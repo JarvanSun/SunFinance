@@ -47,6 +47,6 @@ extension OrderPreview {
 
 private extension OrderPreview {
     var rate: ExchangeRate {
-        ExchangeRate(currency: price.currency, eurosPerUnit: exchangeRate)
+        .init(currency: price.currency, eurosPerUnit: exchangeRate)
     }
 }

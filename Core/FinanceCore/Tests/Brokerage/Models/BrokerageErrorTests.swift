@@ -17,7 +17,7 @@ struct BrokerageErrorTests {
         (.cancelled, .cancelled),
     ])
     func initThenMapsEveryBackendFailure(failure: BackendFailure, expected: BrokerageError) {
-        // When
+        // Given / When
         let error = BrokerageError(failure)
 
         // Then

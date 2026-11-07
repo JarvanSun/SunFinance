@@ -19,13 +19,12 @@ struct PositionPresentationTests {
         (0, .unchanged),
     ])
     func trendThenFollowsTheTotalReturn(totalReturn: Decimal, trend: GainTrend) {
-        // Then
-        #expect(Position("SAP", value: 1_000, totalReturn: totalReturn).trend == trend)
+        #expect(Position.dummy("SAP", value: 1_000, totalReturn: totalReturn).trend == trend)
     }
 
     @Test func textsThenFormatValueReturnAndRealizedGain() {
-        // When
-        let position = Position("SAP", value: 2_000, totalReturn: 200)
+        // Given / When
+        let position = Position.dummy("SAP", value: 2_000, totalReturn: 200)
 
         // Then
         #expect(position.valueText == Money(2_000, .eur).formatted())
@@ -35,8 +34,8 @@ struct PositionPresentationTests {
     }
 
     @Test func accessibilityLabelsThenReadEachRowAsOneSentence() {
-        // When
-        let position = Position("SAP", value: 2_000, totalReturn: 200)
+        // Given / When
+        let position = Position.dummy("SAP", value: 2_000, totalReturn: 200)
 
         // Then
         let openKey = "portfolio.position.accessibilityLabel %@ %@ %@ %@"

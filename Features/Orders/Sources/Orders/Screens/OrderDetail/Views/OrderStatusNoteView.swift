@@ -18,16 +18,26 @@ struct OrderStatusNoteView: View {
         case .none:
             EmptyView()
         case .waiting(let text):
-            Text(text)
-                .textStyle(FinanceColor.textSecondary, FinanceFont.callout)
+            waiting(text)
         case .rejected(let text):
-            Label {
-                Text(text)
-            } icon: {
-                Image(style: FinanceImage.warning)
-            }
-            .textStyle(FinanceColor.critical, FinanceFont.callout)
+            rejected(text)
         }
+    }
+}
+
+private extension OrderStatusNoteView {
+    func waiting(_ text: LocalizedStringResource) -> some View {
+        Text(text)
+            .textStyle(FinanceColor.textSecondary, FinanceFont.callout)
+    }
+
+    func rejected(_ text: LocalizedStringResource) -> some View {
+        Label {
+            Text(text)
+        } icon: {
+            Image(style: FinanceImage.warning)
+        }
+        .textStyle(FinanceColor.critical, FinanceFont.callout)
     }
 }
 

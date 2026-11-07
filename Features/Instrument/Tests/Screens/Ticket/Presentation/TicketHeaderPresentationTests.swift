@@ -13,7 +13,7 @@ import Testing
 
 struct TicketHeaderPresentationTests {
     @Test func holdingsTextWhenBuyingThenShowsBuyingPower() {
-        // When
+        // Given / When
         let text = makeContext(heldShares: 15).holdingsText(for: .buy)
 
         // Then
@@ -39,7 +39,7 @@ struct TicketHeaderPresentationTests {
 
     @Test(arguments: [(true, false), (false, true)])
     func marketNoticeThenShowsOnlyWhileClosed(isMarketOpen: Bool, hasNotice: Bool) {
-        // When
+        // Given / When
         let notice = makeContext(heldShares: 0, isMarketOpen: isMarketOpen).marketNotice
 
         // Then
@@ -47,7 +47,7 @@ struct TicketHeaderPresentationTests {
     }
 
     @Test func priceThenReadsTheQuote() {
-        // When
+        // Given / When
         let context = makeContext(heldShares: 0)
 
         // Then
@@ -65,6 +65,6 @@ private extension TicketHeaderPresentationTests {
             marketCap: Money(1, .usd),
             isMarketOpen: isMarketOpen
         )
-        return TicketContext(quote: quote, buyingPower: Money(1_000, .eur), heldShares: heldShares)
+        return .init(quote: quote, buyingPower: Money(1_000, .eur), heldShares: heldShares)
     }
 }

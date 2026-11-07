@@ -27,8 +27,8 @@ public struct PriceLineChart: View {
     ) {
         self.content = content
         self.style = style
-        series = ChartSeries(drawing: content.points, count: morphPointCount)
-        scale = ValueScale(values: content.points.map(\.value))
+        series = .init(drawing: content.points, count: content.morphPointCount)
+        scale = .init(values: content.points.map(\.value))
         self.onSelect = onSelect
     }
 
@@ -107,28 +107,9 @@ public struct PriceLineChart: View {
         .chartYAxis {
             switch style.appearance {
             case .detailed:
-                AxisMarks(position: .trailing, values: .automatic(desiredCount: axisLabelCount)) {
-                    AxisGridLine()
-                        .foregroundStyle(FinanceColor.separator.color.opacity(gridOpacity))
-
-                    AxisValueLabel()
-                        .font(FinanceFont.caption.font)
-                        .foregroundStyle(FinanceColor.textSecondary.color)
-                }
+                detailedValueAxis
             case .hero:
-                AxisMarks(position: .trailing, values: scale.guideValues) {
-                    AxisGridLine()
-                        .foregroundStyle(FinanceColor.separator.color)
-
-                    AxisValueLabel(
-                        format: guideFormat,
-                        anchor: .bottomTrailing,
-                        horizontalSpacing: .zero,
-                        verticalSpacing: dimensions.spaceXSmall
-                    )
-                    .font(FinanceFont.caption.font)
-                    .foregroundStyle(FinanceColor.textSecondary.color)
-                }
+                heroValueAxis
             }
         }
         .chartXAxis {
@@ -174,15 +155,15 @@ private extension PriceLineChart {
     }
 
     var lineStroke: StrokeStyle {
-        StrokeStyle(lineWidth: dimensions.chartLineWidth, lineCap: .round, lineJoin: .round)
+        .init(lineWidth: dimensions.chartLineWidth, lineCap: .round, lineJoin: .round)
     }
 
     var dashStroke: StrokeStyle {
-        StrokeStyle(lineWidth: dimensions.borderWidthSmall, dash: dimensions.chartDash)
+        .init(lineWidth: dimensions.borderWidthSmall, dash: dimensions.chartDash)
     }
 
     var maskStroke: StrokeStyle {
-        StrokeStyle(lineWidth: dimensions.chartScrubMaskWidth, lineCap: .butt, lineJoin: .round)
+        .init(lineWidth: dimensions.chartScrubMaskWidth, lineCap: .butt, lineJoin: .round)
     }
 
     var positionDomain: ClosedRange<Int> {
@@ -195,19 +176,15 @@ private extension PriceLineChart {
 
     var trend: GainTrend {
         switch (content.baseline ?? series.first?.value, series.last?.value) {
-        case (.some(let start), .some(let end)):
-            GainTrend(from: start, to: end)
-        case (nil, _), (_, nil):
-            .unchanged
+        case (.some(let start), .some(let end)): .init(from: start, to: end)
+        case (nil, _), (_, nil): .unchanged
         }
     }
 
     var baselineValues: [Double] {
         switch (style.appearance, content.baseline) {
-        case (.detailed, .some(let baseline)):
-            [baseline]
-        case (.detailed, nil), (.hero, _):
-            []
+        case (.detailed, .some(let baseline)): [baseline]
+        case (.detailed, nil), (.hero, _): []
         }
     }
 
@@ -221,10 +198,8 @@ private extension PriceLineChart {
 
     var dateTickIndices: [Int] {
         switch style.axisDate {
-        case .some:
-            series.tickIndices(count: dateTickCount)
-        case nil:
-            []
+        case .some: series.tickIndices(count: dateTickCount)
+        case nil: []
         }
     }
 
@@ -248,17 +223,46 @@ private extension PriceLineChart {
         series.index(of: date) ?? .zero
     }
 
+    var detailedValueAxis: some AxisContent {
+        AxisMarks(position: .trailing, values: .automatic(desiredCount: axisLabelCount)) {
+            AxisGridLine()
+                .foregroundStyle(FinanceColor.separator.color.opacity(gridOpacity))
+
+            AxisValueLabel()
+                .font(FinanceFont.caption.font)
+                .foregroundStyle(FinanceColor.textSecondary.color)
+        }
+    }
+
+    var heroValueAxis: some AxisContent {
+        AxisMarks(position: .trailing, values: scale.guideValues) {
+            AxisGridLine()
+                .foregroundStyle(FinanceColor.separator.color)
+
+            AxisValueLabel(
+                format: guideFormat,
+                anchor: .bottomTrailing,
+                horizontalSpacing: .zero,
+                verticalSpacing: dimensions.spaceXSmall
+            )
+            .font(FinanceFont.caption.font)
+            .foregroundStyle(FinanceColor.textSecondary.color)
+        }
+    }
+
     func dateLabel(at value: AxisValue) -> String {
         switch (value.as(Int.self).flatMap(series.point(at:)), style.axisDate) {
-        case (.some(let point), .some(let axisDate)):
-            axisDate(point.date)
-        case (nil, _), (_, nil):
-            ""
+        case (.some(let point), .some(let axisDate)): axisDate(point.date)
+        case (nil, _), (_, nil): ""
         }
     }
 }
 
-private let morphPointCount = 160
+// MARK: - PriceLineChartContent
+
+private extension PriceLineChartContent {
+    var morphPointCount: Int { 160 }
+}
 
 // MARK: - Previews
 
@@ -266,33 +270,36 @@ private let morphPointCount = 160
 #Preview {
     ScrollView {
         VStack(spacing: 32) {
-            PriceLineChart(ChartPreviewData().line(ChartPreviewData().rising, baseline: 210))
+            PriceLineChart(.dummy(ChartPoint.dummyRising, baseline: 210))
 
             PriceLineChart(
-                ChartPreviewData().line(
-                    ChartPreviewData().falling,
+                .dummy(
+                    ChartPoint.dummyFalling,
                     baseline: 230,
-                    trading: ChartPreviewData().trading(on: ChartPreviewData().falling)
+                    trading: .dummy(on: ChartPoint.dummyFalling)
                 )
             )
 
-            PriceLineChart(ChartPreviewData().line(ChartPreviewData().flat, baseline: 220))
+            PriceLineChart(.dummy(ChartPoint.dummyFlat, baseline: 220))
 
             PriceLineChart(
-                ChartPreviewData().line(ChartPreviewData().rising, baseline: nil),
-                style: PriceLineChartStyle(appearance: .hero, axisDate: ChartPreviewData().axisDate)
+                .dummy(ChartPoint.dummyRising, baseline: nil),
+                style: PriceLineChartStyle(
+                    appearance: .hero,
+                    axisDate: PriceLineChartStyle.dummyAxisDate
+                )
             )
 
             PriceLineChart(
-                ChartPreviewData().line(ChartPreviewData().falling, baseline: nil),
+                .dummy(ChartPoint.dummyFalling, baseline: nil),
                 style: PriceLineChartStyle(
                     appearance: .hero,
                     isLive: true,
-                    axisDate: ChartPreviewData().axisDate
+                    axisDate: PriceLineChartStyle.dummyAxisDate
                 )
             )
 
-            PriceLineChart(ChartPreviewData().line([], baseline: nil))
+            PriceLineChart(.dummy([], baseline: nil))
         }
         .padding()
     }

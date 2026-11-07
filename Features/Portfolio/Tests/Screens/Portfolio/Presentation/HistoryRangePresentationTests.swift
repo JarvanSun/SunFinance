@@ -21,7 +21,6 @@ struct HistoryRangePresentationTests {
         (.fiveYears, "fiveYears"),
     ])
     func titlesThenNameTheRange(range: HistoryRange, name: String) {
-        // Then
         #expect(range.periodTitle.key == "portfolio.period.\(name)")
         let summary = range.chartSummary(from: "a", to: "b")
         #expect(summary.key == "portfolio.chart.summary.\(name) %@ %@")
@@ -29,7 +28,6 @@ struct HistoryRangePresentationTests {
 
     @Test(arguments: [HistoryRange.day, .week, .month, .threeMonths, .year, .fiveYears])
     func axisDateThenLabelsEveryRange(range: HistoryRange) {
-        // Then
         #expect(!range.axisDate(Date(timeIntervalSince1970: 0)).isEmpty)
     }
 }

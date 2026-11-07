@@ -12,7 +12,7 @@ import Testing
 
 struct EstimateStatePresentationTests {
     @Test func totalWhenNothingIsEstimatedThenShowsADash() {
-        // When
+        // Given / When
         let state = EstimateState.unavailable
 
         // Then
@@ -23,8 +23,8 @@ struct EstimateStatePresentationTests {
     }
 
     @Test func totalWhenRefreshingThenDimsTheLastEstimate() {
-        // When
-        let state = EstimateState.loading(previous: .init())
+        // Given / When
+        let state = EstimateState.loading(previous: .dummy())
 
         // Then
         #expect(state.totalValue == 369)
@@ -33,8 +33,8 @@ struct EstimateStatePresentationTests {
     }
 
     @Test func totalWhenReadyThenShowsItPlainly() {
-        // When
-        let state = EstimateState.ready(.init())
+        // Given / When
+        let state = EstimateState.ready(.dummy())
 
         // Then
         #expect(state.totalValue == 369)

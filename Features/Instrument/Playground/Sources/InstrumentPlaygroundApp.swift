@@ -25,7 +25,7 @@ struct InstrumentPlaygroundApp: App {
             NavigationStack {
                 List {
                     Section {
-                        ForEach(symbols, id: \.self) { symbol in
+                        ForEach(TickerSymbol.dummySymbols, id: \.self) { symbol in
                             NavigationLink(value: symbol) {
                                 Text(verbatim: symbol.rawValue)
                             }
@@ -35,7 +35,7 @@ struct InstrumentPlaygroundApp: App {
                     }
 
                     Section {
-                        ForEach(intents) { intent in
+                        ForEach(TradeIntent.dummyIntents) { intent in
                             Button {
                                 self.intent = intent
                             } label: {
@@ -62,30 +62,16 @@ struct InstrumentPlaygroundApp: App {
 }
 
 private extension InstrumentPlaygroundApp {
-    var symbols: [TickerSymbol] {
-        ["AAPL", "NVDA", "TSLA", "SAP", "ALV"]
-    }
-
-    var intents: [TradeIntent] {
-        [
-            TradeIntent(symbol: "AAPL", side: .buy, source: .quoteDetail),
-            TradeIntent(symbol: "SAP", side: .buy, source: .quoteDetail),
-            TradeIntent(symbol: "SAP", side: .sell, source: .quoteDetail),
-            TradeIntent(symbol: "NVDA", side: .sell, source: .quoteDetail),
-            TradeIntent(symbol: "TSLA", side: .buy, source: .quoteDetail),
-        ]
-    }
-
     var marketData: MarketDataService {
-        MarketDataService(environment: environment)
+        .init(environment: environment)
     }
 
     var brokerage: BrokerageService {
-        BrokerageService(environment: environment)
+        .init(environment: environment)
     }
 
     func quoteDetail(for symbol: TickerSymbol) -> QuoteDetailDependencies {
-        QuoteDetailDependencies(
+        .init(
             symbol: symbol,
             detailProvider: marketData,
             historyProvider: marketData,
@@ -97,7 +83,7 @@ private extension InstrumentPlaygroundApp {
     }
 
     func trading(for intent: TradeIntent) -> TradingDependencies {
-        TradingDependencies(
+        .init(
             intent: intent,
             quoteProvider: marketData,
             accountProvider: brokerage,

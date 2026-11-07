@@ -19,19 +19,15 @@ extension EstimateState {
 
     var isRefreshing: Bool {
         switch self {
-        case .loading:
-            true
-        case .unavailable, .ready:
-            false
+        case .loading: true
+        case .unavailable, .ready: false
         }
     }
 
     var totalOpacity: Double {
         switch isRefreshing {
-        case true:
-            refreshingOpacity
-        case false:
-            1
+        case true: refreshingOpacity
+        case false: 1
         }
     }
 }

@@ -45,28 +45,22 @@ private extension TradingVenue {
 
     var timeZoneIdentifier: String {
         switch self {
-        case .nasdaq, .nyse:
-            "America/New_York"
-        case .xetra:
-            "Europe/Berlin"
+        case .nasdaq, .nyse: "America/New_York"
+        case .xetra: "Europe/Berlin"
         }
     }
 
     var opening: DateComponents {
         switch self {
-        case .nasdaq, .nyse:
-            DateComponents(hour: 9, minute: 30)
-        case .xetra:
-            DateComponents(hour: 9, minute: 0)
+        case .nasdaq, .nyse: .init(hour: 9, minute: 30)
+        case .xetra: .init(hour: 9, minute: 0)
         }
     }
 
     var closing: DateComponents {
         switch self {
-        case .nasdaq, .nyse:
-            DateComponents(hour: 16, minute: 0)
-        case .xetra:
-            DateComponents(hour: 17, minute: 30)
+        case .nasdaq, .nyse: .init(hour: 16, minute: 0)
+        case .xetra: .init(hour: 17, minute: 30)
         }
     }
 

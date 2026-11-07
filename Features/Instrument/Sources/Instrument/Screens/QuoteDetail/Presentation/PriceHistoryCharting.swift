@@ -32,7 +32,7 @@ extension PriceHistory {
     }
 
     func lineContent(trading: TradingSnapshot, companyName: String) -> PriceLineChartContent {
-        PriceLineChartContent(
+        .init(
             points: chartPoints,
             baseline: chartBaseline,
             trading: trading.chartLayer(for: self),
@@ -44,7 +44,7 @@ extension PriceHistory {
         trading: TradingSnapshot,
         companyName: String
     ) -> CandlestickChartContent {
-        CandlestickChartContent(
+        .init(
             candles: chartCandles,
             trading: trading.chartLayer(for: self),
             accessibility: chartAccessibility(companyName: companyName)
@@ -54,7 +54,7 @@ extension PriceHistory {
     func chartAccessibility(companyName: String) -> ChartAccessibility {
         let currency = currency.rawValue
         let style = range.momentStyle
-        return ChartAccessibility(
+        return .init(
             title: .init("quoteDetail.chart.title \(companyName)", bundle: .module),
             summary: chartSummary(companyName: companyName),
             valueDescription: { $0.formatted(.currency(code: currency)) },
@@ -66,8 +66,7 @@ extension PriceHistory {
 private extension PriceHistory {
     func chartSummary(companyName: String) -> LocalizedStringResource {
         switch candles.last.flatMap({ change(to: $0.close) }) {
-        case .some(let change):
-            summary(companyName: companyName, change: change)
+        case .some(let change): summary(companyName: companyName, change: change)
         case nil:
             .init(
                 "quoteDetail.chart.summary.empty \(companyName) \(range.accessibilityTitle)",

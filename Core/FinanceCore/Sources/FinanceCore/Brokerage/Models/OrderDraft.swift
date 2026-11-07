@@ -36,7 +36,7 @@ public struct OrderDraft: Hashable, Sendable {
 
 extension OrderDraft {
     var dto: OrderDraftDTO {
-        OrderDraftDTO(
+        .init(
             symbol: symbol.rawValue,
             side: side.rawValue,
             shares: amount.shares,
@@ -90,19 +90,15 @@ private extension OrderAmount {
 
     var shares: Decimal? {
         switch self {
-        case .shares(let shares):
-            shares
-        case .euros:
-            nil
+        case .shares(let shares): shares
+        case .euros: nil
         }
     }
 
     var euros: Decimal? {
         switch self {
-        case .shares:
-            nil
-        case .euros(let euros):
-            euros
+        case .shares: nil
+        case .euros(let euros): euros
         }
     }
 }
@@ -123,19 +119,15 @@ private extension OrderExecution {
 
     var code: String {
         switch self {
-        case .market:
-            "market"
-        case .limit:
-            "limit"
+        case .market: "market"
+        case .limit: "limit"
         }
     }
 
     var limitPrice: Decimal? {
         switch self {
-        case .market:
-            nil
-        case .limit(let price):
-            price
+        case .market: nil
+        case .limit(let price): price
         }
     }
 }
@@ -160,32 +152,24 @@ private extension OrderTrigger {
 
     var code: String {
         switch self {
-        case .immediately:
-            "now"
-        case .priceAtOrAbove:
-            "price_at_or_above"
-        case .priceAtOrBelow:
-            "price_at_or_below"
-        case .at:
-            "time"
+        case .immediately: "now"
+        case .priceAtOrAbove: "price_at_or_above"
+        case .priceAtOrBelow: "price_at_or_below"
+        case .at: "time"
         }
     }
 
     var price: Decimal? {
         switch self {
-        case .priceAtOrAbove(let price), .priceAtOrBelow(let price):
-            price
-        case .immediately, .at:
-            nil
+        case .priceAtOrAbove(let price), .priceAtOrBelow(let price): price
+        case .immediately, .at: nil
         }
     }
 
     var time: Date? {
         switch self {
-        case .at(let time):
-            time
-        case .immediately, .priceAtOrAbove, .priceAtOrBelow:
-            nil
+        case .at(let time): time
+        case .immediately, .priceAtOrAbove, .priceAtOrBelow: nil
         }
     }
 }

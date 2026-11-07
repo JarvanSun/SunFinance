@@ -16,11 +16,8 @@ needed.
 
 ## Running
 
-Requires Xcode 26 or later. Open `SunFinance.xcodeproj` and run.
-
-The simulator needs no signing. To run on a device, create
-`Configuration/Signing.local.xcconfig` containing `DEVELOPMENT_TEAM = <your team id>`; the file is
-ignored by git.
+Requires Xcode 26 or later. Open `SunFinance.xcodeproj` and run it on a simulator; no signing is
+needed.
 
 Each package also has an app that runs it on its own: `<Package>/Playground/Playground.xcodeproj`.
 

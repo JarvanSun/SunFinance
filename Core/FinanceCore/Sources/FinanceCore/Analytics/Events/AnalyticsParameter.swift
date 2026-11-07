@@ -32,8 +32,7 @@ public enum AnalyticsParameter: String, Hashable, Sendable {
 
     var isPersonalData: Bool {
         switch self {
-        case .query, .email, .name, .amount, .price, .quantity, .deviceID:
-            true
+        case .query, .email, .name, .amount, .price, .quantity, .deviceID: true
         case .symbol, .resultCount, .failureReason, .sortOrder, .isFavorite, .appVersion, .locale,
             .source, .range, .chartStyle, .side, .orderType, .trigger, .status, .openCount,
             .positionCount:

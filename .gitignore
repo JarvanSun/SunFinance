@@ -6,4 +6,3 @@ DerivedData/
 build/
 Features/*/Package.resolved
 Core/*/Package.resolved
-Configuration/Signing.local.xcconfig

@@ -12,7 +12,7 @@ import Testing
 
 struct PriceHistoryTests {
     @Test func initWhenPreviousCloseIsGivenThenItIsTheBaseline() throws {
-        // When
+        // Given / When
         let history = try PriceHistory(dto(previousClose: 100))
 
         // Then
@@ -23,7 +23,7 @@ struct PriceHistoryTests {
     }
 
     @Test func initWithoutPreviousCloseThenFirstOpenIsTheBaseline() throws {
-        // When
+        // Given / When
         let history = try PriceHistory(dto(previousClose: nil))
 
         // Then
@@ -31,7 +31,7 @@ struct PriceHistoryTests {
     }
 
     @Test func initWhenCurrencyIsInvalidThenThrowsDecoding() {
-        // When
+        // Given / When
         let result = Result { () throws(MarketDataError) in
             try PriceHistory(dto(previousClose: nil, currency: "EURO"))
         }
@@ -43,7 +43,7 @@ struct PriceHistoryTests {
 
 private extension PriceHistoryTests {
     func dto(previousClose: Decimal?, currency: String = "EUR") -> PriceHistoryResponseDTO {
-        PriceHistoryResponseDTO(
+        .init(
             symbol: "SAP",
             range: "1D",
             currency: currency,

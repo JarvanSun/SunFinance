@@ -25,6 +25,7 @@ struct PortfolioView: View {
                 EmptyView()
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(FinanceColor.background.color)
         .overlay(if: viewModel.placeholder) { placeholder in
             PortfolioPlaceholderView(placeholder: placeholder, onRetry: requestReload)
@@ -78,7 +79,7 @@ private extension PortfolioView {
 
     func allocationSection(_ allocation: PortfolioAllocation) -> some View {
         VStack(alignment: .leading, spacing: dimensions.spaceMedium) {
-            SectionHeading(LocalizedStringResource("portfolio.allocation.title", bundle: .module))
+            SectionHeading(.init("portfolio.allocation.title", bundle: .module))
 
             SurfaceGroup {
                 AllocationSection(
@@ -93,7 +94,7 @@ private extension PortfolioView {
 
     func positionsSection(_ allocation: PortfolioAllocation) -> some View {
         VStack(alignment: .leading, spacing: dimensions.spaceMedium) {
-            SectionHeading(LocalizedStringResource("portfolio.positions.title", bundle: .module))
+            SectionHeading(.init("portfolio.positions.title", bundle: .module))
 
             VStack(spacing: 0) {
                 switch viewModel.positionsPlaceholder {
@@ -130,7 +131,7 @@ private extension PortfolioView {
 
     var closedSection: some View {
         VStack(alignment: .leading, spacing: dimensions.spaceMedium) {
-            SectionHeading(LocalizedStringResource("portfolio.closed.title", bundle: .module))
+            SectionHeading(.init("portfolio.closed.title", bundle: .module))
 
             VStack(spacing: 0) {
                 ForEach(viewModel.closedPositions) { position in

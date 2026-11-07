@@ -46,13 +46,13 @@ struct QuoteDetailRouterTests {
 
 private extension QuoteDetailRouterTests {
     func makeRouter() -> QuoteDetailRouter {
-        QuoteDetailRouter(orderTicket: makeDependencies().orderTicket(for:))
+        .init(orderTicket: makeDependencies().orderTicket(for:))
     }
 
     func makeDependencies() -> QuoteDetailDependencies {
         let services = TradingServicesStub()
         let tracker = AnalyticsTrackerSpy()
-        return QuoteDetailDependencies(
+        return .init(
             symbol: "AAPL",
             detailProvider: MarketDataStub(),
             historyProvider: MarketDataStub(),

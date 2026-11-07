@@ -14,14 +14,14 @@ import Testing
 struct PlaceOrderRequestTests {
     @Test func requestThenPostsTheDraftWithItsIdempotencyKey() throws {
         // Given
-        let draft = OrderDraft(.buy, .shares(3), trigger: .priceAtOrAbove(150))
+        let draft = OrderDraft.dummy(.buy, .shares(3), trigger: .priceAtOrAbove(150))
         let request = PlaceOrderRequest(draft: draft, idempotencyKey: IdempotencyKey(rawValue: "k"))
 
         // When
-        let body = try #require(try request.body?.encode(using: makeBackendEncoder()))
+        let body = try #require(try request.body?.encode(using: BackendCoding().encoder))
 
         // Then
-        let sent = try OrderDraft(makeBackendDecoder().decode(OrderDraftDTO.self, from: body))
+        let sent = try OrderDraft(BackendCoding().decoder.decode(OrderDraftDTO.self, from: body))
         #expect(request.path == ["v1", "orders"])
         #expect(request.method == .post)
         #expect(request.headers == ["Idempotency-Key": "k"])

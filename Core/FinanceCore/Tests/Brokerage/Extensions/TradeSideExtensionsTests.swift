@@ -13,7 +13,7 @@ import Testing
 struct TradeSideExtensionsTests {
     @Test(arguments: [(TradeSide.buy, Decimal(-101)), (.sell, 99)])
     func cashEffectThenPaysOutForBuysAndBringsInForSells(side: TradeSide, expected: Decimal) {
-        // When
+        // Given / When
         let cashEffect = side.cashEffect(gross: 100, fee: 1)
 
         // Then
@@ -22,7 +22,7 @@ struct TradeSideExtensionsTests {
 
     @Test(arguments: TradeSide.allCases)
     func totalThenIsWhatTheTradeCostOrPaidOut(side: TradeSide) {
-        // When
+        // Given / When
         let total = side.total(ofCashEffect: side.cashEffect(gross: 100, fee: 1))
 
         // Then

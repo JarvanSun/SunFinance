@@ -35,7 +35,6 @@ struct TradingIssuePresentationTests {
         placementMessage: String,
         image: FinanceImage
     ) {
-        // Then
         #expect(issue.title.key == title)
         #expect(issue.message.key == message)
         #expect(issue.placementMessage.key == placementMessage)

@@ -10,10 +10,8 @@ import Foundation
 extension QuoteDetailPlaceholder {
     var title: LocalizedStringResource {
         switch self {
-        case .loading:
-            .init("quoteDetail.placeholder.loading", bundle: .module)
-        case .failed(let issue):
-            issue.title
+        case .loading: .init("quoteDetail.placeholder.loading", bundle: .module)
+        case .failed(let issue): issue.title
         }
     }
 }

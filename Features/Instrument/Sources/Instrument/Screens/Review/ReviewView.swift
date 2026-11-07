@@ -22,13 +22,7 @@ struct ReviewView: View {
         HandoffContainer(value: showsResult) { showsResult in
             switch (showsResult, viewModel.outcome) {
             case (true, .some(let outcome)):
-                OrderResultView(
-                    outcome: outcome,
-                    draft: viewModel.draft,
-                    currency: viewModel.currency,
-                    onDone: viewModel.finish,
-                    onEdit: viewModel.editOrder
-                )
+                result(outcome)
             case (false, _), (true, nil):
                 reviewContent
             }
@@ -47,6 +41,16 @@ struct ReviewView: View {
 // MARK: - Sections
 
 private extension ReviewView {
+    func result(_ outcome: OrderOutcome) -> some View {
+        OrderResultView(
+            outcome: outcome,
+            draft: viewModel.draft,
+            currency: viewModel.currency,
+            onDone: viewModel.finish,
+            onEdit: viewModel.editOrder
+        )
+    }
+
     var reviewContent: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: dimensions.spaceXLarge) {
@@ -69,43 +73,63 @@ private extension ReviewView {
     var previewSection: some View {
         switch viewModel.preview {
         case .idle, .loading:
-            LoadingStateView(title: .init("trading.loading", bundle: .module))
-                .frame(maxWidth: .infinity, minHeight: dimensions.placeholderMinimumHeight)
+            previewLoading
         case .failed(let issue):
-            ContentUnavailableStateView(
-                title: issue.title,
-                message: issue.message,
-                image: issue.image,
-                action: StateAction(
-                    title: .init("trading.failure.retry", bundle: .module),
-                    perform: requestReload
-                )
-            )
-            .accessibilityIdentifier(InstrumentAccessibility.ticketRetryButton)
+            previewFailure(issue)
         case .loaded(let preview):
-            VStack(alignment: .leading, spacing: dimensions.spaceMedium) {
-                LabeledRows(preview.rows(side: viewModel.draft.side))
-
-                previewNote(preview.rejection)
-            }
-            .transition(.identity)
+            loadedPreview(preview)
         }
+    }
+
+    var previewLoading: some View {
+        LoadingStateView(title: .init("trading.loading", bundle: .module))
+            .frame(maxWidth: .infinity, minHeight: dimensions.placeholderMinimumHeight)
+    }
+
+    func previewFailure(_ issue: TradingIssue) -> some View {
+        ContentUnavailableStateView(
+            title: issue.title,
+            message: issue.message,
+            image: issue.image,
+            action: StateAction(
+                title: .init("trading.failure.retry", bundle: .module),
+                perform: requestReload
+            )
+        )
+        .accessibilityIdentifier(InstrumentAccessibility.ticketRetryButton)
+    }
+
+    func loadedPreview(_ preview: OrderPreview) -> some View {
+        VStack(alignment: .leading, spacing: dimensions.spaceMedium) {
+            LabeledRows(preview.rows(side: viewModel.draft.side))
+
+            previewNote(preview.rejection)
+        }
+        .transition(.identity)
     }
 
     @ViewBuilder
     func previewNote(_ rejection: OrderRejection?) -> some View {
         switch rejection {
         case .some(let rejection):
-            Label {
-                Text(rejection.message)
-            } icon: {
-                Image(style: FinanceImage.warning)
-            }
-            .textStyle(FinanceColor.critical, FinanceFont.callout)
+            rejectionNote(rejection)
         case nil:
-            Text("trading.review.note", bundle: .module)
-                .textStyle(FinanceColor.textSecondary, FinanceFont.caption)
+            reviewNote
         }
+    }
+
+    func rejectionNote(_ rejection: OrderRejection) -> some View {
+        Label {
+            Text(rejection.message)
+        } icon: {
+            Image(style: FinanceImage.warning)
+        }
+        .textStyle(FinanceColor.critical, FinanceFont.callout)
+    }
+
+    var reviewNote: some View {
+        Text("trading.review.note", bundle: .module)
+            .textStyle(FinanceColor.textSecondary, FinanceFont.caption)
     }
 
     var confirmBar: some View {
@@ -119,23 +143,31 @@ private extension ReviewView {
 
             switch viewModel.predictedRejection {
             case .some:
-                Button(action: viewModel.editOrder) {
-                    Text("trading.review.edit", bundle: .module)
-                }
-                .buttonStyle(.finance(.primary))
-                .accessibilityIdentifier(InstrumentAccessibility.editButton)
+                editButton
             case nil:
-                SlideToConfirm(
-                    viewModel.draft.side.slideTitle,
-                    phase: viewModel.placement.slidePhase,
-                    onConfirm: viewModel.confirm
-                )
-                .disabled(!viewModel.isSliderEnabled)
-                .accessibilityIdentifier(InstrumentAccessibility.slider)
+                confirmSlider
             }
         }
         .padding(.horizontal, dimensions.spaceLargeSmall)
         .padding(.vertical, dimensions.spaceMedium)
+    }
+
+    var editButton: some View {
+        Button(action: viewModel.editOrder) {
+            Text("trading.review.edit", bundle: .module)
+        }
+        .buttonStyle(.finance(.primary))
+        .accessibilityIdentifier(InstrumentAccessibility.editButton)
+    }
+
+    var confirmSlider: some View {
+        SlideToConfirm(
+            viewModel.draft.side.slideTitle,
+            phase: viewModel.placement.slidePhase,
+            onConfirm: viewModel.confirm
+        )
+        .disabled(!viewModel.isSliderEnabled)
+        .accessibilityIdentifier(InstrumentAccessibility.slider)
     }
 }
 

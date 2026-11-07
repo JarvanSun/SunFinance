@@ -50,12 +50,18 @@ extension StockQuote {
         self.init(
             symbol: .init(rawValue: dto.symbol),
             companyName: dto.companyName,
-            price: Money(dto.lastPrice, currency),
-            changePercent: (dto.lastPrice / dto.previousClose - 1) * percentScale,
-            marketCap: Money(dto.marketCap, currency),
+            price: .init(dto.lastPrice, currency),
+            changePercent: dto.changePercent,
+            marketCap: .init(dto.marketCap, currency),
             isMarketOpen: dto.isMarketOpen
         )
     }
 }
 
-private let percentScale: Decimal = 100
+private extension QuoteDTO {
+    var percentScale: Decimal { 100 }
+
+    var changePercent: Decimal {
+        (lastPrice / previousClose - 1) * percentScale
+    }
+}

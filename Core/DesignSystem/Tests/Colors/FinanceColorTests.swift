@@ -13,7 +13,7 @@ import UIKit
 struct FinanceColorTests {
     @Test(arguments: FinanceColor.allCases)
     func colorThenEveryCaseHasAnAsset(color: FinanceColor) {
-        // When
+        // Given / When
         let asset = UIColor(named: color.rawValue, in: .module, compatibleWith: nil)
 
         // Then

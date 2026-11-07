@@ -13,10 +13,8 @@ enum PositionAction: CaseIterable, Hashable, Sendable {
 
     var side: TradeSide {
         switch self {
-        case .buyMore:
-            .buy
-        case .sell:
-            .sell
+        case .buyMore: .buy
+        case .sell: .sell
         }
     }
 }

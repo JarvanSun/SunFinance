@@ -16,8 +16,8 @@ struct HoldingTests {
         var holding = Holding(symbol: "SAP", currency: .eur)
 
         // When
-        holding.apply(.init(.buy, 10, at: 100))
-        holding.apply(.init(.buy, 10, at: 120))
+        holding.apply(.dummy(.buy, 10, at: 100))
+        holding.apply(.dummy(.buy, 10, at: 120))
 
         // Then
         #expect(holding.quantity == 20)
@@ -29,11 +29,11 @@ struct HoldingTests {
     @Test func applyWhenSellingPartThenAverageStaysAndGainIsRealized() {
         // Given
         var holding = Holding(symbol: "SAP", currency: .eur)
-        holding.apply(.init(.buy, 10, at: 100))
+        holding.apply(.dummy(.buy, 10, at: 100))
         let averageBefore = holding.averageCost
 
         // When
-        holding.apply(.init(.sell, 4, at: 150))
+        holding.apply(.dummy(.sell, 4, at: 150))
 
         // Then
         #expect(holding.quantity == 6)
@@ -44,10 +44,10 @@ struct HoldingTests {
     @Test func applyWhenSellingEverythingThenHoldingClosesWithItsGain() {
         // Given
         var holding = Holding(symbol: "SAP", currency: .eur)
-        holding.apply(.init(.buy, 10, at: 100))
+        holding.apply(.dummy(.buy, 10, at: 100))
 
         // When
-        holding.apply(.init(.sell, 10, at: 90))
+        holding.apply(.dummy(.sell, 10, at: 90))
 
         // Then
         #expect(!holding.isOpen)
@@ -61,7 +61,7 @@ struct HoldingTests {
 
         // When
         holding.apply(
-            .init(
+            .dummy(
                 .buy,
                 10,
                 at: 100,
@@ -72,7 +72,7 @@ struct HoldingTests {
             )
         )
         holding.apply(
-            .init(
+            .dummy(
                 .buy,
                 10,
                 at: 100,

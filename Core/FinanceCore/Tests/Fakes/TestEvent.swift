@@ -13,19 +13,15 @@ enum TestEvent: AnalyticsEvent {
 
     var name: AnalyticsEventName {
         switch self {
-        case .favoriteToggled:
-            .init("test_favorite_toggled")
-        case .searchWithQuery:
-            .init("test_search_submitted")
+        case .favoriteToggled: .init("test_favorite_toggled")
+        case .searchWithQuery: .init("test_search_submitted")
         }
     }
 
     var parameters: [AnalyticsParameter: AnalyticsValue] {
         switch self {
-        case .favoriteToggled:
-            [.symbol: .text("AAPL"), .isFavorite: .boolean(true)]
-        case .searchWithQuery:
-            [.query: .text("apple")]
+        case .favoriteToggled: [.symbol: .text("AAPL"), .isFavorite: .boolean(true)]
+        case .searchWithQuery: [.query: .text("apple")]
         }
     }
 }

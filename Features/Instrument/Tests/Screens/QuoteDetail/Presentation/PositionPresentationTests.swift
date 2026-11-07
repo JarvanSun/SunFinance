@@ -15,7 +15,7 @@ import Testing
 struct PositionPresentationTests {
     @Test func metricsWhenForeignThenAddTheCurrencyEffect() {
         // Given
-        let position = Position(holding: "AAPL", quantity: 3)
+        let position = Position.dummy(holding: "AAPL", quantity: 3)
 
         // When
         let ids = position.metrics.map(\.id)
@@ -31,7 +31,7 @@ struct PositionPresentationTests {
 
     @Test func metricsWhenInEurosThenLeaveOutTheCurrencyEffect() {
         // Given
-        let position = euroHolding
+        let position = Position.dummyEuroHolding
 
         // When
         let ids = position.metrics.map(\.id)
@@ -42,8 +42,8 @@ struct PositionPresentationTests {
     }
 
     @Test func metricsThenColorOnlyGainsAndLosses() {
-        // When
-        let trends = euroHolding.metrics.map(\.trend)
+        // Given / When
+        let trends = Position.dummyEuroHolding.metrics.map(\.trend)
 
         // Then
         #expect(trends[0] == nil)

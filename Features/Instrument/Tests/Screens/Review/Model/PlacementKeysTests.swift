@@ -17,8 +17,8 @@ struct PlacementKeysTests {
         let keys = PlacementKeys()
 
         // When
-        let first = keys.key(for: .init())
-        let second = keys.key(for: .init())
+        let first = keys.key(for: .dummy())
+        let second = keys.key(for: .dummy())
 
         // Then
         #expect(first == second)
@@ -29,9 +29,9 @@ struct PlacementKeysTests {
         let keys = PlacementKeys()
 
         // When
-        let first = keys.key(for: .init())
-        let edited = keys.key(for: .init(amount: .shares(3)))
-        let back = keys.key(for: .init())
+        let first = keys.key(for: .dummy())
+        let edited = keys.key(for: .dummy(amount: .shares(3)))
+        let back = keys.key(for: .dummy())
 
         // Then
         #expect(first != edited)
@@ -41,11 +41,11 @@ struct PlacementKeysTests {
     @Test func spendThenTheNextReviewOfTheSameDraftGetsANewKey() {
         // Given
         let keys = PlacementKeys()
-        let first = keys.key(for: .init())
+        let first = keys.key(for: .dummy())
 
         // When
         keys.spend(first)
-        let next = keys.key(for: .init())
+        let next = keys.key(for: .dummy())
 
         // Then
         #expect(next != first)
@@ -54,13 +54,13 @@ struct PlacementKeysTests {
     @Test func spendWhenTheKeyIsNoLongerCurrentThenKeepsTheCurrentOne() {
         // Given
         let keys = PlacementKeys()
-        let old = keys.key(for: .init())
-        let current = keys.key(for: .init(amount: .shares(3)))
+        let old = keys.key(for: .dummy())
+        let current = keys.key(for: .dummy(amount: .shares(3)))
 
         // When
         keys.spend(old)
 
         // Then
-        #expect(keys.key(for: .init(amount: .shares(3))) == current)
+        #expect(keys.key(for: .dummy(amount: .shares(3))) == current)
     }
 }

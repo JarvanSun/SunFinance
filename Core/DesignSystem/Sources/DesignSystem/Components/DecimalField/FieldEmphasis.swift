@@ -26,21 +26,16 @@ enum FieldEmphasis: Equatable, Sendable {
 
     var borderColor: FinanceColor {
         switch self {
-        case .resting:
-            .separator
-        case .focused:
-            .accent
-        case .invalid:
-            .critical
+        case .resting: .separator
+        case .focused: .accent
+        case .invalid: .critical
         }
     }
 
-    func borderWidth(in dimensions: any DimensionStyling) -> CGFloat {
+    func borderWidth(in dimensions: DimensionStyling) -> CGFloat {
         switch self {
-        case .resting:
-            dimensions.borderWidthSmall
-        case .focused, .invalid:
-            dimensions.borderWidthMedium
+        case .resting: dimensions.borderWidthSmall
+        case .focused, .invalid: dimensions.borderWidthMedium
         }
     }
 }

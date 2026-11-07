@@ -60,9 +60,11 @@ struct QuoteConsoleView: View {
     }
 }
 
+// MARK: - Private
+
 private extension QuoteConsoleView {
     var behaviorSelection: Binding<ConsoleBehavior> {
-        Binding(get: { console.behavior }, set: { console.selectBehavior($0) })
+        .init(get: { console.behavior }, set: { console.selectBehavior($0) })
     }
 
     @ViewBuilder
@@ -73,23 +75,37 @@ private extension QuoteConsoleView {
         case .loading:
             ProgressView()
         case .loaded(let quotes, let elapsed):
-            Text(verbatim: "\(quotes.count) quotes in \(elapsed.formatted(.units(width: .narrow)))")
-                .textStyle(FinanceColor.textSecondary, FinanceFont.caption)
-
-            ForEach(quotes) { quote in
-                QuoteLine(quote: quote)
-            }
+            loaded(quotes, in: elapsed)
         case .searched(let matches, let elapsed):
-            Text(verbatim: "\(matches.count) in \(elapsed.formatted(.units(width: .narrow)))")
-                .textStyle(FinanceColor.textSecondary, FinanceFont.caption)
-
-            ForEach(matches) { match in
-                MatchLine(match: match)
-            }
+            searched(matches, in: elapsed)
         case .failed(let error):
-            Text(verbatim: "Failed: \(error)")
-                .textStyle(FinanceColor.critical, FinanceFont.body)
+            failure(error)
         }
+    }
+
+    @ViewBuilder
+    func loaded(_ quotes: [StockQuote], in elapsed: Duration) -> some View {
+        Text(verbatim: "\(quotes.count) quotes in \(elapsed.formatted(.units(width: .narrow)))")
+            .textStyle(FinanceColor.textSecondary, FinanceFont.caption)
+
+        ForEach(quotes) { quote in
+            QuoteLine(quote: quote)
+        }
+    }
+
+    @ViewBuilder
+    func searched(_ matches: [SymbolMatch], in elapsed: Duration) -> some View {
+        Text(verbatim: "\(matches.count) in \(elapsed.formatted(.units(width: .narrow)))")
+            .textStyle(FinanceColor.textSecondary, FinanceFont.caption)
+
+        ForEach(matches) { match in
+            MatchLine(match: match)
+        }
+    }
+
+    func failure(_ error: MarketDataError) -> some View {
+        Text(verbatim: "Failed: \(error)")
+            .textStyle(FinanceColor.critical, FinanceFont.body)
     }
 }
 
@@ -133,8 +149,10 @@ private struct MatchLine: View {
     }
 }
 
+// MARK: - Previews
+
 #if DEBUG
 #Preview {
-    QuoteConsoleView(console: QuoteConsole(symbols: ["AAPL", "SAP"]))
+    QuoteConsoleView(console: QuoteConsole(symbols: TickerSymbol.dummyShortWatchlist))
 }
 #endif

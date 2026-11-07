@@ -11,11 +11,11 @@ import Foundation
 
 extension Position {
     var trend: GainTrend {
-        GainTrend(totalReturn.amount)
+        .init(totalReturn.amount)
     }
 
     var realizedTrend: GainTrend {
-        GainTrend(realizedGain.amount)
+        .init(realizedGain.amount)
     }
 
     var valueText: String {

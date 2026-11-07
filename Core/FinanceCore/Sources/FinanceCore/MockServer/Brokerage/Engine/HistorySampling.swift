@@ -14,18 +14,12 @@ struct HistorySampling: Equatable, Sendable {
 
     var span: TimeInterval {
         switch range {
-        case .day:
-            day
-        case .week:
-            7 * day
-        case .month:
-            30 * day
-        case .threeMonths:
-            91 * day
-        case .year:
-            365 * day
-        case .fiveYears:
-            1_826 * day
+        case .day: day
+        case .week: 7 * day
+        case .month: 30 * day
+        case .threeMonths: 91 * day
+        case .year: 365 * day
+        case .fiveYears: 1_826 * day
         }
     }
 
@@ -72,10 +66,8 @@ private extension HistorySampling {
 
     func isSampled(weekday: Int) -> Bool {
         switch range {
-        case .fiveYears:
-            weekday == friday
-        case .day, .week, .month, .threeMonths, .year:
-            weekday != sunday && weekday != saturday
+        case .fiveYears: weekday == friday
+        case .day, .week, .month, .threeMonths, .year: weekday != sunday && weekday != saturday
         }
     }
 }

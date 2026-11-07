@@ -35,7 +35,6 @@ struct OrdersPlaceholderPresentationTests {
         message: String,
         image: FinanceImage
     ) {
-        // Then
         #expect(placeholder.title.key == title)
         #expect(placeholder.message.key == message)
         #expect(placeholder.image == image)

@@ -32,12 +32,9 @@ struct OrderRowView: View {
             VStack(alignment: .trailing, spacing: dimensions.spaceXSmall) {
                 switch order.settledTotal {
                 case .some(let total):
-                    Text(verbatim: total)
-                        .textStyle(FinanceColor.textPrimary, FinanceFont.headline)
-                        .monospacedDigit()
+                    settledTotal(total)
                 case nil:
-                    Text(order.status.title)
-                        .textStyle(order.status.color, FinanceFont.headline)
+                    status
                 }
 
                 Text(order.rowKind)
@@ -54,10 +51,23 @@ struct OrderRowView: View {
     }
 }
 
+private extension OrderRowView {
+    func settledTotal(_ total: String) -> some View {
+        Text(verbatim: total)
+            .textStyle(FinanceColor.textPrimary, FinanceFont.headline)
+            .monospacedDigit()
+    }
+
+    var status: some View {
+        Text(order.status.title)
+            .textStyle(order.status.color, FinanceFont.headline)
+    }
+}
+
 #if DEBUG
 #Preview(traits: .sizeThatFitsLayout) {
     VStack(spacing: 0) {
-        ForEach(PreviewObjectPool().sampleOrders) { order in
+        ForEach(Order.dummyList) { order in
             OrderRowView(order: order)
         }
     }

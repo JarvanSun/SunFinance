@@ -52,22 +52,38 @@ private extension PriceChartSection {
     var chart: some View {
         switch (history, style) {
         case (.loaded(let history), .line):
-            PriceLineChart(
-                history.lineContent(trading: trading, companyName: companyName),
-                onSelect: { onScrub($0?.date) }
-            )
+            lineChart(history)
         case (.loaded(let history), .candles):
-            CandlestickChart(
-                history.candlestickContent(trading: trading, companyName: companyName),
-                onSelect: { onScrub($0?.date) }
-            )
+            candlestickChart(history)
         case (.idle, _), (.loading, _):
-            ProgressView()
-                .accessibilityLabel(Text("quoteDetail.chart.loading", bundle: .module))
+            loading
         case (.failed, _):
-            Text("quoteDetail.chart.unavailable", bundle: .module)
-                .textStyle(FinanceColor.textSecondary, FinanceFont.callout)
+            unavailable
         }
+    }
+
+    func lineChart(_ history: PriceHistory) -> some View {
+        PriceLineChart(
+            history.lineContent(trading: trading, companyName: companyName),
+            onSelect: { onScrub($0?.date) }
+        )
+    }
+
+    func candlestickChart(_ history: PriceHistory) -> some View {
+        CandlestickChart(
+            history.candlestickContent(trading: trading, companyName: companyName),
+            onSelect: { onScrub($0?.date) }
+        )
+    }
+
+    var loading: some View {
+        ProgressView()
+            .accessibilityLabel(Text("quoteDetail.chart.loading", bundle: .module))
+    }
+
+    var unavailable: some View {
+        Text("quoteDetail.chart.unavailable", bundle: .module)
+            .textStyle(FinanceColor.textSecondary, FinanceFont.callout)
     }
 }
 
@@ -76,8 +92,8 @@ private extension PriceChartSection {
     ScrollView {
         VStack(spacing: 32) {
             PriceChartSection(
-                history: .loaded(PreviewObjectPool().history(range: .day)),
-                trading: PreviewObjectPool().trading,
+                history: .loaded(.dummy(range: .day)),
+                trading: .dummy,
                 companyName: "Apple Inc.",
                 style: .line,
                 range: .day,
@@ -88,8 +104,8 @@ private extension PriceChartSection {
             )
 
             PriceChartSection(
-                history: .loaded(PreviewObjectPool().history(range: .month)),
-                trading: PreviewObjectPool().trading,
+                history: .loaded(.dummy(range: .month)),
+                trading: .dummy,
                 companyName: "Apple Inc.",
                 style: .candles,
                 range: .month,

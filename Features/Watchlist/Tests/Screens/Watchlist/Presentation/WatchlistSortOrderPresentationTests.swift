@@ -12,7 +12,7 @@ import Testing
 
 struct WatchlistSortOrderPresentationTests {
     @Test func titleThenEveryOrderHasItsOwnKey() {
-        // When
+        // Given / When
         let keys = WatchlistSortOrder.allCases.map(\.title.key)
 
         // Then

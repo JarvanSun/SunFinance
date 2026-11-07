@@ -17,10 +17,8 @@ struct PortfolioDestinationView: FeatureDestinationView {
 
     var style: PresentingStyle {
         switch destination {
-        case .orderTicket:
-            .sheet
-        case .root, .quoteDetail:
-            .push
+        case .orderTicket: .sheet
+        case .root, .quoteDetail: .push
         }
     }
 

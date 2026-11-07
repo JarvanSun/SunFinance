@@ -12,7 +12,7 @@ import Testing
 
 struct PortfolioValuePointTests {
     @Test func initThenMapsDateAndValue() throws {
-        // When
+        // Given / When
         let point = try PortfolioValuePoint(
             ValuePointDTO(date: Date(timeIntervalSince1970: 60), value: .init(euros: 10_500))
         )
@@ -23,7 +23,7 @@ struct PortfolioValuePointTests {
     }
 
     @Test func initWhenCurrencyIsInvalidThenThrowsDecoding() {
-        // When
+        // Given / When
         let result = Result { () throws(BrokerageError) in
             try PortfolioValuePoint(
                 ValuePointDTO(date: Date(), value: MoneyDTO(amount: 1, currency: "EURO"))

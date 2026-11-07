@@ -31,10 +31,8 @@ final class OrderDetailViewModel {
 
     var hasCancelFailed: Bool {
         switch cancellation {
-        case .failed:
-            true
-        case .idle, .confirming, .working:
-            false
+        case .failed: true
+        case .idle, .confirming, .working: false
         }
     }
 
@@ -43,19 +41,19 @@ final class OrderDetailViewModel {
     }
 
     var statusNote: OrderStatusNote {
-        OrderStatusNote(order.status)
+        .init(order.status)
     }
 
-    private let canceller: any OrderCancelling
-    private let router: any OrdersRouting
-    private let tracker: any AnalyticsTracking
+    private let canceller: OrderCancelling
+    private let router: OrdersRouting
+    private let tracker: AnalyticsTracking
     private let onChange: (Order) -> Void
 
     init(
         order: Order,
-        canceller: some OrderCancelling,
-        router: some OrdersRouting,
-        tracker: some AnalyticsTracking,
+        canceller: OrderCancelling,
+        router: OrdersRouting,
+        tracker: AnalyticsTracking,
         onChange: @escaping (Order) -> Void
     ) {
         self.order = order

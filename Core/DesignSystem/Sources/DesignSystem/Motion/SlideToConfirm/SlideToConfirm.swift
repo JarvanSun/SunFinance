@@ -131,12 +131,9 @@ private extension SlideToConfirm {
 
     func knobOffset(travel: CGFloat) -> CGFloat {
         switch phase {
-        case .ready where isCommitted:
-            travel
-        case .ready:
-            min(max(dragOffset, 0), travel)
-        case .working, .done:
-            travel
+        case .ready where isCommitted: travel
+        case .ready: min(max(dragOffset, 0), travel)
+        case .working, .done: travel
         }
     }
 
@@ -180,31 +177,33 @@ private struct ShimmerModifier: ViewModifier {
         switch isActive {
         case true:
             content
-                .overlay {
-                    GeometryReader { proxy in
-                        TimelineView(.animation) { timeline in
-                            let elapsed = timeline.date.timeIntervalSinceReferenceDate
-                            let phase =
-                                elapsed.truncatingRemainder(dividingBy: period) / period
-                            LinearGradient(
-                                stops: highlightStops,
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                            .frame(width: proxy.size.width * highlightWidth)
-                            .offset(
-                                x: CGFloat(phase) * proxy.size.width * (1 + highlightWidth) - proxy
-                                    .size.width * highlightWidth
-                            )
-                            .blendMode(.sourceAtop)
-                        }
-                    }
-                    .allowsHitTesting(false)
-                }
+                .overlay { highlight }
                 .compositingGroup()
         case false:
             content
         }
+    }
+
+    private var highlight: some View {
+        GeometryReader { proxy in
+            TimelineView(.animation) { timeline in
+                let elapsed = timeline.date.timeIntervalSinceReferenceDate
+                let phase =
+                    elapsed.truncatingRemainder(dividingBy: period) / period
+                LinearGradient(
+                    stops: highlightStops,
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+                .frame(width: proxy.size.width * highlightWidth)
+                .offset(
+                    x: CGFloat(phase) * proxy.size.width * (1 + highlightWidth) - proxy
+                        .size.width * highlightWidth
+                )
+                .blendMode(.sourceAtop)
+            }
+        }
+        .allowsHitTesting(false)
     }
 
     private var period: TimeInterval { FinanceMotion.shimmer.duration }
@@ -221,6 +220,8 @@ private struct ShimmerModifier: ViewModifier {
         ]
     }
 }
+
+// MARK: - Previews
 
 #if DEBUG
 private struct SlideToConfirmPreview: View {

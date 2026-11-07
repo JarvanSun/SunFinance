@@ -12,7 +12,7 @@ import Testing
 struct CurrencyCodeTests {
     @Test(arguments: [("EUR", CurrencyCode.eur), ("USD", .usd), ("JPY", .jpy)])
     func initWhenCodeIsSupportedThenIsItsCase(code: String, expected: CurrencyCode) {
-        // When
+        // Given / When
         let currency = CurrencyCode(rawValue: code)
 
         // Then
@@ -21,7 +21,7 @@ struct CurrencyCodeTests {
 
     @Test(arguments: ["", "EU", "EURO", "eur", "E1R", "ÉUR", "CHF"])
     func initWhenCodeIsInvalidOrUnsupportedThenFails(code: String) {
-        // When
+        // Given / When
         let currency = CurrencyCode(rawValue: code)
 
         // Then

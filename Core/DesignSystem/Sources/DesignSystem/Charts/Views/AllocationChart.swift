@@ -97,7 +97,7 @@ private extension AllocationChart {
     }
 
     var palette: AllocationPalette {
-        AllocationPalette(slices: slices)
+        .init(slices: slices)
     }
 
     var total: Double {
@@ -118,10 +118,8 @@ private extension AllocationChart {
 
     var accessibilityLabel: Text {
         switch content.accessibility {
-        case .some(let accessibility):
-            Text(accessibility.summary)
-        case nil:
-            Text(verbatim: "")
+        case .some(let accessibility): .init(accessibility.summary)
+        case nil: .init(verbatim: "")
         }
     }
 
@@ -131,10 +129,8 @@ private extension AllocationChart {
 
     func opacity(of slice: AllocationSlice) -> Double {
         switch selection {
-        case .some(let selection):
-            slice.id == selection ? 1 : FinanceOpacity.dimmed.value
-        case nil:
-            1
+        case .some(let selection): slice.id == selection ? 1 : FinanceOpacity.dimmed.value
+        case nil: 1
         }
     }
 
@@ -155,6 +151,8 @@ private extension AllocationChart {
     }
 }
 
+// MARK: - Previews
+
 #if DEBUG
 private struct AllocationChartPreview: View {
     @State private var selection: AllocationSlice.ID?
@@ -163,7 +161,7 @@ private struct AllocationChartPreview: View {
     var body: some View {
         VStack(spacing: 24) {
             AllocationChart(
-                ChartPreviewData().allocationChart,
+                .dummy,
                 selection: selection,
                 onSelect: { selection = $0 }
             ) { slice in
@@ -173,7 +171,7 @@ private struct AllocationChartPreview: View {
             .id(replay)
 
             AllocationChart(
-                AllocationChartContent(slices: [ChartPreviewData().allocation[0]]),
+                AllocationChartContent(slices: [AllocationSlice.dummyAllocation[0]]),
                 selection: nil,
                 onSelect: { _ in }
             ) { _ in

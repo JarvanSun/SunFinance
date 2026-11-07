@@ -42,11 +42,11 @@ struct ClosedPositionRowView: View {
 #Preview(traits: .sizeThatFitsLayout) {
     VStack(spacing: 0) {
         ClosedPositionRowView(
-            position: PreviewObjectPool().position("KO", quantity: 0, value: 0, gain: 96.3)
+            position: .dummy("KO", quantity: 0, value: 0, gain: 96.3)
         )
 
         ClosedPositionRowView(
-            position: PreviewObjectPool().position("TSLA", quantity: 0, value: 0, gain: -42)
+            position: .dummy("TSLA", quantity: 0, value: 0, gain: -42)
         )
     }
     .padding()

@@ -60,8 +60,8 @@ struct BrokerageServiceTests {
         let key = IdempotencyKey()
 
         // When
-        let first = try await service.place(.init(), idempotencyKey: key)
-        let second = try await service.place(.init(), idempotencyKey: key)
+        let first = try await service.place(.dummy(), idempotencyKey: key)
+        let second = try await service.place(.dummy(), idempotencyKey: key)
         let past = try await service.orders(.past, symbol: nil, cursor: nil)
 
         // Then
@@ -77,7 +77,7 @@ struct BrokerageServiceTests {
 
         // When
         let order = try await service.place(
-            .init(.buy, .shares(1_000_000)),
+            .dummy(.buy, .shares(1_000_000)),
             idempotencyKey: IdempotencyKey()
         )
 
@@ -91,7 +91,7 @@ struct BrokerageServiceTests {
         let cash = try await service.account().cash
 
         // When
-        let preview = try await service.preview(.init(.buy, .shares(2), symbol: "AAPL"))
+        let preview = try await service.preview(.dummy(.buy, .shares(2), symbol: "AAPL"))
 
         // Then
         #expect(preview.rejection == nil)
@@ -104,7 +104,7 @@ struct BrokerageServiceTests {
         // Given
         let service = makeService()
         let order = try await service.place(
-            .init(execution: .limit(1)),
+            .dummy(execution: .limit(1)),
             idempotencyKey: IdempotencyKey()
         )
         let openBefore = try await service.orders(.open, symbol: nil, cursor: nil)
@@ -126,12 +126,12 @@ struct BrokerageServiceTests {
         let service = makeService()
         for _ in 0..<21 {
             _ = try await service.place(
-                .init(symbol: "AAPL", execution: .limit(1)),
+                .dummy(symbol: "AAPL", execution: .limit(1)),
                 idempotencyKey: IdempotencyKey()
             )
         }
         let sap = try await service.place(
-            .init(execution: .limit(1)),
+            .dummy(execution: .limit(1)),
             idempotencyKey: IdempotencyKey()
         )
 
@@ -152,7 +152,7 @@ struct BrokerageServiceTests {
 
         // Then
         await #expect(throws: BrokerageError.server(statusCode: 503)) {
-            try await service.place(.init(), idempotencyKey: IdempotencyKey())
+            try await service.place(.dummy(), idempotencyKey: IdempotencyKey())
         }
     }
 
@@ -169,13 +169,13 @@ struct BrokerageServiceTests {
 
 private extension BrokerageServiceTests {
     func makeService(behavior: MockServerBehavior = .instant) -> BrokerageService {
-        let date = TradingMoment.tuesdayAfternoon.date
+        let date = Date.dummyTuesdayAfternoon
         let brokerage = MockBrokerage(exchange: MockExchange(), storageURL: nil, now: date)
         let server = MockServer(
             routes: [BrokerageMockRoutes(brokerage: brokerage)],
             behavior: behavior,
             now: { date }
         )
-        return BrokerageService(client: BackendClient(environment: .init(mockServer: server)))
+        return .init(client: BackendClient(environment: .init(mockServer: server)))
     }
 }

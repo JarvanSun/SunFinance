@@ -12,8 +12,7 @@ import Foundation
 extension ExchangeRate {
     var rows: [LabeledRow] {
         switch currency == .eur {
-        case true:
-            []
+        case true: []
         case false:
             [
                 LabeledRow(

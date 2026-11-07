@@ -40,7 +40,7 @@ private struct RevealLayout: Layout {
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let size = contentSize(proposal: proposal, subviews: subviews)
-        return CGSize(width: size.width, height: size.height * progress)
+        return .init(width: size.width, height: size.height * progress)
     }
 
     func placeSubviews(
@@ -58,7 +58,7 @@ private struct RevealLayout: Layout {
     private func contentSize(proposal: ProposedViewSize, subviews: Subviews) -> CGSize {
         let width = ProposedViewSize(width: proposal.width, height: nil)
         let sizes = subviews.map { $0.sizeThatFits(width) }
-        return CGSize(
+        return .init(
             width: sizes.map(\.width).max() ?? 0,
             height: sizes.map(\.height).max() ?? 0
         )

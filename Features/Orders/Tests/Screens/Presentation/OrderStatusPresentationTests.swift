@@ -34,7 +34,6 @@ struct OrderStatusPresentationTests {
         image: FinanceImage,
         color: FinanceColor
     ) {
-        // Then
         #expect(status.title.key == title)
         #expect(status.image == image)
         #expect(status.color == color)

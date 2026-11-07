@@ -20,7 +20,6 @@ struct HistoryRangeCandlesTests {
         (.fiveYears, true),
     ])
     func isLongEnoughForCandlesThenFromOneMonth(range: HistoryRange, expected: Bool) {
-        // Then
         #expect(range.isLongEnoughForCandles == expected)
     }
 }

@@ -20,7 +20,6 @@ struct TicketIssueTests {
         (.unknownSymbol, .notTradable),
     ])
     func initThenNamesWhatTheServerPredicts(rejection: OrderRejection, expected: TicketIssue) {
-        // Then
         #expect(TicketIssue(rejection) == expected)
     }
 
@@ -30,7 +29,6 @@ struct TicketIssueTests {
         (.insufficientCash, false),
     ])
     func waitsForReviewAttemptThenOnlyForAnEmptyField(issue: TicketIssue, waits: Bool) {
-        // Then
         #expect(issue.waitsForReviewAttempt == waits)
     }
 }

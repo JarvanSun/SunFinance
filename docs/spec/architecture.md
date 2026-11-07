@@ -60,8 +60,7 @@ preview.
 - `<Name>HostView.swift` ends with a preview built from `PreviewObjectPool().<name>Dependencies()`,
   where every `FeatureEntry` is a stand-in screen, so the canvas runs the whole flow.
 - Every package also runs as an app: `Playground/Playground.xcodeproj` with one target,
-  `<Package>Playground`, which links the package by relative path and shares
-  `Configuration/Signing.xcconfig` with the App. Feature
+  `<Package>Playground`, which links the package by relative path. Feature
   playgrounds run the `*HostView` on the mock backend; DesignSystem's is a catalogue of tokens,
   components, motion and charts; FinanceCore's is a console for the exchange, each provider and
   analytics.
@@ -82,7 +81,7 @@ preview.
 - Every module enables `MemberImportVisibility`, so each file imports exactly what it uses.
 - In a MainActor module, write no isolation keyword. `nonisolated` goes only on the narrowest
   declaration the compiler reports as used off the main actor (a `Shape`, a `FeatureDestination`,
-  formatting called from `@Sendable` closures, fixtures for `@Test(arguments:)`). Members in an
+  formatting called from `@Sendable` closures, dummies for `@Test(arguments:)`). Members in an
   extension do not inherit the type's `nonisolated`.
 - In FinanceCore, `@MainActor` marks only what the UI calls synchronously: the watchlist and
   favorites stores and the analytics protocols and classes, not the analytics values. Their tests
@@ -128,11 +127,13 @@ SunKit routing: `FeatureDestination` → `FeatureRouting` router → `FeatureDes
 ## The App
 
 `SunFinance/` holds `App/` (`SunFinanceApp`, `AppRoot`), `Composition/` (`AppDependencies`,
-`AppConfiguration`), `Navigation/` (`MainTabsView`, `AppTab`) and `Resources/`; `SunFinanceTests/` mirrors it. The root shows a `TabView` at once, each tab a
+`AppConfiguration`), `Dummy/` (the demo setup: `AppConfiguration.dummy`,
+`TickerSymbol.dummyWatchlist`), `Navigation/` (`MainTabsView`, `AppTab`) and `Resources/`;
+`SunFinanceTests/` mirrors it and adds `Fakes/`. The root shows a `TabView` at once, each tab a
 feature's `*HostView` with its own stack, under the privacy shield.
 
-`SunFinanceApp` creates one `AppDependencies` from `AppConfiguration()`, whose defaults are the
-demo setup. It builds one `ServerEnvironment(mockBehavior:storageDirectory:)` for both services, so every screen sees the
+`SunFinanceApp` creates one `AppDependencies` from `AppConfiguration.dummy`, the demo setup;
+`AppConfiguration` itself has no default values. It builds one `ServerEnvironment(mockBehavior:storageDirectory:)` for both services, so every screen sees the
 same exchange and account, and builds each feature's dependencies and the `FeatureEntry`s between
 them in instance methods (`watchlist()`, `quoteDetail(for:)`, `trading(for:)`…).
 

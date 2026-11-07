@@ -17,14 +17,10 @@ nonisolated enum InterFace: String, CaseIterable, Sendable {
 
     var weight: Font.Weight {
         switch self {
-        case .regular:
-            .regular
-        case .medium:
-            .medium
-        case .semiBold:
-            .semibold
-        case .bold:
-            .bold
+        case .regular: .regular
+        case .medium: .medium
+        case .semiBold: .semibold
+        case .bold: .bold
         }
     }
 }

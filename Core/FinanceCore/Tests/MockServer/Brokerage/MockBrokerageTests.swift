@@ -17,10 +17,10 @@ struct MockBrokerageTests {
             path: "\(UUID().uuidString)/ledger.json"
         )
         defer { try? FileManager.default.removeItem(at: url.deletingLastPathComponent()) }
-        let date = TradingMoment.tuesdayAfternoon.date
+        let date = Date.dummyTuesdayAfternoon
         let first = MockBrokerage(exchange: MockExchange(), storageURL: url, now: date)
         let placed = first.update(at: date) { ledger in
-            ledger.place(.init(), key: nil, at: date, exchange: MockExchange())
+            ledger.place(.dummy(), key: nil, at: date, exchange: MockExchange())
         }
 
         // When

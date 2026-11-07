@@ -12,8 +12,8 @@ import Testing
 
 struct OrdersEventTests {
     @Test func cancelledThenDescribesTypeAndTriggerOnly() {
-        // When
-        let event = OrdersEvent.cancelled(Order("1").draft)
+        // Given / When
+        let event = OrdersEvent.cancelled(Order.dummy("1").draft)
 
         // Then
         #expect(event.name == .init("trading_order_cancelled"))

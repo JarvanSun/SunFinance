@@ -7,20 +7,21 @@
 
 import CoreText
 import Foundation
+import UIKit
 
 nonisolated struct FontRegistrar {
     func registerBundledFonts() {
-        _ = registration
+        for face in InterFace.allCases where !isRegistered(face) {
+            register(face)
+        }
     }
 }
 
 private extension FontRegistrar {
     nonisolated var fontFileExtension: String { "ttf" }
 
-    nonisolated func registerEveryFace() {
-        for face in InterFace.allCases {
-            register(face)
-        }
+    nonisolated func isRegistered(_ face: InterFace) -> Bool {
+        UIFont(name: face.postScriptName, size: UIFont.systemFontSize) != nil
     }
 
     nonisolated func register(_ face: InterFace) {
@@ -33,5 +34,3 @@ private extension FontRegistrar {
         CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
     }
 }
-
-private nonisolated let registration: Void = FontRegistrar().registerEveryFace()

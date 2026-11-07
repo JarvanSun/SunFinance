@@ -14,7 +14,7 @@ import Testing
 struct AppConfigurationTests {
     @Test func defaultsWithoutSuiteNameThenAreStandard() {
         // Given
-        let configuration = makeConfiguration(defaultsSuiteName: nil)
+        let configuration = AppConfiguration.dummy(defaultsSuiteName: nil)
 
         // Then
         #expect(configuration.defaults == .standard)
@@ -23,7 +23,7 @@ struct AppConfigurationTests {
     @Test func defaultsWithSuiteNameThenAreThatSuite() throws {
         // Given
         let suiteName = #function
-        let configuration = makeConfiguration(defaultsSuiteName: suiteName)
+        let configuration = AppConfiguration.dummy(defaultsSuiteName: suiteName)
         defer { UserDefaults.standard.removePersistentDomain(forName: suiteName) }
 
         // When
@@ -33,27 +33,5 @@ struct AppConfigurationTests {
         let suite = try #require(UserDefaults(suiteName: suiteName))
         #expect(suite.bool(forKey: suiteName))
         #expect(configuration.defaults != .standard)
-    }
-
-    @Test func initThenStartsWithAWatchlistAndStoresTheAccount() {
-        // When
-        let configuration = AppConfiguration()
-
-        // Then
-        #expect(!configuration.defaultWatchlist.isEmpty)
-        #expect(configuration.mockServerStorageURL != nil)
-        #expect(configuration.defaultsSuiteName == nil)
-    }
-}
-
-private extension AppConfigurationTests {
-    func makeConfiguration(defaultsSuiteName: String?) -> AppConfiguration {
-        AppConfiguration(
-            serverBehavior: .instant,
-            defaultWatchlist: ["AAPL"],
-            vendorAnalyticsAPIKey: "test-key",
-            defaultsSuiteName: defaultsSuiteName,
-            mockServerStorageURL: nil
-        )
     }
 }

@@ -14,7 +14,8 @@ Layout a tool can decide is fixed in `.swift-format` and applied by `scripts/for
 - One blank line between declaration groups, between top-level sections of a `body`, and after a
   `guard`. Never two blank lines in a row.
 - `#if DEBUG` blocks are not indented.
-- When the type is known from context, write `.init(...)`.
+- When the type is known from context, write `.init(...)` instead of repeating the type name
+  ([details](#init-from-context)).
 
 ## Files
 
@@ -29,6 +30,14 @@ Layout a tool can decide is fixed in `.swift-format` and applied by `scripts/for
   `<Type>Presentation.swift` (`StockQuotePresentation.swift`).
 - Any other extension of our own type in its own file is named after what it adds
   (`StockQuoteMatching.swift`).
+- Dummy data for a type goes in `<Type>Dummy.swift` (`StockQuoteDummy.swift`,
+  `TickerSymbolDummy.swift`), whichever module the type comes from
+  ([Dummy data](#dummy-data)).
+- Nothing lives at file level except types and their extensions: every `func`, `let` and `var`
+  belongs to a type. A helper goes in the file's trailing `private extension <Type>`, in an
+  extension of the value type it works on (`private extension AppConfiguration { var
+  analyticsTracker: AnalyticsTracker }`), or in a small `private` helper type. The only exception
+  is a `Package.swift` manifest.
 
 ## Naming
 
@@ -104,7 +113,40 @@ file.
   ([example](view-model.md#async-loading)).
 - A function that does not fit on one screen, or nests more than two levels, is split.
 - At most four parameters; more means a value type is missing.
-- `some Protocol` for parameters, `any Protocol` for stored existentials.
+- A protocol type is written bare, as a parameter and as a stored property:
+  `quoteProvider: QuoteProviding`, `private let quoteProvider: QuoteProviding`. The project does
+  not enable `ExistentialAny`, so `any` and `some` appear only where the compiler needs them: a
+  protocol with an associated or primary associated type (`clock: some Clock<Duration>`, stored as
+  `any Clock<Duration>`), an opaque result (`some View`, `some AxisContent`), or a generic use that
+  needs it.
+
+### `.init` from context
+
+Write `.init(…)` when the surrounding declaration already states the type:
+
+- the single-expression body of a function or computed property, or a `return`, of that type;
+- each value of a `switch` that is such a body;
+- a property, a parameter default or a `let` with an explicit type annotation;
+- an enum payload and an element of a collection literal whose element type is stated.
+
+```swift
+func watchlist() -> WatchlistDependencies {
+    .init(
+        watchlistStore: watchlistStore,
+        quoteProvider: marketData,
+        symbolSearcher: marketData,
+        favoriteStore: favoriteStore,
+        clock: ContinuousClock(),
+        tracker: tracker,
+        quoteDetail: quoteDetailEntry
+    )
+}
+```
+
+Keep the type name where nothing nearby states it (`let environment = ServerEnvironment(…)`), for
+a SwiftUI view built inside a `body` or `@ViewBuilder`, and where `.init` would be ambiguous
+(`String(localized:)`). A presentation `switch` that produces a `LocalizedStringResource` writes
+every case as `.init("key", bundle: .module)`.
 - No boolean parameters that change behaviour (`load(force: true)`): two intents or an enum.
 
 ## Control flow
@@ -113,6 +155,20 @@ file.
   `defer` form one block.
 - `defer` sits after the entry `guard`s and the declarations its cleanup needs, never in the middle
   of the main logic.
+- A `switch` case whose body is a single value goes on the same line as its label. A case that
+  does not fit in 100 columns stays wrapped as the formatter leaves it; a case with several
+  statements, or a value spanning several lines, stays as it is.
+
+  ```swift
+  var image: FinanceImage {
+      switch self {
+      case .watchlist: .watchlist
+      case .portfolio: .portfolio
+      case .orders: .orders
+      }
+  }
+  ```
+
 - **Branch with `switch`**: over an enum, a tuple of the deciding values, an optional or a `Bool`.
   `if` only for one condition without `else`. Never `if / else`, an `else if` chain or a series of
   early `return`s.
@@ -123,8 +179,8 @@ file.
 - Name compound conditions before using them (`let matchesSymbol = …`).
 - Ternaries only to pick between two simple values (`isFavorite ? .remove : .add`); never nested,
   never for side effects.
-- No force unwraps or `try!` outside tests and previews, except a file-scope `private let` `URL`
-  from a string literal.
+- No force unwraps or `try!` outside tests and previews, except a `URL` from a string literal
+  (`var baseURL: URL { .init(string: "https://api.sunfinance.example")! }`).
 
 ## Errors
 
@@ -148,13 +204,13 @@ A literal that carries meaning gets a name, once, in the place that owns it.
 | Durations, limits, retry counts | A configuration value or a property of the type that uses it |
 | Accessibility identifiers | The feature's `AccessibilityIdentifying` enum |
 
-`0`, `1`, `""` and `[]` as neutral starting values are not magic. Sample data in previews,
-`Preview Content/` and test fixtures may be literal.
+`0`, `1`, `""` and `[]` as neutral starting values are not magic. Dummy data may be literal
+([Dummy data](#dummy-data)).
 
 A constant belongs to the type that uses it: a closed set of names is an `enum` with raw values; a
 value one type uses is a computed property in its `private extension`
-(`var pressedOpacity: Double { 0.7 }`); a value an initializer needs before `self` exists is a
-file-scope `private let` below the type (`private let cashSliceID = "cash"`); a value that differs
+(`var pressedOpacity: Double { 0.7 }`); an identifier a type needs before `self` exists is a case
+of a small `private enum` inside it (`SliceID.cash.rawValue`); a value that differs
 per environment is configuration passed through `init`. Never a `Constants` type.
 
 ## No `static`
@@ -166,19 +222,65 @@ Write no `static` (or `class`) member, except:
    `extension ButtonStyle where Self == FinanceButtonStyle { static func finance(_:) }`,
    `extension FormatStyle where Self == SignedPercentFormatStyle { static var signedPercent }`, and
    each package's `LocalizedStringResource.BundleDescription.module` behind `bundle: .module`;
-3. `VendorAnalytics.shared`, which imitates code we do not own.
+3. `VendorAnalytics.shared`, which imitates code we do not own;
+4. a `static var dummy…` or `static func dummy…(…)` in a [dummy extension](#dummy-data)
+   (`StockQuote.dummyApple`, `OrderDraft.dummy(.sell, .shares(16))`).
 
 Localization keys are never `static`: the key is written where it is used,
 `Text("watchlist.title", bundle: .module)`. Everything else has a non-static home:
 
 - A preset is an enum case (`MockServerBehavior.realistic`, `CurrencyCode.eur`) or an initializer
-  with default values (`AppConfiguration()`, `ServerEnvironment(mockBehavior:storageDirectory:)`).
-- A helper is an instance member, an initializer (`MockLedger(seededAt:exchange:)`) or a
-  file-scope `private func` (`marketEndpoint(matching:)`).
-- One-time setup is a lazily initialized file-scope `private let` (`FontRegistrar`).
-- Preview data and test fixtures are instances (`PreviewObjectPool().quotes`), initializers with
-  fixture defaults (`OrderDraft(.sell, .shares(16))`) or `nonisolated let` constants in `Fakes/`;
-  `@Test(arguments:)` takes array literals of them.
+  with real default values (`ServerEnvironment(mockBehavior:storageDirectory:)`).
+- A helper is an instance member or an initializer (`MockLedger(seededAt:exchange:)`,
+  `MarketEndpoint(matching:)` in a `private extension`), never a file-scope function.
+- One-time setup is an instance method of a small type (`FontRegistrar().registerBundledFonts()`).
+- Preview dependencies are instances (`PreviewObjectPool().watchlistDependencies()`); preview
+  data, test fixtures and playground stand-in data are [dummy data](#dummy-data).
+
+## Dummy data
+
+Fake data is never a default value in production code: no default argument, stored property
+default or preset holds a demo watchlist, an example key or a sample amount. A type that carries
+such values is a plain value without defaults (`AppConfiguration` uses its memberwise
+initializer), and its caller passes every value in.
+
+Dummy data lives in one place per module, as `static var dummy…`, or `static func dummy…(…)`
+when it needs parameters, in an extension of the model it belongs to, one file per extended type
+named `<Type>Dummy.swift`:
+
+| Module part | Folder |
+|---|---|
+| The App's demo setup | `SunFinance/Dummy/` |
+| Package previews | `Sources/<Package>/Preview Content/Dummy/`, inside `#if DEBUG` |
+| Tests | `Tests/Fakes/` (`SunFinanceTests/Fakes/` for the App) |
+| Playground stand-ins | `Playground/Sources/Dummy/` |
+
+```swift
+extension AppConfiguration {
+    static var dummy: AppConfiguration {
+        .init(
+            serverBehavior: .realistic,
+            defaultWatchlist: TickerSymbol.dummyWatchlist,
+            vendorAnalyticsAPIKey: "demo-vendor-key",
+            defaultsSuiteName: nil,
+            mockServerStorageURL: URL.applicationSupportDirectory.appending(path: "MockServer")
+        )
+    }
+}
+```
+
+- Every member is named `dummy…`: `dummy` for the only value of a type, `dummy<Name>` for one of
+  several (`StockQuote.dummyGaining`, `Date.dummyNow`), `dummy<Role>` for a list
+  (`TickerSymbol.dummyWatchlist: [TickerSymbol]`). A private generator inside the extension is a
+  `private static func dummy…` too.
+- A use writes `Type.dummyX`, or `.dummyX` where the context type is exactly that type
+  (`AppDependencies(configuration: .dummy)`, `QuoteRowView(quote: .dummyGaining, …)`).
+- A dummy is `nonisolated` when it is used off the main actor (`@Test(arguments:)`, a nonisolated
+  preview service).
+- Previews, tests and playgrounds each own their dummies. A test target's dummy may share a name
+  with a preview dummy of its package; the test's own declaration wins.
+- The mock backend's seeded content (MockLedger's seed trades, the MockExchange and companies
+  fixtures) is the backend's data, not dummy data, and stays where it is.
 
 ## Comments
 

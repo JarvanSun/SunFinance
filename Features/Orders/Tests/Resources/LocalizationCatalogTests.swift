@@ -24,7 +24,7 @@ struct LocalizationCatalogTests {
 
 private extension LocalizationCatalogTests {
     var catalogURL: URL {
-        URL(filePath: #filePath)
+        .init(filePath: #filePath)
             .deletingLastPathComponent()
             .deletingLastPathComponent()
             .deletingLastPathComponent()

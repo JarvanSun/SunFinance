@@ -16,7 +16,7 @@ struct MockLedger: Codable, Sendable {
     var settledUntil: Date
 
     var book: PositionBook {
-        PositionBook(fills: fills)
+        .init(fills: fills)
     }
 }
 
@@ -72,14 +72,14 @@ private extension MockLedger {
 
     var seedTrades: [SeedTrade] {
         [
-            SeedTrade(symbol: "AAPL", side: .buy, quantity: 10, daysAgo: 170),
-            SeedTrade(symbol: "SAP", side: .buy, quantity: 20, daysAgo: 150),
-            SeedTrade(symbol: "KO", side: .buy, quantity: 30, daysAgo: 140),
-            SeedTrade(symbol: "NVDA", side: .buy, quantity: 15, daysAgo: 120),
-            SeedTrade(symbol: "AAPL", side: .buy, quantity: 5, daysAgo: 60),
-            SeedTrade(symbol: "SAP", side: .sell, quantity: 5, daysAgo: 40),
-            SeedTrade(symbol: "KO", side: .sell, quantity: 30, daysAgo: 30),
-            SeedTrade(symbol: "ALV", side: .buy, quantity: 4, daysAgo: 20),
+            .init(symbol: "AAPL", side: .buy, quantity: 10, daysAgo: 170),
+            .init(symbol: "SAP", side: .buy, quantity: 20, daysAgo: 150),
+            .init(symbol: "KO", side: .buy, quantity: 30, daysAgo: 140),
+            .init(symbol: "NVDA", side: .buy, quantity: 15, daysAgo: 120),
+            .init(symbol: "AAPL", side: .buy, quantity: 5, daysAgo: 60),
+            .init(symbol: "SAP", side: .sell, quantity: 5, daysAgo: 40),
+            .init(symbol: "KO", side: .sell, quantity: 30, daysAgo: 30),
+            .init(symbol: "ALV", side: .buy, quantity: 4, daysAgo: 20),
         ]
     }
 }

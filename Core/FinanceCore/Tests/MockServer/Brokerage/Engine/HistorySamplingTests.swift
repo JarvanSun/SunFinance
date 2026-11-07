@@ -18,23 +18,23 @@ struct HistorySamplingTests {
     }
 
     @Test func momentsWhenMonthThenTakesWeekdayClosesAndNow() {
-        // When
+        // Given / When
         let moments = HistorySampling(range: .month).moments(
-            endingAt: TradingMoment.tuesdayAfternoon.date
+            endingAt: Date.dummyTuesdayAfternoon
         )
 
         // Then
         let closes = moments.dropLast()
-        #expect(moments.last == TradingMoment.tuesdayAfternoon.date)
+        #expect(moments.last == Date.dummyTuesdayAfternoon)
         #expect(closes.allSatisfy { ![1, 7].contains(calendar.component(.weekday, from: $0)) })
         #expect(closes.allSatisfy { calendar.component(.hour, from: $0) == 21 })
         #expect((20...23).contains(closes.count))
     }
 
     @Test func momentsWhenFiveYearsThenTakesFridays() {
-        // When
+        // Given / When
         let moments = HistorySampling(range: .fiveYears).moments(
-            endingAt: TradingMoment.tuesdayAfternoon.date
+            endingAt: Date.dummyTuesdayAfternoon
         ).dropLast()
 
         // Then
@@ -43,13 +43,13 @@ struct HistorySamplingTests {
     }
 
     @Test func momentsWhenDayThenSamplesEvenly() {
-        // When
+        // Given / When
         let moments = HistorySampling(range: .day).moments(
-            endingAt: TradingMoment.tuesdayAfternoon.date
+            endingAt: Date.dummyTuesdayAfternoon
         )
 
         // Then
         #expect(moments.count == 120)
-        #expect(moments.last == TradingMoment.tuesdayAfternoon.date)
+        #expect(moments.last == Date.dummyTuesdayAfternoon)
     }
 }

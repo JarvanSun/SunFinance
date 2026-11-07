@@ -25,7 +25,6 @@ struct SegmentStyleTests {
         foreground: FinanceColor,
         font: FinanceFont
     ) {
-        // Then
         #expect(style.foreground(isSelected: isSelected) == foreground)
         #expect(style.font(isSelected: isSelected) == font)
     }

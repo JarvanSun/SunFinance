@@ -25,7 +25,6 @@ struct TicketFieldTests {
         execution: ExecutionKind,
         expected: TicketField
     ) {
-        // Then
         #expect(TicketField(rejection, execution: execution) == expected)
     }
 }

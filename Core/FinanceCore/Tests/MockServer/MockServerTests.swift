@@ -77,10 +77,10 @@ struct MockServerTests {
 
 private extension MockServerTests {
     func makeServer(behavior: MockServerBehavior) -> MockServer {
-        MockServer(routes: [EchoRoute(path: ["v1", "echo"])], behavior: behavior)
+        .init(routes: [EchoRoute(path: ["v1", "echo"])], behavior: behavior)
     }
 
     func request(path: String) throws -> URLRequest {
-        URLRequest(url: try #require(URL(string: "https://api.sunfinance.example/\(path)")))
+        .init(url: try #require(URL(string: "https://api.sunfinance.example/\(path)")))
     }
 }

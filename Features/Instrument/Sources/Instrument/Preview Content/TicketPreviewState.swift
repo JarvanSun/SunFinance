@@ -24,8 +24,7 @@ enum TicketPreviewState: String, CaseIterable, CustomStringConvertible {
 
     var side: TradeSide {
         switch self {
-        case .stopLimitSell:
-            .sell
+        case .stopLimitSell: .sell
         case .empty, .estimated, .tooMuch, .scheduled, .marketClosed, .loading, .offline, .german:
             .buy
         }
@@ -33,8 +32,7 @@ enum TicketPreviewState: String, CaseIterable, CustomStringConvertible {
 
     var rejection: OrderRejection? {
         switch self {
-        case .tooMuch:
-            .insufficientCash
+        case .tooMuch: .insufficientCash
         case .empty, .estimated, .stopLimitSell, .scheduled, .marketClosed, .loading, .offline,
             .german:
             nil
@@ -43,8 +41,7 @@ enum TicketPreviewState: String, CaseIterable, CustomStringConvertible {
 
     var failure: BrokerageError? {
         switch self {
-        case .offline:
-            .offline
+        case .offline: .offline
         case .empty, .estimated, .tooMuch, .stopLimitSell, .scheduled, .marketClosed, .loading,
             .german:
             nil
@@ -53,8 +50,7 @@ enum TicketPreviewState: String, CaseIterable, CustomStringConvertible {
 
     var delay: Duration {
         switch self {
-        case .loading:
-            .seconds(3_600)
+        case .loading: .seconds(3_600)
         case .empty, .estimated, .tooMuch, .stopLimitSell, .scheduled, .marketClosed, .offline,
             .german:
             .zero
@@ -67,8 +63,7 @@ enum TicketPreviewState: String, CaseIterable, CustomStringConvertible {
 
     var locale: Locale {
         switch self {
-        case .german:
-            Locale(identifier: "de_DE")
+        case .german: .init(identifier: "de_DE")
         case .empty, .estimated, .tooMuch, .stopLimitSell, .scheduled, .marketClosed, .loading,
             .offline:
             Locale(identifier: "en_US")

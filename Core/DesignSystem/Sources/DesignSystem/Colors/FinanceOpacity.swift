@@ -13,8 +13,7 @@ enum FinanceOpacity: CaseIterable, Sendable {
 
     var value: Double {
         switch self {
-        case .dimmed:
-            0.4
+        case .dimmed: 0.4
         }
     }
 }

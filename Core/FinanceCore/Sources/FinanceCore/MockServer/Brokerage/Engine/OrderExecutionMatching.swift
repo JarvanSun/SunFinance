@@ -10,12 +10,9 @@ import Foundation
 extension OrderExecution {
     func allowsFill(at price: Decimal, side: TradeSide) -> Bool {
         switch (self, side) {
-        case (.market, _):
-            true
-        case (.limit(let limit), .buy):
-            price <= limit
-        case (.limit(let limit), .sell):
-            price >= limit
+        case (.market, _): true
+        case (.limit(let limit), .buy): price <= limit
+        case (.limit(let limit), .sell): price >= limit
         }
     }
 }

@@ -24,7 +24,7 @@ in Xcode.
 
 - [ ] Builds without warnings in Swift 6 language mode.
 - [ ] `scripts/format.sh --lint` succeeds.
-- [ ] All tests pass; every new source file with logic has its test file.
+- [ ] `scripts/test.sh` passes; every new source file with logic has its test file.
 - [ ] Every changed package builds, tests and previews on its own, and its playground shows the
       change.
 - [ ] No `public` that another module does not use.
@@ -42,5 +42,4 @@ in Xcode.
 
 - Commit messages are imperative and say what changed and why: `Add price history request`.
 - Commit the `.xcodeproj` files with their shared schemes and the project's `Package.resolved`;
-  never commit `xcuserdata`, `DerivedData`, `.build`, a package's own `Package.resolved` or
-  `Configuration/Signing.local.xcconfig`.
+  never commit `xcuserdata`, `DerivedData`, `.build` or a package's own `Package.resolved`.

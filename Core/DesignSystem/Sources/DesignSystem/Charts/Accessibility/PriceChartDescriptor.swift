@@ -38,7 +38,7 @@ struct PriceChartDescriptor: AXChartDescriptorRepresentable {
                 AXDataPoint(x: Double($0.offset), y: $0.element.value)
             }
         )
-        return AXChartDescriptor(
+        return .init(
             title: String(localized: accessibility.title),
             summary: String(localized: accessibility.summary),
             xAxis: xAxis,

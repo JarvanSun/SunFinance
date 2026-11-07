@@ -8,14 +8,10 @@
 extension TicketField {
     var accessibilityIdentifier: InstrumentAccessibility {
         switch self {
-        case .amount:
-            .amountField
-        case .limitPrice:
-            .limitField
-        case .triggerPrice:
-            .triggerPriceField
-        case .triggerTime:
-            .triggerTimePicker
+        case .amount: .amountField
+        case .limitPrice: .limitField
+        case .triggerPrice: .triggerPriceField
+        case .triggerTime: .triggerTimePicker
         }
     }
 }

@@ -14,27 +14,26 @@ import Testing
 
 struct StockQuotePresentationTests {
     @Test func formattedChangeThenIsSigned() {
-        // When
-        let formattedChange = appleQuote.formattedChange
+        // Given / When
+        let formattedChange = StockQuote.dummyApple.formattedChange
 
         // Then
         #expect(formattedChange.hasPrefix("+"))
     }
 
     @Test(arguments: [
-        (appleQuote, GainTrend.gain),
-        (sapQuote, .loss),
-        (unchangedQuote, .unchanged),
+        (StockQuote.dummyApple, GainTrend.gain),
+        (StockQuote.dummySAP, .loss),
+        (StockQuote.dummyUnchanged, .unchanged),
     ])
     func trendThenFollowsDailyChange(quote: StockQuote, expected: GainTrend) {
-        // Then
         #expect(quote.trend == expected)
     }
 
     @Test func accessibilityLabelThenReadsCompanyPriceAndChange() {
-        // Then
         #expect(
-            appleQuote.accessibilityLabel.key == "watchlist.row.accessibilityLabel %@ %@ %@"
+            StockQuote.dummyApple.accessibilityLabel.key
+                == "watchlist.row.accessibilityLabel %@ %@ %@"
         )
     }
 }

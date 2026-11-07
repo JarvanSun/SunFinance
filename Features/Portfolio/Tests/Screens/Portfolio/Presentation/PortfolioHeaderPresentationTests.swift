@@ -20,7 +20,7 @@ struct PortfolioHeaderPresentationTests {
     ])
     func trendThenFollowsTheChange(change: Decimal, trend: GainTrend) {
         // Given
-        let header = makeHeader(change: .known(Money(change, .eur), percent: 0))
+        let header = makeHeader(change: .known(.init(change, .eur), percent: 0))
 
         // Then
         #expect(header.trend == trend)
@@ -41,6 +41,6 @@ struct PortfolioHeaderPresentationTests {
 
 private extension PortfolioHeaderPresentationTests {
     func makeHeader(change: PortfolioChange) -> PortfolioHeader {
-        PortfolioHeader(value: Money(100, .eur), change: change, moment: .range(.month))
+        .init(value: Money(100, .eur), change: change, moment: .range(.month))
     }
 }

@@ -13,28 +13,22 @@ public enum LoadState<Value: Equatable, Issue: Equatable>: Equatable {
 
     public var value: Value? {
         switch self {
-        case .loaded(let value):
-            value
-        case .idle, .loading, .failed:
-            nil
+        case .loaded(let value): value
+        case .idle, .loading, .failed: nil
         }
     }
 
     public var reloading: Self {
         switch self {
-        case .loaded:
-            self
-        case .idle, .loading, .failed:
-            .loading
+        case .loaded: self
+        case .idle, .loading, .failed: .loading
         }
     }
 
     public func settled(with result: Self) -> Self {
         switch (self, result) {
-        case (.loaded, .failed):
-            self
-        default:
-            result
+        case (.loaded, .failed): self
+        default: result
         }
     }
 }

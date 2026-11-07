@@ -18,7 +18,6 @@ struct MarketEndpointTests {
         (.symbolSearch, ["v1", "search"]),
     ])
     func pathThenIsVersionedPathOfTheEndpoint(endpoint: MarketEndpoint, expected: [String]) {
-        // Then
         #expect(endpoint.path == expected)
         #expect(endpoint.method == .get)
     }
@@ -32,7 +31,7 @@ struct MarketEndpointTests {
         (["v2", "quotes"], nil),
     ])
     func initWithPathThenMatchesOnlyKnownEndpoints(path: [String], expected: MarketEndpoint?) {
-        // When
+        // Given / When
         let endpoint = MarketEndpoint(path: path, method: .get)
 
         // Then
@@ -40,7 +39,7 @@ struct MarketEndpointTests {
     }
 
     @Test func initWhenMethodDoesNotMatchThenIsNil() {
-        // When
+        // Given / When
         let endpoint = MarketEndpoint(path: ["v1", "quotes"], method: .post)
 
         // Then

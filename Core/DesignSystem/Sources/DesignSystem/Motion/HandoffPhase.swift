@@ -19,12 +19,9 @@ enum HandoffPhase: Equatable, Sendable {
 
     var scale: CGFloat {
         switch self {
-        case .arriving:
-            0.98
-        case .shown:
-            1
-        case .leaving:
-            1.04
+        case .arriving: 0.98
+        case .shown: 1
+        case .leaving: 1.04
         }
     }
 
@@ -32,12 +29,10 @@ enum HandoffPhase: Equatable, Sendable {
         self == .shown
     }
 
-    func verticalOffset(in dimensions: any DimensionStyling) -> CGFloat {
+    func verticalOffset(in dimensions: DimensionStyling) -> CGFloat {
         switch self {
-        case .arriving:
-            dimensions.handoffRiseDistance
-        case .shown, .leaving:
-            .zero
+        case .arriving: dimensions.handoffRiseDistance
+        case .shown, .leaving: .zero
         }
     }
 }

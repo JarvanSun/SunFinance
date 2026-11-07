@@ -20,14 +20,10 @@ final class OrdersViewModel {
 
     var placeholder: OrdersPlaceholder? {
         switch (current.phase, current.orders.isEmpty) {
-        case (.idle, true), (.loading, true):
-            .loading
-        case (.failed(let issue), true):
-            .failed(issue)
-        case (.loaded, true):
-            .empty(filter)
-        case (_, false):
-            nil
+        case (.idle, true), (.loading, true): .loading
+        case (.failed(let issue), true): .failed(issue)
+        case (.loaded, true): .empty(filter)
+        case (_, false): nil
         }
     }
 
@@ -39,18 +35,18 @@ final class OrdersViewModel {
         current.footer
     }
 
-    private let orderProvider: any OrderProviding
-    private let router: any OrdersRouting
-    private let tracker: any AnalyticsTracking
+    private let orderProvider: OrderProviding
+    private let router: OrdersRouting
+    private let tracker: AnalyticsTracking
     private let calendar: Calendar
     private let now: @Sendable () -> Date
     @ObservationIgnored private var isScreenViewPending = false
     @ObservationIgnored private var loads: [OrderListFilter: OrderListLoads] = [:]
 
     init(
-        orderProvider: some OrderProviding,
-        router: some OrdersRouting,
-        tracker: some AnalyticsTracking,
+        orderProvider: OrderProviding,
+        router: OrdersRouting,
+        tracker: AnalyticsTracking,
         calendar: Calendar,
         now: @escaping @Sendable () -> Date
     ) {
@@ -162,10 +158,8 @@ private extension OrdersViewModel {
 
     func settledPhase(of result: PageResult) -> OrderList.Phase {
         switch result {
-        case .success:
-            .loaded
-        case .failure(let error):
-            .failed(OrdersIssue(error))
+        case .success: .loaded
+        case .failure(let error): .failed(OrdersIssue(error))
         }
     }
 

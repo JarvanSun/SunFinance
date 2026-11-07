@@ -34,7 +34,6 @@ struct QuoteDetailEventTests {
         name: String,
         parameters: [String: AnalyticsValue]
     ) {
-        // Then
         #expect(event.name.rawValue == name)
         #expect(
             Dictionary(uniqueKeysWithValues: event.parameters.map { ($0.key.rawValue, $0.value) })

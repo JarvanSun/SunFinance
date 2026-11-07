@@ -100,7 +100,7 @@ private extension MockLedger {
     func newOrder(for draft: OrderDraft, at date: Date, exchange: MockExchange) -> LedgerOrder {
         let estimate = estimate(for: draft, at: date, exchange: exchange)
         let rejection = rejection(for: draft, estimate: estimate, at: date, exchange: exchange)
-        return LedgerOrder(
+        return .init(
             id: UUID().uuidString,
             draft: draft,
             quantity: estimate?.quantity ?? 0,
@@ -221,8 +221,7 @@ private extension MockLedger {
 
     func shortfall(of fill: LedgerFill) -> OrderRejection? {
         switch fill.side {
-        case .buy:
-            cash + fill.cashEffect >= 0 ? nil : .insufficientCash
+        case .buy: cash + fill.cashEffect >= 0 ? nil : .insufficientCash
         case .sell:
             (book.holding(of: fill.symbol, asOf: fill.date)?.quantity ?? 0) >= fill.quantity
                 ? nil : .insufficientShares

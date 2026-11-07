@@ -14,9 +14,9 @@ struct PositionBookTests {
     @Test func holdingsThenAddUpFillsPerSymbolUpToTheMoment() {
         // Given
         let book = PositionBook(fills: [
-            .init(.buy, 5, at: 100, day: 2),
-            .init(.buy, 10, at: 100, day: 0),
-            .init(.buy, 3, at: 50, symbol: "ALV", day: 1),
+            .dummy(.buy, 5, at: 100, day: 2),
+            .dummy(.buy, 10, at: 100, day: 0),
+            .dummy(.buy, 3, at: 50, symbol: "ALV", day: 1),
         ])
 
         // When
@@ -29,7 +29,10 @@ struct PositionBookTests {
 
     @Test func holdingsThenKeepSymbolsSoldCompletely() {
         // Given
-        let book = PositionBook(fills: [.init(.buy, 10, at: 100), .init(.sell, 10, at: 90, day: 1)])
+        let book = PositionBook(fills: [
+            .dummy(.buy, 10, at: 100),
+            .dummy(.sell, 10, at: 90, day: 1),
+        ])
 
         // When
         let holding = book.holding(of: "SAP", asOf: day(1))
@@ -41,7 +44,7 @@ struct PositionBookTests {
 
     @Test func holdingWhenSymbolWasNeverTradedThenIsNil() {
         // Given
-        let book = PositionBook(fills: [.init(.buy, 10, at: 100)])
+        let book = PositionBook(fills: [.dummy(.buy, 10, at: 100)])
 
         // Then
         #expect(book.holding(of: "KO", asOf: day(5)) == nil)
@@ -49,11 +52,11 @@ struct PositionBookTests {
 
     @Test func fillsThenReturnsOnlyTheSymbolsFillsAfterTheMoment() {
         // Given
-        let later = LedgerFill(.sell, 2, at: 120, day: 2)
+        let later = LedgerFill.dummy(.sell, 2, at: 120, day: 2)
         let book = PositionBook(fills: [
-            .init(.buy, 10, at: 100),
+            .dummy(.buy, 10, at: 100),
             later,
-            .init(.buy, 1, at: 50, symbol: "ALV", day: 3),
+            .dummy(.buy, 1, at: 50, symbol: "ALV", day: 3),
         ])
 
         // When
@@ -66,6 +69,6 @@ struct PositionBookTests {
 
 private extension PositionBookTests {
     func day(_ offset: Double) -> Date {
-        Date(timeIntervalSince1970: 1_790_000_000 + offset * 86_400)
+        .init(timeIntervalSince1970: 1_790_000_000 + offset * 86_400)
     }
 }

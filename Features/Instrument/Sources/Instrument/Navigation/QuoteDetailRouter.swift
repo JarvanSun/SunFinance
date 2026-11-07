@@ -25,7 +25,7 @@ final class QuoteDetailRouter: FeatureRouting, QuoteDetailRouting {
     }
 
     func view(for destination: QuoteDetailDestination) -> QuoteDetailDestinationView {
-        QuoteDetailDestinationView(destination: destination, orderTicket: orderTicket)
+        .init(destination: destination, orderTicket: orderTicket)
     }
 
     func showOrderTicket(for intent: TradeIntent, onDismiss: @escaping () -> Void) {

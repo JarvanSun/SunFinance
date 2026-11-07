@@ -38,7 +38,7 @@ extension LedgerOrder: Codable {
         case fillID
     }
 
-    init(from decoder: any Decoder) throws {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let rejection = try container.decodeIfPresent(String.self, forKey: .rejection)
         self.init(
@@ -62,7 +62,7 @@ extension LedgerOrder: Codable {
         )
     }
 
-    func encode(to encoder: any Encoder) throws {
+    func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(draft.dto, forKey: .draft)

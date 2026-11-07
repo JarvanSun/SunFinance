@@ -13,19 +13,15 @@ extension Order {
     var detailSections: [OrderDetailSection] {
         let terms = OrderDetailSection(id: "terms", rows: termRows)
         return switch fill {
-        case .some(let fill):
-            [terms, OrderDetailSection(id: "fill", rows: rows(of: fill))]
-        case nil:
-            [terms]
+        case .some(let fill): [terms, OrderDetailSection(id: "fill", rows: rows(of: fill))]
+        case nil: [terms]
         }
     }
 
     var totalTitle: LocalizedStringResource {
         switch draft.side {
-        case .buy:
-            .init("orders.detail.row.total.buy", bundle: .module)
-        case .sell:
-            .init("orders.detail.row.total.sell", bundle: .module)
+        case .buy: .init("orders.detail.row.total.buy", bundle: .module)
+        case .sell: .init("orders.detail.row.total.sell", bundle: .module)
         }
     }
 }
@@ -33,27 +29,27 @@ extension Order {
 private extension Order {
     var termRows: [LabeledRow] {
         [
-            LabeledRow(
+            .init(
                 id: "placed",
                 title: .init("orders.detail.row.placed", bundle: .module),
                 value: .verbatim(createdAt.formatted(date: .abbreviated, time: .shortened))
             ),
-            LabeledRow(
+            .init(
                 id: "type",
                 title: .init("orders.detail.row.type", bundle: .module),
                 value: .localized(executionText)
             ),
-            LabeledRow(
+            .init(
                 id: "trigger",
                 title: .init("orders.detail.row.trigger", bundle: .module),
                 value: .localized(triggerText)
             ),
-            LabeledRow(
+            .init(
                 id: "validity",
                 title: .init("orders.detail.row.validity", bundle: .module),
                 value: .localized(validityText)
             ),
-            LabeledRow(
+            .init(
                 id: "quantity",
                 title: .init("orders.detail.row.quantity", bundle: .module),
                 value: .verbatim(quantity.formattedQuantity())
@@ -98,8 +94,7 @@ private extension Order {
             bundle: .module
         )
         return switch fill.price.currency == .eur {
-        case true:
-            []
+        case true: []
         case false:
             [
                 LabeledRow(

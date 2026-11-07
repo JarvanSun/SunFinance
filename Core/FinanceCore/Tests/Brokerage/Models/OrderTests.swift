@@ -13,10 +13,10 @@ import Testing
 struct OrderTests {
     @Test func initThenMapsEveryField() throws {
         // Given
-        let draft = OrderDraft(.buy, .euros(200), symbol: "AAPL")
+        let draft = OrderDraft.dummy(.buy, .euros(200), symbol: "AAPL")
 
         // When
-        let order = try Order(dto(draft: draft, fill: .init()))
+        let order = try Order(dto(draft: draft, fill: .dummy()))
 
         // Then
         #expect(order.id == "order-1")
@@ -25,12 +25,12 @@ struct OrderTests {
         #expect(order.currency == .usd)
         #expect(order.status == .filled)
         #expect(order.createdAt == Date(timeIntervalSince1970: 500))
-        #expect(order.fill == (try OrderFill(.init())))
+        #expect(order.fill == (try OrderFill(.dummy())))
     }
 
     @Test(arguments: [("filled", "DOLLAR"), ("lost", "USD"), ("rejected", "USD")])
     func initWhenStatusOrCurrencyIsInvalidThenThrowsDecoding(status: String, currency: String) {
-        // When
+        // Given / When
         let result = Result { () throws(BrokerageError) in
             try Order(dto(status: status, currency: currency))
         }
@@ -42,12 +42,12 @@ struct OrderTests {
 
 private extension OrderTests {
     func dto(
-        draft: OrderDraft = .init(),
+        draft: OrderDraft = .dummy(),
         status: String = "filled",
         currency: String = "USD",
         fill: FillDTO? = nil
     ) -> OrderDTO {
-        OrderDTO(
+        .init(
             id: "order-1",
             draft: draft.dto,
             quantity: 2,

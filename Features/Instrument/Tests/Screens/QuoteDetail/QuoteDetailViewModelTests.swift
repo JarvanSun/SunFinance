@@ -35,7 +35,6 @@ struct QuoteDetailViewModelTests {
     }
 
     @Test func placeholderBeforeLoadingThenIsLoading() {
-        // Then
         #expect(makeViewModel().placeholder == .loading)
     }
 
@@ -95,7 +94,7 @@ struct QuoteDetailViewModelTests {
     @Test func refreshThenLoadsDetailHistoryAndTrading() async {
         // Given
         let brokerage = BrokerageStub(
-            portfolio: Portfolio(open: [.init(holding: "AAPL", quantity: 3)], closed: [])
+            portfolio: Portfolio(open: [.dummy(holding: "AAPL", quantity: 3)], closed: [])
         )
         let viewModel = makeViewModel(brokerage: brokerage)
 
@@ -339,7 +338,7 @@ struct QuoteDetailViewModelTests {
     @Test func tradeActionsWhenTheStockIsHeldThenOfferSellThenBuyAtThePrice() async {
         // Given
         let brokerage = BrokerageStub(
-            portfolio: Portfolio(open: [.init(holding: "AAPL", quantity: 3)], closed: [])
+            portfolio: Portfolio(open: [.dummy(holding: "AAPL", quantity: 3)], closed: [])
         )
         let viewModel = makeViewModel(brokerage: brokerage)
 
@@ -360,7 +359,7 @@ struct QuoteDetailViewModelTests {
         // Given
         let viewModel = makeViewModel(
             brokerage: BrokerageStub(
-                portfolio: Portfolio(open: [.init(holding: "SAP", quantity: 3)], closed: [])
+                portfolio: Portfolio(open: [.dummy(holding: "SAP", quantity: 3)], closed: [])
             )
         )
 
@@ -376,9 +375,9 @@ struct QuoteDetailViewModelTests {
         // Given
         let brokerage = BrokerageStub(
             openOrders: [
-                .init("AAPL", status: .waitingForPrice), .init("SAP", status: .waitingForPrice),
+                .dummy("AAPL", status: .waitingForPrice), .dummy("SAP", status: .waitingForPrice),
             ],
-            pastOrders: [.init("AAPL", status: .filled, fillDate: .now)]
+            pastOrders: [.dummy("AAPL", status: .filled, fillDate: .now)]
         )
         let viewModel = makeViewModel(brokerage: brokerage)
 
@@ -392,10 +391,10 @@ struct QuoteDetailViewModelTests {
     @Test func reloadWhenTheSymbolHasMoreOrdersThanOnePageThenShowsThemAll() async {
         // Given
         let brokerage = BrokerageStub(
-            openOrders: (0..<3).map { _ in .init("AAPL", status: .waitingForPrice) } + [
-                .init("SAP", status: .waitingForPrice)
+            openOrders: (0..<3).map { _ in .dummy("AAPL", status: .waitingForPrice) } + [
+                .dummy("SAP", status: .waitingForPrice)
             ],
-            pastOrders: (0..<3).map { _ in .init("AAPL", status: .filled, fillDate: .now) }
+            pastOrders: (0..<3).map { _ in .dummy("AAPL", status: .filled, fillDate: .now) }
         )
         let viewModel = makeViewModel(brokerage: brokerage)
 
@@ -424,12 +423,12 @@ struct QuoteDetailViewModelTests {
 
 private extension QuoteDetailViewModelTests {
     func makeViewModel(
-        marketData: MarketDataStub = MarketDataStub(),
-        brokerage: BrokerageStub = BrokerageStub(),
-        router: QuoteDetailRouterSpy = QuoteDetailRouterSpy(),
-        tracker: AnalyticsTrackerSpy = AnalyticsTrackerSpy()
+        marketData: MarketDataStub = .init(),
+        brokerage: BrokerageStub = .init(),
+        router: QuoteDetailRouterSpy = .init(),
+        tracker: AnalyticsTrackerSpy = .init()
     ) -> QuoteDetailViewModel {
-        QuoteDetailViewModel(
+        .init(
             symbol: "AAPL",
             detailProvider: marketData,
             historyProvider: marketData,

@@ -12,24 +12,24 @@ import Foundation
 extension PortfolioSnapshot {
     var metrics: [Metric] {
         [
-            Metric(
+            .init(
                 id: "today",
                 label: .init("portfolio.metric.today", bundle: .module),
                 value: account.todayGain.formattedSigned(),
                 trend: GainTrend(account.todayGain.amount)
             ),
-            Metric(
+            .init(
                 id: "totalReturn",
                 label: .init("portfolio.metric.totalReturn", bundle: .module),
                 value: totalReturn.formattedSigned(),
                 trend: GainTrend(totalReturn.amount)
             ),
-            Metric(
+            .init(
                 id: "invested",
                 label: .init("portfolio.metric.invested", bundle: .module),
                 value: account.positionsValue.formatted()
             ),
-            Metric(
+            .init(
                 id: "cash",
                 label: .init("portfolio.allocation.cash", bundle: .module),
                 value: account.cash.formatted()

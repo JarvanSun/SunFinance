@@ -33,12 +33,7 @@ struct TicketHeaderView: View {
 
             switch context.marketNotice {
             case .some(let notice):
-                Label {
-                    Text(notice)
-                } icon: {
-                    Image(style: FinanceImage.scheduled)
-                }
-                .textStyle(FinanceColor.textSecondary, FinanceFont.caption)
+                marketNotice(notice)
             case nil:
                 EmptyView()
             }
@@ -48,12 +43,23 @@ struct TicketHeaderView: View {
     }
 }
 
+private extension TicketHeaderView {
+    func marketNotice(_ notice: LocalizedStringResource) -> some View {
+        Label {
+            Text(notice)
+        } icon: {
+            Image(style: FinanceImage.scheduled)
+        }
+        .textStyle(FinanceColor.textSecondary, FinanceFont.caption)
+    }
+}
+
 #if DEBUG
 #Preview {
     VStack(spacing: 24) {
-        TicketHeaderView(context: PreviewObjectPool().context(isMarketOpen: true), side: .buy)
+        TicketHeaderView(context: .dummy(isMarketOpen: true), side: .buy)
 
-        TicketHeaderView(context: PreviewObjectPool().context(isMarketOpen: false), side: .sell)
+        TicketHeaderView(context: .dummy(isMarketOpen: false), side: .sell)
     }
     .padding()
 }

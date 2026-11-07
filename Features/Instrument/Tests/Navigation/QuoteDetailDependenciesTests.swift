@@ -40,7 +40,7 @@ private extension QuoteDetailDependenciesTests {
     func makeDependencies() -> QuoteDetailDependencies {
         let services = TradingServicesStub()
         let tracker = AnalyticsTrackerSpy()
-        return QuoteDetailDependencies(
+        return .init(
             symbol: "AAPL",
             detailProvider: MarketDataStub(),
             historyProvider: MarketDataStub(),

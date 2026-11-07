@@ -13,7 +13,6 @@ import Testing
 struct PositionActionTests {
     @Test(arguments: [(PositionAction.buyMore, TradeSide.buy), (.sell, .sell)])
     func sideThenMatchesTheAction(action: PositionAction, side: TradeSide) {
-        // Then
         #expect(action.side == side)
     }
 }

@@ -11,10 +11,8 @@ import Foundation
 extension LabeledRowValue {
     var resourceKey: String? {
         switch self {
-        case .verbatim:
-            nil
-        case .localized(let resource):
-            resource.key
+        case .verbatim: nil
+        case .localized(let resource): resource.key
         }
     }
 }

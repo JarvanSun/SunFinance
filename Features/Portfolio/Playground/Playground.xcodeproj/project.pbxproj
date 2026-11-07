@@ -17,7 +17,6 @@
 /* Begin PBXFileReference section */
 		038914A840A8B4F0076B1243 /* FinanceCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FinanceCore; path = ../../../Core/FinanceCore; sourceTree = SOURCE_ROOT; };
 		2E88B0082E36022E06BC9E0D /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DesignSystem; path = ../../../Core/DesignSystem; sourceTree = SOURCE_ROOT; };
-		56645860CC8314FF90CE752D /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 		66D8E7AD6476D84520402912 /* PortfolioPlayground.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PortfolioPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69CA44BA8554AD692B56E090 /* Portfolio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Portfolio; path = ..; sourceTree = SOURCE_ROOT; };
 		85F1F534BC774F53BEDB1F84 /* PortfolioPlaygroundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioPlaygroundApp.swift; sourceTree = "<group>"; };
@@ -38,15 +37,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		305CEBF740BA6612B7135ECD /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				56645860CC8314FF90CE752D /* Signing.xcconfig */,
-			);
-			name = Configuration;
-			path = ../../../Configuration;
-			sourceTree = "<group>";
-		};
 		3F6B916872C30820F6241E84 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,7 +66,6 @@
 		E23F411CF4F5D5291A0322DE = {
 			isa = PBXGroup;
 			children = (
-				305CEBF740BA6612B7135ECD /* Configuration */,
 				75054112A41CDCE58ADACF92 /* Packages */,
 				AABC9BE64A1302199D5D2AF8 /* Sources */,
 				3F6B916872C30820F6241E84 /* Products */,
@@ -165,7 +154,6 @@
 /* Begin XCBuildConfiguration section */
 		18883859C44E4AE8042B204F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56645860CC8314FF90CE752D /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -277,7 +265,6 @@
 		};
 		FE96C092F5D790A83D093866 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56645860CC8314FF90CE752D /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

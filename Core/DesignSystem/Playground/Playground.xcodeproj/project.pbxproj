@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1FE43E3D0DA4C37D12496BC0 /* ComponentsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FE3EF31CE6101F67392EE /* ComponentsSection.swift */; };
-		21A6965A62BBADA9025F8E12 /* SampleSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C41C93030FEFE00BE35613 /* SampleSeries.swift */; };
 		28C38232F477B3511C0E2C34 /* ButtonsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8BA35221D8FECBC555580D /* ButtonsSection.swift */; };
 		35FD145DA0DDE1D16B102160 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 6BEBCB7C7E4ED5C5EA3DE567 /* DesignSystem */; };
 		3672421886953678482620C2 /* FontsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D615F84E268C9170606878 /* FontsSection.swift */; };
@@ -21,6 +20,14 @@
 		DC6DE8D8616D5316205EE03B /* CatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96047263104B890E11E807C4 /* CatalogView.swift */; };
 		E023DEAF54C9993DDE5EACC5 /* ChartGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C259194D9925FA7664E37E7 /* ChartGalleryView.swift */; };
 		F0E211A60084AC2C41166C7E /* SunUserInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 49D2A9885BC6CAA967794B5C /* SunUserInterface */; };
+		644EA31B56B5246DC67241EE /* AllocationChartContentDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA871C99262158A96D6ECC95 /* AllocationChartContentDummy.swift */; };
+		51C3A3FCAF7D66E988581160 /* CandlestickChartContentDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1539AFA1AB05A4424C4C24 /* CandlestickChartContentDummy.swift */; };
+		0FCC398351F43B07ED51F277 /* ChartAccessibilityDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF549DACE2436E06DE0A959 /* ChartAccessibilityDummy.swift */; };
+		8F47C13024B3C2D279A5EB7D /* ChartCandleDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8710CF6A610F1D8A6E8CE3 /* ChartCandleDummy.swift */; };
+		14133D02EB01887E126EECC3 /* ChartPointDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D10DD9F771F214E3D4FD396 /* ChartPointDummy.swift */; };
+		C97C75D554AFC0176ED74B50 /* ChartTradingLayerDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D409652D2EDAD1061EF366 /* ChartTradingLayerDummy.swift */; };
+		FD47882EE15A2B24735B7431 /* PriceLineChartContentDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2222F7367010E9C26E75AB /* PriceLineChartContentDummy.swift */; };
+		88D585537D7B346E15C9D12C /* PriceLineChartStyleDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D751E5277EB3D4E7F1A171 /* PriceLineChartStyleDummy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,9 +35,7 @@
 		047FE3EF31CE6101F67392EE /* ComponentsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentsSection.swift; sourceTree = "<group>"; };
 		1776CB1AB0A71974610CB861 /* MotionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionSection.swift; sourceTree = "<group>"; };
 		2E88B0082E36022E06BC9E0D /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DesignSystem; path = ..; sourceTree = SOURCE_ROOT; };
-		45C41C93030FEFE00BE35613 /* SampleSeries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleSeries.swift; sourceTree = "<group>"; };
 		463070A2D777F5C614ED79F0 /* DesignSystemPlayground.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DesignSystemPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		56645860CC8314FF90CE752D /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 		582C75F3477E91488772772B /* DimensionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionsSection.swift; sourceTree = "<group>"; };
 		5C259194D9925FA7664E37E7 /* ChartGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartGalleryView.swift; sourceTree = "<group>"; };
 		96047263104B890E11E807C4 /* CatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogView.swift; sourceTree = "<group>"; };
@@ -39,6 +44,14 @@
 		E38CF08D80482A5B57684952 /* ColorsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsSection.swift; sourceTree = "<group>"; };
 		F6F61E0F78B0A10E254131E6 /* ImagesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesSection.swift; sourceTree = "<group>"; };
 		F8D615F84E268C9170606878 /* FontsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsSection.swift; sourceTree = "<group>"; };
+		CA871C99262158A96D6ECC95 /* AllocationChartContentDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllocationChartContentDummy.swift; sourceTree = "<group>"; };
+		7C1539AFA1AB05A4424C4C24 /* CandlestickChartContentDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandlestickChartContentDummy.swift; sourceTree = "<group>"; };
+		9FF549DACE2436E06DE0A959 /* ChartAccessibilityDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAccessibilityDummy.swift; sourceTree = "<group>"; };
+		BF8710CF6A610F1D8A6E8CE3 /* ChartCandleDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCandleDummy.swift; sourceTree = "<group>"; };
+		3D10DD9F771F214E3D4FD396 /* ChartPointDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPointDummy.swift; sourceTree = "<group>"; };
+		23D409652D2EDAD1061EF366 /* ChartTradingLayerDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTradingLayerDummy.swift; sourceTree = "<group>"; };
+		2E2222F7367010E9C26E75AB /* PriceLineChartContentDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLineChartContentDummy.swift; sourceTree = "<group>"; };
+		90D751E5277EB3D4E7F1A171 /* PriceLineChartStyleDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceLineChartStyleDummy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,15 +68,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		305CEBF740BA6612B7135ECD /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				56645860CC8314FF90CE752D /* Signing.xcconfig */,
-			);
-			name = Configuration;
-			path = ../../../Configuration;
-			sourceTree = "<group>";
-		};
 		3F6B916872C30820F6241E84 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +105,7 @@
 				96047263104B890E11E807C4 /* CatalogView.swift */,
 				AF3BD0C185FCB09ADFEC0E55 /* DesignSystemPlaygroundApp.swift */,
 				EC88DE731C71B811CD5CAB4E /* Charts */,
+				826A5B62D3E3E8F39717CD7F /* Dummy */,
 				53E7E4CAC9A52724E8D4A249 /* Views */,
 			);
 			path = Sources;
@@ -109,7 +114,6 @@
 		E23F411CF4F5D5291A0322DE = {
 			isa = PBXGroup;
 			children = (
-				305CEBF740BA6612B7135ECD /* Configuration */,
 				75054112A41CDCE58ADACF92 /* Packages */,
 				AABC9BE64A1302199D5D2AF8 /* Sources */,
 				3F6B916872C30820F6241E84 /* Products */,
@@ -123,9 +127,23 @@
 			isa = PBXGroup;
 			children = (
 				5C259194D9925FA7664E37E7 /* ChartGalleryView.swift */,
-				45C41C93030FEFE00BE35613 /* SampleSeries.swift */,
 			);
 			path = Charts;
+			sourceTree = "<group>";
+		};
+		826A5B62D3E3E8F39717CD7F /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				CA871C99262158A96D6ECC95 /* AllocationChartContentDummy.swift */,
+				7C1539AFA1AB05A4424C4C24 /* CandlestickChartContentDummy.swift */,
+				9FF549DACE2436E06DE0A959 /* ChartAccessibilityDummy.swift */,
+				BF8710CF6A610F1D8A6E8CE3 /* ChartCandleDummy.swift */,
+				3D10DD9F771F214E3D4FD396 /* ChartPointDummy.swift */,
+				23D409652D2EDAD1061EF366 /* ChartTradingLayerDummy.swift */,
+				2E2222F7367010E9C26E75AB /* PriceLineChartContentDummy.swift */,
+				90D751E5277EB3D4E7F1A171 /* PriceLineChartStyleDummy.swift */,
+			);
+			path = Dummy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,9 +214,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				644EA31B56B5246DC67241EE /* AllocationChartContentDummy.swift in Sources */,
 				28C38232F477B3511C0E2C34 /* ButtonsSection.swift in Sources */,
+				51C3A3FCAF7D66E988581160 /* CandlestickChartContentDummy.swift in Sources */,
 				DC6DE8D8616D5316205EE03B /* CatalogView.swift in Sources */,
+				0FCC398351F43B07ED51F277 /* ChartAccessibilityDummy.swift in Sources */,
+				8F47C13024B3C2D279A5EB7D /* ChartCandleDummy.swift in Sources */,
 				E023DEAF54C9993DDE5EACC5 /* ChartGalleryView.swift in Sources */,
+				14133D02EB01887E126EECC3 /* ChartPointDummy.swift in Sources */,
+				C97C75D554AFC0176ED74B50 /* ChartTradingLayerDummy.swift in Sources */,
 				3FCAA37152761C581CB2006D /* ColorsSection.swift in Sources */,
 				1FE43E3D0DA4C37D12496BC0 /* ComponentsSection.swift in Sources */,
 				467DBB026707B6FD428CBC8C /* DesignSystemPlaygroundApp.swift in Sources */,
@@ -206,7 +230,8 @@
 				3672421886953678482620C2 /* FontsSection.swift in Sources */,
 				BFA4DB3E04A969110F984240 /* ImagesSection.swift in Sources */,
 				9D7DF61DE480BBFB803C16C4 /* MotionSection.swift in Sources */,
-				21A6965A62BBADA9025F8E12 /* SampleSeries.swift in Sources */,
+				FD47882EE15A2B24735B7431 /* PriceLineChartContentDummy.swift in Sources */,
+				88D585537D7B346E15C9D12C /* PriceLineChartStyleDummy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,7 +240,6 @@
 /* Begin XCBuildConfiguration section */
 		18883859C44E4AE8042B204F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56645860CC8314FF90CE752D /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -327,7 +351,6 @@
 		};
 		FE96C092F5D790A83D093866 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56645860CC8314FF90CE752D /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

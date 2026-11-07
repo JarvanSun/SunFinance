@@ -11,9 +11,9 @@ import Testing
 
 struct PortfolioTests {
     @Test func initThenMapsOpenAndClosedPositions() throws {
-        // When
+        // Given / When
         let portfolio = try Portfolio(
-            PositionsResponseDTO(open: [.init(symbol: "AAPL")], closed: [.init(symbol: "KO")])
+            PositionsResponseDTO(open: [.dummy(symbol: "AAPL")], closed: [.dummy(symbol: "KO")])
         )
 
         // Then
@@ -22,9 +22,9 @@ struct PortfolioTests {
     }
 
     @Test func initWhenAPositionIsInvalidThenThrowsDecoding() {
-        // When
+        // Given / When
         let result = Result { () throws(BrokerageError) in
-            try Portfolio(PositionsResponseDTO(open: [], closed: [.init(currency: "?")]))
+            try Portfolio(PositionsResponseDTO(open: [], closed: [.dummy(currency: "?")]))
         }
 
         // Then
@@ -34,7 +34,7 @@ struct PortfolioTests {
     @Test func positionThenFindsOnlyOpenPositions() throws {
         // Given
         let portfolio = try Portfolio(
-            PositionsResponseDTO(open: [.init(symbol: "AAPL")], closed: [.init(symbol: "KO")])
+            PositionsResponseDTO(open: [.dummy(symbol: "AAPL")], closed: [.dummy(symbol: "KO")])
         )
 
         // Then

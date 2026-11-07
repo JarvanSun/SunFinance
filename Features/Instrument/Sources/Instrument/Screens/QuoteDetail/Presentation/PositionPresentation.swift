@@ -12,7 +12,7 @@ import Foundation
 extension Position {
     var metrics: [Metric] {
         [
-            Metric(
+            .init(
                 id: MetricID.value.rawValue,
                 label: .init(
                     "quoteDetail.position.buyIn \(costBasis.formatted())",
@@ -20,13 +20,13 @@ extension Position {
                 ),
                 value: marketValue.formatted()
             ),
-            Metric(
+            .init(
                 id: MetricID.gain.rawValue,
                 label: .init("quoteDetail.position.sinceBuy", bundle: .module),
                 value: unrealizedGain.formattedSigned(),
                 trend: GainTrend(unrealizedGain.amount)
             ),
-            Metric(
+            .init(
                 id: MetricID.price.rawValue,
                 label: .init(
                     "quoteDetail.position.averageBuyIn \(averageCostInPriceCurrency.formatted())",
@@ -34,7 +34,7 @@ extension Position {
                 ),
                 value: price.formatted()
             ),
-            Metric(
+            .init(
                 id: MetricID.gainPercent.rawValue,
                 label: .init(
                     "quoteDetail.position.sinceBuyPercent",
@@ -43,25 +43,25 @@ extension Position {
                 value: unrealizedGainPercent.formatted(.signedPercent),
                 trend: GainTrend(unrealizedGain.amount)
             ),
-            Metric(
+            .init(
                 id: MetricID.shares.rawValue,
                 label: .init("quoteDetail.position.shares", bundle: .module),
                 value: quantity.formattedQuantity()
             ),
-            Metric(
+            .init(
                 id: MetricID.today.rawValue,
                 label: .init("quoteDetail.position.today", bundle: .module),
                 value: todayGain.formattedSigned(),
                 trend: GainTrend(todayGain.amount)
             ),
-            Metric(
+            .init(
                 id: MetricID.realized.rawValue,
                 label: .init("quoteDetail.position.realized", bundle: .module),
                 value: realizedGain.formattedSigned(),
                 trend: GainTrend(realizedGain.amount)
             ),
         ] + currencyEffectMetrics + [
-            Metric(
+            .init(
                 id: MetricID.totalReturn.rawValue,
                 label: .init(
                     "quoteDetail.position.totalReturnPercent \(totalReturnPercent.formatted(.signedPercent))",
@@ -93,17 +93,14 @@ private extension Position {
 
     var averageCostInPriceCurrency: Money {
         switch isInBaseCurrency {
-        case true:
-            averageCost
-        case false:
-            averageLocalCost
+        case true: averageCost
+        case false: averageLocalCost
         }
     }
 
     var currencyEffectMetrics: [Metric] {
         switch isInBaseCurrency {
-        case true:
-            []
+        case true: []
         case false:
             [
                 Metric(

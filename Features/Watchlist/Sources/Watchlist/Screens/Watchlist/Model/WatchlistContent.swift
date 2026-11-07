@@ -14,10 +14,8 @@ struct WatchlistContent: Equatable {
 
     var sections: [WatchlistSection] {
         switch isSearching {
-        case true:
-            [WatchlistSection.quotesMatchingSearch, .symbolMatches].filter(hasRows)
-        case false:
-            [.quotes]
+        case true: [WatchlistSection.quotesMatchingSearch, .symbolMatches].filter(hasRows)
+        case false: [.quotes]
         }
     }
 
@@ -55,10 +53,8 @@ struct WatchlistContent: Equatable {
 private extension WatchlistContent {
     func hasRows(_ section: WatchlistSection) -> Bool {
         switch section {
-        case .quotes, .quotesMatchingSearch:
-            !visibleQuotes.isEmpty
-        case .symbolMatches:
-            !addableMatches.isEmpty
+        case .quotes, .quotesMatchingSearch: !visibleQuotes.isEmpty
+        case .symbolMatches: !addableMatches.isEmpty
         }
     }
 }

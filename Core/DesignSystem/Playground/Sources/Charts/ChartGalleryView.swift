@@ -16,8 +16,6 @@ struct ChartGalleryView: View {
     @State private var selected: ChartPoint?
     @State private var selectedSlice: AllocationSlice.ID?
 
-    private let samples = SampleSeries()
-
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -25,29 +23,29 @@ struct ChartGalleryView: View {
                     Text(verbatim: selectionText)
                         .textStyle(FinanceColor.textSecondary, FinanceFont.callout)
 
-                    PriceLineChart(samples.line(for: range), onSelect: { selected = $0 })
+                    PriceLineChart(.dummyLine(for: range), onSelect: { selected = $0 })
 
                     ChartRangePicker(selection: range, onSelect: { range = $0 })
 
                     caption("Hero, live, with time labels")
 
                     PriceLineChart(
-                        samples.value(for: range),
+                        .dummyValue(for: range),
                         style: PriceLineChartStyle(
                             appearance: .hero,
                             isLive: true,
-                            axisDate: samples.axisDate
+                            axisDate: PriceLineChartStyle.dummyAxisDate
                         )
                     )
 
                     caption("Candles with fills and a limit")
 
-                    CandlestickChart(samples.candleChart(for: range))
+                    CandlestickChart(.dummy(for: range))
 
                     caption("Allocation")
 
                     AllocationChart(
-                        samples.allocation,
+                        .dummy,
                         selection: selectedSlice,
                         onSelect: { selectedSlice = $0 }
                     ) { slice in

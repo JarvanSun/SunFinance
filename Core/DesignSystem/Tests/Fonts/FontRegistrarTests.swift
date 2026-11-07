@@ -13,7 +13,7 @@ import UIKit
 struct FontRegistrarTests {
     @Test(arguments: InterFace.allCases)
     func registerBundledFontsThenEveryFaceIsAvailable(face: InterFace) {
-        // When
+        // Given / When
         FontRegistrar().registerBundledFonts()
 
         // Then

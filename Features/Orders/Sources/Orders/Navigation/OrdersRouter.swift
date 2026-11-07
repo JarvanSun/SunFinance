@@ -23,7 +23,7 @@ final class OrdersRouter: FeatureRouting, OrdersRouting {
     }
 
     func view(for destination: OrdersDestination) -> OrdersDestinationView {
-        OrdersDestinationView(
+        .init(
             destination: destination,
             quoteDetail: quoteDetail,
             makeDetailViewModel: makeDetailViewModel

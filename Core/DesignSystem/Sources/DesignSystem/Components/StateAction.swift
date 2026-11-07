@@ -21,7 +21,7 @@ public struct StateAction {
 
     public init(
         title: LocalizedStringResource,
-        accessibilityIdentifier: some AccessibilityIdentifying,
+        accessibilityIdentifier: AccessibilityIdentifying,
         perform: @escaping () -> Void
     ) {
         self.title = title

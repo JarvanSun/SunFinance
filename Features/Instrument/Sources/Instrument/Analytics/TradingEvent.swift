@@ -15,14 +15,10 @@ enum TradingEvent: AnalyticsEvent, Equatable {
 
     var name: AnalyticsEventName {
         switch self {
-        case .ticketOpened:
-            .init("trading_ticket_opened")
-        case .orderReviewed:
-            .init("trading_order_reviewed")
-        case .orderPlaced:
-            .init("trading_order_placed")
-        case .orderFailed:
-            .init("trading_order_failed")
+        case .ticketOpened: .init("trading_ticket_opened")
+        case .orderReviewed: .init("trading_order_reviewed")
+        case .orderPlaced: .init("trading_order_placed")
+        case .orderFailed: .init("trading_order_failed")
         }
     }
 
@@ -34,8 +30,7 @@ enum TradingEvent: AnalyticsEvent, Equatable {
                 .side: .text(intent.side.rawValue),
                 .source: .text(intent.source.rawValue),
             ]
-        case .orderReviewed(let draft):
-            describe(draft)
+        case .orderReviewed(let draft): describe(draft)
         case .orderPlaced(let order):
             describe(order.draft).merging(
                 [
@@ -43,8 +38,7 @@ enum TradingEvent: AnalyticsEvent, Equatable {
                     .status: .text(order.status.analyticsValue),
                 ]
             ) { current, _ in current }
-        case .orderFailed(let reason):
-            [.failureReason: .text(reason)]
+        case .orderFailed(let reason): [.failureReason: .text(reason)]
         }
     }
 }
@@ -62,22 +56,14 @@ private extension TradingEvent {
 private extension OrderStatus {
     var analyticsValue: String {
         switch self {
-        case .waitingForTrigger:
-            "waiting_for_trigger"
-        case .waitingForPrice:
-            "waiting_for_price"
-        case .scheduled:
-            "scheduled"
-        case .waitingForOpen:
-            "waiting_for_open"
-        case .filled:
-            "filled"
-        case .cancelled:
-            "cancelled"
-        case .expired:
-            "expired"
-        case .rejected(let rejection):
-            "rejected_\(rejection.rawValue)"
+        case .waitingForTrigger: "waiting_for_trigger"
+        case .waitingForPrice: "waiting_for_price"
+        case .scheduled: "scheduled"
+        case .waitingForOpen: "waiting_for_open"
+        case .filled: "filled"
+        case .cancelled: "cancelled"
+        case .expired: "expired"
+        case .rejected(let rejection): "rejected_\(rejection.rawValue)"
         }
     }
 }

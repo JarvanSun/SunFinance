@@ -31,7 +31,6 @@ struct TicketIssuePresentationTests {
         field: TicketField,
         key: String
     ) {
-        // Then
         #expect(issue.message(for: field).key == key)
     }
 }

@@ -13,8 +13,8 @@ import Testing
 struct StockQuoteMatchingTests {
     @Test(arguments: [("", true), ("  ", true), ("aapl", true), ("apple", true), ("SAP", false)])
     func matchesThenComparesSymbolAndCompanyName(query: String, expected: Bool) {
-        // When
-        let matches = appleQuote.matches(query)
+        // Given / When
+        let matches = StockQuote.dummyApple.matches(query)
 
         // Then
         #expect(matches == expected)

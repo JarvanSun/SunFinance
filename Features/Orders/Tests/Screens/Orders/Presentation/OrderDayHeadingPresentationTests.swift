@@ -17,7 +17,6 @@ struct OrderDayHeadingPresentationTests {
         (.date(Date(timeIntervalSince1970: 0)), "orders.day.date %@"),
     ])
     func titleThenNamesTheDay(heading: OrderDayHeading, key: String) {
-        // Then
         #expect(heading.title.key == key)
     }
 }

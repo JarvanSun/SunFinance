@@ -24,7 +24,7 @@ struct OrderStatusTests {
         ("parked", nil, nil),
     ])
     func initWithCodeThenMapsEveryStatus(code: String, rejection: String?, expected: OrderStatus?) {
-        // When
+        // Given / When
         let status = OrderStatus(code: code, rejection: rejection)
 
         // Then
@@ -42,7 +42,6 @@ struct OrderStatusTests {
         (.rejected(.insufficientCash), false),
     ])
     func isOpenThenIsTrueOnlyWhileWaiting(status: OrderStatus, isOpen: Bool) {
-        // Then
         #expect(status.isOpen == isOpen)
     }
 }

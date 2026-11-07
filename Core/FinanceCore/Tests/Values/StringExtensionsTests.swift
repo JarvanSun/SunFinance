@@ -12,7 +12,6 @@ import Testing
 struct StringExtensionsTests {
     @Test(arguments: [("", true), ("  \n", true), (" a ", false)])
     func isBlankThenIsTrueOnlyForWhitespace(text: String, expected: Bool) {
-        // Then
         #expect(text.isBlank == expected)
     }
 }

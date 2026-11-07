@@ -20,7 +20,6 @@ struct TicketFieldPresentationTests {
         field: TicketField,
         identifier: InstrumentAccessibility
     ) {
-        // Then
         #expect(field.accessibilityIdentifier == identifier)
     }
 }

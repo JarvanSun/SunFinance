@@ -13,13 +13,13 @@ import Testing
 
 struct BackendFailureTests {
     @Test(arguments: [
-        (URLError(.notConnectedToInternet) as any Error, BackendFailure.offline),
+        (URLError(.notConnectedToInternet) as Error, BackendFailure.offline),
         (CancellationError(), .cancelled),
         (DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: "")), .decoding),
         (BackendFailure.server(statusCode: 500), .server(statusCode: 500)),
     ])
-    func initThenMapsTransportErrorToDomainError(error: any Error, expected: BackendFailure) {
-        // When
+    func initThenMapsTransportErrorToDomainError(error: Error, expected: BackendFailure) {
+        // Given / When
         let mappedError = BackendFailure(error)
 
         // Then

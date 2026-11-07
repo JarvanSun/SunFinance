@@ -10,24 +10,24 @@ import Foundation
 
 public struct TradingDependencies {
     let intent: TradeIntent
-    let quoteProvider: any QuoteProviding
-    let accountProvider: any AccountProviding
-    let positionProvider: any PositionProviding
-    let previewer: any OrderPreviewing
-    let placer: any OrderPlacing
-    let tracker: any AnalyticsTracking
+    let quoteProvider: QuoteProviding
+    let accountProvider: AccountProviding
+    let positionProvider: PositionProviding
+    let previewer: OrderPreviewing
+    let placer: OrderPlacing
+    let tracker: AnalyticsTracking
     let locale: Locale
     let estimateDelay: Duration
     let now: @Sendable () -> Date
 
     public init(
         intent: TradeIntent,
-        quoteProvider: some QuoteProviding,
-        accountProvider: some AccountProviding,
-        positionProvider: some PositionProviding,
-        previewer: some OrderPreviewing,
-        placer: some OrderPlacing,
-        tracker: some AnalyticsTracking,
+        quoteProvider: QuoteProviding,
+        accountProvider: AccountProviding,
+        positionProvider: PositionProviding,
+        previewer: OrderPreviewing,
+        placer: OrderPlacing,
+        tracker: AnalyticsTracking,
         locale: Locale = .autoupdatingCurrent,
         estimateDelay: Duration = .milliseconds(350),
         now: @escaping @Sendable () -> Date = { Date() }
@@ -44,8 +44,8 @@ public struct TradingDependencies {
         self.now = now
     }
 
-    func makeTicketViewModel(router: some TradingRouting) -> TicketViewModel {
-        TicketViewModel(
+    func makeTicketViewModel(router: TradingRouting) -> TicketViewModel {
+        .init(
             intent: intent,
             quoteProvider: quoteProvider,
             accountProvider: accountProvider,
@@ -62,9 +62,9 @@ public struct TradingDependencies {
     func makeReviewViewModel(
         draft: OrderDraft,
         keys: PlacementKeys,
-        router: some TradingRouting
+        router: TradingRouting
     ) -> ReviewViewModel {
-        ReviewViewModel(
+        .init(
             draft: draft,
             previewer: previewer,
             placer: placer,

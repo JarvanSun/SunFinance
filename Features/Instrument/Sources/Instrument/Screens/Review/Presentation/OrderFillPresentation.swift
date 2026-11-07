@@ -34,6 +34,6 @@ extension OrderFill {
 
 private extension OrderFill {
     var rate: ExchangeRate {
-        ExchangeRate(currency: price.currency, eurosPerUnit: exchangeRate)
+        .init(currency: price.currency, eurosPerUnit: exchangeRate)
     }
 }

@@ -16,7 +16,7 @@ struct GainTrendTests {
         (Decimal(0), .unchanged),
     ])
     func initWhenGivenAChangeThenFollowsItsSign(change: Decimal, expected: GainTrend) {
-        // When
+        // Given / When
         let trend = GainTrend(change)
 
         // Then
@@ -33,7 +33,7 @@ struct GainTrendTests {
         end: Double,
         expected: GainTrend
     ) {
-        // When
+        // Given / When
         let trend = GainTrend(from: start, to: end)
 
         // Then
@@ -46,7 +46,7 @@ struct GainTrendTests {
         (.unchanged, .unchanged),
     ])
     func colorThenUsesTheMarketColor(trend: GainTrend, expected: FinanceColor) {
-        // When
+        // Given / When
         let color = trend.color
 
         // Then

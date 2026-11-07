@@ -18,7 +18,6 @@ struct PortfolioIssueTests {
         (.cancelled, .serviceUnavailable),
     ])
     func initThenNamesTheIssue(error: BrokerageError, expected: PortfolioIssue) {
-        // Then
         #expect(PortfolioIssue(error) == expected)
     }
 }

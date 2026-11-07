@@ -9,6 +9,6 @@
 import FinanceCore
 
 final class PreviewAnalyticsTracker: AnalyticsTracking {
-    func track(_ event: some AnalyticsEvent) {}
+    func track(_ event: AnalyticsEvent) {}
 }
 #endif

@@ -23,6 +23,8 @@
 		A7098876C1AE359339B2FD45 /* PlaygroundEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545CC50C65689D4ACE8838A6 /* PlaygroundEvent.swift */; };
 		AE14614F054F984D0E3689C8 /* BrokerageConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8BFB2DA859DEC9C6E59B7C /* BrokerageConsoleView.swift */; };
 		D5E2AF9F1CFC595BEE92E26D /* BrokerageConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C81F167392FFD60E400A71 /* BrokerageConsole.swift */; };
+		6AC017187DE97FE14E479C6D /* OrderDraftDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756D7EEAF464FEFE2F6E3C3 /* OrderDraftDummy.swift */; };
+		FDCC3CE396D1250462CF4CF5 /* TickerSymbolDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE66C96EA58EF9843835C07 /* TickerSymbolDummy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +36,6 @@
 		4B8BFB2DA859DEC9C6E59B7C /* BrokerageConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerageConsoleView.swift; sourceTree = "<group>"; };
 		518DDF92DC1F6F6F2F5CAF83 /* AnalyticsConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsoleView.swift; sourceTree = "<group>"; };
 		545CC50C65689D4ACE8838A6 /* PlaygroundEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundEvent.swift; sourceTree = "<group>"; };
-		56645860CC8314FF90CE752D /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 		631CBC80027859E5AEF5CEEF /* QuoteConsole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteConsole.swift; sourceTree = "<group>"; };
 		8206627CFAFB4EC0FC587D95 /* ConsoleBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleBehavior.swift; sourceTree = "<group>"; };
 		A9C81F167392FFD60E400A71 /* BrokerageConsole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerageConsole.swift; sourceTree = "<group>"; };
@@ -43,6 +44,8 @@
 		BE8ED41D2C5183235DA9C539 /* AnalyticsConsole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsole.swift; sourceTree = "<group>"; };
 		E847DC729D1DA02A0C33CB83 /* QuoteConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteConsoleView.swift; sourceTree = "<group>"; };
 		F2B0FF9C80B3644B5946EE7B /* ExchangeConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeConsoleView.swift; sourceTree = "<group>"; };
+		1756D7EEAF464FEFE2F6E3C3 /* OrderDraftDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDraftDummy.swift; sourceTree = "<group>"; };
+		FAE66C96EA58EF9843835C07 /* TickerSymbolDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSymbolDummy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,15 +73,6 @@
 			path = MarketData;
 			sourceTree = "<group>";
 		};
-		305CEBF740BA6612B7135ECD /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				56645860CC8314FF90CE752D /* Signing.xcconfig */,
-			);
-			name = Configuration;
-			path = ../../../Configuration;
-			sourceTree = "<group>";
-		};
 		3F6B916872C30820F6241E84 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +96,7 @@
 				129CD6BA166B29658C190ED4 /* FinanceCorePlaygroundApp.swift */,
 				FE2AA6453DC0ABBA43836580 /* Analytics */,
 				B22C8F94A425B22C6C52E739 /* Brokerage */,
+				CE2AFBB80F9695E2ED2EA18C /* Dummy */,
 				EEDE4F6EEF1B3CC2E4010D58 /* Exchange */,
 				100008AD2D747AABA15019A5 /* MarketData */,
 			);
@@ -121,7 +116,6 @@
 		E23F411CF4F5D5291A0322DE = {
 			isa = PBXGroup;
 			children = (
-				305CEBF740BA6612B7135ECD /* Configuration */,
 				75054112A41CDCE58ADACF92 /* Packages */,
 				AABC9BE64A1302199D5D2AF8 /* Sources */,
 				3F6B916872C30820F6241E84 /* Products */,
@@ -148,6 +142,15 @@
 				BD1F653D19DFEDDAD10B09AD /* RecordingAnalyticsDestination.swift */,
 			);
 			path = Analytics;
+			sourceTree = "<group>";
+		};
+		CE2AFBB80F9695E2ED2EA18C /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				1756D7EEAF464FEFE2F6E3C3 /* OrderDraftDummy.swift */,
+				FAE66C96EA58EF9843835C07 /* TickerSymbolDummy.swift */,
+			);
+			path = Dummy;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,10 +230,12 @@
 				728F836EC77E038274F9B693 /* ConsoleOutcome.swift in Sources */,
 				3186873A31467039A6797398 /* ExchangeConsoleView.swift in Sources */,
 				3B62D977EE58D5C1EF298998 /* FinanceCorePlaygroundApp.swift in Sources */,
+				6AC017187DE97FE14E479C6D /* OrderDraftDummy.swift in Sources */,
 				A7098876C1AE359339B2FD45 /* PlaygroundEvent.swift in Sources */,
 				9EEF12C9723F2601D020AAD3 /* QuoteConsole.swift in Sources */,
 				0F486FCB07982402A1B5D0A1 /* QuoteConsoleView.swift in Sources */,
 				3C7A8019BF46250D6F146FA0 /* RecordingAnalyticsDestination.swift in Sources */,
+				FDCC3CE396D1250462CF4CF5 /* TickerSymbolDummy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +244,6 @@
 /* Begin XCBuildConfiguration section */
 		18883859C44E4AE8042B204F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56645860CC8314FF90CE752D /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -351,7 +355,6 @@
 		};
 		FE96C092F5D790A83D093866 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56645860CC8314FF90CE752D /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

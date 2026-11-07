@@ -35,12 +35,12 @@ struct AppDependencies {
             defaultSymbols: configuration.defaultWatchlist
         )
         favoriteStore = UserDefaultsFavoriteSymbolStore(defaults: configuration.defaults)
-        tracker = makeTracker(configuration: configuration)
+        tracker = configuration.analyticsTracker
         tracker.applyConsent()
     }
 
     func watchlist() -> WatchlistDependencies {
-        WatchlistDependencies(
+        .init(
             watchlistStore: watchlistStore,
             quoteProvider: marketData,
             symbolSearcher: marketData,
@@ -52,7 +52,7 @@ struct AppDependencies {
     }
 
     func portfolio() -> PortfolioDependencies {
-        PortfolioDependencies(
+        .init(
             accountProvider: brokerage,
             positionProvider: brokerage,
             historyProvider: brokerage,
@@ -63,7 +63,7 @@ struct AppDependencies {
     }
 
     func orders() -> OrdersDependencies {
-        OrdersDependencies(
+        .init(
             orderProvider: brokerage,
             canceller: brokerage,
             tracker: tracker,
@@ -72,7 +72,7 @@ struct AppDependencies {
     }
 
     func quoteDetail(for symbol: TickerSymbol) -> QuoteDetailDependencies {
-        QuoteDetailDependencies(
+        .init(
             symbol: symbol,
             detailProvider: marketData,
             historyProvider: marketData,
@@ -84,7 +84,7 @@ struct AppDependencies {
     }
 
     func trading(for intent: TradeIntent) -> TradingDependencies {
-        TradingDependencies(
+        .init(
             intent: intent,
             quoteProvider: marketData,
             accountProvider: brokerage,
@@ -98,36 +98,43 @@ struct AppDependencies {
 
 private extension AppDependencies {
     var quoteDetailEntry: FeatureEntry<TickerSymbol> {
-        FeatureEntry { QuoteDetailHostView(dependencies: quoteDetail(for: $0)) }
+        .init { QuoteDetailHostView(dependencies: quoteDetail(for: $0)) }
     }
 
     var orderTicketEntry: FeatureEntry<TradeIntent> {
-        FeatureEntry { TradingHostView(dependencies: trading(for: $0)) }
+        .init { TradingHostView(dependencies: trading(for: $0)) }
     }
 }
 
-private func info(_ key: InfoKey) -> String {
-    Bundle.main.object(forInfoDictionaryKey: key.rawValue) as? String ?? ""
+private extension AppConfiguration {
+    var analyticsTracker: AnalyticsTracker {
+        .init(
+            consent: UserDefaultsAnalyticsConsent(defaults: defaults),
+            context: .init(
+                appVersion: Bundle.main.string(for: .shortVersion),
+                locale: .autoupdatingCurrent
+            ),
+            destinations: analyticsDestinations
+        )
+    }
+
+    var analyticsDestinations: [AnalyticsDestination] {
+        let vendor = VendorAnalyticsDestination(apiKey: vendorAnalyticsAPIKey)
+        #if DEBUG
+        return [
+            vendor,
+            ConsoleAnalyticsDestination(subsystem: Bundle.main.string(for: .bundleIdentifier)),
+        ]
+        #else
+        return [vendor]
+        #endif
+    }
 }
 
-private func makeTracker(configuration: AppConfiguration) -> AnalyticsTracker {
-    AnalyticsTracker(
-        consent: UserDefaultsAnalyticsConsent(defaults: configuration.defaults),
-        context: AnalyticsContext(
-            appVersion: info(.shortVersion),
-            locale: .autoupdatingCurrent
-        ),
-        destinations: analyticsDestinations(configuration: configuration)
-    )
-}
-
-private func analyticsDestinations(configuration: AppConfiguration) -> [any AnalyticsDestination] {
-    let vendor = VendorAnalyticsDestination(apiKey: configuration.vendorAnalyticsAPIKey)
-    #if DEBUG
-    return [vendor, ConsoleAnalyticsDestination(subsystem: info(.bundleIdentifier))]
-    #else
-    return [vendor]
-    #endif
+private extension Bundle {
+    func string(for key: InfoKey) -> String {
+        object(forInfoDictionaryKey: key.rawValue) as? String ?? ""
+    }
 }
 
 private enum InfoKey: String {

@@ -12,7 +12,7 @@ import Testing
 
 struct MoneyTests {
     @Test func initThenKeepsAmountAndCurrency() {
-        // When
+        // Given / When
         let money = Money(228.52, .usd)
 
         // Then

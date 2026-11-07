@@ -12,7 +12,7 @@ import Testing
 
 struct QuoteDetailTests {
     @Test func initThenMapsRangesInTheQuotesCurrency() throws {
-        // When
+        // Given / When
         let detail = try QuoteDetail(dto(dayLow: 220, dayHigh: 230))
 
         // Then
@@ -24,7 +24,7 @@ struct QuoteDetailTests {
     }
 
     @Test func initWhenARangeIsInvertedThenThrowsDecoding() {
-        // When
+        // Given / When
         let result = Result { () throws(MarketDataError) in
             try QuoteDetail(dto(dayLow: 231, dayHigh: 230))
         }
@@ -36,8 +36,8 @@ struct QuoteDetailTests {
 
 private extension QuoteDetailTests {
     func dto(dayLow: Decimal, dayHigh: Decimal) -> QuoteDetailResponseDTO {
-        QuoteDetailResponseDTO(
-            quote: QuoteDTO(),
+        .init(
+            quote: QuoteDTO.dummy(),
             open: 225,
             dayHigh: dayHigh,
             dayLow: dayLow,

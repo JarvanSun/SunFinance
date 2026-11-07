@@ -12,7 +12,7 @@ import Testing
 
 struct PortfolioHistoryTests {
     @Test func initThenMapsRangeAndPoints() throws {
-        // When
+        // Given / When
         let history = try PortfolioHistory(dto(range: "1M"))
 
         // Then
@@ -21,7 +21,7 @@ struct PortfolioHistoryTests {
     }
 
     @Test func initWhenRangeIsUnknownThenThrowsDecoding() {
-        // When
+        // Given / When
         let result = Result { () throws(BrokerageError) in try PortfolioHistory(dto(range: "2M")) }
 
         // Then
@@ -31,7 +31,7 @@ struct PortfolioHistoryTests {
 
 private extension PortfolioHistoryTests {
     func dto(range: String) -> PortfolioHistoryResponseDTO {
-        PortfolioHistoryResponseDTO(
+        .init(
             range: range,
             points: [
                 ValuePointDTO(date: Date(timeIntervalSince1970: 0), value: .init(euros: 100)),

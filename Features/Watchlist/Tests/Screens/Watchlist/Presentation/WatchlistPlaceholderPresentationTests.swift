@@ -18,7 +18,6 @@ struct WatchlistPlaceholderPresentationTests {
         (.unavailable(.failed(.offline)), "watchlist.placeholder.offline.title"),
     ])
     func titleThenNamesThePlaceholder(placeholder: WatchlistPlaceholder, key: String) {
-        // Then
         #expect(placeholder.title.key == key)
     }
 }

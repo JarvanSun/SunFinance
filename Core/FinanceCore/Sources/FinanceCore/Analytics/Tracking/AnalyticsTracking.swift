@@ -7,5 +7,5 @@
 
 @MainActor
 public protocol AnalyticsTracking: AnyObject {
-    func track(_ event: some AnalyticsEvent)
+    func track(_ event: AnalyticsEvent)
 }

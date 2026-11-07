@@ -24,21 +24,17 @@ enum WatchlistPreviewState: String, CaseIterable, CustomStringConvertible {
 
     var result: Result<[StockQuote], MarketDataError> {
         switch self {
-        case .empty:
-            .success([])
-        case .offline:
-            .failure(.offline)
-        case .serviceUnavailable:
-            .failure(.server(statusCode: 503))
+        case .empty: .success([])
+        case .offline: .failure(.offline)
+        case .serviceUnavailable: .failure(.server(statusCode: 503))
         case .content, .loading, .search, .noSearchResults, .searchUnavailable, .german:
-            .success(PreviewObjectPool().quotes)
+            .success(StockQuote.dummyWatchlist)
         }
     }
 
     var delay: Duration {
         switch self {
-        case .loading:
-            .seconds(3_600)
+        case .loading: .seconds(3_600)
         case .content, .empty, .offline, .serviceUnavailable, .search, .noSearchResults,
             .searchUnavailable, .german:
             .zero
@@ -47,31 +43,25 @@ enum WatchlistPreviewState: String, CaseIterable, CustomStringConvertible {
 
     var searchText: String {
         switch self {
-        case .search:
-            "S"
-        case .noSearchResults:
-            "Volkswagen"
-        case .searchUnavailable:
-            "Tesla"
-        case .content, .loading, .empty, .offline, .serviceUnavailable, .german:
-            ""
+        case .search: "S"
+        case .noSearchResults: "Volkswagen"
+        case .searchUnavailable: "Tesla"
+        case .content, .loading, .empty, .offline, .serviceUnavailable, .german: ""
         }
     }
 
     var searchResult: Result<[SymbolMatch], MarketDataError> {
         switch self {
-        case .searchUnavailable:
-            .failure(.offline)
+        case .searchUnavailable: .failure(.offline)
         case .content, .loading, .empty, .offline, .serviceUnavailable, .search, .noSearchResults,
             .german:
-            .success(PreviewObjectPool().symbolMatches)
+            .success(SymbolMatch.dummySearchResults)
         }
     }
 
     var locale: Locale {
         switch self {
-        case .german:
-            Locale(identifier: "de_DE")
+        case .german: .init(identifier: "de_DE")
         case .content, .loading, .empty, .offline, .serviceUnavailable, .search, .noSearchResults,
             .searchUnavailable:
             Locale(identifier: "en_US")

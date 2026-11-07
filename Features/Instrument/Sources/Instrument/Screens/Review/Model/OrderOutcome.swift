@@ -44,8 +44,7 @@ enum OrderOutcome: Equatable, Sendable {
 
     var allowsEditing: Bool {
         switch self {
-        case .rejected, .cancelled, .expired:
-            true
+        case .rejected, .cancelled, .expired: true
         case .filled, .filledWithoutDetails, .waitingForPrice, .waitingForTrigger, .scheduled,
             .waitingForOpen:
             false

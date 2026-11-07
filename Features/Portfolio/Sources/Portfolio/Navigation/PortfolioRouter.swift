@@ -24,7 +24,7 @@ final class PortfolioRouter: FeatureRouting, PortfolioRouting {
     }
 
     func view(for destination: PortfolioDestination) -> PortfolioDestinationView {
-        PortfolioDestinationView(
+        .init(
             destination: destination,
             quoteDetail: quoteDetail,
             orderTicket: orderTicket

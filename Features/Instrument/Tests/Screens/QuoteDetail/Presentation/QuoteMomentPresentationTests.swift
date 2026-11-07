@@ -19,7 +19,6 @@ struct QuoteMomentPresentationTests {
         (.scrubbed(.now, .year), "quoteDetail.header.onDate %@"),
     ])
     func textThenNamesTheMoment(moment: QuoteMoment, key: String) {
-        // Then
         #expect(moment.text.key == key)
     }
 }

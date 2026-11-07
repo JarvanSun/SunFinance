@@ -15,7 +15,7 @@ struct OrderOutcomeTests {
     @Test(arguments: [
         (OrderStatus.waitingForPrice, OrderTrigger.immediately, OrderOutcome.waitingForPrice),
         (.waitingForTrigger, .priceAtOrAbove(250), .waitingForTrigger),
-        (.scheduled, .at(testNow), .scheduled(testNow)),
+        (.scheduled, .at(Date.dummyNow), .scheduled(Date.dummyNow)),
         (.scheduled, .immediately, .waitingForOpen),
         (.waitingForOpen, .immediately, .waitingForOpen),
         (.cancelled, .immediately, .cancelled),
@@ -24,8 +24,8 @@ struct OrderOutcomeTests {
     ])
     func initThenFollowsTheStatus(status: OrderStatus, trigger: OrderTrigger, outcome: OrderOutcome)
     {
-        // When
-        let result = OrderOutcome(.init(.init(trigger: trigger), status: status))
+        // Given / When
+        let result = OrderOutcome(.dummy(.dummy(trigger: trigger), status: status))
 
         // Then
         #expect(result == outcome)
@@ -33,7 +33,7 @@ struct OrderOutcomeTests {
 
     @Test func initWhenFilledThenCarriesTheFill() {
         // Given
-        let order = Order(status: .filled)
+        let order = Order.dummy(status: .filled)
 
         // When
         let outcome = OrderOutcome(order)
@@ -44,7 +44,7 @@ struct OrderOutcomeTests {
 
     @Test func initWhenFilledWithoutAFillThenSaysSoWithoutFigures() {
         // Given
-        let order = Order(status: .filled).withoutFill
+        let order = Order.dummy(status: .filled).withoutFill
 
         // When
         let outcome = OrderOutcome(order)
@@ -60,11 +60,10 @@ struct OrderOutcomeTests {
         (.filledWithoutDetails, false),
         (.waitingForPrice, false),
         (.waitingForTrigger, false),
-        (.scheduled(testNow), false),
+        (.scheduled(Date.dummyNow), false),
         (.waitingForOpen, false),
     ])
     func allowsEditingThenOnlyWhenNothingTraded(outcome: OrderOutcome, allowsEditing: Bool) {
-        // Then
         #expect(outcome.allowsEditing == allowsEditing)
     }
 }

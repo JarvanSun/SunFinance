@@ -14,12 +14,9 @@ enum EstimateState: Equatable, Sendable {
 
     var preview: OrderPreview? {
         switch self {
-        case .unavailable:
-            nil
-        case .loading(let previous):
-            previous
-        case .ready(let preview):
-            preview
+        case .unavailable: nil
+        case .loading(let previous): previous
+        case .ready(let preview): preview
         }
     }
 }

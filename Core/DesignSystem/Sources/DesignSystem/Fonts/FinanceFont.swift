@@ -30,20 +30,13 @@ public enum FinanceFont: CaseIterable, FontStyling {
 
     public var relativeTo: Font.TextStyle {
         switch self {
-        case .largeTitle, .priceLarge:
-            .largeTitle
-        case .title:
-            .title2
-        case .figure:
-            .title3
-        case .headline:
-            .headline
-        case .body:
-            .body
-        case .callout:
-            .callout
-        case .caption:
-            .caption
+        case .largeTitle, .priceLarge: .largeTitle
+        case .title: .title2
+        case .figure: .title3
+        case .headline: .headline
+        case .body: .body
+        case .callout: .callout
+        case .caption: .caption
         }
     }
 
@@ -57,35 +50,23 @@ public enum FinanceFont: CaseIterable, FontStyling {
 extension FinanceFont {
     var face: InterFace {
         switch self {
-        case .largeTitle:
-            .bold
-        case .priceLarge, .title:
-            .semiBold
-        case .headline, .figure:
-            .medium
-        case .body, .callout, .caption:
-            .regular
+        case .largeTitle: .bold
+        case .priceLarge, .title: .semiBold
+        case .headline, .figure: .medium
+        case .body, .callout, .caption: .regular
         }
     }
 
     var pointSize: CGFloat {
         switch self {
-        case .largeTitle:
-            32
-        case .priceLarge:
-            38
-        case .title:
-            20
-        case .figure:
-            19
-        case .headline:
-            16
-        case .body:
-            16
-        case .callout:
-            14
-        case .caption:
-            12
+        case .largeTitle: 32
+        case .priceLarge: 38
+        case .title: 20
+        case .figure: 19
+        case .headline: 16
+        case .body: 16
+        case .callout: 14
+        case .caption: 12
         }
     }
 }
@@ -93,7 +74,7 @@ extension FinanceFont {
 private extension FinanceFont {
     var style: FontStyle {
         FontRegistrar().registerBundledFonts()
-        return FontStyle(
+        return .init(
             face.postScriptName,
             size: pointSize,
             weight: face.weight,

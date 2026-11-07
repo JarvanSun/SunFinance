@@ -11,10 +11,8 @@ public struct RangedHistory<Range: Hashable, Value: Equatable, Issue: Equatable>
 
     public var selected: Value? {
         switch shownRange {
-        case .some(let shownRange) where shownRange == range:
-            shown.value
-        case .some, nil:
-            nil
+        case .some(let shownRange) where shownRange == range: shown.value
+        case .some, nil: nil
         }
     }
 

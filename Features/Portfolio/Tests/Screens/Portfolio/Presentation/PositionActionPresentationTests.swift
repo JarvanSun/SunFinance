@@ -23,7 +23,6 @@ struct PositionActionPresentationTests {
         image: FinanceImage,
         isDestructive: Bool
     ) {
-        // Then
         #expect(action.title.key == title)
         #expect(action.image == image)
         #expect((action.role == .destructive) == isDestructive)

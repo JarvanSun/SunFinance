@@ -18,7 +18,6 @@ struct TradeSidePresentationTests {
         (.sell, "sell"),
     ])
     func titlesThenFollowTheSide(side: TradeSide, name: String) {
-        // Then
         #expect(side.segmentTitle.key == "trading.side.\(name)")
         #expect(side.ticketTitle(for: "AAPL").key == "trading.ticket.title.\(name) %@")
         #expect(side.limitFieldTitle.key == "trading.limit.field.\(name)")
@@ -41,7 +40,6 @@ struct TradeSidePresentationTests {
         identifier: InstrumentAccessibility,
         fill: FinanceColor
     ) {
-        // Then
         #expect(side.actionTitle.key == titleKey)
         #expect(side.accessibilityIdentifier == identifier)
         #expect(side.fill == fill)

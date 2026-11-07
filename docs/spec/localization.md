@@ -33,7 +33,7 @@ both before a change is done.
       Text("trading.cancel", bundle: .module)
   }
 
-  SectionHeading(LocalizedStringResource("portfolio.positions.title", bundle: .module))
+  SectionHeading(.init("portfolio.positions.title", bundle: .module))
   ```
 
 - Text that describes a model is a `LocalizedStringResource`, built in the presentation extension
@@ -43,12 +43,9 @@ both before a change is done.
   extension WatchlistPlaceholder {
       var title: LocalizedStringResource {
           switch self {
-          case .loading:
-              .init("watchlist.placeholder.loading.title", bundle: .module)
-          case .searching:
-              .init("watchlist.placeholder.searching.title", bundle: .module)
-          case .unavailable(let reason):
-              reason.title
+          case .loading: .init("watchlist.placeholder.loading.title", bundle: .module)
+          case .searching: .init("watchlist.placeholder.searching.title", bundle: .module)
+          case .unavailable(let reason): reason.title
           }
       }
   }

@@ -18,13 +18,12 @@ struct AppTabTests {
         (.orders, "app.tab.orders", .orders),
     ])
     func presentationThenNamesAndPicturesEveryTab(tab: AppTab, key: String, image: FinanceImage) {
-        // Then
         #expect(tab.title.key == key)
         #expect(tab.image == image)
     }
 
     @Test func titleThenEveryTabIsTranslated() {
-        // When
+        // Given / When
         let resolved = AppTab.allCases.map { String(localized: $0.title) }
 
         // Then
@@ -33,7 +32,6 @@ struct AppTabTests {
     }
 
     @Test func allCasesThenStartWithWatchlist() {
-        // Then
         #expect(AppTab.allCases == [.watchlist, .portfolio, .orders])
     }
 }

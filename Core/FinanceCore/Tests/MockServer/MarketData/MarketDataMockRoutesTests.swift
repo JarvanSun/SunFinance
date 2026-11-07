@@ -18,7 +18,7 @@ struct MarketDataMockRoutesTests {
 
         // When
         let response = try #require(try makeRoutes().response(to: request))
-        let body = try makeBackendDecoder().decode(QuotesResponseDTO.self, from: response.body)
+        let body = try BackendCoding().decoder.decode(QuotesResponseDTO.self, from: response.body)
 
         // Then
         #expect(response.statusCode == 200)
@@ -32,7 +32,7 @@ struct MarketDataMockRoutesTests {
 
         // When
         let response = try #require(try makeRoutes().response(to: request))
-        let body = try makeBackendDecoder().decode(
+        let body = try BackendCoding().decoder.decode(
             PriceHistoryResponseDTO.self,
             from: response.body
         )
@@ -61,7 +61,10 @@ struct MarketDataMockRoutesTests {
 
         // When
         let response = try #require(try makeRoutes().response(to: request))
-        let body = try makeBackendDecoder().decode(QuoteDetailResponseDTO.self, from: response.body)
+        let body = try BackendCoding().decoder.decode(
+            QuoteDetailResponseDTO.self,
+            from: response.body
+        )
 
         // Then
         #expect(body.dayLow <= body.dayHigh)
@@ -86,7 +89,7 @@ struct MarketDataMockRoutesTests {
 
         // When
         let response = try #require(try makeRoutes().response(to: request))
-        let body = try makeBackendDecoder().decode(
+        let body = try BackendCoding().decoder.decode(
             SymbolSearchResponseDTO.self,
             from: response.body
         )
@@ -103,7 +106,7 @@ struct MarketDataMockRoutesTests {
 
         // When
         let response = try #require(try makeRoutes().response(to: request))
-        let body = try makeBackendDecoder().decode(
+        let body = try BackendCoding().decoder.decode(
             SymbolSearchResponseDTO.self,
             from: response.body
         )
@@ -144,11 +147,11 @@ struct MarketDataMockRoutesTests {
 
 private extension MarketDataMockRoutesTests {
     func makeRoutes() -> MarketDataMockRoutes {
-        MarketDataMockRoutes(exchange: MockExchange())
+        .init(exchange: MockExchange())
     }
 
     func makeRequest(_ path: [String], query: (String, String)? = nil) -> MockRequest {
-        MockRequest(
+        .init(
             method: .get,
             path: path,
             queryItems: query.map { [URLQueryItem(name: $0.0, value: $0.1)] } ?? [],

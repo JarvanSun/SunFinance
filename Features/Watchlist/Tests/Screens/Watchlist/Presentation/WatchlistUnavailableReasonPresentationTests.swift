@@ -20,7 +20,6 @@ struct WatchlistUnavailableReasonPresentationTests {
         (.failed(.unreadableData), "watchlist.placeholder.unreadable.title"),
     ])
     func titleThenNamesTheReason(reason: WatchlistUnavailableReason, key: String) {
-        // Then
         #expect(reason.title.key == key)
     }
 
@@ -32,7 +31,6 @@ struct WatchlistUnavailableReasonPresentationTests {
         (.failed(.unreadableData), "watchlist.placeholder.unreadable.message"),
     ])
     func messageThenExplainsTheReason(reason: WatchlistUnavailableReason, key: String) {
-        // Then
         #expect(reason.message.key == key)
     }
 
@@ -44,7 +42,6 @@ struct WatchlistUnavailableReasonPresentationTests {
         (.failed(.unreadableData), .warning),
     ])
     func imageThenMatchesTheReason(reason: WatchlistUnavailableReason, expected: FinanceImage) {
-        // Then
         #expect(reason.image == expected)
     }
 
@@ -55,7 +52,7 @@ struct WatchlistUnavailableReasonPresentationTests {
         (.failed(.unreadableData), true),
     ])
     func actionThenRetriesOnlyFailures(reason: WatchlistUnavailableReason, hasRetry: Bool) {
-        // When
+        // Given / When
         let action = reason.action(onRetry: {})
 
         // Then
@@ -63,7 +60,7 @@ struct WatchlistUnavailableReasonPresentationTests {
     }
 
     @Test func actionWhenFailedThenCarriesRetryIdentifier() {
-        // When
+        // Given / When
         let action = WatchlistUnavailableReason.failed(.offline).action(onRetry: {})
 
         // Then

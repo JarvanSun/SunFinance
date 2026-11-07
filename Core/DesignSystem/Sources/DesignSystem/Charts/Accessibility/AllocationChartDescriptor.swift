@@ -31,7 +31,7 @@ struct AllocationChartDescriptor: AXChartDescriptorRepresentable {
             isContinuous: false,
             dataPoints: zip(slices, shares).map { AXDataPoint(x: $0.label, y: $1) }
         )
-        return AXChartDescriptor(
+        return .init(
             title: title,
             summary: accessibility.map { String(localized: $0.summary) },
             xAxis: xAxis,

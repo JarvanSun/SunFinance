@@ -18,22 +18,32 @@ struct OrdersFooterView: View {
     var body: some View {
         switch footer {
         case .loadingMore:
-            ProgressView()
-                .frame(maxWidth: .infinity)
-                .accessibilityLabel(Text("orders.footer.loading", bundle: .module))
+            loadingMore
         case .failed(let issue):
-            VStack(spacing: dimensions.spaceSmall) {
-                Text(issue.title)
-                    .textStyle(FinanceColor.textSecondary, FinanceFont.callout)
-
-                Button(action: onRetry) {
-                    Text("orders.footer.retry", bundle: .module)
-                }
-                .buttonStyle(.finance(.tertiary))
-                .accessibilityIdentifier(OrdersAccessibility.pageRetryButton)
-            }
-            .frame(maxWidth: .infinity)
+            failure(issue)
         }
+    }
+}
+
+private extension OrdersFooterView {
+    var loadingMore: some View {
+        ProgressView()
+            .frame(maxWidth: .infinity)
+            .accessibilityLabel(Text("orders.footer.loading", bundle: .module))
+    }
+
+    func failure(_ issue: OrdersIssue) -> some View {
+        VStack(spacing: dimensions.spaceSmall) {
+            Text(issue.title)
+                .textStyle(FinanceColor.textSecondary, FinanceFont.callout)
+
+            Button(action: onRetry) {
+                Text("orders.footer.retry", bundle: .module)
+            }
+            .buttonStyle(.finance(.tertiary))
+            .accessibilityIdentifier(OrdersAccessibility.pageRetryButton)
+        }
+        .frame(maxWidth: .infinity)
     }
 }
 

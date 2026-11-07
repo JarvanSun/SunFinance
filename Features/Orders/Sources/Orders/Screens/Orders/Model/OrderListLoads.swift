@@ -13,10 +13,8 @@ struct OrderListLoads: Equatable {
 
     var phase: OrderList.Phase {
         switch running {
-        case 0:
-            settledPhase
-        default:
-            .loading
+        case 0: settledPhase
+        default: .loading
         }
     }
 

@@ -12,7 +12,7 @@ import Testing
 
 struct AccountTests {
     @Test func initThenMapsEveryField() throws {
-        // When
+        // Given / When
         let account = try Account(dto())
 
         // Then
@@ -24,7 +24,7 @@ struct AccountTests {
     }
 
     @Test func initWhenACurrencyIsInvalidThenThrowsDecoding() {
-        // When
+        // Given / When
         let result = Result { () throws(BrokerageError) in try Account(dto(currency: "E")) }
 
         // Then
@@ -34,7 +34,7 @@ struct AccountTests {
 
 private extension AccountTests {
     func dto(currency: String = "EUR") -> AccountResponseDTO {
-        AccountResponseDTO(
+        .init(
             cash: .init(euros: 100),
             buyingPower: .init(euros: 80),
             positionsValue: .init(euros: 900),

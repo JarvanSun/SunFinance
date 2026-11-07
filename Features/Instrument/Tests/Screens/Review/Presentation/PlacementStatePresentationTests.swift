@@ -16,7 +16,7 @@ struct PlacementStatePresentationTests {
     @Test(arguments: [
         (PlacementState.ready, SlideToConfirmPhase.ready, false),
         (.placing, .working, false),
-        (.placed(.init(status: .filled)), .done, false),
+        (.placed(.dummy(status: .filled)), .done, false),
         (.failed(.offline), .ready, true),
     ])
     func slidePhaseThenFollowsThePlacement(
@@ -24,7 +24,6 @@ struct PlacementStatePresentationTests {
         phase: SlideToConfirmPhase,
         isFailed: Bool
     ) {
-        // Then
         #expect(state.slidePhase == phase)
         #expect(state.isFailed == isFailed)
     }
@@ -35,7 +34,6 @@ struct PlacementStatePresentationTests {
         (.ready, "trading.review.placeFailed.service"),
     ])
     func failureMessageThenNamesWhyPlacingGotNoAnswer(state: PlacementState, key: String) {
-        // Then
         #expect(state.failureMessage.key == key)
     }
 }

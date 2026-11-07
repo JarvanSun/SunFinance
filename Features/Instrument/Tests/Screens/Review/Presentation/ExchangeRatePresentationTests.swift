@@ -14,7 +14,7 @@ import Testing
 
 struct ExchangeRatePresentationTests {
     @Test func rowsWhenTheStockTradesInEurosThenAreEmpty() {
-        // When
+        // Given / When
         let rows = ExchangeRate(currency: .eur, eurosPerUnit: 1).rows
 
         // Then
@@ -22,7 +22,7 @@ struct ExchangeRatePresentationTests {
     }
 
     @Test func rowsWhenTheStockTradesInDollarsThenShowOneDollarInEuros() throws {
-        // When
+        // Given / When
         let row = try #require(ExchangeRate(currency: .usd, eurosPerUnit: 0.9213).rows.first)
 
         // Then

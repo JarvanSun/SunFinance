@@ -15,29 +15,33 @@ struct PlaygroundDependencies {
     private let marketData = MarketDataService(
         environment: .init(mockBehavior: .realistic, storageDirectory: nil)
     )
-    private let watchlistStore = InMemoryWatchlistSymbolStore(symbols: ["AAPL", "SAP"])
-    private let favoriteStore = InMemoryFavoriteSymbolStore(favoriteSymbols: ["AAPL"])
-    private let tracker = makeTracker()
+    private let watchlistStore = InMemoryWatchlistSymbolStore(symbols: TickerSymbol.dummyWatchlist)
+    private let favoriteStore = InMemoryFavoriteSymbolStore(
+        favoriteSymbols: TickerSymbol.dummyFavorites
+    )
+    private let tracker = AnalyticsTracker(playgroundSubsystem: "WatchlistPlayground")
 
     func watchlist() -> WatchlistDependencies {
-        WatchlistDependencies(
+        .init(
             watchlistStore: watchlistStore,
             quoteProvider: marketData,
             symbolSearcher: marketData,
             favoriteStore: favoriteStore,
             clock: ContinuousClock(),
             tracker: tracker,
-            quoteDetail: FeatureEntry { StandInScreen(title: "Quote detail \($0.rawValue)") }
+            quoteDetail: .init { StandInScreen(title: "Quote detail \($0.rawValue)") }
         )
     }
 }
 
-private func makeTracker() -> AnalyticsTracker {
-    let consent = UserDefaultsAnalyticsConsent(defaults: .standard)
-    consent.setConsent(true)
-    return AnalyticsTracker(
-        consent: consent,
-        context: AnalyticsContext(appVersion: "playground", locale: .autoupdatingCurrent),
-        destinations: [ConsoleAnalyticsDestination(subsystem: "WatchlistPlayground")]
-    )
+private extension AnalyticsTracker {
+    convenience init(playgroundSubsystem subsystem: String) {
+        let consent = UserDefaultsAnalyticsConsent(defaults: .standard)
+        consent.setConsent(true)
+        self.init(
+            consent: consent,
+            context: .init(appVersion: "playground", locale: .autoupdatingCurrent),
+            destinations: [ConsoleAnalyticsDestination(subsystem: subsystem)]
+        )
+    }
 }

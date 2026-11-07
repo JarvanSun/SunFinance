@@ -9,21 +9,21 @@ import DesignSystem
 import FinanceCore
 
 public struct WatchlistDependencies {
-    let watchlistStore: any WatchlistSymbolStoring
-    let quoteProvider: any QuoteProviding
-    let symbolSearcher: any SymbolSearching
-    let favoriteStore: any FavoriteSymbolStoring
+    let watchlistStore: WatchlistSymbolStoring
+    let quoteProvider: QuoteProviding
+    let symbolSearcher: SymbolSearching
+    let favoriteStore: FavoriteSymbolStoring
     let clock: any Clock<Duration>
-    let tracker: any AnalyticsTracking
+    let tracker: AnalyticsTracking
     let quoteDetail: FeatureEntry<TickerSymbol>
 
     public init(
-        watchlistStore: some WatchlistSymbolStoring,
-        quoteProvider: some QuoteProviding,
-        symbolSearcher: some SymbolSearching,
-        favoriteStore: some FavoriteSymbolStoring,
+        watchlistStore: WatchlistSymbolStoring,
+        quoteProvider: QuoteProviding,
+        symbolSearcher: SymbolSearching,
+        favoriteStore: FavoriteSymbolStoring,
         clock: some Clock<Duration>,
-        tracker: some AnalyticsTracking,
+        tracker: AnalyticsTracking,
         quoteDetail: FeatureEntry<TickerSymbol>
     ) {
         self.watchlistStore = watchlistStore
@@ -35,8 +35,8 @@ public struct WatchlistDependencies {
         self.quoteDetail = quoteDetail
     }
 
-    func makeViewModel(router: some WatchlistRouting) -> WatchlistViewModel {
-        WatchlistViewModel(
+    func makeViewModel(router: WatchlistRouting) -> WatchlistViewModel {
+        .init(
             watchlistStore: watchlistStore,
             quoteProvider: quoteProvider,
             symbolSearcher: symbolSearcher,

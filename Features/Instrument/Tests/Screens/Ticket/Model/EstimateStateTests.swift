@@ -14,14 +14,13 @@ struct EstimateStateTests {
     @Test(arguments: [
         (EstimateState.unavailable, OrderPreview?.none),
         (.loading(previous: nil), nil),
-        (.loading(previous: .init()), .init()),
-        (.ready(.init()), .init()),
+        (.loading(previous: .dummy()), .dummy()),
+        (.ready(.dummy()), .dummy()),
     ])
     func previewThenKeepsTheLastEstimateWhileLoading(
         state: EstimateState,
         expected: OrderPreview?
     ) {
-        // Then
         #expect(state.preview == expected)
     }
 }

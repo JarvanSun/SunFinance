@@ -15,17 +15,16 @@ import Testing
 
 struct OrderOutcomePresentationTests {
     @Test(arguments: [
-        (OrderOutcome.filled(sampleFill), FinanceImage.success, FinanceColor.gain),
+        (OrderOutcome.filled(OrderFill.dummy), FinanceImage.success, FinanceColor.gain),
         (.filledWithoutDetails, .success, .gain),
         (.waitingForPrice, .scheduled, .accent),
-        (.scheduled(testNow), .scheduled, .accent),
+        (.scheduled(Date.dummyNow), .scheduled, .accent),
         (.cancelled, .rejected, .textSecondary),
         (.expired, .rejected, .textSecondary),
         (.rejected(.insufficientCash), .rejected, .critical),
     ])
     func badgeThenFollowsTheOutcome(outcome: OrderOutcome, image: FinanceImage, color: FinanceColor)
     {
-        // Then
         #expect(outcome.image == image)
         #expect(outcome.color == color)
     }
@@ -36,7 +35,6 @@ struct OrderOutcomePresentationTests {
         (.rejected(.invalidAmount), false),
     ])
     func feedbackThenCelebratesOnlyAFill(outcome: OrderOutcome, celebrates: Bool) {
-        // Then
         #expect((outcome.feedback == .success) == celebrates)
     }
 
@@ -48,12 +46,11 @@ struct OrderOutcomePresentationTests {
         outcome: OrderOutcome,
         kind: FinanceButtonKind
     ) {
-        // Then
         #expect(outcome.doneButtonKind == kind)
     }
 
     @Test(arguments: [
-        (OrderOutcome.filled(sampleFill), "trading.result.filled.buy %@ %@"),
+        (OrderOutcome.filled(OrderFill.dummy), "trading.result.filled.buy %@ %@"),
         (.filledWithoutDetails, "trading.result.filledWithoutDetails"),
         (.waitingForTrigger, "trading.result.placed"),
         (.cancelled, "trading.result.cancelled"),
@@ -61,13 +58,12 @@ struct OrderOutcomePresentationTests {
         (.rejected(.insufficientCash), "trading.result.rejected"),
     ])
     func titleThenSaysWhatHappened(outcome: OrderOutcome, key: String) {
-        // Then
-        #expect(outcome.title(for: .init()).key == key)
+        #expect(outcome.title(for: .dummy()).key == key)
     }
 
     @Test func titleWhenASellFilledThenSaysSold() {
-        // When
-        let title = OrderOutcome.filled(sampleFill).title(for: .init(.sell))
+        // Given / When
+        let title = OrderOutcome.filled(OrderFill.dummy).title(for: .dummy(.sell))
 
         // Then
         #expect(title.key == "trading.result.filled.sell %@ %@")
@@ -75,7 +71,7 @@ struct OrderOutcomePresentationTests {
 
     @Test(arguments: [
         (
-            OrderOutcome.filled(sampleFill),
+            OrderOutcome.filled(OrderFill.dummy),
             OrderTrigger.immediately,
             "trading.result.filled.detail %@ %@"
         ),
@@ -83,7 +79,7 @@ struct OrderOutcomePresentationTests {
         (.waitingForPrice, .immediately, "trading.result.waitingForPrice"),
         (.waitingForTrigger, .priceAtOrAbove(250), "trading.result.waitingForTrigger %@"),
         (.waitingForTrigger, .immediately, "trading.result.waitingForOpen"),
-        (.scheduled(testNow), .at(testNow), "trading.result.scheduled %@"),
+        (.scheduled(Date.dummyNow), .at(Date.dummyNow), "trading.result.scheduled %@"),
         (.waitingForOpen, .immediately, "trading.result.waitingForOpen"),
         (.cancelled, .immediately, "trading.result.cancelled.detail"),
         (.expired, .immediately, "trading.result.expired.detail"),
@@ -94,7 +90,6 @@ struct OrderOutcomePresentationTests {
         trigger: OrderTrigger,
         key: String
     ) {
-        // Then
-        #expect(outcome.detail(for: .init(trigger: trigger), currency: .usd).key == key)
+        #expect(outcome.detail(for: .dummy(trigger: trigger), currency: .usd).key == key)
     }
 }

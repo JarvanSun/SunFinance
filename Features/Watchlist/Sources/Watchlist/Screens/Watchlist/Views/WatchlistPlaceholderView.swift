@@ -18,13 +18,19 @@ struct WatchlistPlaceholderView: View {
         case .loading, .searching:
             LoadingStateView(title: placeholder.title)
         case .unavailable(let reason):
-            ContentUnavailableStateView(
-                title: reason.title,
-                message: reason.message,
-                image: reason.image,
-                action: reason.action(onRetry: onRetry)
-            )
+            unavailable(reason)
         }
+    }
+}
+
+private extension WatchlistPlaceholderView {
+    func unavailable(_ reason: WatchlistUnavailableReason) -> some View {
+        ContentUnavailableStateView(
+            title: reason.title,
+            message: reason.message,
+            image: reason.image,
+            action: reason.action(onRetry: onRetry)
+        )
     }
 }
 

@@ -19,7 +19,7 @@ struct MockResponseTests {
         let response = try MockResponse(json: echo, status: .created)
 
         // Then
-        let body = try makeBackendDecoder().decode(EchoDTO.self, from: response.body)
+        let body = try BackendCoding().decoder.decode(EchoDTO.self, from: response.body)
         #expect(response.statusCode == 201)
         #expect(body == echo)
     }
@@ -31,7 +31,7 @@ struct MockResponseTests {
         (.serviceUnavailable, 503),
     ])
     func initWithStatusThenHasItsCodeAndNoBody(status: HTTPStatus, statusCode: Int) {
-        // When
+        // Given / When
         let response = MockResponse(status: status)
 
         // Then

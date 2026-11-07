@@ -11,7 +11,7 @@ import SwiftUI
 
 struct TradingLayerMarks<Position: Plottable>: ChartContent {
     let layer: ChartTradingLayer
-    let dimensions: any DimensionStyling
+    let dimensions: DimensionStyling
     let position: (Date) -> Position
 
     var body: some ChartContent {

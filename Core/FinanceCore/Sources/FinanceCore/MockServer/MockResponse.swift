@@ -11,12 +11,12 @@ struct MockResponse: Equatable, Sendable {
     let statusCode: Int
     let body: Data
 
-    init(status: HTTPStatus, body: Data = Data()) {
+    init(status: HTTPStatus, body: Data = .init()) {
         statusCode = status.rawValue
         self.body = body
     }
 
-    init(json value: some Encodable, status: HTTPStatus = .ok) throws {
-        self.init(status: status, body: try makeBackendEncoder().encode(value))
+    init(json value: Encodable, status: HTTPStatus = .ok) throws {
+        self.init(status: status, body: try BackendCoding().encoder.encode(value))
     }
 }

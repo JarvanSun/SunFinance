@@ -98,7 +98,7 @@ private extension BrokerageMockRoutes {
     func draft(in request: MockRequest) -> OrderDraft? {
         guard
             let body = request.body,
-            let dto = try? makeBackendDecoder().decode(OrderDraftDTO.self, from: body)
+            let dto = try? BackendCoding().decoder.decode(OrderDraftDTO.self, from: body)
         else { return nil }
 
         return try? OrderDraft(dto)

@@ -12,7 +12,7 @@ import Testing
 struct DurationExtensionsTests {
     @Test(arguments: [(Duration.seconds(2), 2.0), (.milliseconds(250), 0.25)])
     func timeIntervalThenConvertsToSeconds(duration: Duration, expected: Double) {
-        // When
+        // Given / When
         let timeInterval = duration.timeInterval
 
         // Then

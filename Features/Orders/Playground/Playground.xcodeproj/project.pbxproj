@@ -12,15 +12,16 @@
 		AD08F432D2E4B9B85F41E8E1 /* FinanceCore in Frameworks */ = {isa = PBXBuildFile; productRef = B1F6CB24B7D2426B0D98C5DD /* FinanceCore */; };
 		B0405403E75366CA67AFF584 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 2F282EBAE814CABF0B9F639B /* DesignSystem */; };
 		E02FFEE592D4A062BB6BC87C /* OrdersPlaygroundApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEE8D6392A650529BA1D051 /* OrdersPlaygroundApp.swift */; };
+		6608534DCDD5E22818F4C0D9 /* OrderDraftDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B97AF5A9F61ED53841A3750 /* OrderDraftDummy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		038914A840A8B4F0076B1243 /* FinanceCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FinanceCore; path = ../../../Core/FinanceCore; sourceTree = SOURCE_ROOT; };
 		2E88B0082E36022E06BC9E0D /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DesignSystem; path = ../../../Core/DesignSystem; sourceTree = SOURCE_ROOT; };
-		56645860CC8314FF90CE752D /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 		5E19913767B8F2A202E27C20 /* Orders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Orders; path = ..; sourceTree = SOURCE_ROOT; };
 		6EEE8D6392A650529BA1D051 /* OrdersPlaygroundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersPlaygroundApp.swift; sourceTree = "<group>"; };
 		AED837431D8D89C6FE0CB399 /* OrdersPlayground.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OrdersPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B97AF5A9F61ED53841A3750 /* OrderDraftDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDraftDummy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,15 +39,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		305CEBF740BA6612B7135ECD /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				56645860CC8314FF90CE752D /* Signing.xcconfig */,
-			);
-			name = Configuration;
-			path = ../../../Configuration;
-			sourceTree = "<group>";
-		};
 		3F6B916872C30820F6241E84 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +60,7 @@
 		AABC9BE64A1302199D5D2AF8 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				4BC2116266DECE99718208D4 /* Dummy */,
 				6EEE8D6392A650529BA1D051 /* OrdersPlaygroundApp.swift */,
 			);
 			path = Sources;
@@ -76,7 +69,6 @@
 		E23F411CF4F5D5291A0322DE = {
 			isa = PBXGroup;
 			children = (
-				305CEBF740BA6612B7135ECD /* Configuration */,
 				75054112A41CDCE58ADACF92 /* Packages */,
 				AABC9BE64A1302199D5D2AF8 /* Sources */,
 				3F6B916872C30820F6241E84 /* Products */,
@@ -85,6 +77,14 @@
 			sourceTree = "<group>";
 			tabWidth = 4;
 			usesTabs = 0;
+		};
+		4BC2116266DECE99718208D4 /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				9B97AF5A9F61ED53841A3750 /* OrderDraftDummy.swift */,
+			);
+			path = Dummy;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -156,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6608534DCDD5E22818F4C0D9 /* OrderDraftDummy.swift in Sources */,
 				E02FFEE592D4A062BB6BC87C /* OrdersPlaygroundApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,7 +166,6 @@
 /* Begin XCBuildConfiguration section */
 		18883859C44E4AE8042B204F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56645860CC8314FF90CE752D /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -277,7 +277,6 @@
 		};
 		FE96C092F5D790A83D093866 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56645860CC8314FF90CE752D /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

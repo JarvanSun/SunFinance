@@ -29,7 +29,7 @@ struct TicketViewModelTests {
     @Test func loadWhenNothingIsHeldThenOffersBuyOnly() async {
         // Given
         let services = TradingServicesStub()
-        services.update { $0.portfolioResult = .success(.init(holdingApple: 0)) }
+        services.update { $0.portfolioResult = .success(.dummy(holdingApple: 0)) }
         let viewModel = makeViewModel(services: services)
 
         // When
@@ -64,7 +64,7 @@ struct TicketViewModelTests {
         // Then
         #expect(
             tracker.events(of: TradingEvent.self) == [
-                .ticketOpened(TradeIntent(symbol: "AAPL", side: .buy, source: .quoteDetail))
+                .ticketOpened(.init(symbol: "AAPL", side: .buy, source: .quoteDetail))
             ]
         )
     }
@@ -94,7 +94,7 @@ struct TicketViewModelTests {
     @Test func refreshEstimateWhenServerPredictsShortCashThenFlagsTheAmount() async {
         // Given
         let services = TradingServicesStub()
-        services.update { $0.previewResult = .success(.init(rejection: .insufficientCash)) }
+        services.update { $0.previewResult = .success(.dummy(rejection: .insufficientCash)) }
         let viewModel = makeViewModel(services: services)
         viewModel.setAmountText("200")
 
@@ -103,7 +103,7 @@ struct TicketViewModelTests {
 
         // Then
         #expect(viewModel.visibleIssues == [.amount: .insufficientCash])
-        #expect(services.previewedDrafts == [.init(amount: .shares(200))])
+        #expect(services.previewedDrafts == [.dummy(amount: .shares(200))])
     }
 
     @Test func refreshEstimateWhenCancelledWhileAskingThenIgnoresTheLateAnswer() async {
@@ -151,7 +151,7 @@ struct TicketViewModelTests {
     ) async {
         // Given
         let services = TradingServicesStub()
-        services.update { $0.previewResult = .success(.init(rejection: rejection)) }
+        services.update { $0.previewResult = .success(.dummy(rejection: rejection)) }
         let viewModel = makeViewModel(services: services)
         viewModel.setAmountText("2")
 
@@ -172,8 +172,8 @@ struct TicketViewModelTests {
         let range = viewModel.triggerDateRange
 
         // Then
-        #expect(range.lowerBound == testNow)
-        #expect(range.upperBound == testNow.addingTimeInterval(90 * 86_400))
+        #expect(range.lowerBound == Date.dummyNow)
+        #expect(range.upperBound == Date.dummyNow.addingTimeInterval(90 * 86_400))
     }
 
     @Test func offersSellAllWhenSellingHeldSharesThenIsTrue() async {
@@ -213,7 +213,7 @@ struct TicketViewModelTests {
         viewModel.review()
 
         // Then
-        #expect(router.reviewedDrafts == [.init()])
+        #expect(router.reviewedDrafts == [.dummy()])
     }
 
     @Test func sellAllWhenSharesAreHeldThenFillsThemIn() async {
@@ -245,11 +245,11 @@ struct TicketViewModelTests {
 
 private extension TicketViewModelTests {
     func makeViewModel(
-        services: TradingServicesStub = TradingServicesStub(),
-        router: TradingRouterSpy = TradingRouterSpy(),
-        tracker: AnalyticsTrackerSpy = AnalyticsTrackerSpy()
+        services: TradingServicesStub = .init(),
+        router: TradingRouterSpy = .init(),
+        tracker: AnalyticsTrackerSpy = .init()
     ) -> TicketViewModel {
-        TicketViewModel(
+        .init(
             intent: TradeIntent(symbol: "AAPL", side: .buy, source: .quoteDetail),
             quoteProvider: services,
             accountProvider: services,
@@ -259,7 +259,7 @@ private extension TicketViewModelTests {
             tracker: tracker,
             input: DecimalInput(locale: Locale(identifier: "en_US")),
             estimateDelay: .zero,
-            now: { testNow }
+            now: { Date.dummyNow }
         )
     }
 }

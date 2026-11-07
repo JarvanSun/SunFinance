@@ -16,7 +16,7 @@ extension MockLedger {
         }
         let positionsValue = valuations.reduce(Decimal.zero) { $0 + $1.marketValue }
         let todayGain = valuations.reduce(Decimal.zero) { $0 + $1.todayGain }
-        return AccountResponseDTO(
+        return .init(
             cash: .init(euros: cash),
             buyingPower: .init(euros: buyingPower(at: date, exchange: exchange)),
             positionsValue: .init(euros: positionsValue),
@@ -27,7 +27,7 @@ extension MockLedger {
 
     func positions(at date: Date, exchange: MockExchange) -> PositionsResponseDTO {
         let valuations = valuations(at: date, exchange: exchange)
-        return PositionsResponseDTO(
+        return .init(
             open: valuations.filter(\.holding.isOpen).sorted { $0.marketValue > $1.marketValue }
                 .map(\.dto),
             closed: valuations.filter { !$0.holding.isOpen }.map(\.dto)
@@ -57,14 +57,14 @@ extension MockLedger {
             .filter(query.matches)
             .sorted { $0.createdAt > $1.createdAt }
         let page = page(of: selected, cursor: query.cursor)
-        return OrdersResponseDTO(
+        return .init(
             orders: page.elements.map { dto(of: $0, at: date, exchange: exchange) },
             nextCursor: page.nextCursor
         )
     }
 
     func dto(of order: LedgerOrder, at date: Date, exchange: MockExchange) -> OrderDTO {
-        OrderDTO(
+        .init(
             id: order.id,
             draft: order.draft.dto,
             quantity: order.quantity,
@@ -87,7 +87,7 @@ private extension MockLedger {
         let end = min(start + pageSize, orders.count)
         guard start < end else { return Page(elements: [], nextCursor: nil) }
 
-        return Page(
+        return .init(
             elements: Array(orders[start..<end]),
             nextCursor: end < orders.count ? String(end) : nil
         )
@@ -163,7 +163,7 @@ private extension MockLedger {
 private extension PositionValuation {
     var dto: PositionDTO {
         let currency = holding.currency.rawValue
-        return PositionDTO(
+        return .init(
             symbol: holding.symbol.rawValue,
             quantity: holding.quantity,
             price: MoneyDTO(amount: price, currency: currency),
@@ -186,7 +186,7 @@ private extension PositionValuation {
 
 private extension LedgerFill {
     var dto: FillDTO {
-        FillDTO(
+        .init(
             date: date,
             quantity: quantity,
             price: MoneyDTO(amount: price, currency: currency.rawValue),

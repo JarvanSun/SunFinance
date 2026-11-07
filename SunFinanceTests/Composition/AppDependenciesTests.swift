@@ -18,7 +18,7 @@ struct AppDependenciesTests {
         defer { defaults.removePersistentDomain(forName: #function) }
 
         // When
-        _ = AppDependencies(configuration: makeConfiguration(suiteName: #function)).watchlist()
+        _ = AppDependencies(configuration: .dummy(defaultsSuiteName: #function)).watchlist()
 
         // Then
         let consent = UserDefaultsAnalyticsConsent(defaults: defaults)
@@ -31,22 +31,10 @@ struct AppDependenciesTests {
         defer { defaults.removePersistentDomain(forName: #function) }
 
         // When
-        _ = AppDependencies(configuration: makeConfiguration(suiteName: #function)).watchlist()
+        _ = AppDependencies(configuration: .dummy(defaultsSuiteName: #function)).watchlist()
 
         // Then
         let store = UserDefaultsWatchlistSymbolStore(defaults: defaults, defaultSymbols: [])
         #expect(store.symbols.isEmpty)
-    }
-}
-
-private extension AppDependenciesTests {
-    func makeConfiguration(suiteName: String) -> AppConfiguration {
-        AppConfiguration(
-            serverBehavior: .instant,
-            defaultWatchlist: ["AAPL"],
-            vendorAnalyticsAPIKey: "test-key",
-            defaultsSuiteName: suiteName,
-            mockServerStorageURL: nil
-        )
     }
 }

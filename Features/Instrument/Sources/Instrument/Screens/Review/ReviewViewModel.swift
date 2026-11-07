@@ -22,17 +22,14 @@ final class ReviewViewModel {
         switch (preview, placement) {
         case (.loaded(let preview), .ready), (.loaded(let preview), .failed):
             preview.rejection == nil
-        case (_, .ready), (_, .placing), (_, .placed), (_, .failed):
-            false
+        case (_, .ready), (_, .placing), (_, .placed), (_, .failed): false
         }
     }
 
     var isSliderEnabled: Bool {
         switch placement {
-        case .ready, .failed:
-            canConfirm
-        case .placing, .placed:
-            true
+        case .ready, .failed: canConfirm
+        case .placing, .placed: true
         }
     }
 
@@ -46,39 +43,34 @@ final class ReviewViewModel {
 
     var outcome: OrderOutcome? {
         switch placement {
-        case .placed(let order):
-            OrderOutcome(order)
-        case .ready, .placing, .failed:
-            nil
+        case .placed(let order): OrderOutcome(order)
+        case .ready, .placing, .failed: nil
         }
     }
 
     var canGoBack: Bool {
         switch placement {
-        case .ready, .failed:
-            true
-        case .placing:
-            false
-        case .placed:
-            outcome?.allowsEditing == true
+        case .ready, .failed: true
+        case .placing: false
+        case .placed: outcome?.allowsEditing == true
         }
     }
 
-    private let previewer: any OrderPreviewing
-    private let placer: any OrderPlacing
+    private let previewer: OrderPreviewing
+    private let placer: OrderPlacing
     private let keys: PlacementKeys
-    private let router: any TradingRouting
-    private let tracker: any AnalyticsTracking
+    private let router: TradingRouting
+    private let tracker: AnalyticsTracking
     private let idempotencyKey: IdempotencyKey
     @ObservationIgnored private var placing: Task<PlacementResult, Never>?
 
     init(
         draft: OrderDraft,
-        previewer: some OrderPreviewing,
-        placer: some OrderPlacing,
+        previewer: OrderPreviewing,
+        placer: OrderPlacing,
         keys: PlacementKeys,
-        router: some TradingRouting,
-        tracker: some AnalyticsTracking
+        router: TradingRouting,
+        tracker: AnalyticsTracking
     ) {
         self.draft = draft
         self.previewer = previewer

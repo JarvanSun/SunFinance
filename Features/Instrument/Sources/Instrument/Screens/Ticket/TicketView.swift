@@ -27,6 +27,7 @@ struct TicketView: View {
                     EmptyView()
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onChange(of: viewModel.firstIssueField) { _, field in
                 scroll(proxy, to: field)
             }
@@ -219,7 +220,7 @@ private extension TicketView {
         _ keyPath: KeyPath<TicketForm, Value>,
         set: @escaping @MainActor @Sendable (Value) -> Void
     ) -> Binding<Value> {
-        Binding(get: { viewModel.form[keyPath: keyPath] }, set: set)
+        .init(get: { viewModel.form[keyPath: keyPath] }, set: set)
     }
 
     func scroll(_ proxy: ScrollViewProxy, to field: TicketField?) {

@@ -120,7 +120,7 @@ private extension QuotesRequest {
 
 ## Errors
 
-`BackendClient` maps every failure once into `BackendFailure` (`init(_ error: any Error)`); each
+`BackendClient` maps every failure once into `BackendFailure` (`init(_ error: Error)`); each
 domain error converts it with `init(_ failure: BackendFailure)`, used only by that domain's
 service. `MarketDataError` and `BrokerageError` have the same cases:
 

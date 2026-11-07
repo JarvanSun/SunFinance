@@ -21,46 +21,36 @@ enum QuoteDetailPreviewState: String, CaseIterable, CustomStringConvertible {
 
     var detailError: MarketDataError? {
         switch self {
-        case .offline:
-            .offline
-        case .content, .notHeld, .loading, .chartUnavailable, .german:
-            nil
+        case .offline: .offline
+        case .content, .notHeld, .loading, .chartUnavailable, .german: nil
         }
     }
 
     var historyError: MarketDataError? {
         switch self {
-        case .chartUnavailable:
-            .server(statusCode: 503)
-        case .content, .notHeld, .loading, .offline, .german:
-            nil
+        case .chartUnavailable: .server(statusCode: 503)
+        case .content, .notHeld, .loading, .offline, .german: nil
         }
     }
 
     var isHolding: Bool {
         switch self {
-        case .notHeld:
-            false
-        case .content, .loading, .offline, .chartUnavailable, .german:
-            true
+        case .notHeld: false
+        case .content, .loading, .offline, .chartUnavailable, .german: true
         }
     }
 
     var delay: Duration {
         switch self {
-        case .loading:
-            .seconds(3_600)
-        case .content, .notHeld, .offline, .chartUnavailable, .german:
-            .zero
+        case .loading: .seconds(3_600)
+        case .content, .notHeld, .offline, .chartUnavailable, .german: .zero
         }
     }
 
     var locale: Locale {
         switch self {
-        case .german:
-            Locale(identifier: "de_DE")
-        case .content, .notHeld, .loading, .offline, .chartUnavailable:
-            Locale(identifier: "en_US")
+        case .german: .init(identifier: "de_DE")
+        case .content, .notHeld, .loading, .offline, .chartUnavailable: .init(identifier: "en_US")
         }
     }
 }

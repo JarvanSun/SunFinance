@@ -49,7 +49,7 @@ struct AnalyticsConsoleView: View {
 
 private extension AnalyticsConsoleView {
     var consentSelection: Binding<Bool> {
-        Binding(get: { console.isConsentGranted }, set: { console.setConsent($0) })
+        .init(get: { console.isConsentGranted }, set: { console.setConsent($0) })
     }
 }
 

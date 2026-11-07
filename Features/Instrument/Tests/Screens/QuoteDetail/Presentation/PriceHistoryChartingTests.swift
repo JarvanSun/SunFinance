@@ -15,7 +15,7 @@ import Testing
 struct PriceHistoryChartingTests {
     @Test func chartValuesThenFollowCandles() {
         // Given
-        let history = appleDayHistory
+        let history = PriceHistory.dummyAppleDay
 
         // Then
         #expect(history.chartPoints.map(\.value) == [105, 110])
@@ -24,8 +24,8 @@ struct PriceHistoryChartingTests {
     }
 
     @Test func chartAccessibilityThenSummarisesRangeAndChange() {
-        // When
-        let accessibility = appleDayHistory.chartAccessibility(companyName: "Apple")
+        // Given / When
+        let accessibility = PriceHistory.dummyAppleDay.chartAccessibility(companyName: "Apple")
 
         // Then
         #expect(accessibility.summary.key == "quoteDetail.chart.summary %@ %@ %@ %@ %@")
@@ -51,14 +51,14 @@ struct PriceHistoryChartingTests {
 
     @Test func candlestickContentThenCarriesTheTradingLayer() {
         // Given
-        let fillDate = appleDayHistory.candles[0].start.addingTimeInterval(60)
+        let fillDate = PriceHistory.dummyAppleDay.candles[0].start.addingTimeInterval(60)
         let trading = TradingSnapshot(
             position: nil,
-            orders: [.init("AAPL", status: .filled, fillDate: fillDate)]
+            orders: [.dummy("AAPL", status: .filled, fillDate: fillDate)]
         )
 
         // When
-        let content = appleDayHistory.candlestickContent(
+        let content = PriceHistory.dummyAppleDay.candlestickContent(
             trading: trading,
             companyName: "Apple"
         )

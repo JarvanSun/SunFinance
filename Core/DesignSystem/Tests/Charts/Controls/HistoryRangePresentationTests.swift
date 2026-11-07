@@ -21,7 +21,7 @@ struct HistoryRangePresentationTests {
         (.fiveYears, "charts.range.fiveYears"),
     ])
     func titlesThenUseTheRangesKeys(range: HistoryRange, key: String) {
-        // When
+        // Given / When
         let shortTitle = range.shortTitle
         let accessibilityTitle = range.accessibilityTitle
 

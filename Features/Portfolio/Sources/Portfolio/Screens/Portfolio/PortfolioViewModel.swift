@@ -28,30 +28,23 @@ final class PortfolioViewModel {
 
     var isLive: Bool {
         switch freshness {
-        case .live:
-            true
-        case .stale:
-            false
+        case .live: true
+        case .stale: false
         }
     }
 
     var placeholder: PortfolioPlaceholder? {
         switch snapshot {
-        case .idle, .loading:
-            .loading
-        case .failed(let issue):
-            .failed(issue)
-        case .loaded:
-            nil
+        case .idle, .loading: .loading
+        case .failed(let issue): .failed(issue)
+        case .loaded: nil
         }
     }
 
     var positionsPlaceholder: PortfolioPlaceholder? {
         switch snapshot.value?.hasOpenPositions {
-        case .some(false):
-            .empty
-        case .some(true), nil:
-            nil
+        case .some(false): .empty
+        case .some(true), nil: nil
         }
     }
 
@@ -67,20 +60,20 @@ final class PortfolioViewModel {
         !closedPositions.isEmpty
     }
 
-    private let accountProvider: any AccountProviding
-    private let positionProvider: any PositionProviding
-    private let historyProvider: any PortfolioHistoryProviding
-    private let router: any PortfolioRouting
-    private let tracker: any AnalyticsTracking
+    private let accountProvider: AccountProviding
+    private let positionProvider: PositionProviding
+    private let historyProvider: PortfolioHistoryProviding
+    private let router: PortfolioRouting
+    private let tracker: AnalyticsTracking
     private let refreshInterval: Duration
     @ObservationIgnored private var isScreenViewPending = false
 
     init(
-        accountProvider: some AccountProviding,
-        positionProvider: some PositionProviding,
-        historyProvider: some PortfolioHistoryProviding,
-        router: some PortfolioRouting,
-        tracker: some AnalyticsTracking,
+        accountProvider: AccountProviding,
+        positionProvider: PositionProviding,
+        historyProvider: PortfolioHistoryProviding,
+        router: PortfolioRouting,
+        tracker: AnalyticsTracking,
         refreshInterval: Duration
     ) {
         self.accountProvider = accountProvider
@@ -158,13 +151,13 @@ final class PortfolioViewModel {
     func header(of snapshot: PortfolioSnapshot) -> PortfolioHeader {
         switch scrubbedPoint {
         case .some((let point, let first)):
-            PortfolioHeader(
+            .init(
                 value: point.value,
                 change: PortfolioChange(from: first.value, to: point.value),
                 moment: .scrubbed(point.date)
             )
         case nil:
-            PortfolioHeader(
+            .init(
                 value: snapshot.account.total,
                 change: rangeChange(to: snapshot.account.total),
                 moment: .range(range)
@@ -191,10 +184,8 @@ private extension PortfolioViewModel {
 
     func rangeChange(to value: Money) -> PortfolioChange {
         switch history.selected?.points.first {
-        case .some(let start):
-            PortfolioChange(from: start.value, to: value)
-        case nil:
-            .pending
+        case .some(let start): .init(from: start.value, to: value)
+        case nil: .pending
         }
     }
 
@@ -214,10 +205,8 @@ private extension PortfolioViewModel {
 
     func refreshedSnapshot(from update: Result<Portfolio, BrokerageError>) async -> SnapshotResult {
         switch update {
-        case .success(let portfolio):
-            await fetchSnapshot(with: portfolio)
-        case .failure(let error):
-            .failure(error)
+        case .success(let portfolio): await fetchSnapshot(with: portfolio)
+        case .failure(let error): .failure(error)
         }
     }
 
@@ -251,7 +240,7 @@ private extension PortfolioViewModel {
         do {
             return .loaded(try await historyProvider.portfolioHistory(range: range))
         } catch {
-            return .failed(PortfolioIssue(error))
+            return .failed(.init(error))
         }
     }
 

@@ -31,9 +31,11 @@ struct MainTabsView: View {
             }
         }
     }
+}
 
+private extension MainTabsView {
     @ViewBuilder
-    private func screen(for tab: AppTab) -> some View {
+    func screen(for tab: AppTab) -> some View {
         switch tab {
         case .watchlist:
             WatchlistHostView(dependencies: dependencies.watchlist())

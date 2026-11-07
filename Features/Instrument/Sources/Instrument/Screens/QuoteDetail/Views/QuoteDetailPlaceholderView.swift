@@ -18,20 +18,23 @@ struct QuoteDetailPlaceholderView: View {
         case .loading:
             LoadingStateView(title: placeholder.title)
         case .failed(let issue):
-            ContentUnavailableStateView(
-                title: placeholder.title,
-                message: issue.message,
-                image: issue.image,
-                action: StateAction(
-                    title: .init(
-                        "quoteDetail.placeholder.retry",
-                        bundle: .module
-                    ),
-                    accessibilityIdentifier: InstrumentAccessibility.quoteRetryButton,
-                    perform: onRetry
-                )
-            )
+            failure(issue)
         }
+    }
+}
+
+private extension QuoteDetailPlaceholderView {
+    func failure(_ issue: QuoteDetailIssue) -> some View {
+        ContentUnavailableStateView(
+            title: placeholder.title,
+            message: issue.message,
+            image: issue.image,
+            action: StateAction(
+                title: .init("quoteDetail.placeholder.retry", bundle: .module),
+                accessibilityIdentifier: InstrumentAccessibility.quoteRetryButton,
+                perform: onRetry
+            )
+        )
     }
 }
 

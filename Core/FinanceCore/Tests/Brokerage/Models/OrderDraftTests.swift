@@ -12,14 +12,14 @@ import Testing
 
 struct OrderDraftTests {
     @Test(arguments: [
-        OrderDraft(.buy, .shares(2)),
-        .init(.sell, .euros(250), execution: .limit(99.5)),
-        .init(trigger: .priceAtOrAbove(120), validity: .goodTillCancelled),
-        .init(.sell, trigger: .priceAtOrBelow(80)),
-        .init(trigger: .at(Date(timeIntervalSince1970: 1_800_000_000))),
+        OrderDraft.dummy(.buy, .shares(2)),
+        .dummy(.sell, .euros(250), execution: .limit(99.5)),
+        .dummy(trigger: .priceAtOrAbove(120), validity: .goodTillCancelled),
+        .dummy(.sell, trigger: .priceAtOrBelow(80)),
+        .dummy(trigger: .at(Date(timeIntervalSince1970: 1_800_000_000))),
     ])
     func dtoThenMapsBackToTheSameDraft(draft: OrderDraft) throws {
-        // When
+        // Given / When
         let roundTripped = try OrderDraft(draft.dto)
 
         // Then
@@ -27,8 +27,8 @@ struct OrderDraftTests {
     }
 
     @Test func dtoThenWritesTheServersCodes() {
-        // When
-        let dto = OrderDraft(.sell, .euros(250), execution: .limit(99.5)).dto
+        // Given / When
+        let dto = OrderDraft.dummy(.sell, .euros(250), execution: .limit(99.5)).dto
 
         // Then
         #expect(dto.symbol == "SAP")
@@ -42,17 +42,17 @@ struct OrderDraftTests {
     }
 
     @Test(arguments: [
-        makeDraftDTO(side: "hold"),
-        makeDraftDTO(shares: nil, cashAmount: nil),
-        makeDraftDTO(shares: 1, cashAmount: 100),
-        makeDraftDTO(execution: "limit"),
-        makeDraftDTO(execution: "iceberg"),
-        makeDraftDTO(trigger: "price_at_or_above"),
-        makeDraftDTO(trigger: "time"),
-        makeDraftDTO(validity: "forever"),
+        OrderDraftDTO(side: "hold"),
+        .init(shares: nil, cashAmount: nil),
+        .init(shares: 1, cashAmount: 100),
+        .init(execution: "limit"),
+        .init(execution: "iceberg"),
+        .init(trigger: "price_at_or_above"),
+        .init(trigger: "time"),
+        .init(validity: "forever"),
     ])
     func initWhenDTOIsInvalidThenThrowsDecoding(dto: OrderDraftDTO) {
-        // When
+        // Given / When
         let result = Result { () throws(BrokerageError) in try OrderDraft(dto) }
 
         // Then
@@ -60,24 +60,26 @@ struct OrderDraftTests {
     }
 }
 
-private func makeDraftDTO(
-    side: String = "buy",
-    shares: Decimal? = 1,
-    cashAmount: Decimal? = nil,
-    execution: String = "market",
-    trigger: String = "now",
-    validity: String = "day"
-) -> OrderDraftDTO {
-    OrderDraftDTO(
-        symbol: "SAP",
-        side: side,
-        shares: shares,
-        cashAmount: cashAmount,
-        execution: execution,
-        limitPrice: nil,
-        trigger: trigger,
-        triggerPrice: nil,
-        triggerTime: nil,
-        validity: validity
-    )
+private extension OrderDraftDTO {
+    init(
+        side: String = "buy",
+        shares: Decimal? = 1,
+        cashAmount: Decimal? = nil,
+        execution: String = "market",
+        trigger: String = "now",
+        validity: String = "day"
+    ) {
+        self.init(
+            symbol: "SAP",
+            side: side,
+            shares: shares,
+            cashAmount: cashAmount,
+            execution: execution,
+            limitPrice: nil,
+            trigger: trigger,
+            triggerPrice: nil,
+            triggerTime: nil,
+            validity: validity
+        )
+    }
 }

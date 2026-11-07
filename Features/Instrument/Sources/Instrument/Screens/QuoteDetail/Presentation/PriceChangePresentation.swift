@@ -11,7 +11,7 @@ import Foundation
 
 extension PriceChange {
     var trend: GainTrend {
-        GainTrend(amount.amount)
+        .init(amount.amount)
     }
 
     var percentText: String {

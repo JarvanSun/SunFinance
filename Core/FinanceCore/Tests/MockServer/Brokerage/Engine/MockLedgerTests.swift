@@ -14,21 +14,21 @@ struct MockLedgerTests {
     let exchange = MockExchange()
 
     @Test func seededWhenOpenedThenHoldsStartingCashAndHistory() {
-        // When
-        let ledger = MockLedger(seededAt: TradingMoment.tuesdayAfternoon.date, exchange: exchange)
-        let holdings = ledger.book.holdings(asOf: TradingMoment.tuesdayAfternoon.date)
+        // Given / When
+        let ledger = MockLedger(seededAt: Date.dummyTuesdayAfternoon, exchange: exchange)
+        let holdings = ledger.book.holdings(asOf: Date.dummyTuesdayAfternoon)
 
         // Then
         #expect(abs(ledger.cash - 10_000) < Decimal(string: "0.0001")!)
         #expect(Set(holdings.filter(\.isOpen).map(\.symbol)) == ["AAPL", "SAP", "NVDA", "ALV"])
         #expect(holdings.filter { !$0.isOpen }.map(\.symbol) == ["KO"])
         #expect(holdings.first { $0.symbol == "SAP" }?.quantity == 15)
-        #expect(ledger.fills.allSatisfy { $0.date < TradingMoment.tuesdayAfternoon.date })
+        #expect(ledger.fills.allSatisfy { $0.date < Date.dummyTuesdayAfternoon })
     }
 
     @Test func seededThenCashEntriesAddUpToTheCash() {
-        // When
-        let ledger = MockLedger(seededAt: TradingMoment.tuesdayAfternoon.date, exchange: exchange)
+        // Given / When
+        let ledger = MockLedger(seededAt: Date.dummyTuesdayAfternoon, exchange: exchange)
 
         // Then
         #expect(ledger.cashEntries.reduce(Decimal.zero) { $0 + $1.amount } == ledger.cash)
@@ -38,7 +38,7 @@ struct MockLedgerTests {
     @Test func bookWhenFillIsBookedThenCashAndEntryMoveByItsCashEffect() {
         // Given
         var ledger = makeLedger(cash: 1_000)
-        let fill = LedgerFill(.buy, 2, at: 100)
+        let fill = LedgerFill.dummy(.buy, 2, at: 100)
 
         // When
         ledger.book(fill)
@@ -64,7 +64,7 @@ struct MockLedgerTests {
 
 private extension MockLedgerTests {
     func makeLedger(cash: Decimal) -> MockLedger {
-        MockLedger(
+        .init(
             cash: cash,
             orders: [],
             fills: [],

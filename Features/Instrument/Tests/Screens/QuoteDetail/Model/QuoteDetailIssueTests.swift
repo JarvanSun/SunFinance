@@ -18,7 +18,6 @@ struct QuoteDetailIssueTests {
         (.decoding, .unreadableData),
     ])
     func initThenMapsEveryMarketDataError(error: MarketDataError, expected: QuoteDetailIssue) {
-        // Then
         #expect(QuoteDetailIssue(error) == expected)
     }
 
@@ -29,7 +28,6 @@ struct QuoteDetailIssueTests {
         (.decoding, .unreadableData),
     ])
     func initThenMapsEveryBrokerageError(error: BrokerageError, expected: QuoteDetailIssue) {
-        // Then
         #expect(QuoteDetailIssue(error) == expected)
     }
 }

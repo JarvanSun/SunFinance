@@ -13,7 +13,7 @@ import Testing
 struct CandleSeriesTests {
     @Test func initWhenShortThenKeepsEveryCandle() {
         // Given
-        let candles = makeCandles(count: 10)
+        let candles = ChartCandle.dummySeries(count: 10)
 
         // When
         let series = CandleSeries(candles, maximumCount: 90)
@@ -24,7 +24,7 @@ struct CandleSeriesTests {
 
     @Test func initWhenLongThenMergesNeighboursIntoWiderCandles() throws {
         // Given
-        let candles = makeCandles(count: 10)
+        let candles = ChartCandle.dummySeries(count: 10)
 
         // When
         let series = CandleSeries(candles, maximumCount: 4)
@@ -43,7 +43,7 @@ struct CandleSeriesTests {
 
     @Test func scaleThenSpansEveryLowAndHigh() {
         // Given
-        let series = CandleSeries(makeCandles(count: 5), maximumCount: 90)
+        let series = CandleSeries(ChartCandle.dummySeries(count: 5), maximumCount: 90)
 
         // When
         let scale = series.scale
@@ -55,7 +55,7 @@ struct CandleSeriesTests {
 
     @Test func slotOfDateThenFindsTheCandleTheMomentFallsIn() {
         // Given
-        let candles = makeCandles(count: 5)
+        let candles = ChartCandle.dummySeries(count: 5)
         let series = CandleSeries(candles, maximumCount: 90)
 
         // Then
@@ -67,7 +67,7 @@ struct CandleSeriesTests {
     @Test(arguments: [("1", 1), ("7", nil), (nil, nil)] as [(String?, Int?)])
     func candleAtSlotThenOnlyInsideTheSeries(slot: String?, index: Int?) {
         // Given
-        let candles = makeCandles(count: 5)
+        let candles = ChartCandle.dummySeries(count: 5)
         let series = CandleSeries(candles, maximumCount: 90)
 
         // When
@@ -79,7 +79,7 @@ struct CandleSeriesTests {
 
     @Test func closePointsThenFollowTheCloses() {
         // Given
-        let candles = makeCandles(count: 3)
+        let candles = ChartCandle.dummySeries(count: 3)
 
         // When
         let points = CandleSeries(candles, maximumCount: 90).closePoints
@@ -87,21 +87,5 @@ struct CandleSeriesTests {
         // Then
         #expect(points.map(\.value) == candles.map(\.close))
         #expect(points.map(\.date) == candles.map(\.date))
-    }
-}
-
-private extension CandleSeriesTests {
-    func makeCandles(count: Int) -> [ChartCandle] {
-        (0..<count).map { index in
-            let base = 10 + Double(index)
-            return ChartCandle(
-                date: Date(timeIntervalSince1970: Double(index) * 86_400),
-                open: base,
-                high: base + 2,
-                low: base - 1,
-                close: base + 1,
-                volume: 100
-            )
-        }
     }
 }

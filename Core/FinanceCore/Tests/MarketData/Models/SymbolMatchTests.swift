@@ -11,7 +11,7 @@ import Testing
 
 struct SymbolMatchTests {
     @Test func initThenMapsEveryField() throws {
-        // When
+        // Given / When
         let match = try SymbolMatch(dto())
 
         // Then
@@ -24,7 +24,7 @@ struct SymbolMatchTests {
 
     @Test(arguments: [("", "XETRA", "EUR"), ("SAP SE", "", "EUR"), ("SAP SE", "XETRA", "EURO")])
     func initWhenDTOIsInvalidThenThrowsDecoding(name: String, exchange: String, currency: String) {
-        // When
+        // Given / When
         let result = Result { () throws(MarketDataError) in
             try SymbolMatch(dto(companyName: name, exchange: exchange, currency: currency))
         }
@@ -40,7 +40,7 @@ private extension SymbolMatchTests {
         exchange: String = "XETRA",
         currency: String = "EUR"
     ) -> SymbolMatchDTO {
-        SymbolMatchDTO(
+        .init(
             symbol: "SAP",
             companyName: companyName,
             exchange: exchange,

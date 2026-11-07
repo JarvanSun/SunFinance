@@ -16,23 +16,17 @@ enum PlaygroundEvent: String, CaseIterable, Identifiable, AnalyticsEvent {
 
     var name: AnalyticsEventName {
         switch self {
-        case .screenViewed:
-            AnalyticsEventName("playground_viewed")
-        case .quoteOpened:
-            AnalyticsEventName("playground_quote_opened")
-        case .searchWithQueryText:
-            AnalyticsEventName("playground_search_submitted")
+        case .screenViewed: .init("playground_viewed")
+        case .quoteOpened: .init("playground_quote_opened")
+        case .searchWithQueryText: .init("playground_search_submitted")
         }
     }
 
     var parameters: [AnalyticsParameter: AnalyticsValue] {
         switch self {
-        case .screenViewed:
-            [:]
-        case .quoteOpened:
-            [.symbol: .text("AAPL")]
-        case .searchWithQueryText:
-            [.query: .text("apple")]
+        case .screenViewed: [:]
+        case .quoteOpened: [.symbol: .text("AAPL")]
+        case .searchWithQueryText: [.query: .text("apple")]
         }
     }
 }

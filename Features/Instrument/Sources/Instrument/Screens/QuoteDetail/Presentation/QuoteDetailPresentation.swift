@@ -12,25 +12,25 @@ import Foundation
 extension QuoteDetail {
     var statisticRows: [StatisticRow] {
         [
-            StatisticRow(
+            .init(
                 title: .init("quoteDetail.statistics.open", bundle: .module),
                 value: open.formatted()
             ),
-            StatisticRow(
+            .init(
                 title: .init("quoteDetail.statistics.dayRange", bundle: .module),
                 value: rangeText(dayRange)
             ),
-            StatisticRow(
+            .init(
                 title: .init("quoteDetail.statistics.yearRange", bundle: .module),
                 value: rangeText(yearRange)
             ),
-            StatisticRow(
+            .init(
                 title: .init("quoteDetail.statistics.marketCap", bundle: .module),
                 value: quote.marketCap.amount.formatted(
                     .compactCurrency(code: quote.marketCap.currency)
                 )
             ),
-            StatisticRow(
+            .init(
                 title: .init("quoteDetail.statistics.volume", bundle: .module),
                 value: volume.formatted(.number.notation(.compactName))
             ),
@@ -47,6 +47,6 @@ private extension QuoteDetail {
             "quoteDetail.statistics.range \(lower) \(upper)",
             bundle: .module
         )
-        return String(localized: text)
+        return .init(localized: text)
     }
 }

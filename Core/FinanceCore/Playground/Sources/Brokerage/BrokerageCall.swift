@@ -22,29 +22,21 @@ enum BrokerageCall: String, CaseIterable, Identifiable, Sendable {
 
     var title: String {
         switch self {
-        case .account:
-            "Account"
-        case .portfolio:
-            "Positions"
-        case .history:
-            "Portfolio history, 1M"
-        case .openOrders:
-            "Open orders"
-        case .pastOrders:
-            "Past orders"
-        case .previewBuy:
-            "Preview: buy 2 AAPL"
-        case .placeBuy:
-            "Place: buy 1 SAP at market"
-        case .placeLimit:
-            "Place: buy 1 NVDA, limit 1 USD"
+        case .account: "Account"
+        case .portfolio: "Positions"
+        case .history: "Portfolio history, 1M"
+        case .openOrders: "Open orders"
+        case .pastOrders: "Past orders"
+        case .previewBuy: "Preview: buy 2 AAPL"
+        case .placeBuy: "Place: buy 1 SAP at market"
+        case .placeLimit: "Place: buy 1 NVDA, limit 1 USD"
         }
     }
 
     func run(on service: BrokerageService) async throws(BrokerageError) -> String {
         switch self {
         case .account:
-            return String(describing: try await service.account())
+            return .init(describing: try await service.account())
         case .portfolio:
             let portfolio = try await service.portfolio()
             return (portfolio.open + portfolio.closed).map(describe).joined(separator: "\n\n")
@@ -60,18 +52,18 @@ enum BrokerageCall: String, CaseIterable, Identifiable, Sendable {
                 String(describing: $0)
             }.joined(separator: "\n\n")
         case .previewBuy:
-            return String(describing: try await service.preview(draft("AAPL", shares: 2)))
+            return .init(describing: try await service.preview(.dummyBuy("AAPL", shares: 2)))
         case .placeBuy:
-            return String(
+            return .init(
                 describing: try await service.place(
-                    draft("SAP", shares: 1),
+                    .dummyBuy("SAP", shares: 1),
                     idempotencyKey: IdempotencyKey()
                 )
             )
         case .placeLimit:
-            return String(
+            return .init(
                 describing: try await service.place(
-                    draft("NVDA", shares: 1, execution: .limit(1)),
+                    .dummyBuy("NVDA", shares: 1, execution: .limit(1)),
                     idempotencyKey: IdempotencyKey()
                 )
             )
@@ -80,19 +72,6 @@ enum BrokerageCall: String, CaseIterable, Identifiable, Sendable {
 }
 
 private extension BrokerageCall {
-    func draft(_ symbol: TickerSymbol, shares: Int, execution: OrderExecution = .market)
-        -> OrderDraft
-    {
-        OrderDraft(
-            symbol: symbol,
-            side: .buy,
-            amount: .shares(Decimal(shares)),
-            execution: execution,
-            trigger: .immediately,
-            validity: .day
-        )
-    }
-
     func describe(_ position: Position) -> String {
         """
         \(position.symbol.rawValue) × \(position.quantity)

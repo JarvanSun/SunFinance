@@ -26,7 +26,7 @@ struct ChartTradingLayerTests {
     }
 
     @Test func initThenDrawsNothing() {
-        // When
+        // Given / When
         let layer = ChartTradingLayer()
 
         // Then

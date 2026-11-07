@@ -38,14 +38,10 @@ private extension VendorAnalyticsDestination {
 
     func vendorValue(of value: AnalyticsValue) -> Any {
         switch value {
-        case .text(let text):
-            text
-        case .integer(let integer):
-            integer
-        case .decimal(let decimal):
-            NSDecimalNumber(decimal: decimal)
-        case .boolean(let boolean):
-            boolean
+        case .text(let text): text
+        case .integer(let integer): integer
+        case .decimal(let decimal): NSDecimalNumber(decimal: decimal)
+        case .boolean(let boolean): boolean
         }
     }
 }

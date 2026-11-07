@@ -14,7 +14,7 @@ enum BackendFailure: Error, Equatable, Sendable {
     case decoding
     case cancelled
 
-    init(_ error: any Error) {
+    init(_ error: Error) {
         switch error {
         case let failure as BackendFailure:
             self = failure

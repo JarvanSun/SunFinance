@@ -95,34 +95,25 @@ private extension TicketForm {
 
     func timeIssue(now: Date) -> TicketIssue? {
         switch triggerDate {
-        case ...now:
-            .notInFuture
-        case now.addingTimeInterval(longestSchedule)...:
-            .tooFar
-        default:
-            nil
+        case ...now: .notInFuture
+        case now.addingTimeInterval(longestSchedule)...: .tooFar
+        default: nil
         }
     }
 
     func orderExecution(input: DecimalInput) -> OrderExecution {
         switch (execution, input.parse(limitText)) {
-        case (.limit, .some(let price)):
-            .limit(price)
-        case (.limit, nil), (.market, _):
-            .market
+        case (.limit, .some(let price)): .limit(price)
+        case (.limit, nil), (.market, _): .market
         }
     }
 
     func orderTrigger(input: DecimalInput) -> OrderTrigger {
         switch (trigger, input.parse(triggerPriceText), side) {
-        case (.price, .some(let price), .buy):
-            .priceAtOrAbove(price)
-        case (.price, .some(let price), .sell):
-            .priceAtOrBelow(price)
-        case (.time, _, _):
-            .at(triggerDate)
-        case (.now, _, _), (.price, nil, _):
-            .immediately
+        case (.price, .some(let price), .buy): .priceAtOrAbove(price)
+        case (.price, .some(let price), .sell): .priceAtOrBelow(price)
+        case (.time, _, _): .at(triggerDate)
+        case (.now, _, _), (.price, nil, _): .immediately
         }
     }
 }

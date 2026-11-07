@@ -11,7 +11,7 @@ import Foundation
 
 extension TradingSnapshot {
     func chartLayer(for history: PriceHistory) -> ChartTradingLayer {
-        ChartTradingLayer(markers: markers(within: history), levels: levels)
+        .init(markers: markers(within: history), levels: levels)
     }
 }
 
@@ -38,10 +38,8 @@ private extension TradingSnapshot {
 private extension Order {
     var markerKind: ChartMarker.Kind {
         switch draft.side {
-        case .buy:
-            .buy
-        case .sell:
-            .sell
+        case .buy: .buy
+        case .sell: .sell
         }
     }
 
@@ -49,8 +47,7 @@ private extension Order {
         switch draft.execution {
         case .limit(let price):
             [level(.limit, at: price, label: .init("quoteDetail.level.limit", bundle: .module))]
-        case .market:
-            []
+        case .market: []
         }
     }
 
@@ -58,8 +55,7 @@ private extension Order {
         switch draft.trigger {
         case .priceAtOrAbove(let price), .priceAtOrBelow(let price):
             [level(.trigger, at: price, label: .init("quoteDetail.level.trigger", bundle: .module))]
-        case .immediately, .at:
-            []
+        case .immediately, .at: []
         }
     }
 
@@ -68,7 +64,7 @@ private extension Order {
         at price: Decimal,
         label: LocalizedStringResource
     ) -> ChartLevel {
-        ChartLevel(
+        .init(
             id: "\(id).\(kind.rawValue)",
             value: Money(price, currency).doubleValue,
             label: label

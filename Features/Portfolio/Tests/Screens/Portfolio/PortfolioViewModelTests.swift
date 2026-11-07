@@ -41,7 +41,7 @@ struct PortfolioViewModelTests {
 
         // Then
         #expect(viewModel.placeholder == nil)
-        #expect(viewModel.snapshot.value?.account == sampleAccount)
+        #expect(viewModel.snapshot.value?.account == Account.dummy)
         #expect(viewModel.freshness == .stale(.offline))
         #expect(!viewModel.isLive)
     }
@@ -127,7 +127,7 @@ struct PortfolioViewModelTests {
 
         // Then
         let header = viewModel.header(of: try #require(viewModel.snapshot.value))
-        #expect(header.change == .known(Money(1_000, .eur), percent: Decimal(1_000) / 3_000 * 100))
+        #expect(header.change == .known(.init(1_000, .eur), percent: Decimal(1_000) / 3_000 * 100))
         #expect(header.moment == .range(.month))
     }
 
@@ -142,7 +142,7 @@ struct PortfolioViewModelTests {
 
         // Then
         let header = viewModel.header(of: try #require(viewModel.snapshot.value))
-        #expect(viewModel.history.shown == .loaded(sampleHistory))
+        #expect(viewModel.history.shown == .loaded(PortfolioHistory.dummy))
         #expect(header.change == .pending)
         #expect(header.moment == .range(.year))
     }
@@ -190,15 +190,15 @@ struct PortfolioViewModelTests {
         // Then
         let header = viewModel.header(of: try #require(viewModel.snapshot.value))
         #expect(header.value == Money(3_300, .eur))
-        #expect(header.change == .known(Money(300, .eur), percent: 10))
-        #expect(header.moment == .scrubbed(Date(timeIntervalSince1970: 100)))
+        #expect(header.change == .known(.init(300, .eur), percent: 10))
+        #expect(header.moment == .scrubbed(.init(timeIntervalSince1970: 100)))
     }
 
     @Test func keepFreshThenAppliesEachNewPortfolio() async {
         // Given
         let brokerage = BrokerageStub()
-        let newer = Portfolio(open: [Position("SAP", value: 2_500, totalReturn: 700)], closed: [])
-        brokerage.update { $0.portfolios = [samplePortfolio, newer] }
+        let newer = Portfolio(open: [.dummy("SAP", value: 2_500, totalReturn: 700)], closed: [])
+        brokerage.update { $0.portfolios = [Portfolio.dummy, newer] }
         let viewModel = makeViewModel(brokerage: brokerage)
         await viewModel.load()
 
@@ -217,18 +217,18 @@ struct PortfolioViewModelTests {
         // Given
         let brokerage = BrokerageStub()
         let firstPoll = Portfolio(
-            open: [Position("SAP", value: 2_500, totalReturn: 700)],
+            open: [Position.dummy("SAP", value: 2_500, totalReturn: 700)],
             closed: []
         )
         let secondPoll = Portfolio(
             open: [
-                Position("SAP", value: 2_600, totalReturn: 800),
-                Position("AAPL", value: 1_000, totalReturn: 0),
-                Position("NVDA", value: 900, totalReturn: 0),
+                Position.dummy("SAP", value: 2_600, totalReturn: 800),
+                Position.dummy("AAPL", value: 1_000, totalReturn: 0),
+                Position.dummy("NVDA", value: 900, totalReturn: 0),
             ],
             closed: []
         )
-        brokerage.update { $0.portfolios = [samplePortfolio, firstPoll, secondPoll] }
+        brokerage.update { $0.portfolios = [Portfolio.dummy, firstPoll, secondPoll] }
         let viewModel = makeViewModel(brokerage: brokerage)
         await viewModel.load()
 
@@ -247,7 +247,7 @@ struct PortfolioViewModelTests {
     @Test func keepFreshWhenAPollFailsThenKeepsTheBalancesAndGoesStaleUntilTheNextPoll() async {
         // Given
         let brokerage = BrokerageStub()
-        let newer = Portfolio(open: [Position("SAP", value: 2_500, totalReturn: 700)], closed: [])
+        let newer = Portfolio(open: [.dummy("SAP", value: 2_500, totalReturn: 700)], closed: [])
         let viewModel = makeViewModel(brokerage: brokerage)
         await viewModel.load()
         brokerage.update { $0.portfolioFailure = .offline }
@@ -281,7 +281,7 @@ struct PortfolioViewModelTests {
         let viewModel = makeViewModel(brokerage: brokerage)
         await viewModel.loadHistory()
         viewModel.selectRange(.year)
-        brokerage.update { $0.historyResult = .success(PortfolioHistory(range: .year, points: [])) }
+        brokerage.update { $0.historyResult = .success(.init(range: .year, points: [])) }
         await viewModel.loadHistory()
 
         // When
@@ -290,7 +290,7 @@ struct PortfolioViewModelTests {
         await viewModel.loadHistory()
 
         // Then
-        #expect(viewModel.history.shown == .loaded(sampleHistory))
+        #expect(viewModel.history.shown == .loaded(PortfolioHistory.dummy))
     }
 
     @Test func loadHistoryWhenCancelledWhileAskingThenIgnoresTheLateAnswer() async {
@@ -352,7 +352,7 @@ struct PortfolioViewModelTests {
 
         // Then
         #expect(viewModel.snapshot.value != nil)
-        #expect(viewModel.history.shown == .loaded(sampleHistory))
+        #expect(viewModel.history.shown == .loaded(PortfolioHistory.dummy))
     }
 
     @Test func selectSliceWhenTappedTwiceThenClearsIt() {
@@ -414,11 +414,11 @@ struct PortfolioViewModelTests {
 
 private extension PortfolioViewModelTests {
     func makeViewModel(
-        brokerage: BrokerageStub = BrokerageStub(),
-        router: PortfolioRouterSpy = PortfolioRouterSpy(),
-        tracker: AnalyticsTrackerSpy = AnalyticsTrackerSpy()
+        brokerage: BrokerageStub = .init(),
+        router: PortfolioRouterSpy = .init(),
+        tracker: AnalyticsTrackerSpy = .init()
     ) -> PortfolioViewModel {
-        PortfolioViewModel(
+        .init(
             accountProvider: brokerage,
             positionProvider: brokerage,
             historyProvider: brokerage,

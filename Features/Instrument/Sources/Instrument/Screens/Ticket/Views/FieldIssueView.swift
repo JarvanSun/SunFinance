@@ -42,10 +42,8 @@ private extension FieldIssueView {
 
     var shakes: Int {
         switch isShown {
-        case true:
-            shakeCount
-        case false:
-            0
+        case true: shakeCount
+        case false: 0
         }
     }
 

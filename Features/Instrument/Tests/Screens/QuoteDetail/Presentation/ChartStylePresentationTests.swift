@@ -16,7 +16,6 @@ struct ChartStylePresentationTests {
         (.candles, "quoteDetail.chartStyle.candles"),
     ])
     func titleThenNamesTheStyle(style: ChartStyle, key: String) {
-        // Then
         #expect(style.title.key == key)
     }
 }

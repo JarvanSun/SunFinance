@@ -14,7 +14,6 @@ import Testing
 struct OrderRejectionPresentationTests {
     @Test(arguments: OrderRejection.allCases)
     func messageThenHasOneKeyPerReason(rejection: OrderRejection) {
-        // Then
         #expect(rejection.message.key.hasPrefix("orders.rejection."))
         let keys = Set(OrderRejection.allCases.map(\.message.key))
         #expect(keys.count == OrderRejection.allCases.count)

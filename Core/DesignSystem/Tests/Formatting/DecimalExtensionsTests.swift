@@ -21,7 +21,7 @@ struct DecimalExtensionsTests {
         localeIdentifier: String,
         expected: String
     ) {
-        // When
+        // Given / When
         let text = quantity.formattedQuantity(locale: Locale(identifier: localeIdentifier))
 
         // Then
@@ -38,7 +38,7 @@ struct DecimalExtensionsTests {
         localeIdentifier: String,
         expected: String
     ) {
-        // When
+        // Given / When
         let text = rate.formattedExchangeRate(locale: Locale(identifier: localeIdentifier))
 
         // Then

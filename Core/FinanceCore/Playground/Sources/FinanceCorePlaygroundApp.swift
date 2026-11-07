@@ -10,9 +10,7 @@ import SwiftUI
 
 @main
 struct FinanceCorePlaygroundApp: App {
-    @State private var quoteConsole = QuoteConsole(
-        symbols: ["AAPL", "MSFT", "NVDA", "SAP", "SIE", "ALV"]
-    )
+    @State private var quoteConsole = QuoteConsole(symbols: TickerSymbol.dummyWatchlist)
     @State private var brokerageConsole = BrokerageConsole()
     @State private var analyticsConsole = AnalyticsConsole()
 

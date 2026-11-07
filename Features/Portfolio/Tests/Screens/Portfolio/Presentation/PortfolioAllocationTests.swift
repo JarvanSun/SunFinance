@@ -15,7 +15,7 @@ import Testing
 
 struct PortfolioAllocationTests {
     @Test func slicesThenListHoldingsThenNeutralCash() {
-        // When
+        // Given / When
         let slices = makeAllocation().slices
 
         // Then
@@ -30,12 +30,10 @@ struct PortfolioAllocationTests {
         (nil, nil),
     ])
     func symbolThenIsNilForCash(sliceID: String?, expected: TickerSymbol?) {
-        // Then
         #expect(makeAllocation().symbol(forSlice: sliceID) == expected)
     }
 
     @Test func centerWhenNothingIsSelectedThenCountsThePositions() {
-        // Then
         #expect(makeAllocation().centerValue(for: nil) == "2")
     }
 
@@ -69,12 +67,12 @@ struct PortfolioAllocationTests {
     }
 
     @Test(arguments: [
-        (samplePortfolio, "portfolio.allocation.summary %@ %@"),
+        (Portfolio.dummy, "portfolio.allocation.summary %@ %@"),
         (Portfolio(open: [], closed: []), "portfolio.allocation.summary.cashOnly"),
     ])
     func contentThenReadsTheLargestPositionOrCashOnly(portfolio: Portfolio, key: String) {
-        // When
-        let accessibility = PortfolioAllocation(account: sampleAccount, portfolio: portfolio)
+        // Given / When
+        let accessibility = PortfolioAllocation(account: Account.dummy, portfolio: portfolio)
             .content
             .accessibility
 
@@ -86,6 +84,6 @@ struct PortfolioAllocationTests {
 
 private extension PortfolioAllocationTests {
     func makeAllocation() -> PortfolioAllocation {
-        PortfolioAllocation(account: sampleAccount, portfolio: samplePortfolio)
+        .init(account: Account.dummy, portfolio: Portfolio.dummy)
     }
 }

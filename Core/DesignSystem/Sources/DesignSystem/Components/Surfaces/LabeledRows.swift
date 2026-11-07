@@ -48,15 +48,13 @@ private extension LabeledRows {
     var hairline: CGFloat { 1 / displayScale }
 
     var surface: RoundedRectangle {
-        RoundedRectangle(cornerRadius: dimensions.cornerRadiusLarge, style: .continuous)
+        .init(cornerRadius: dimensions.cornerRadiusLarge, style: .continuous)
     }
 
     func valueText(_ value: LabeledRowValue) -> Text {
         switch value {
-        case .verbatim(let text):
-            Text(verbatim: text)
-        case .localized(let resource):
-            Text(resource)
+        case .verbatim(let text): .init(verbatim: text)
+        case .localized(let resource): .init(resource)
         }
     }
 }

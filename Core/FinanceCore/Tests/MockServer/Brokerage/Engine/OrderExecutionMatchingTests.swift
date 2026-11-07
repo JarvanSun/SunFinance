@@ -26,7 +26,6 @@ struct OrderExecutionMatchingTests {
         price: Decimal,
         expected: Bool
     ) {
-        // Then
         #expect(execution.allowsFill(at: price, side: side) == expected)
     }
 }

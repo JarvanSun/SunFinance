@@ -28,7 +28,7 @@ struct OrderDraftKindTests {
         triggerKind: OrderTriggerKind
     ) {
         // Given
-        let draft = OrderDraft(execution: execution, trigger: trigger)
+        let draft = OrderDraft.dummy(execution: execution, trigger: trigger)
 
         // Then
         #expect(draft.kind == kind)
@@ -36,7 +36,6 @@ struct OrderDraftKindTests {
     }
 
     @Test func rawValuesThenAreTheAnalyticsValues() {
-        // Then
         #expect(OrderKind.allCases.map(\.rawValue) == ["market", "limit", "stop", "stop_limit"])
         #expect(OrderTriggerKind.allCases.map(\.rawValue) == ["now", "price", "time"])
     }

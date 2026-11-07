@@ -15,10 +15,8 @@ struct QuoteDetailDestinationView: FeatureDestinationView {
 
     var style: PresentingStyle {
         switch destination {
-        case .orderTicket:
-            .sheet
-        case .root:
-            .push
+        case .orderTicket: .sheet
+        case .root: .push
         }
     }
 

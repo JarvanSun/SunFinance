@@ -11,8 +11,7 @@ import Foundation
 extension QuoteDetailIssue {
     var title: LocalizedStringResource {
         switch self {
-        case .offline:
-            .init("quoteDetail.placeholder.offline.title", bundle: .module)
+        case .offline: .init("quoteDetail.placeholder.offline.title", bundle: .module)
         case .serviceUnavailable, .unreadableData:
             .init("quoteDetail.placeholder.unavailable.title", bundle: .module)
         }
@@ -20,8 +19,7 @@ extension QuoteDetailIssue {
 
     var message: LocalizedStringResource {
         switch self {
-        case .offline:
-            .init("quoteDetail.placeholder.offline.message", bundle: .module)
+        case .offline: .init("quoteDetail.placeholder.offline.message", bundle: .module)
         case .serviceUnavailable, .unreadableData:
             .init("quoteDetail.placeholder.unavailable.message", bundle: .module)
         }
@@ -29,10 +27,8 @@ extension QuoteDetailIssue {
 
     var image: FinanceImage {
         switch self {
-        case .offline:
-            .offline
-        case .serviceUnavailable, .unreadableData:
-            .warning
+        case .offline: .offline
+        case .serviceUnavailable, .unreadableData: .warning
         }
     }
 }

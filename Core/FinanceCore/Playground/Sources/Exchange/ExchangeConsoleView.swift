@@ -13,9 +13,7 @@ struct ExchangeConsoleView: View {
     @State private var hoursFromNow = 0.0
 
     private let exchange = MockExchange()
-    private let symbols: [TickerSymbol] = [
-        "AAPL", "MSFT", "NVDA", "TSLA", "KO", "JPM", "SAP", "SIE", "ALV",
-    ]
+    private let symbols = TickerSymbol.dummyExchangeListing
 
     var body: some View {
         NavigationStack {

@@ -15,8 +15,7 @@ enum MarketEndpoint: Equatable, Sendable {
 
     var path: [String] {
         switch self {
-        case .quotes:
-            [version, MarketPathSegment.quotes.rawValue]
+        case .quotes: [version, MarketPathSegment.quotes.rawValue]
         case .quoteDetail(let symbol):
             [version, MarketPathSegment.symbols.rawValue, symbol.rawValue]
         case .priceHistory(let symbol):
@@ -24,20 +23,18 @@ enum MarketEndpoint: Equatable, Sendable {
                 version, MarketPathSegment.symbols.rawValue, symbol.rawValue,
                 MarketPathSegment.history.rawValue,
             ]
-        case .symbolSearch:
-            [version, MarketPathSegment.search.rawValue]
+        case .symbolSearch: [version, MarketPathSegment.search.rawValue]
         }
     }
 
     var method: HTTPMethod {
         switch self {
-        case .quotes, .quoteDetail, .priceHistory, .symbolSearch:
-            .get
+        case .quotes, .quoteDetail, .priceHistory, .symbolSearch: .get
         }
     }
 
     init?(path: [String], method: HTTPMethod) {
-        let endpoint = marketEndpoint(matching: path)
+        let endpoint = MarketEndpoint(matching: path)
         guard let endpoint, endpoint.method == method else { return nil }
 
         self = endpoint
@@ -46,21 +43,23 @@ enum MarketEndpoint: Equatable, Sendable {
 
 private extension MarketEndpoint {
     var version: String { APIVersion.v1.rawValue }
-}
 
-private func marketEndpoint(matching path: [String]) -> MarketEndpoint? {
-    let symbolsPrefix = [APIVersion.v1.rawValue, MarketPathSegment.symbols.rawValue]
-    switch path {
-    case MarketEndpoint.quotes.path:
-        return .quotes
-    case MarketEndpoint.symbolSearch.path:
-        return .symbolSearch
-    case let path where path.count == 3 && path.starts(with: symbolsPrefix):
-        return .quoteDetail(TickerSymbol(rawValue: path[2]))
-    case let path where path.count == 4 && path.starts(with: symbolsPrefix):
-        let symbol = TickerSymbol(rawValue: path[2])
-        return path == MarketEndpoint.priceHistory(symbol).path ? .priceHistory(symbol) : nil
-    default:
-        return nil
+    init?(matching path: [String]) {
+        let symbolsPrefix = [APIVersion.v1.rawValue, MarketPathSegment.symbols.rawValue]
+        switch path {
+        case MarketEndpoint.quotes.path:
+            self = .quotes
+        case MarketEndpoint.symbolSearch.path:
+            self = .symbolSearch
+        case let path where path.count == 3 && path.starts(with: symbolsPrefix):
+            self = .quoteDetail(.init(rawValue: path[2]))
+        case let path where path.count == 4 && path.starts(with: symbolsPrefix):
+            let symbol = TickerSymbol(rawValue: path[2])
+            guard path == MarketEndpoint.priceHistory(symbol).path else { return nil }
+
+            self = .priceHistory(symbol)
+        default:
+            return nil
+        }
     }
 }

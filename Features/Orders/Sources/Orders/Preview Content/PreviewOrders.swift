@@ -21,16 +21,14 @@ struct PreviewOrders: OrderProviding, OrderCancelling {
     ) async throws(BrokerageError) -> Page<Order> {
         try? await Task.sleep(for: delay)
         if let failure { throw failure }
-        let orders =
-            isEmpty
-            ? [] : PreviewObjectPool().sampleOrders.filter { $0.status.isOpen == (filter == .open) }
-        return Page(elements: orders, nextCursor: nil)
+        let orders = isEmpty ? [] : Order.dummyList.filter { $0.status.isOpen == (filter == .open) }
+        return .init(elements: orders, nextCursor: nil)
     }
 
     func cancel(orderID: Order.ID) async throws(BrokerageError) -> Order {
-        let orders = PreviewObjectPool().sampleOrders
+        let orders = Order.dummyList
         let order = orders.first { $0.id == orderID } ?? orders[0]
-        return Order(
+        return .init(
             id: order.id,
             draft: order.draft,
             quantity: order.quantity,

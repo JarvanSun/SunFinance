@@ -17,9 +17,9 @@ struct WatchlistSectionHeader: View {
         case .quotes:
             EmptyView()
         case .quotesMatchingSearch:
-            heading(LocalizedStringResource("watchlist.section.onWatchlist", bundle: .module))
+            heading(.init("watchlist.section.onWatchlist", bundle: .module))
         case .symbolMatches:
-            heading(LocalizedStringResource("watchlist.section.symbolMatches", bundle: .module))
+            heading(.init("watchlist.section.symbolMatches", bundle: .module))
         }
     }
 }

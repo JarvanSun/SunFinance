@@ -22,7 +22,6 @@ struct QuoteDetailIssuePresentationTests {
         messageKey: String,
         image: FinanceImage
     ) {
-        // Then
         #expect(issue.message.key == messageKey)
         #expect(issue.image == image)
     }

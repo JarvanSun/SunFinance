@@ -52,11 +52,11 @@ public struct DecimalField: View {
 
 private extension DecimalField {
     var emphasis: FieldEmphasis {
-        FieldEmphasis(isFocused: isFocused, isInvalid: isInvalid)
+        .init(isFocused: isFocused, isInvalid: isInvalid)
     }
 
     var frame: RoundedRectangle {
-        RoundedRectangle(cornerRadius: dimensions.cornerRadiusLarge, style: .continuous)
+        .init(cornerRadius: dimensions.cornerRadiusLarge, style: .continuous)
     }
 }
 

@@ -8,9 +8,9 @@
 import FinanceCore
 
 final class AnalyticsTrackerSpy: AnalyticsTracking {
-    private(set) var trackedEvents: [any AnalyticsEvent] = []
+    private(set) var trackedEvents: [AnalyticsEvent] = []
 
-    func track(_ event: some AnalyticsEvent) {
+    func track(_ event: AnalyticsEvent) {
         trackedEvents.append(event)
     }
 

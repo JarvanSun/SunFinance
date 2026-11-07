@@ -15,10 +15,10 @@ struct TradingSnapshotTests {
     @Test func initThenKeepsOnlyThisStock() {
         // Given
         let portfolio = Portfolio(
-            open: [.init(holding: "SAP", quantity: 1), .init(holding: "AAPL", quantity: 3)],
+            open: [.dummy(holding: "SAP", quantity: 1), .dummy(holding: "AAPL", quantity: 3)],
             closed: []
         )
-        let orders: [Order] = [.init("AAPL", status: .filled), .init("SAP", status: .filled)]
+        let orders: [Order] = [.dummy("AAPL", status: .filled), .dummy("SAP", status: .filled)]
 
         // When
         let snapshot = TradingSnapshot(symbol: "AAPL", portfolio: portfolio, orders: orders)

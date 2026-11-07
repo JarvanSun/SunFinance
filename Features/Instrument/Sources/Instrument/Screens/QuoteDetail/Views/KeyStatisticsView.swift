@@ -6,6 +6,7 @@
 //
 
 import DesignSystem
+import FinanceCore
 import SunUserInterface
 import SwiftUI
 
@@ -16,7 +17,7 @@ struct KeyStatisticsView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: dimensions.spaceLargeSmall) {
-            SectionHeading(LocalizedStringResource("quoteDetail.statistics.title", bundle: .module))
+            SectionHeading(.init("quoteDetail.statistics.title", bundle: .module))
 
             MetricStrip(rows.map(\.metric))
         }
@@ -26,9 +27,9 @@ struct KeyStatisticsView: View {
 #if DEBUG
 #Preview(traits: .sizeThatFitsLayout) {
     VStack(spacing: 32) {
-        KeyStatisticsView(rows: PreviewObjectPool().detail.statisticRows)
+        KeyStatisticsView(rows: QuoteDetail.dummy.statisticRows)
 
-        KeyStatisticsView(rows: PreviewObjectPool().detail.statisticRows)
+        KeyStatisticsView(rows: QuoteDetail.dummy.statisticRows)
             .environment(\.locale, Locale(identifier: "de_DE"))
     }
     .padding()

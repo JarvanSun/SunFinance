@@ -16,7 +16,7 @@ public struct ChartCandle: Hashable, Sendable {
     public let volume: Double
 
     public var trend: GainTrend {
-        GainTrend(from: open, to: close)
+        .init(from: open, to: close)
     }
 
     public init(

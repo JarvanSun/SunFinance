@@ -18,29 +18,4 @@ struct AppConfiguration {
     var defaults: UserDefaults {
         defaultsSuiteName.flatMap(UserDefaults.init(suiteName:)) ?? .standard
     }
-
-    init(
-        serverBehavior: MockServerBehavior = .realistic,
-        defaultWatchlist: [TickerSymbol] = [
-            "AAPL",
-            "MSFT",
-            "NVDA",
-            "AMZN",
-            "GOOGL",
-            "TSLA",
-            "ASML",
-            "SAP",
-            "SIE",
-            "ALV",
-        ],
-        vendorAnalyticsAPIKey: String = "demo-vendor-key",
-        defaultsSuiteName: String? = nil,
-        mockServerStorageURL: URL? = URL.applicationSupportDirectory.appending(path: "MockServer")
-    ) {
-        self.serverBehavior = serverBehavior
-        self.defaultWatchlist = defaultWatchlist
-        self.vendorAnalyticsAPIKey = vendorAnalyticsAPIKey
-        self.defaultsSuiteName = defaultsSuiteName
-        self.mockServerStorageURL = mockServerStorageURL
-    }
 }

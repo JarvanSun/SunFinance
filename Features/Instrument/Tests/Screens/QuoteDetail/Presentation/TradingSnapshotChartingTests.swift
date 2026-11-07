@@ -15,15 +15,15 @@ import Testing
 struct TradingSnapshotChartingTests {
     @Test func chartLayerThenMarksFillsInsideTheRangeOnly() {
         // Given
-        let history = appleDayHistory
+        let history = PriceHistory.dummyAppleDay
         let start = history.candles[0].start
         let before = start.addingTimeInterval(-60)
         let trading = TradingSnapshot(
             position: nil,
             orders: [
-                .init("AAPL", side: .buy, status: .filled, fillDate: start.addingTimeInterval(60)),
-                .init("AAPL", side: .sell, status: .filled, fillDate: before),
-                .init("AAPL", status: .waitingForPrice),
+                .dummy("AAPL", side: .buy, status: .filled, fillDate: start.addingTimeInterval(60)),
+                .dummy("AAPL", side: .sell, status: .filled, fillDate: before),
+                .dummy("AAPL", status: .waitingForPrice),
             ]
         )
 
@@ -40,18 +40,18 @@ struct TradingSnapshotChartingTests {
         let trading = TradingSnapshot(
             position: nil,
             orders: [
-                .init(
+                .dummy(
                     "AAPL",
                     execution: .limit(100),
                     trigger: .priceAtOrBelow(98),
                     status: .waitingForTrigger
                 ),
-                .init("AAPL", execution: .limit(90), status: .cancelled),
+                .dummy("AAPL", execution: .limit(90), status: .cancelled),
             ]
         )
 
         // When
-        let layer = trading.chartLayer(for: appleDayHistory)
+        let layer = trading.chartLayer(for: PriceHistory.dummyAppleDay)
 
         // Then
         #expect(layer.levels.map(\.value) == [100, 98])

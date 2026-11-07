@@ -25,7 +25,6 @@ struct MockServerBehaviorTests {
         readFailureRate: Double,
         writeFailureRate: Double
     ) {
-        // Then
         #expect(behavior.latency == latency)
         #expect(behavior.readFailureRate == readFailureRate)
         #expect(behavior.writeFailureRate == writeFailureRate)

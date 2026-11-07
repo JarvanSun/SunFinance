@@ -37,17 +37,17 @@ extension OrderDraft {
 
     func termRows(currency: CurrencyCode) -> [LabeledRow] {
         [
-            LabeledRow(
+            .init(
                 id: "type",
                 title: .init("trading.review.row.type", bundle: .module),
                 value: .localized(executionText(currency: currency))
             ),
-            LabeledRow(
+            .init(
                 id: "trigger",
                 title: .init("trading.review.row.trigger", bundle: .module),
                 value: .localized(triggerText(currency: currency))
             ),
-            LabeledRow(
+            .init(
                 id: "validity",
                 title: .init("trading.review.row.validity", bundle: .module),
                 value: .localized(validity.segmentTitle)
@@ -59,8 +59,7 @@ extension OrderDraft {
 private extension OrderDraft {
     func executionText(currency: CurrencyCode) -> LocalizedStringResource {
         switch execution {
-        case .market:
-            .init("trading.review.execution.market", bundle: .module)
+        case .market: .init("trading.review.execution.market", bundle: .module)
         case .limit(let price):
             .init(
                 "trading.review.execution.limit \(Money(price, currency).formatted())",
@@ -71,8 +70,7 @@ private extension OrderDraft {
 
     func triggerText(currency: CurrencyCode) -> LocalizedStringResource {
         switch trigger {
-        case .immediately:
-            .init("trading.review.trigger.now", bundle: .module)
+        case .immediately: .init("trading.review.trigger.now", bundle: .module)
         case .priceAtOrAbove(let price), .priceAtOrBelow(let price):
             .init(
                 "trading.review.trigger.price \(Money(price, currency).formatted())",

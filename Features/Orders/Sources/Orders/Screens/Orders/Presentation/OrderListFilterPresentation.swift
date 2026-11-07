@@ -11,10 +11,8 @@ import Foundation
 extension OrderListFilter {
     var title: LocalizedStringResource {
         switch self {
-        case .open:
-            .init("orders.filter.open", bundle: .module)
-        case .past:
-            .init("orders.filter.past", bundle: .module)
+        case .open: .init("orders.filter.open", bundle: .module)
+        case .past: .init("orders.filter.past", bundle: .module)
         }
     }
 }

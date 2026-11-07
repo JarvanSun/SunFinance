@@ -20,41 +20,26 @@ public enum FinanceMotion: CaseIterable, Sendable {
 
     public var animation: Animation {
         switch self {
-        case .snappy:
-            .snappy(duration: duration)
-        case .settle, .emphasis:
-            .spring(duration: duration, bounce: bounce)
-        case .reveal:
-            .smooth(duration: duration)
-        case .draw:
-            .easeOut(duration: duration)
-        case .shake:
-            .linear(duration: duration)
-        case .shimmer:
-            .linear(duration: duration).repeatForever(autoreverses: false)
-        case .pulse:
-            .easeOut(duration: duration).repeatForever(autoreverses: false)
+        case .snappy: .snappy(duration: duration)
+        case .settle, .emphasis: .spring(duration: duration, bounce: bounce)
+        case .reveal: .smooth(duration: duration)
+        case .draw: .easeOut(duration: duration)
+        case .shake: .linear(duration: duration)
+        case .shimmer: .linear(duration: duration).repeatForever(autoreverses: false)
+        case .pulse: .easeOut(duration: duration).repeatForever(autoreverses: false)
         }
     }
 
     public var duration: TimeInterval {
         switch self {
-        case .snappy:
-            0.25
-        case .settle:
-            0.45
-        case .reveal:
-            0.35
-        case .emphasis:
-            0.6
-        case .draw:
-            0.9
-        case .shake:
-            0.06
-        case .shimmer:
-            2.4
-        case .pulse:
-            2
+        case .snappy: 0.25
+        case .settle: 0.45
+        case .reveal: 0.35
+        case .emphasis: 0.6
+        case .draw: 0.9
+        case .shake: 0.06
+        case .shimmer: 2.4
+        case .pulse: 2
         }
     }
 
@@ -66,12 +51,9 @@ public enum FinanceMotion: CaseIterable, Sendable {
 extension FinanceMotion {
     var bounce: Double {
         switch self {
-        case .snappy, .reveal, .draw, .shake, .shimmer, .pulse:
-            0
-        case .settle:
-            0.15
-        case .emphasis:
-            0.35
+        case .snappy, .reveal, .draw, .shake, .shimmer, .pulse: 0
+        case .settle: 0.15
+        case .emphasis: 0.35
         }
     }
 }

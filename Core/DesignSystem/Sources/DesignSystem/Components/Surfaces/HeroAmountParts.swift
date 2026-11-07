@@ -9,6 +9,10 @@ import FinanceCore
 import Foundation
 
 struct HeroAmountParts: Equatable {
+    private enum Spacer: String {
+        case raising = " "
+    }
+
     let whole: String
     let cents: String
     let leadingSymbol: String?
@@ -47,9 +51,7 @@ struct HeroAmountParts: Equatable {
             whole: whole,
             cents: cents,
             leadingSymbol: symbolLeads ? symbol : nil,
-            trailingSymbol: symbolLeads ? raisingSpace : symbol
+            trailingSymbol: symbolLeads ? Spacer.raising.rawValue : symbol
         )
     }
 }
-
-private let raisingSpace = " "

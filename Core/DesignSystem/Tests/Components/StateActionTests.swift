@@ -13,7 +13,7 @@ import Testing
 
 struct StateActionTests {
     @Test func initWithoutIdentifierThenHasEmptyIdentifier() {
-        // When
+        // Given / When
         let action = StateAction(title: "Try again", perform: {})
 
         // Then
@@ -21,7 +21,7 @@ struct StateActionTests {
     }
 
     @Test func initWithIdentifierThenUsesItsRawValue() {
-        // When
+        // Given / When
         let action = StateAction(
             title: "Try again",
             accessibilityIdentifier: Identifier.retry,

@@ -12,12 +12,12 @@ import Testing
 
 struct MockLedgerReportsTests {
     let exchange = MockExchange()
-    let date = TradingMoment.tuesdayAfternoon.date
+    let date = Date.dummyTuesdayAfternoon
 
     @Test func accountThenAddsCashAndPositionsAndSubtractsReservedCash() throws {
         // Given
         var ledger = MockLedger(seededAt: date, exchange: exchange)
-        let draft = OrderDraft(.buy, .shares(1), execution: .limit(1))
+        let draft = OrderDraft.dummy(.buy, .shares(1), execution: .limit(1))
         _ = ledger.place(draft, key: nil, at: date, exchange: exchange)
 
         // When
@@ -36,8 +36,8 @@ struct MockLedgerReportsTests {
         // Given
         let quote = try #require(exchange.quote(for: "SAP", at: date))
         var ledger = makeLedger()
-        ledger.book(.init(.buy, 10, at: 100, day: -30))
-        ledger.book(.init(.sell, 10, at: 105, date: date.addingTimeInterval(-3_600)))
+        ledger.book(.dummy(.buy, 10, at: 100, day: -30))
+        ledger.book(.dummy(.sell, 10, at: 105, date: date.addingTimeInterval(-3_600)))
 
         // When
         let account = try Account(ledger.account(at: date, exchange: exchange))
@@ -81,13 +81,13 @@ struct MockLedgerReportsTests {
         var ledger = MockLedger(seededAt: date, exchange: exchange)
         let orders = (0..<25).map { index in
             ledger.place(
-                .init(execution: .limit(1)),
+                .dummy(execution: .limit(1)),
                 key: nil,
                 at: date.addingTimeInterval(Double(index)),
                 exchange: exchange
             )
         }
-        _ = ledger.place(.init(), key: nil, at: date, exchange: exchange)
+        _ = ledger.place(.dummy(), key: nil, at: date, exchange: exchange)
 
         // When
         let first = ledger.ordersPage(query(.open), at: date, exchange: exchange)
@@ -109,7 +109,7 @@ struct MockLedgerReportsTests {
     @Test func dtoThenDescribesTheOrderWithItsFill() throws {
         // Given
         var ledger = MockLedger(seededAt: date, exchange: exchange)
-        let draft = OrderDraft(.buy, .shares(2), symbol: "AAPL")
+        let draft = OrderDraft.dummy(.buy, .shares(2), symbol: "AAPL")
         let order = ledger.place(draft, key: nil, at: date, exchange: exchange)
 
         // When
@@ -144,7 +144,7 @@ struct MockLedgerReportsTests {
         let ledger = makeLedger()
         let order = LedgerOrder(
             id: "order-1",
-            draft: .init(execution: execution, trigger: trigger),
+            draft: .dummy(execution: execution, trigger: trigger),
             quantity: 1,
             createdAt: date,
             state: state,
@@ -163,7 +163,7 @@ struct MockLedgerReportsTests {
 
 private extension MockLedgerReportsTests {
     func makeLedger() -> MockLedger {
-        MockLedger(
+        .init(
             cash: 10_000,
             orders: [],
             fills: [],
@@ -174,6 +174,6 @@ private extension MockLedgerReportsTests {
     }
 
     func query(_ filter: OrderListFilter, cursor: String? = nil) -> OrdersQuery {
-        OrdersQuery(filter: filter, symbol: nil, cursor: cursor)
+        .init(filter: filter, symbol: nil, cursor: cursor)
     }
 }

@@ -17,10 +17,8 @@ public enum OrderStatus: Hashable, Sendable {
 
     public var isOpen: Bool {
         switch self {
-        case .waitingForTrigger, .waitingForPrice, .scheduled, .waitingForOpen:
-            true
-        case .filled, .cancelled, .expired, .rejected:
-            false
+        case .waitingForTrigger, .waitingForPrice, .scheduled, .waitingForOpen: true
+        case .filled, .cancelled, .expired, .rejected: false
         }
     }
 }

@@ -21,14 +21,12 @@ struct FinanceMotionTests {
         (.pulse, 2.0, 0.0),
     ])
     func timingThenIsNamedPerMotion(motion: FinanceMotion, duration: Double, bounce: Double) {
-        // Then
         #expect(motion.duration == duration)
         #expect(motion.bounce == bounce)
     }
 
     @Test(arguments: FinanceMotion.allCases)
     func animationWhenReduceMotionThenIsNil(motion: FinanceMotion) {
-        // Then
         #expect(motion.animation(reduceMotion: true) == nil)
         #expect(motion.animation(reduceMotion: false) == motion.animation)
     }

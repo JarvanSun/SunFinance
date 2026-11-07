@@ -15,14 +15,10 @@ public enum SegmentStyle: CaseIterable, Hashable, Sendable {
 
     func foreground(isSelected: Bool) -> FinanceColor {
         switch (self, isSelected) {
-        case (.prominent, true):
-            .textOnAccent
-        case (.quiet, true):
-            .background
-        case (.prominent, false):
-            .textSecondary
-        case (.quiet, false):
-            .textPrimary
+        case (.prominent, true): .textOnAccent
+        case (.quiet, true): .background
+        case (.prominent, false): .textSecondary
+        case (.quiet, false): .textPrimary
         }
     }
 
@@ -32,46 +28,36 @@ public enum SegmentStyle: CaseIterable, Hashable, Sendable {
 
     var capsuleColor: FinanceColor {
         switch self {
-        case .prominent:
-            .accent
-        case .quiet:
-            .textPrimary
+        case .prominent: .accent
+        case .quiet: .textPrimary
         }
     }
 
     var trackColor: Color {
         switch self {
-        case .prominent:
-            FinanceColor.surfaceElevated.color
-        case .quiet:
-            .clear
+        case .prominent: FinanceColor.surfaceElevated.color
+        case .quiet: .clear
         }
     }
 
-    func trackPadding(in dimensions: any DimensionStyling) -> CGFloat {
+    func trackPadding(in dimensions: DimensionStyling) -> CGFloat {
         switch self {
-        case .prominent:
-            dimensions.spaceXSmall
-        case .quiet:
-            .zero
+        case .prominent: dimensions.spaceXSmall
+        case .quiet: .zero
         }
     }
 
     func capsuleWidth(segmentWidth: CGFloat) -> CGFloat {
         switch self {
-        case .prominent:
-            segmentWidth
-        case .quiet:
-            segmentWidth * quietCapsuleWidthShare
+        case .prominent: segmentWidth
+        case .quiet: segmentWidth * quietCapsuleWidthShare
         }
     }
 
-    func capsuleHeight(in dimensions: any DimensionStyling) -> CGFloat? {
+    func capsuleHeight(in dimensions: DimensionStyling) -> CGFloat? {
         switch self {
-        case .prominent:
-            nil
-        case .quiet:
-            dimensions.segmentCapsuleHeight
+        case .prominent: nil
+        case .quiet: dimensions.segmentCapsuleHeight
         }
     }
 }

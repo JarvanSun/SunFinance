@@ -18,7 +18,7 @@ struct FinanceButtonKindTests {
         (.row, .textPrimary),
     ])
     func foregroundThenContrastsWithTheFill(kind: FinanceButtonKind, expected: FinanceColor) {
-        // When
+        // Given / When
         let foreground = kind.foreground
 
         // Then
@@ -42,7 +42,7 @@ struct FinanceButtonKindTests {
         isPressed: Bool,
         expected: FinanceColor?
     ) {
-        // When
+        // Given / When
         let fill = kind.fill(isPressed: isPressed)
 
         // Then
@@ -57,7 +57,7 @@ struct FinanceButtonKindTests {
         (.row, nil),
     ])
     func borderThenOnlySecondaryIsOutlined(kind: FinanceButtonKind, expected: FinanceColor?) {
-        // When
+        // Given / When
         let border = kind.border
 
         // Then
@@ -72,7 +72,7 @@ struct FinanceButtonKindTests {
         (.row, .body),
     ])
     func fontThenFollowsEmphasis(kind: FinanceButtonKind, expected: FinanceFont) {
-        // When
+        // Given / When
         let font = kind.font
 
         // Then
@@ -92,7 +92,6 @@ struct FinanceButtonKindTests {
         hasPadding: Bool,
         dimsWhenPressed: Bool
     ) {
-        // Then
         #expect(kind.fillsWidth == fillsWidth)
         #expect(kind.hasPadding == hasPadding)
         #expect(kind.dimsWhenPressed == dimsWhenPressed)

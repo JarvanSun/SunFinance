@@ -10,17 +10,17 @@ import FinanceCore
 import Foundation
 
 public struct OrdersDependencies {
-    let orderProvider: any OrderProviding
-    let canceller: any OrderCancelling
-    let tracker: any AnalyticsTracking
+    let orderProvider: OrderProviding
+    let canceller: OrderCancelling
+    let tracker: AnalyticsTracking
     let quoteDetail: FeatureEntry<TickerSymbol>
     let calendar: Calendar
     let now: @Sendable () -> Date
 
     public init(
-        orderProvider: some OrderProviding,
-        canceller: some OrderCancelling,
-        tracker: some AnalyticsTracking,
+        orderProvider: OrderProviding,
+        canceller: OrderCancelling,
+        tracker: AnalyticsTracking,
         quoteDetail: FeatureEntry<TickerSymbol>,
         calendar: Calendar = .autoupdatingCurrent,
         now: @escaping @Sendable () -> Date = { Date() }
@@ -33,8 +33,8 @@ public struct OrdersDependencies {
         self.now = now
     }
 
-    func makeViewModel(router: some OrdersRouting) -> OrdersViewModel {
-        OrdersViewModel(
+    func makeViewModel(router: OrdersRouting) -> OrdersViewModel {
+        .init(
             orderProvider: orderProvider,
             router: router,
             tracker: tracker,
@@ -45,10 +45,10 @@ public struct OrdersDependencies {
 
     func makeDetailViewModel(
         order: Order,
-        router: some OrdersRouting,
+        router: OrdersRouting,
         onChange: @escaping (Order) -> Void
     ) -> OrderDetailViewModel {
-        OrderDetailViewModel(
+        .init(
             order: order,
             canceller: canceller,
             router: router,

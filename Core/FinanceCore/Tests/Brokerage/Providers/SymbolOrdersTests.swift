@@ -14,8 +14,8 @@ struct SymbolOrdersTests {
     @Test func allOrdersThenFollowsEveryPageForTheSymbol() async throws {
         // Given
         let provider = OrderProviderStub(pages: [
-            nil: .success(Page(elements: [order("1"), order("2")], nextCursor: "2")),
-            "2": .success(Page(elements: [order("3")], nextCursor: nil)),
+            nil: .success(.init(elements: [order("1"), order("2")], nextCursor: "2")),
+            "2": .success(.init(elements: [order("3")], nextCursor: nil)),
         ])
 
         // When
@@ -34,7 +34,7 @@ struct SymbolOrdersTests {
     @Test func allOrdersWhenAPageFailsThenThrowsItsError() async {
         // Given
         let provider = OrderProviderStub(pages: [
-            nil: .success(Page(elements: [order("1")], nextCursor: "1")),
+            nil: .success(.init(elements: [order("1")], nextCursor: "1")),
             "1": .failure(.offline),
         ])
 
@@ -47,9 +47,9 @@ struct SymbolOrdersTests {
 
 private extension SymbolOrdersTests {
     func order(_ id: Order.ID) -> Order {
-        Order(
+        .init(
             id: id,
-            draft: .init(symbol: "AAPL"),
+            draft: .dummy(symbol: "AAPL"),
             quantity: 1,
             currency: .usd,
             status: .waitingForPrice,

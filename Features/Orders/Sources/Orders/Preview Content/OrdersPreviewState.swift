@@ -24,28 +24,22 @@ enum OrdersPreviewState: String, CaseIterable, CustomStringConvertible {
 
     var failure: BrokerageError? {
         switch self {
-        case .offline:
-            .offline
-        case .content, .german, .empty, .loading:
-            nil
+        case .offline: .offline
+        case .content, .german, .empty, .loading: nil
         }
     }
 
     var delay: Duration {
         switch self {
-        case .loading:
-            .seconds(3_600)
-        case .content, .german, .empty, .offline:
-            .zero
+        case .loading: .seconds(3_600)
+        case .content, .german, .empty, .offline: .zero
         }
     }
 
     var locale: Locale {
         switch self {
-        case .german:
-            Locale(identifier: "de_DE")
-        case .content, .empty, .loading, .offline:
-            Locale(identifier: "en_US")
+        case .german: .init(identifier: "de_DE")
+        case .content, .empty, .loading, .offline: .init(identifier: "en_US")
         }
     }
 }

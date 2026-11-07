@@ -31,10 +31,8 @@ enum TradingIssue: Equatable, Sendable {
 
     var analyticsReason: String {
         switch self {
-        case .offline:
-            "offline"
-        case .serviceUnavailable:
-            "service_unavailable"
+        case .offline: "offline"
+        case .serviceUnavailable: "service_unavailable"
         }
     }
 }

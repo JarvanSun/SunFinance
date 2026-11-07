@@ -20,12 +20,9 @@ final class TicketViewModel {
 
     var placeholder: TicketPlaceholder? {
         switch context {
-        case .idle, .loading:
-            .loading
-        case .failed(let issue):
-            .failed(issue)
-        case .loaded:
-            nil
+        case .idle, .loading: .loading
+        case .failed(let issue): .failed(issue)
+        case .loaded: nil
         }
     }
 
@@ -68,12 +65,12 @@ final class TicketViewModel {
     }
 
     private let intent: TradeIntent
-    private let quoteProvider: any QuoteProviding
-    private let accountProvider: any AccountProviding
-    private let positionProvider: any PositionProviding
-    private let previewer: any OrderPreviewing
-    private let router: any TradingRouting
-    private let tracker: any AnalyticsTracking
+    private let quoteProvider: QuoteProviding
+    private let accountProvider: AccountProviding
+    private let positionProvider: PositionProviding
+    private let previewer: OrderPreviewing
+    private let router: TradingRouting
+    private let tracker: AnalyticsTracking
     private let input: DecimalInput
     private let estimateDelay: Duration
     private let now: @Sendable () -> Date
@@ -81,12 +78,12 @@ final class TicketViewModel {
 
     init(
         intent: TradeIntent,
-        quoteProvider: some QuoteProviding,
-        accountProvider: some AccountProviding,
-        positionProvider: some PositionProviding,
-        previewer: some OrderPreviewing,
-        router: some TradingRouting,
-        tracker: some AnalyticsTracking,
+        quoteProvider: QuoteProviding,
+        accountProvider: AccountProviding,
+        positionProvider: PositionProviding,
+        previewer: OrderPreviewing,
+        router: TradingRouting,
+        tracker: AnalyticsTracking,
         input: DecimalInput,
         estimateDelay: Duration,
         now: @escaping @Sendable () -> Date
@@ -101,7 +98,7 @@ final class TicketViewModel {
         self.input = input
         self.estimateDelay = estimateDelay
         self.now = now
-        form = TicketForm(side: intent.side, triggerDate: defaultTriggerDate(after: now()))
+        form = TicketForm(side: intent.side, triggerDate: now().defaultTriggerDate)
     }
 
     func trackScreenView() {
@@ -209,10 +206,8 @@ private extension TicketViewModel {
 
     var settledRejection: OrderRejection? {
         switch estimate {
-        case .ready(let preview):
-            preview.rejection
-        case .unavailable, .loading:
-            nil
+        case .ready(let preview): preview.rejection
+        case .unavailable, .loading: nil
         }
     }
 
@@ -231,9 +226,9 @@ private extension TicketViewModel {
             )
             return .loaded(context)
         } catch let error as MarketDataError {
-            return .failed(TradingIssue(error))
+            return .failed(.init(error))
         } catch let error as BrokerageError {
-            return .failed(TradingIssue(error))
+            return .failed(.init(error))
         } catch {
             return .failed(.serviceUnavailable)
         }
@@ -257,11 +252,16 @@ private extension TicketViewModel {
     }
 }
 
-private func defaultTriggerDate(after date: Date) -> Date {
-    let quarterHour: TimeInterval = 15 * 60
-    let inAnHour = date.addingTimeInterval(4 * quarterHour)
-    return Date(
-        timeIntervalSinceReferenceDate: (inAnHour.timeIntervalSinceReferenceDate / quarterHour)
-            .rounded(.up) * quarterHour
-    )
+// MARK: - Date
+
+private extension Date {
+    var quarterHour: TimeInterval { 15 * 60 }
+
+    var defaultTriggerDate: Date {
+        let inAnHour = addingTimeInterval(4 * quarterHour)
+        return .init(
+            timeIntervalSinceReferenceDate: (inAnHour.timeIntervalSinceReferenceDate / quarterHour)
+                .rounded(.up) * quarterHour
+        )
+    }
 }

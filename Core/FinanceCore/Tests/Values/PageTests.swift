@@ -12,7 +12,7 @@ import Testing
 struct PageTests {
     @Test(arguments: [("next", true), (nil, false)] as [(String?, Bool)])
     func hasMoreThenFollowsNextCursor(nextCursor: String?, hasMore: Bool) {
-        // When
+        // Given / When
         let page = Page(elements: [1, 2], nextCursor: nextCursor)
 
         // Then

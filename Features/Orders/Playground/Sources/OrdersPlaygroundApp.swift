@@ -49,33 +49,7 @@ struct OrdersPlaygroundApp: App {
 private extension OrdersPlaygroundApp {
     @Sendable
     func placeSampleOrders() async {
-        let drafts = [
-            OrderDraft(
-                symbol: "AAPL",
-                side: .buy,
-                amount: .shares(3),
-                execution: .limit(1),
-                trigger: .immediately,
-                validity: .goodTillCancelled
-            ),
-            OrderDraft(
-                symbol: "SAP",
-                side: .sell,
-                amount: .shares(5),
-                execution: .market,
-                trigger: .priceAtOrBelow(1),
-                validity: .goodTillCancelled
-            ),
-            OrderDraft(
-                symbol: "NVDA",
-                side: .buy,
-                amount: .euros(500),
-                execution: .market,
-                trigger: .at(.now.addingTimeInterval(86_400)),
-                validity: .day
-            ),
-        ]
-        for draft in drafts {
+        for draft in OrderDraft.dummyOpenOrders {
             _ = try? await brokerage.place(draft, idempotencyKey: IdempotencyKey())
         }
     }

@@ -42,18 +42,18 @@ struct QuoteHeaderView: View {
 #Preview(traits: .sizeThatFitsLayout) {
     VStack(spacing: 24) {
         QuoteHeaderView(
-            header: PreviewObjectPool().header(change: 2.4, moment: .live(isMarketOpen: true))
+            header: .dummy(change: 2.4, moment: .live(isMarketOpen: true))
         )
 
         QuoteHeaderView(
-            header: PreviewObjectPool().header(change: -1.1, moment: .live(isMarketOpen: false))
+            header: .dummy(change: -1.1, moment: .live(isMarketOpen: false))
         )
 
         QuoteHeaderView(
-            header: PreviewObjectPool().header(change: 0, moment: .scrubbed(.now, .day))
+            header: .dummy(change: 0, moment: .scrubbed(.now, .day))
         )
 
-        QuoteHeaderView(header: PreviewObjectPool().pendingHeader)
+        QuoteHeaderView(header: .dummyPending)
     }
     .padding()
 }

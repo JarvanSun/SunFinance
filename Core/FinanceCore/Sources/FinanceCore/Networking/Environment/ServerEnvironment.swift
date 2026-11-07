@@ -19,7 +19,7 @@ extension ServerEnvironment {
             exchange: exchange,
             storageURL: storageDirectory?.appending(path: MockStorageFile.brokerage.rawValue)
         )
-        let routes: [any MockRoute] = [
+        let routes: [MockRoute] = [
             MarketDataMockRoutes(exchange: exchange),
             BrokerageMockRoutes(brokerage: brokerage),
         ]
@@ -27,7 +27,7 @@ extension ServerEnvironment {
     }
 
     init(mockServer: MockServer) {
-        self.init(baseURL: mockBaseURL, transport: .mock(mockServer))
+        self.init(baseURL: mockServer.baseURL, transport: .mock(mockServer))
     }
 }
 
@@ -35,4 +35,6 @@ private enum MockStorageFile: String {
     case brokerage = "brokerage.json"
 }
 
-private let mockBaseURL = URL(string: "https://api.sunfinance.example")!
+private extension MockServer {
+    var baseURL: URL { .init(string: "https://api.sunfinance.example")! }
+}

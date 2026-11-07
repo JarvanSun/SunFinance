@@ -19,7 +19,6 @@ struct CandleIntervalTests {
         (.fiveYears, .sessions(1_260, sessionsPerCandle: 5)),
     ])
     func initThenCutsEachRangeSensibly(range: HistoryRange, expected: CandleInterval) {
-        // Then
         #expect(CandleInterval(range) == expected)
     }
 }

@@ -11,10 +11,8 @@ import Foundation
 extension OrderValidity {
     var segmentTitle: LocalizedStringResource {
         switch self {
-        case .day:
-            .init("trading.validity.day", bundle: .module)
-        case .goodTillCancelled:
-            .init("trading.validity.gtc", bundle: .module)
+        case .day: .init("trading.validity.day", bundle: .module)
+        case .goodTillCancelled: .init("trading.validity.gtc", bundle: .module)
         }
     }
 }

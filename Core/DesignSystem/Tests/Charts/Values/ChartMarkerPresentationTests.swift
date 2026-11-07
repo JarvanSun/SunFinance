@@ -12,7 +12,7 @@ import Testing
 struct ChartMarkerPresentationTests {
     @Test(arguments: [(ChartMarker.Kind.buy, FinanceColor.gain), (.sell, .loss)])
     func colorThenBuyIsGainAndSellIsLoss(kind: ChartMarker.Kind, expected: FinanceColor) {
-        // When
+        // Given / When
         let color = kind.color
 
         // Then

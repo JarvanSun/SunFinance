@@ -9,6 +9,6 @@ import DesignSystem
 
 extension StatisticRow {
     var metric: Metric {
-        Metric(id: id, label: title, value: value)
+        .init(id: id, label: title, value: value)
     }
 }

@@ -20,7 +20,6 @@ struct AnalyticsParameterTests {
         .deviceID,
     ])
     func isPersonalDataWhenParameterIdentifiesAPersonThenIsTrue(parameter: AnalyticsParameter) {
-        // Then
         #expect(parameter.isPersonalData)
     }
 
@@ -45,7 +44,6 @@ struct AnalyticsParameterTests {
     func isPersonalDataWhenParameterDescribesTheProductThenIsFalse(
         parameter: AnalyticsParameter
     ) {
-        // Then
         #expect(!parameter.isPersonalData)
     }
 
@@ -56,7 +54,6 @@ struct AnalyticsParameterTests {
         (.symbol, "symbol"),
     ])
     func rawValueThenIsSnakeCase(parameter: AnalyticsParameter, rawValue: String) {
-        // Then
         #expect(parameter.rawValue == rawValue)
     }
 }

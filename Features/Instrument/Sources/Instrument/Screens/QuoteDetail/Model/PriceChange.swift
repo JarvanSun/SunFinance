@@ -13,7 +13,7 @@ struct PriceChange: Equatable, Sendable {
     let end: Money
 
     var amount: Money {
-        Money(end.amount - start.amount, end.currency)
+        .init(end.amount - start.amount, end.currency)
     }
 
     var percent: Decimal {

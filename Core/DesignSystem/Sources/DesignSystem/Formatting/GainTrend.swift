@@ -36,12 +36,9 @@ public enum GainTrend: Equatable, Sendable {
 
     public var color: FinanceColor {
         switch self {
-        case .gain:
-            .gain
-        case .loss:
-            .loss
-        case .unchanged:
-            .unchanged
+        case .gain: .gain
+        case .loss: .loss
+        case .unchanged: .unchanged
         }
     }
 }

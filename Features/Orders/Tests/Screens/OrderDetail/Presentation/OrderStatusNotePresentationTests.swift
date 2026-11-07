@@ -19,12 +19,10 @@ struct OrderStatusNotePresentationTests {
         (.waitingForOpen, "orders.status.detail.waitingForOpen"),
     ])
     func initWhenOpenThenSaysWhatTheOrderWaitsFor(status: OrderStatus, key: String) {
-        // Then
         #expect(OrderStatusNote(status).waitingKey == key)
     }
 
     @Test func initWhenRejectedThenGivesTheReason() {
-        // Then
         #expect(
             OrderStatusNote(.rejected(.insufficientCash))
                 == .rejected(OrderRejection.insufficientCash.message)
@@ -33,7 +31,6 @@ struct OrderStatusNotePresentationTests {
 
     @Test(arguments: [OrderStatus.filled, .cancelled, .expired])
     func initWhenPastThenHasNone(status: OrderStatus) {
-        // Then
         #expect(OrderStatusNote(status) == .none)
     }
 }
@@ -41,10 +38,8 @@ struct OrderStatusNotePresentationTests {
 private extension OrderStatusNote {
     var waitingKey: String? {
         switch self {
-        case .waiting(let text):
-            text.key
-        case .none, .rejected:
-            nil
+        case .waiting(let text): text.key
+        case .none, .rejected: nil
         }
     }
 }

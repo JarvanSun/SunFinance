@@ -23,7 +23,6 @@ struct PortfolioPlaceholderPresentationTests {
         title: String,
         image: FinanceImage
     ) {
-        // Then
         #expect(placeholder.title.key == title)
         #expect(placeholder.image == image)
     }
@@ -33,7 +32,6 @@ struct PortfolioPlaceholderPresentationTests {
         (.failed(.offline), "portfolio.failure.offline.message"),
     ])
     func messageThenExplainsThePlaceholder(placeholder: PortfolioPlaceholder, key: String) {
-        // Then
         #expect(placeholder.message.key == key)
     }
 }

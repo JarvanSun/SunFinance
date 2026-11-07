@@ -19,7 +19,7 @@ struct FieldEmphasisTests {
         (true, true, .invalid),
     ])
     func initThenInvalidWinsOverFocus(isFocused: Bool, isInvalid: Bool, expected: FieldEmphasis) {
-        // When
+        // Given / When
         let emphasis = FieldEmphasis(isFocused: isFocused, isInvalid: isInvalid)
 
         // Then

@@ -35,6 +35,6 @@ struct BackendClientTests {
 private extension BackendClientTests {
     func makeClient(behavior: MockServerBehavior) -> BackendClient {
         let server = MockServer(routes: [EchoRoute(path: ["v1", "echo"])], behavior: behavior)
-        return BackendClient(environment: .init(mockServer: server))
+        return .init(environment: .init(mockServer: server))
     }
 }

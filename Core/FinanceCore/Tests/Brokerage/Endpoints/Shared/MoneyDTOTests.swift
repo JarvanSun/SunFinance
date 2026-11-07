@@ -12,7 +12,7 @@ import Testing
 
 struct MoneyDTOTests {
     @Test func initThenCarriesAmountAndCurrencyCode() {
-        // When
+        // Given / When
         let dto = MoneyDTO(Money(12.5, .usd))
 
         // Then
@@ -22,7 +22,7 @@ struct MoneyDTOTests {
     }
 
     @Test func moneyThenMapsBackToMoney() throws {
-        // When
+        // Given / When
         let money = try MoneyDTO(amount: 7, currency: "EUR").money()
 
         // Then
@@ -30,7 +30,7 @@ struct MoneyDTOTests {
     }
 
     @Test func moneyWhenCurrencyIsInvalidThenThrowsDecoding() {
-        // When
+        // Given / When
         let result = Result { () throws(BrokerageError) in
             try MoneyDTO(amount: 7, currency: "euro").money()
         }

@@ -10,10 +10,8 @@ import Foundation
 extension OrderTrigger {
     var scheduledTime: Date? {
         switch self {
-        case .at(let time):
-            time
-        case .immediately, .priceAtOrAbove, .priceAtOrBelow:
-            nil
+        case .at(let time): time
+        case .immediately, .priceAtOrAbove, .priceAtOrBelow: nil
         }
     }
 }

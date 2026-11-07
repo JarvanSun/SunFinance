@@ -13,32 +13,24 @@ import SwiftUI
 extension OrderOutcome {
     var image: FinanceImage {
         switch self {
-        case .filled, .filledWithoutDetails:
-            .success
-        case .waitingForPrice, .waitingForTrigger, .scheduled, .waitingForOpen:
-            .scheduled
-        case .cancelled, .expired, .rejected:
-            .rejected
+        case .filled, .filledWithoutDetails: .success
+        case .waitingForPrice, .waitingForTrigger, .scheduled, .waitingForOpen: .scheduled
+        case .cancelled, .expired, .rejected: .rejected
         }
     }
 
     var color: FinanceColor {
         switch self {
-        case .filled, .filledWithoutDetails:
-            .gain
-        case .waitingForPrice, .waitingForTrigger, .scheduled, .waitingForOpen:
-            .accent
-        case .cancelled, .expired:
-            .textSecondary
-        case .rejected:
-            .critical
+        case .filled, .filledWithoutDetails: .gain
+        case .waitingForPrice, .waitingForTrigger, .scheduled, .waitingForOpen: .accent
+        case .cancelled, .expired: .textSecondary
+        case .rejected: .critical
         }
     }
 
     var feedback: SensoryFeedback? {
         switch self {
-        case .filled, .filledWithoutDetails:
-            .success
+        case .filled, .filledWithoutDetails: .success
         case .waitingForPrice, .waitingForTrigger, .scheduled, .waitingForOpen, .cancelled,
             .expired, .rejected:
             nil
@@ -47,10 +39,8 @@ extension OrderOutcome {
 
     var doneButtonKind: FinanceButtonKind {
         switch allowsEditing {
-        case true:
-            .secondary
-        case false:
-            .primary
+        case true: .secondary
+        case false: .primary
         }
     }
 
@@ -70,12 +60,9 @@ extension OrderOutcome {
             .init("trading.result.filledWithoutDetails", bundle: .module)
         case (.waitingForPrice, _), (.waitingForTrigger, _), (.scheduled, _), (.waitingForOpen, _):
             .init("trading.result.placed", bundle: .module)
-        case (.cancelled, _):
-            .init("trading.result.cancelled", bundle: .module)
-        case (.expired, _):
-            .init("trading.result.expired", bundle: .module)
-        case (.rejected, _):
-            .init("trading.result.rejected", bundle: .module)
+        case (.cancelled, _): .init("trading.result.cancelled", bundle: .module)
+        case (.expired, _): .init("trading.result.expired", bundle: .module)
+        case (.rejected, _): .init("trading.result.rejected", bundle: .module)
         }
     }
 
@@ -88,8 +75,7 @@ extension OrderOutcome {
             )
         case (.filledWithoutDetails, _):
             .init("trading.result.filledWithoutDetails.detail", bundle: .module)
-        case (.waitingForPrice, _):
-            .init("trading.result.waitingForPrice", bundle: .module)
+        case (.waitingForPrice, _): .init("trading.result.waitingForPrice", bundle: .module)
         case (.waitingForTrigger, .priceAtOrAbove(let price)),
             (.waitingForTrigger, .priceAtOrBelow(let price)):
             .init(
@@ -103,12 +89,9 @@ extension OrderOutcome {
             )
         case (.waitingForOpen, _), (.waitingForTrigger, _):
             .init("trading.result.waitingForOpen", bundle: .module)
-        case (.cancelled, _):
-            .init("trading.result.cancelled.detail", bundle: .module)
-        case (.expired, _):
-            .init("trading.result.expired.detail", bundle: .module)
-        case (.rejected(let rejection), _):
-            rejection.message
+        case (.cancelled, _): .init("trading.result.cancelled.detail", bundle: .module)
+        case (.expired, _): .init("trading.result.expired.detail", bundle: .module)
+        case (.rejected(let rejection), _): rejection.message
         }
     }
 }

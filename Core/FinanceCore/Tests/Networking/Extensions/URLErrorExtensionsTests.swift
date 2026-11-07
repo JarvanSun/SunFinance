@@ -17,7 +17,7 @@ struct URLErrorExtensionsTests {
         (.badURL, false),
     ])
     func isConnectivityFailureThenMatchesConnectivityCodes(code: URLError.Code, expected: Bool) {
-        // When
+        // Given / When
         let isConnectivityFailure = URLError(code).isConnectivityFailure
 
         // Then

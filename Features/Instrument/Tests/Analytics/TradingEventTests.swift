@@ -13,18 +13,18 @@ import Testing
 
 struct TradingEventTests {
     @Test(arguments: [
-        (OrderDraft(), "market", "now"),
-        (.init(execution: .limit(1)), "limit", "now"),
-        (.init(trigger: .priceAtOrAbove(1)), "stop", "price"),
-        (.init(execution: .limit(1), trigger: .priceAtOrBelow(1)), "stop_limit", "price"),
-        (.init(trigger: .at(testNow)), "market", "time"),
+        (OrderDraft.dummy(), "market", "now"),
+        (.dummy(execution: .limit(1)), "limit", "now"),
+        (.dummy(trigger: .priceAtOrAbove(1)), "stop", "price"),
+        (.dummy(execution: .limit(1), trigger: .priceAtOrBelow(1)), "stop_limit", "price"),
+        (.dummy(trigger: .at(Date.dummyNow)), "market", "time"),
     ])
     func orderReviewedThenDescribesTypeAndTrigger(
         draft: OrderDraft,
         orderType: String,
         trigger: String
     ) {
-        // When
+        // Given / When
         let parameters = TradingEvent.orderReviewed(draft).parameters
 
         // Then
@@ -33,8 +33,8 @@ struct TradingEventTests {
     }
 
     @Test func orderPlacedThenCarriesStatusButNoSize() {
-        // When
-        let event = TradingEvent.orderPlaced(.init(status: .filled))
+        // Given / When
+        let event = TradingEvent.orderPlaced(.dummy(status: .filled))
 
         // Then
         #expect(event.name == .init("trading_order_placed"))
@@ -43,7 +43,7 @@ struct TradingEventTests {
     }
 
     @Test func ticketOpenedThenNamesTheSource() {
-        // When
+        // Given / When
         let event = TradingEvent.ticketOpened(
             TradeIntent(symbol: "SAP", side: .sell, source: .position)
         )

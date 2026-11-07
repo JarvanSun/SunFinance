@@ -17,7 +17,7 @@ struct MarketDataErrorTests {
         (.cancelled, .cancelled),
     ])
     func initThenMapsEveryBackendFailure(failure: BackendFailure, expected: MarketDataError) {
-        // When
+        // Given / When
         let error = MarketDataError(failure)
 
         // Then

@@ -11,6 +11,10 @@ import Foundation
 import SwiftUI
 
 struct PortfolioAllocation: Equatable {
+    private enum SliceID: String {
+        case cash
+    }
+
     let slices: [AllocationSlice]
 
     init(account: Account, portfolio: Portfolio) {
@@ -22,7 +26,7 @@ struct PortfolioAllocation: Equatable {
             )
         }
         let cash = AllocationSlice(
-            id: cashSliceID,
+            id: SliceID.cash.rawValue,
             label: String(
                 localized: LocalizedStringResource("portfolio.allocation.cash", bundle: .module)
             ),
@@ -33,9 +37,9 @@ struct PortfolioAllocation: Equatable {
     }
 
     var content: AllocationChartContent {
-        AllocationChartContent(
+        .init(
             slices: slices,
-            accessibility: AllocationChartAccessibility(
+            accessibility: .init(
                 title: .init("portfolio.allocation.title", bundle: .module),
                 summary: summary
             )
@@ -44,46 +48,36 @@ struct PortfolioAllocation: Equatable {
 
     func symbol(forSlice id: String?) -> TickerSymbol? {
         switch id {
-        case .some(cashSliceID), nil:
-            nil
-        case .some(let id):
-            TickerSymbol(rawValue: id)
+        case .some(SliceID.cash.rawValue), nil: nil
+        case .some(let id): TickerSymbol(rawValue: id)
         }
     }
 
     func swatch(for symbol: TickerSymbol) -> Color {
         switch slice(for: symbol) {
-        case .some(let slice):
-            AllocationPalette(slices: slices).color(of: slice)
-        case nil:
-            .clear
+        case .some(let slice): AllocationPalette(slices: slices).color(of: slice)
+        case nil: .clear
         }
     }
 
     func highlight(for symbol: TickerSymbol, selection: TickerSymbol?) -> Color {
         switch symbol == selection {
-        case true:
-            swatch(for: symbol).opacity(highlightOpacity)
-        case false:
-            .clear
+        case true: swatch(for: symbol).opacity(highlightOpacity)
+        case false: .clear
         }
     }
 
     func centerTitle(for slice: AllocationSlice?) -> Text {
         switch slice {
-        case .some(let slice):
-            Text(verbatim: slice.label)
-        case nil:
-            Text("portfolio.allocation.positions", bundle: .module)
+        case .some(let slice): .init(verbatim: slice.label)
+        case nil: .init("portfolio.allocation.positions", bundle: .module)
         }
     }
 
     func centerValue(for slice: AllocationSlice?) -> String {
         switch slice {
-        case .some(let slice):
-            share(of: slice)
-        case nil:
-            holdings.count.formatted()
+        case .some(let slice): share(of: slice)
+        case nil: holdings.count.formatted()
         }
     }
 }
@@ -106,8 +100,7 @@ private extension PortfolioAllocation {
                 "portfolio.allocation.summary \(largest.label) \(share(of: largest))",
                 bundle: .module
             )
-        case nil:
-            .init("portfolio.allocation.summary.cashOnly", bundle: .module)
+        case nil: .init("portfolio.allocation.summary.cashOnly", bundle: .module)
         }
     }
 
@@ -119,5 +112,3 @@ private extension PortfolioAllocation {
         (slice.value / max(total, 1)).formatted(.percent.precision(.fractionLength(0)))
     }
 }
-
-private let cashSliceID = "cash"

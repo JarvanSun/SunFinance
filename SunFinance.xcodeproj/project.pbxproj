@@ -26,6 +26,10 @@
 		CBFDBCD7EEC65DF094044265 /* AppDependenciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B6A4213255A576472345FF /* AppDependenciesTests.swift */; };
 		E78869CB09FBF1A9CEF1A881 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B15D7813F46ADC55A237AEA /* AppDependencies.swift */; };
 		E8360D252A2C8E6DC0CCFB64 /* Instrument in Frameworks */ = {isa = PBXBuildFile; productRef = 4D56B6BB7BFE3C9005941D74 /* Instrument */; };
+		9C35991E5DF73ED602AB0333 /* AppConfigurationDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0141C3159658D371CBBC5996 /* AppConfigurationDummy.swift */; };
+		A2C776990277E8F2296D106C /* TickerSymbolDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65928ECEE1260294091E1C0D /* TickerSymbolDummy.swift */; };
+		58B0AB98E378B8BD0AF8D0EB /* AppConfigurationDummyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2493BF76C9CC5775BCCD2 /* AppConfigurationDummyTests.swift */; };
+		8B4ED4EC8D7ABD8104E4CEC2 /* AppConfigurationDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517F285FB826CB9ED335C07D /* AppConfigurationDummy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,27 +43,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2E662E7E69867A6F2E6EBB59 /* Orders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Orders; path = Features/Orders; sourceTree = SOURCE_ROOT; };
-		2F381C64CBB59E9ED96FA2E2 /* Portfolio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Portfolio; path = Features/Portfolio; sourceTree = SOURCE_ROOT; };
-		3553DD1AD8C30C863B5FE2C7 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DesignSystem; path = Core/DesignSystem; sourceTree = SOURCE_ROOT; };
 		3B15D7813F46ADC55A237AEA /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		3C4322DE14DA360FA487D682 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E9C4CF0253CC6BAC6A753C1 /* SunFinanceTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SunFinanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C1411BC7D01DAD4CAFBEA36 /* Watchlist */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Watchlist; path = Features/Watchlist; sourceTree = SOURCE_ROOT; };
 		7380DEC3CCD693B0628C9A4E /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		801FCBA975E6B8C2D3128AF5 /* AppConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurationTests.swift; sourceTree = "<group>"; };
 		87F1E73D232143AEE3072509 /* AppRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoot.swift; sourceTree = "<group>"; };
 		A6CD7CDE0FD0A60089EA72D1 /* SunFinanceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunFinanceApp.swift; sourceTree = "<group>"; };
-		AAC88D449E22D447EE945A8A /* FinanceCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FinanceCore; path = Core/FinanceCore; sourceTree = SOURCE_ROOT; };
 		ABDCC9F91A5A663F44F4C22B /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		B239CAA081D4FF5505E8A6C6 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
 		BB29086B4F52F0C54161B939 /* MainTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabsView.swift; sourceTree = "<group>"; };
-		BD879B09429149DF691F1BE6 /* Instrument */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Instrument; path = Features/Instrument; sourceTree = SOURCE_ROOT; };
 		C635119D05CCB409C27086D7 /* SunFinance.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = SunFinance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF03C5A87C8EC8BFB8D53A4F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		E1AAFB4E5676CF1695F8837A /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 		F3B6A4213255A576472345FF /* AppDependenciesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependenciesTests.swift; sourceTree = "<group>"; };
 		FE6D7C57C4C762E6240E3596 /* AppTabTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabTests.swift; sourceTree = "<group>"; };
+		0141C3159658D371CBBC5996 /* AppConfigurationDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurationDummy.swift; sourceTree = "<group>"; };
+		65928ECEE1260294091E1C0D /* TickerSymbolDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSymbolDummy.swift; sourceTree = "<group>"; };
+		08D2493BF76C9CC5775BCCD2 /* AppConfigurationDummyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurationDummyTests.swift; sourceTree = "<group>"; };
+		517F285FB826CB9ED335C07D /* AppConfigurationDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurationDummy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +104,7 @@
 			children = (
 				D896E52FCD92FD651A3A02B5 /* App */,
 				118C64E5B60F5700C2E8A305 /* Composition */,
+				EFF81CEF11A1E66636F1BD05 /* Dummy */,
 				5B9E45AFC5E31B25E1E46762 /* Navigation */,
 				CF4D600699B4A00F020F19E2 /* Resources */,
 			);
@@ -130,6 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				F994790591CFA3E7E51FAF37 /* Composition */,
+				D6A5F984AC456ADBAEC3EA1A /* Dummy */,
+				9D0296E08B0CDE35C22676F8 /* Fakes */,
 				AB5B310DE9B54C1761E56573 /* Navigation */,
 			);
 			path = SunFinanceTests;
@@ -138,13 +142,6 @@
 		C57FD4E8B2A10F65AC0B6561 = {
 			isa = PBXGroup;
 			children = (
-				3553DD1AD8C30C863B5FE2C7 /* DesignSystem */,
-				AAC88D449E22D447EE945A8A /* FinanceCore */,
-				BD879B09429149DF691F1BE6 /* Instrument */,
-				2E662E7E69867A6F2E6EBB59 /* Orders */,
-				2F381C64CBB59E9ED96FA2E2 /* Portfolio */,
-				6C1411BC7D01DAD4CAFBEA36 /* Watchlist */,
-				D989449CAA5750FFB62A0826 /* Configuration */,
 				9830530FA0A62904209325D8 /* SunFinance */,
 				B32980220DB078BC1570B710 /* SunFinanceTests */,
 				9AC27E8C95322130EB3DA66D /* Products */,
@@ -173,14 +170,6 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		D989449CAA5750FFB62A0826 /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				E1AAFB4E5676CF1695F8837A /* Signing.xcconfig */,
-			);
-			path = Configuration;
-			sourceTree = "<group>";
-		};
 		F994790591CFA3E7E51FAF37 /* Composition */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +177,31 @@
 				F3B6A4213255A576472345FF /* AppDependenciesTests.swift */,
 			);
 			path = Composition;
+			sourceTree = "<group>";
+		};
+		EFF81CEF11A1E66636F1BD05 /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				0141C3159658D371CBBC5996 /* AppConfigurationDummy.swift */,
+				65928ECEE1260294091E1C0D /* TickerSymbolDummy.swift */,
+			);
+			path = Dummy;
+			sourceTree = "<group>";
+		};
+		D6A5F984AC456ADBAEC3EA1A /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				08D2493BF76C9CC5775BCCD2 /* AppConfigurationDummyTests.swift */,
+			);
+			path = Dummy;
+			sourceTree = "<group>";
+		};
+		9D0296E08B0CDE35C22676F8 /* Fakes */ = {
+			isa = PBXGroup;
+			children = (
+				517F285FB826CB9ED335C07D /* AppConfigurationDummy.swift */,
+			);
+			path = Fakes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,11 +318,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1373BB5BBB00545DED25811A /* AppConfiguration.swift in Sources */,
+				9C35991E5DF73ED602AB0333 /* AppConfigurationDummy.swift in Sources */,
 				E78869CB09FBF1A9CEF1A881 /* AppDependencies.swift in Sources */,
 				546C2CEED9972C34EAF6DED9 /* AppRoot.swift in Sources */,
 				0919A83DFF883EBB9B8A334A /* AppTab.swift in Sources */,
 				9DE5AE1B7CA384CC81BB2AE8 /* MainTabsView.swift in Sources */,
 				B7566D28FCCBAF7E5A700D97 /* SunFinanceApp.swift in Sources */,
+				A2C776990277E8F2296D106C /* TickerSymbolDummy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +332,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B4ED4EC8D7ABD8104E4CEC2 /* AppConfigurationDummy.swift in Sources */,
+				58B0AB98E378B8BD0AF8D0EB /* AppConfigurationDummyTests.swift in Sources */,
 				4A1A20CD4185521C630C42C8 /* AppConfigurationTests.swift in Sources */,
 				CBFDBCD7EEC65DF094044265 /* AppDependenciesTests.swift in Sources */,
 				305A3AC4E4CA6FCEC6F24F94 /* AppTabTests.swift in Sources */,
@@ -335,7 +353,6 @@
 /* Begin XCBuildConfiguration section */
 		17CAC4FA15C78053E01A9C43 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1AAFB4E5676CF1695F8837A /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -426,7 +443,6 @@
 		};
 		7ECFE2E4D1CA648CB9B3A81C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1AAFB4E5676CF1695F8837A /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

@@ -17,7 +17,6 @@ struct OrdersIssuePresentationTests {
         (.serviceUnavailable, "service", .warning),
     ])
     func presentationThenNamesTheIssue(issue: OrdersIssue, name: String, image: FinanceImage) {
-        // Then
         #expect(issue.title.key == "orders.failure.\(name).title")
         #expect(issue.message.key == "orders.failure.\(name).message")
         #expect(issue.image == image)

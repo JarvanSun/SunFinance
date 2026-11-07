@@ -35,7 +35,7 @@ struct WatchlistToolbar: ToolbarContent {
     }
 
     private var selection: Binding<WatchlistSortOrder> {
-        Binding(get: { sortOrder }, set: { onSelect($0) })
+        .init(get: { sortOrder }, set: { onSelect($0) })
     }
 }
 

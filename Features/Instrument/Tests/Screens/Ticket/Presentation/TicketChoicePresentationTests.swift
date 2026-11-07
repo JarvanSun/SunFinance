@@ -16,7 +16,6 @@ struct TicketChoicePresentationTests {
         (.euros, "trading.amount.mode.euros", "trading.amount.field.euros"),
     ])
     func amountModeThenTitlesSegmentAndField(mode: AmountMode, segment: String, field: String) {
-        // Then
         #expect(mode.segmentTitle.key == segment)
         #expect(mode.fieldTitle.key == field)
     }
@@ -26,7 +25,6 @@ struct TicketChoicePresentationTests {
         (.limit, "trading.execution.limit"),
     ])
     func executionKindThenTitlesTheSegment(kind: ExecutionKind, key: String) {
-        // Then
         #expect(kind.segmentTitle.key == key)
     }
 
@@ -36,7 +34,6 @@ struct TicketChoicePresentationTests {
         (.time, "trading.trigger.time"),
     ])
     func triggerKindThenTitlesTheSegment(kind: TriggerKind, key: String) {
-        // Then
         #expect(kind.segmentTitle.key == key)
     }
 }

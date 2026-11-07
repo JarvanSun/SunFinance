@@ -17,7 +17,6 @@ struct OrderValidityPresentationTests {
         (.goodTillCancelled, "trading.validity.gtc"),
     ])
     func segmentTitleThenNamesTheValidity(validity: OrderValidity, key: String) {
-        // Then
         #expect(validity.segmentTitle.key == key)
     }
 }

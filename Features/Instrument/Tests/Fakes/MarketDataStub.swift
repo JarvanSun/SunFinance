@@ -19,7 +19,7 @@ final class MarketDataStub: QuoteDetailProviding, PriceHistoryProviding {
     }
 
     init(
-        detailResult: Result<QuoteDetail, MarketDataError> = .success(appleDetail),
+        detailResult: Result<QuoteDetail, MarketDataError> = .success(QuoteDetail.dummyApple),
         failingRanges: Set<HistoryRange> = []
     ) {
         self.detailResult = detailResult
@@ -35,7 +35,7 @@ final class MarketDataStub: QuoteDetailProviding, PriceHistoryProviding {
     {
         guard !failingRanges.contains(range) else { throw .server(statusCode: 503) }
 
-        let history = appleDayHistory
+        let history = PriceHistory.dummyAppleDay
         return PriceHistory(
             symbol: history.symbol,
             range: range,

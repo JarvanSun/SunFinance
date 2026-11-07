@@ -129,7 +129,7 @@ private extension MockExchange {
     func candle(of listing: MockListing, over intervals: [Range<Date>]) -> ExchangeCandle {
         let prices = intervals.flatMap { samples(in: $0) }.map { price(of: listing, at: $0).amount }
         let start = intervals.first?.lowerBound ?? .distantPast
-        return ExchangeCandle(
+        return .init(
             start: start,
             open: prices.first ?? listing.referencePrice,
             high: prices.max() ?? listing.referencePrice,
@@ -159,7 +159,7 @@ private extension MockExchange {
                         / volumeRhythmPeriod
                 )
             )
-        return Int(baseVolume * listing.volatility * hours * rhythm)
+        return .init(baseVolume * listing.volatility * hours * rhythm)
     }
 
     func price(of listing: MockListing, at date: Date) -> Money {
@@ -171,7 +171,7 @@ private extension MockExchange {
             return sum + wave.element.amplitude * listing.volatility * sin(angle)
         }
         let amount = listing.referencePrice * Decimal(1 + movement)
-        return Money(amount.rounded(to: pricePrecision), listing.currency)
+        return .init(amount.rounded(to: pricePrecision), listing.currency)
     }
 }
 

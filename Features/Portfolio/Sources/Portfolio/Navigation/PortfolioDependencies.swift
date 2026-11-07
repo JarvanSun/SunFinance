@@ -9,19 +9,19 @@ import DesignSystem
 import FinanceCore
 
 public struct PortfolioDependencies {
-    let accountProvider: any AccountProviding
-    let positionProvider: any PositionProviding
-    let historyProvider: any PortfolioHistoryProviding
-    let tracker: any AnalyticsTracking
+    let accountProvider: AccountProviding
+    let positionProvider: PositionProviding
+    let historyProvider: PortfolioHistoryProviding
+    let tracker: AnalyticsTracking
     let quoteDetail: FeatureEntry<TickerSymbol>
     let orderTicket: FeatureEntry<TradeIntent>
     let refreshInterval: Duration
 
     public init(
-        accountProvider: some AccountProviding,
-        positionProvider: some PositionProviding,
-        historyProvider: some PortfolioHistoryProviding,
-        tracker: some AnalyticsTracking,
+        accountProvider: AccountProviding,
+        positionProvider: PositionProviding,
+        historyProvider: PortfolioHistoryProviding,
+        tracker: AnalyticsTracking,
         quoteDetail: FeatureEntry<TickerSymbol>,
         orderTicket: FeatureEntry<TradeIntent>,
         refreshInterval: Duration = .seconds(15)
@@ -35,8 +35,8 @@ public struct PortfolioDependencies {
         self.refreshInterval = refreshInterval
     }
 
-    func makeViewModel(router: some PortfolioRouting) -> PortfolioViewModel {
-        PortfolioViewModel(
+    func makeViewModel(router: PortfolioRouting) -> PortfolioViewModel {
+        .init(
             accountProvider: accountProvider,
             positionProvider: positionProvider,
             historyProvider: historyProvider,

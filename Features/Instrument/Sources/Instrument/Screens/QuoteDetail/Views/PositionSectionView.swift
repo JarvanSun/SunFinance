@@ -17,7 +17,7 @@ struct PositionSectionView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: dimensions.spaceLargeSmall) {
-            SectionHeading(LocalizedStringResource("quoteDetail.position.title", bundle: .module))
+            SectionHeading(.init("quoteDetail.position.title", bundle: .module))
 
             MetricStrip(position.metrics)
         }
@@ -27,9 +27,9 @@ struct PositionSectionView: View {
 #if DEBUG
 #Preview(traits: .sizeThatFitsLayout) {
     VStack(spacing: 32) {
-        PositionSectionView(position: PreviewObjectPool().position)
+        PositionSectionView(position: .dummy)
 
-        PositionSectionView(position: PreviewObjectPool().euroPosition)
+        PositionSectionView(position: .dummyEuro)
     }
     .padding()
 }

@@ -26,6 +26,6 @@ extension MoneyDTO {
     func money() throws(BrokerageError) -> Money {
         guard let currency = CurrencyCode(rawValue: currency) else { throw .decoding }
 
-        return Money(amount, currency)
+        return .init(amount, currency)
     }
 }

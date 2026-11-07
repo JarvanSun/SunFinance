@@ -16,12 +16,9 @@ enum ConsoleBehavior: String, CaseIterable, Identifiable, Sendable {
 
     var mockBehavior: MockServerBehavior {
         switch self {
-        case .realistic:
-            .realistic
-        case .instant:
-            .instant
-        case .alwaysFailing:
-            .alwaysFailing
+        case .realistic: .realistic
+        case .instant: .instant
+        case .alwaysFailing: .alwaysFailing
         }
     }
 }

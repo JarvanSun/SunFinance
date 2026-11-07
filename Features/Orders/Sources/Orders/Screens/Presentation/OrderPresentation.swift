@@ -32,8 +32,7 @@ extension Order {
 
     var executionText: LocalizedStringResource {
         switch draft.execution {
-        case .market:
-            .init("orders.execution.market", bundle: .module)
+        case .market: .init("orders.execution.market", bundle: .module)
         case .limit(let price):
             .init("orders.execution.limit \(Money(price, currency).formatted())", bundle: .module)
         }
@@ -41,8 +40,7 @@ extension Order {
 
     var triggerText: LocalizedStringResource {
         switch draft.trigger {
-        case .immediately:
-            .init("orders.trigger.now", bundle: .module)
+        case .immediately: .init("orders.trigger.now", bundle: .module)
         case .priceAtOrAbove(let price), .priceAtOrBelow(let price):
             .init("orders.trigger.price \(Money(price, currency).formatted())", bundle: .module)
         case .at(let date):
@@ -52,10 +50,8 @@ extension Order {
 
     var validityText: LocalizedStringResource {
         switch draft.validity {
-        case .day:
-            .init("orders.validity.day", bundle: .module)
-        case .goodTillCancelled:
-            .init("orders.validity.gtc", bundle: .module)
+        case .day: .init("orders.validity.day", bundle: .module)
+        case .goodTillCancelled: .init("orders.validity.gtc", bundle: .module)
         }
     }
 
@@ -63,10 +59,8 @@ extension Order {
         let shares = quantity.formattedQuantity()
         let count = NSDecimalNumber(decimal: quantity).doubleValue
         return switch (draft.amount, draft.side) {
-        case (.shares, .buy):
-            .init("orders.row.shares.buy \(shares) \(count)", bundle: .module)
-        case (.shares, .sell):
-            .init("orders.row.shares.sell \(shares) \(count)", bundle: .module)
+        case (.shares, .buy): .init("orders.row.shares.buy \(shares) \(count)", bundle: .module)
+        case (.shares, .sell): .init("orders.row.shares.sell \(shares) \(count)", bundle: .module)
         case (.euros(let euros), .buy):
             .init("orders.row.euros.buy \(Money(euros, .eur).formatted())", bundle: .module)
         case (.euros(let euros), .sell):
@@ -80,8 +74,7 @@ extension Order {
             .init("orders.row.stop \(Money(price, currency).formatted())", bundle: .module)
         case .at(let date):
             .init("orders.row.scheduled \(date.formatted(.orderMoment))", bundle: .module)
-        case .immediately:
-            executionText
+        case .immediately: executionText
         }
     }
 
@@ -103,10 +96,8 @@ extension Order {
 private extension TradeSide {
     var cashSign: Decimal {
         switch self {
-        case .buy:
-            -1
-        case .sell:
-            1
+        case .buy: -1
+        case .sell: 1
         }
     }
 }

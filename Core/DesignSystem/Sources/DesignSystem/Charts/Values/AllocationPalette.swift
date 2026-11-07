@@ -16,19 +16,15 @@ public struct AllocationPalette: Sendable {
 
     public func color(of slice: AllocationSlice) -> Color {
         switch slice.tone {
-        case .holding:
-            FinanceColor.accent.color.opacity(opacity(of: slice))
-        case .neutral:
-            FinanceColor.textSecondary.color.opacity(opacity(of: slice))
+        case .holding: FinanceColor.accent.color.opacity(opacity(of: slice))
+        case .neutral: FinanceColor.textSecondary.color.opacity(opacity(of: slice))
         }
     }
 
     func opacity(of slice: AllocationSlice) -> Double {
         switch slice.tone {
-        case .holding:
-            opacity(rank: holdingRank(of: slice))
-        case .neutral:
-            neutralOpacity
+        case .holding: opacity(rank: holdingRank(of: slice))
+        case .neutral: neutralOpacity
         }
     }
 }

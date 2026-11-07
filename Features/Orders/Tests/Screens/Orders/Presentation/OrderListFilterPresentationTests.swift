@@ -17,7 +17,6 @@ struct OrderListFilterPresentationTests {
         (.past, "orders.filter.past"),
     ])
     func titleThenNamesTheFilter(filter: OrderListFilter, key: String) {
-        // Then
         #expect(filter.title.key == key)
     }
 }

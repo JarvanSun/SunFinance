@@ -14,6 +14,7 @@
 		616C19DDB156A113845446FA /* PlaygroundDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C9B4C6EA632B1A0F6BD5EC /* PlaygroundDependencies.swift */; };
 		8C0901E2676AA278BDB0ECE8 /* FinanceCore in Frameworks */ = {isa = PBXBuildFile; productRef = 4E015EF281E5A9C623189CCB /* FinanceCore */; };
 		DE3E98E18654C99E8CEADB34 /* SunUserInterface in Frameworks */ = {isa = PBXBuildFile; productRef = 95325D36DE51C73D43078375 /* SunUserInterface */; };
+		92E2DAC942CE2FFB7DEE7E35 /* TickerSymbolDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E430ADADE9B7449C7428F269 /* TickerSymbolDummy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,10 +22,10 @@
 		093CE8F519310CA54208B08C /* StandInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandInScreen.swift; sourceTree = "<group>"; };
 		2E88B0082E36022E06BC9E0D /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DesignSystem; path = ../../../Core/DesignSystem; sourceTree = SOURCE_ROOT; };
 		42D8462F0D4B31387EA29B72 /* Watchlist */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Watchlist; path = ..; sourceTree = SOURCE_ROOT; };
-		56645860CC8314FF90CE752D /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 		93C9B4C6EA632B1A0F6BD5EC /* PlaygroundDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundDependencies.swift; sourceTree = "<group>"; };
 		95248519C6A8B1ED4D8B0E48 /* WatchlistPlaygroundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistPlaygroundApp.swift; sourceTree = "<group>"; };
 		A2DB770EF50C33F8BB5A38C6 /* WatchlistPlayground.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = WatchlistPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E430ADADE9B7449C7428F269 /* TickerSymbolDummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSymbolDummy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,15 +43,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		305CEBF740BA6612B7135ECD /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				56645860CC8314FF90CE752D /* Signing.xcconfig */,
-			);
-			name = Configuration;
-			path = ../../../Configuration;
-			sourceTree = "<group>";
-		};
 		3F6B916872C30820F6241E84 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +64,7 @@
 		AABC9BE64A1302199D5D2AF8 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				C4E977E12ED09D9E229CF0CE /* Dummy */,
 				93C9B4C6EA632B1A0F6BD5EC /* PlaygroundDependencies.swift */,
 				093CE8F519310CA54208B08C /* StandInScreen.swift */,
 				95248519C6A8B1ED4D8B0E48 /* WatchlistPlaygroundApp.swift */,
@@ -82,7 +75,6 @@
 		E23F411CF4F5D5291A0322DE = {
 			isa = PBXGroup;
 			children = (
-				305CEBF740BA6612B7135ECD /* Configuration */,
 				75054112A41CDCE58ADACF92 /* Packages */,
 				AABC9BE64A1302199D5D2AF8 /* Sources */,
 				3F6B916872C30820F6241E84 /* Products */,
@@ -91,6 +83,14 @@
 			sourceTree = "<group>";
 			tabWidth = 4;
 			usesTabs = 0;
+		};
+		C4E977E12ED09D9E229CF0CE /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				E430ADADE9B7449C7428F269 /* TickerSymbolDummy.swift */,
+			);
+			path = Dummy;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -164,6 +164,7 @@
 			files = (
 				616C19DDB156A113845446FA /* PlaygroundDependencies.swift in Sources */,
 				0601E7E2AD4EC162F2A363E8 /* StandInScreen.swift in Sources */,
+				92E2DAC942CE2FFB7DEE7E35 /* TickerSymbolDummy.swift in Sources */,
 				280FD65B1FC79F072E81DBD6 /* WatchlistPlaygroundApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,7 +174,6 @@
 /* Begin XCBuildConfiguration section */
 		18883859C44E4AE8042B204F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56645860CC8314FF90CE752D /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -285,7 +285,6 @@
 		};
 		FE96C092F5D790A83D093866 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56645860CC8314FF90CE752D /* Signing.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

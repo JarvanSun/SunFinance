@@ -16,7 +16,7 @@ struct OrderPreviewTests {
         ("insufficient_cash", .insufficientCash),
     ])
     func initThenMapsEveryField(rejection: String?, expected: OrderRejection?) throws {
-        // When
+        // Given / When
         let preview = try OrderPreview(dto(rejection: rejection))
 
         // Then
@@ -30,7 +30,7 @@ struct OrderPreviewTests {
     }
 
     @Test func initWhenACurrencyIsInvalidThenThrowsDecoding() {
-        // When
+        // Given / When
         let result = Result { () throws(BrokerageError) in
             try OrderPreview(dto(rejection: nil, priceCurrency: "?"))
         }
@@ -42,7 +42,7 @@ struct OrderPreviewTests {
 
 private extension OrderPreviewTests {
     func dto(rejection: String?, priceCurrency: String = "USD") -> PreviewOrderResponseDTO {
-        PreviewOrderResponseDTO(
+        .init(
             quantity: 2,
             price: MoneyDTO(amount: 100, currency: priceCurrency),
             exchangeRate: 0.9,

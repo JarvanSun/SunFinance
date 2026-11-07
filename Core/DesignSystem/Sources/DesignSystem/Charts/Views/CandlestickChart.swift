@@ -22,7 +22,7 @@ public struct CandlestickChart: View {
         onSelect: @escaping (ChartCandle?) -> Void = { _ in }
     ) {
         self.content = content
-        series = CandleSeries(content.candles, maximumCount: maximumCandleCount)
+        series = .init(content.candles, maximumCount: content.maximumCandleCount)
         self.onSelect = onSelect
     }
 
@@ -118,24 +118,26 @@ private extension CandlestickChart {
     }
 }
 
-private let maximumCandleCount = 90
+private extension CandlestickChartContent {
+    var maximumCandleCount: Int { 90 }
+}
 
 #if DEBUG
 #Preview {
     ScrollView {
         VStack(spacing: 32) {
-            CandlestickChart(ChartPreviewData().candleChart(ChartPreviewData().candles))
+            CandlestickChart(.dummy(ChartCandle.dummyCandles))
 
             CandlestickChart(
-                ChartPreviewData().candleChart(
-                    ChartPreviewData().candles,
-                    trading: ChartPreviewData().trading(on: ChartPreviewData().candlePoints)
+                .dummy(
+                    ChartCandle.dummyCandles,
+                    trading: .dummy(on: ChartPoint.dummyCandlePoints)
                 )
             )
 
-            CandlestickChart(ChartPreviewData().candleChart(ChartPreviewData().longCandles))
+            CandlestickChart(.dummy(ChartCandle.dummyLongCandles))
 
-            CandlestickChart(ChartPreviewData().candleChart([]))
+            CandlestickChart(.dummy([]))
         }
         .padding()
     }

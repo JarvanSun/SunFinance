@@ -82,10 +82,10 @@ private extension OrderResultView {
 
 #if DEBUG
 @available(iOS 26, *)
-#Preview("Result", arguments: PreviewObjectPool().outcomes) { outcome in
+#Preview("Result", arguments: OrderOutcome.dummyOutcomes) { outcome in
     OrderResultView(
         outcome: outcome,
-        draft: PreviewObjectPool().draft,
+        draft: .dummyMarket,
         currency: .usd,
         onDone: {},
         onEdit: {}

@@ -11,7 +11,7 @@ import Foundation
 
 extension StockQuote {
     var trend: GainTrend {
-        GainTrend(changePercent)
+        .init(changePercent)
     }
 
     var formattedChange: String {

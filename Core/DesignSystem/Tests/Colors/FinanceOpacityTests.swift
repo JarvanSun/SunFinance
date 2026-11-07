@@ -11,7 +11,7 @@ import Testing
 
 struct FinanceOpacityTests {
     @Test func valueWhenDimmedThenStaysReadable() {
-        // When
+        // Given / When
         let value = FinanceOpacity.dimmed.value
 
         // Then

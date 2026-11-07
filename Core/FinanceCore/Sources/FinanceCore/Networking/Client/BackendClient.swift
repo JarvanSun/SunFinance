@@ -28,19 +28,17 @@ struct BackendClient: Sendable {
 
 private extension ServerEnvironment {
     func makeAPIClient() -> APIClient {
-        APIClient(
+        .init(
             sender: makeSender(),
-            requestBuilder: RequestBuilder(baseURL: baseURL) { makeBackendEncoder() },
-            responseDecoder: ResponseDecoder { makeBackendDecoder() }
+            requestBuilder: RequestBuilder(baseURL: baseURL) { BackendCoding().encoder },
+            responseDecoder: ResponseDecoder { BackendCoding().decoder }
         )
     }
 
-    func makeSender() -> any RequestSending {
+    func makeSender() -> RequestSending {
         switch transport {
-        case .urlSession:
-            RequestSender()
-        case .mock(let server):
-            server.makeSender()
+        case .urlSession: RequestSender()
+        case .mock(let server): server.makeSender()
         }
     }
 }

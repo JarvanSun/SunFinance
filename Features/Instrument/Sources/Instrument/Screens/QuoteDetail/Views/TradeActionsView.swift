@@ -53,7 +53,7 @@ private struct TradeButtonLabel: View {
     }
 
     private var shape: RoundedRectangle {
-        RoundedRectangle(cornerRadius: dimensions.cornerRadiusLarge, style: .continuous)
+        .init(cornerRadius: dimensions.cornerRadiusLarge, style: .continuous)
     }
 
     private var priceOpacity: Double { 0.85 }

@@ -11,7 +11,7 @@ import Testing
 
 struct IdempotencyKeyTests {
     @Test func initThenCreatesADifferentKeyEachTime() {
-        // When
+        // Given / When
         let first = IdempotencyKey()
         let second = IdempotencyKey()
 

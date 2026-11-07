@@ -40,7 +40,7 @@ private extension FinanceButtonStyle {
     var pressedOpacity: Double { 0.7 }
 
     var shape: RoundedRectangle {
-        RoundedRectangle(cornerRadius: dimensions.cornerRadiusLarge, style: .continuous)
+        .init(cornerRadius: dimensions.cornerRadiusLarge, style: .continuous)
     }
 
     var verticalPadding: CGFloat {
@@ -57,12 +57,9 @@ private extension FinanceButtonStyle {
 
     func opacity(isPressed: Bool) -> Double {
         switch (isEnabled, isPressed && kind.dimsWhenPressed) {
-        case (false, _):
-            FinanceOpacity.dimmed.value
-        case (true, true):
-            pressedOpacity
-        case (true, false):
-            1
+        case (false, _): FinanceOpacity.dimmed.value
+        case (true, true): pressedOpacity
+        case (true, false): 1
         }
     }
 

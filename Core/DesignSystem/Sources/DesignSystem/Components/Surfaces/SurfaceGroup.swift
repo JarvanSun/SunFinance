@@ -30,7 +30,7 @@ public struct SurfaceGroup<Content: View>: View {
 
 private extension SurfaceGroup {
     var surface: RoundedRectangle {
-        RoundedRectangle(cornerRadius: dimensions.cornerRadiusSurface, style: .continuous)
+        .init(cornerRadius: dimensions.cornerRadiusSurface, style: .continuous)
     }
 }
 

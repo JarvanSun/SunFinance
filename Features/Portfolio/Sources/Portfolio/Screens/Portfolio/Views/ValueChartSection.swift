@@ -32,31 +32,45 @@ struct ValueChartSection: View {
                 .accessibilityIdentifier(PortfolioAccessibility.rangePicker)
         }
     }
+}
 
+private extension ValueChartSection {
     @ViewBuilder
-    private var chart: some View {
+    var chart: some View {
         switch history {
         case .loaded(let history):
-            PriceLineChart(
-                PriceLineChartContent(
-                    points: history.chartPoints,
-                    baseline: history.baseline,
-                    accessibility: history.chartAccessibility
-                ),
-                style: PriceLineChartStyle(
-                    appearance: .hero,
-                    isLive: isLive,
-                    axisDate: history.range.axisDate
-                ),
-                onSelect: { onScrub($0?.date) }
-            )
+            valueChart(history)
         case .idle, .loading:
-            ProgressView()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            loading
         case .failed:
-            Text("portfolio.chart.unavailable", bundle: .module)
-                .textStyle(FinanceColor.textSecondary, FinanceFont.callout)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            unavailable
         }
+    }
+
+    func valueChart(_ history: PortfolioHistory) -> some View {
+        PriceLineChart(
+            PriceLineChartContent(
+                points: history.chartPoints,
+                baseline: history.baseline,
+                accessibility: history.chartAccessibility
+            ),
+            style: PriceLineChartStyle(
+                appearance: .hero,
+                isLive: isLive,
+                axisDate: history.range.axisDate
+            ),
+            onSelect: { onScrub($0?.date) }
+        )
+    }
+
+    var loading: some View {
+        ProgressView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    var unavailable: some View {
+        Text("portfolio.chart.unavailable", bundle: .module)
+            .textStyle(FinanceColor.textSecondary, FinanceFont.callout)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

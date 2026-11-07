@@ -18,23 +18,33 @@ struct PortfolioPlaceholderView: View {
         case .loading:
             LoadingStateView(title: placeholder.title)
         case .empty:
-            ContentUnavailableStateView(
-                title: placeholder.title,
-                message: placeholder.message,
-                image: placeholder.image
-            )
+            empty
         case .failed:
-            ContentUnavailableStateView(
-                title: placeholder.title,
-                message: placeholder.message,
-                image: placeholder.image,
-                action: StateAction(
-                    title: .init("portfolio.failure.retry", bundle: .module),
-                    perform: onRetry
-                )
-            )
-            .accessibilityIdentifier(PortfolioAccessibility.retryButton)
+            failure
         }
+    }
+}
+
+private extension PortfolioPlaceholderView {
+    var empty: some View {
+        ContentUnavailableStateView(
+            title: placeholder.title,
+            message: placeholder.message,
+            image: placeholder.image
+        )
+    }
+
+    var failure: some View {
+        ContentUnavailableStateView(
+            title: placeholder.title,
+            message: placeholder.message,
+            image: placeholder.image,
+            action: StateAction(
+                title: .init("portfolio.failure.retry", bundle: .module),
+                perform: onRetry
+            )
+        )
+        .accessibilityIdentifier(PortfolioAccessibility.retryButton)
     }
 }
 

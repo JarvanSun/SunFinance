@@ -7,21 +7,21 @@
 
 @MainActor
 public final class AnalyticsTracker: AnalyticsTracking {
-    private let consent: any AnalyticsConsentProviding
+    private let consent: AnalyticsConsentProviding
     private let context: AnalyticsContext
-    private let destinations: [any AnalyticsDestination]
+    private let destinations: [AnalyticsDestination]
 
     public init(
-        consent: some AnalyticsConsentProviding,
+        consent: AnalyticsConsentProviding,
         context: AnalyticsContext,
-        destinations: [any AnalyticsDestination]
+        destinations: [AnalyticsDestination]
     ) {
         self.consent = consent
         self.context = context
         self.destinations = destinations
     }
 
-    public func track(_ event: some AnalyticsEvent) {
+    public func track(_ event: AnalyticsEvent) {
         guard consent.isAnalyticsConsentGranted, isFreeOfPersonalData(event) else { return }
 
         forward(enriched(event))
@@ -35,15 +35,15 @@ public final class AnalyticsTracker: AnalyticsTracking {
 }
 
 private extension AnalyticsTracker {
-    func isFreeOfPersonalData(_ event: some AnalyticsEvent) -> Bool {
+    func isFreeOfPersonalData(_ event: AnalyticsEvent) -> Bool {
         !event.parameters.keys.contains { $0.isPersonalData }
     }
 
-    func enriched(_ event: some AnalyticsEvent) -> TrackedEvent {
+    func enriched(_ event: AnalyticsEvent) -> TrackedEvent {
         let parameters = event.parameters.merging(context.parameters) { eventValue, _ in
             eventValue
         }
-        return TrackedEvent(name: event.name, parameters: parameters)
+        return .init(name: event.name, parameters: parameters)
     }
 
     func forward(_ event: TrackedEvent) {

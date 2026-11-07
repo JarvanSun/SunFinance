@@ -9,21 +9,21 @@ import FinanceCore
 
 public struct QuoteDetailDependencies {
     let symbol: TickerSymbol
-    let detailProvider: any QuoteDetailProviding
-    let historyProvider: any PriceHistoryProviding
-    let positionProvider: any PositionProviding
-    let orderProvider: any OrderProviding
-    let tracker: any AnalyticsTracking
+    let detailProvider: QuoteDetailProviding
+    let historyProvider: PriceHistoryProviding
+    let positionProvider: PositionProviding
+    let orderProvider: OrderProviding
+    let tracker: AnalyticsTracking
 
     private let makeOrderTicket: (TradeIntent) -> TradingDependencies
 
     public init(
         symbol: TickerSymbol,
-        detailProvider: some QuoteDetailProviding,
-        historyProvider: some PriceHistoryProviding,
-        positionProvider: some PositionProviding,
-        orderProvider: some OrderProviding,
-        tracker: some AnalyticsTracking,
+        detailProvider: QuoteDetailProviding,
+        historyProvider: PriceHistoryProviding,
+        positionProvider: PositionProviding,
+        orderProvider: OrderProviding,
+        tracker: AnalyticsTracking,
         orderTicket: @escaping (TradeIntent) -> TradingDependencies
     ) {
         self.symbol = symbol
@@ -35,8 +35,8 @@ public struct QuoteDetailDependencies {
         makeOrderTicket = orderTicket
     }
 
-    func makeViewModel(router: some QuoteDetailRouting) -> QuoteDetailViewModel {
-        QuoteDetailViewModel(
+    func makeViewModel(router: QuoteDetailRouting) -> QuoteDetailViewModel {
+        .init(
             symbol: symbol,
             detailProvider: detailProvider,
             historyProvider: historyProvider,

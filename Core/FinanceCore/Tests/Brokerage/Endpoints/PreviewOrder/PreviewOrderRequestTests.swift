@@ -14,14 +14,14 @@ import Testing
 struct PreviewOrderRequestTests {
     @Test func requestThenPostsTheDraft() throws {
         // Given
-        let draft = OrderDraft(.sell, .euros(500), execution: .limit(120))
+        let draft = OrderDraft.dummy(.sell, .euros(500), execution: .limit(120))
         let request = PreviewOrderRequest(draft: draft)
 
         // When
-        let body = try #require(try request.body?.encode(using: makeBackendEncoder()))
+        let body = try #require(try request.body?.encode(using: BackendCoding().encoder))
 
         // Then
-        let sent = try OrderDraft(makeBackendDecoder().decode(OrderDraftDTO.self, from: body))
+        let sent = try OrderDraft(BackendCoding().decoder.decode(OrderDraftDTO.self, from: body))
         #expect(request.path == ["v1", "orders", "preview"])
         #expect(request.method == .post)
         #expect(request.headers.isEmpty)

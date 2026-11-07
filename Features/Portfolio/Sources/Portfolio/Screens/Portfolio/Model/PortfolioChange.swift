@@ -15,6 +15,6 @@ enum PortfolioChange: Equatable {
     init(from start: Money, to end: Money) {
         let change = end.amount - start.amount
         let percent = start.amount == 0 ? 0 : change / start.amount * 100
-        self = .known(Money(change, end.currency), percent: percent)
+        self = .known(.init(change, end.currency), percent: percent)
     }
 }

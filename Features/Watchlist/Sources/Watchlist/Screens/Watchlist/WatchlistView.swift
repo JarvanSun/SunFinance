@@ -47,47 +47,46 @@ private extension WatchlistView {
             Section {
                 switch section {
                 case .quotes, .quotesMatchingSearch:
-                    ForEach(content.visibleQuotes) { quote in
-                        Button(action: { viewModel.openDetail(for: quote) }) {
-                            QuoteRowView(
-                                quote: quote,
-                                favoriteAction: viewModel.favoriteAction(for: quote.symbol)
-                            )
-                        }
-                        .buttonStyle(.finance(.row))
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(FinanceColor.background.color)
-                        .swipeActions {
-                            FavoriteSwipeButton(
-                                action: viewModel.favoriteAction(for: quote.symbol),
-                                onToggle: { viewModel.toggleFavorite(quote.symbol) }
-                            )
-                        }
-                        .accessibilityAction(
-                            named: viewModel.favoriteAction(for: quote.symbol).title
-                        ) {
-                            viewModel.toggleFavorite(quote.symbol)
-                        }
-                    }
+                    ForEach(content.visibleQuotes, content: quoteRow(_:))
                 case .symbolMatches:
-                    ForEach(content.addableMatches) { match in
-                        Button(action: { viewModel.addToWatchlist(match) }) {
-                            SymbolMatchRowView(
-                                match: match,
-                                addition: viewModel.addition(for: match)
-                            )
-                        }
-                        .buttonStyle(.finance(.row))
-                        .disabled(!viewModel.addition(for: match).isAvailable)
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(FinanceColor.background.color)
-                        .accessibilityIdentifier(WatchlistAccessibility.addSymbolButton)
-                    }
+                    ForEach(content.addableMatches, content: matchRow(_:))
                 }
             } header: {
                 WatchlistSectionHeader(section: section)
             }
         }
+    }
+
+    func quoteRow(_ quote: StockQuote) -> some View {
+        Button(action: { viewModel.openDetail(for: quote) }) {
+            QuoteRowView(
+                quote: quote,
+                favoriteAction: viewModel.favoriteAction(for: quote.symbol)
+            )
+        }
+        .buttonStyle(.finance(.row))
+        .listRowSeparator(.hidden)
+        .listRowBackground(FinanceColor.background.color)
+        .swipeActions {
+            FavoriteSwipeButton(
+                action: viewModel.favoriteAction(for: quote.symbol),
+                onToggle: { viewModel.toggleFavorite(quote.symbol) }
+            )
+        }
+        .accessibilityAction(named: viewModel.favoriteAction(for: quote.symbol).title) {
+            viewModel.toggleFavorite(quote.symbol)
+        }
+    }
+
+    func matchRow(_ match: SymbolMatch) -> some View {
+        Button(action: { viewModel.addToWatchlist(match) }) {
+            SymbolMatchRowView(match: match, addition: viewModel.addition(for: match))
+        }
+        .buttonStyle(.finance(.row))
+        .disabled(!viewModel.addition(for: match).isAvailable)
+        .listRowSeparator(.hidden)
+        .listRowBackground(FinanceColor.background.color)
+        .accessibilityIdentifier(WatchlistAccessibility.addSymbolButton)
     }
 }
 

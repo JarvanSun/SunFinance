@@ -33,6 +33,6 @@ final class OrderProviderStub: OrderProviding {
         cursor: String?
     ) async throws(BrokerageError) -> Page<Order> {
         recorded.withLock { $0.append(Request(filter: filter, symbol: symbol, cursor: cursor)) }
-        return try (pages[cursor] ?? .success(Page(elements: [], nextCursor: nil))).get()
+        return try (pages[cursor] ?? .success(.init(elements: [], nextCursor: nil))).get()
     }
 }

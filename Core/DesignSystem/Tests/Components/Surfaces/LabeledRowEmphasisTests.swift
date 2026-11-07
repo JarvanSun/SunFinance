@@ -19,7 +19,6 @@ struct LabeledRowEmphasisTests {
         font: FinanceFont,
         titleColor: FinanceColor
     ) {
-        // Then
         #expect(emphasis.font == font)
         #expect(emphasis.titleColor == titleColor)
     }

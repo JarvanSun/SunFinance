@@ -21,7 +21,7 @@ struct PortfolioSnapshot: Equatable {
 
     var totalReturn: Money {
         let positions = portfolio.open + portfolio.closed
-        return Money(
+        return .init(
             positions.reduce(Decimal.zero) { $0 + $1.totalReturn.amount },
             account.total.currency
         )

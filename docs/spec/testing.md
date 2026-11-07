@@ -32,7 +32,31 @@ func toggleFavoriteThenFlipsSavesAndTracks(wasFavorite: Bool) {
 ```
 
 - Name: `<method>When<condition>Then<result>`; drop `When…` when there is no condition.
-- `// Given`, `// When`, `// Then` are required and the only comments in tests.
+- Section comments are the only comments in tests, and each test uses one of these shapes:
+  - `// Given`, `// When`, `// Then` (the sample above).
+  - `// Given`, `// Then` when the arrangement is the call under test, or `// Given` and
+    `// When / Then` when the call is the expectation itself.
+  - `// Given / When`, `// Then` when the step that builds the subject is the step under test:
+
+    ```swift
+    @Test func placeholderBeforeFirstLoadThenIsNil() {
+        // Given / When
+        let viewModel = makeViewModel()
+
+        // Then
+        #expect(viewModel.placeholder == nil)
+    }
+    ```
+
+  - No comment at all when the body is only the expectation:
+
+    ```swift
+    func valueThenExistsOnlyOnceLoaded(state: LoadState<Int, String>, expected: Int?) {
+        #expect(state.value == expected)
+    }
+    ```
+
+  A lone `// Then` is never written, and `// When` never appears without `// Given` before it.
 - One behaviour per test; several `#expect`s may describe one outcome. Variations use
   `@Test(arguments:)`, not copied tests.
 - The system under test is built by a `make…` function in a `private extension <Type>Tests` at
@@ -50,12 +74,13 @@ Fakes live in `Tests/Fakes/`, one per file, named by role. No mocking frameworks
 | `Spy` | Records calls in `private(set)` arrays (`AnalyticsTrackerSpy`) |
 | `Fake` | A working lightweight implementation |
 
-Fixtures live in `Fakes/<Type>Fixtures.swift` and are never `static`: a named value is a
-`nonisolated let` (`appleQuote`, `sampleAccount`), a family of values an initializer with fixture
-defaults in an extension (`OrderDraft(.sell, .shares(16))`,
-`Position(holding: "AAPL", quantity: 3)`). A symbol is its literal (`"AAPL"`).
-`@Test(arguments:)` takes array literals of these. Other test helpers (`LocalizationCatalog`) also
-live in `Fakes/`.
+Fixtures are [dummy extensions](swift-style.md#dummy-data) in `Fakes/<Type>Dummy.swift`, one
+file per extended type: a named value is a `nonisolated static var dummy…`
+(`StockQuote.dummyApple`, `Account.dummy`, `Date.dummyNow`), a family of values a
+`nonisolated static func dummy…(…)` with fixture defaults (`OrderDraft.dummy(.sell, .shares(16))`,
+`Position.dummy(holding: "AAPL", quantity: 3)`). Tests never use a preview dummy. A symbol is its
+literal (`"AAPL"`). `@Test(arguments:)` takes array literals of these. Other test helpers
+(`LocalizationCatalog`) also live in `Fakes/`.
 
 ## What must be tested
 
@@ -107,6 +132,9 @@ One `#Preview` at the end of each view file and each DesignSystem style or token
   set `.preferredColorScheme` or `.dynamicTypeSize`.
 - A screen that sets `navigationTitle`, `searchable` or `toolbar` is wrapped in a
   `NavigationStack`; nothing else is. Preview the `*HostView` to see navigation.
-- Data and dependencies come from the package's `PreviewObjectPool` (`#if DEBUG`), a struct whose
-  instance members (`PreviewObjectPool().quotes`) return new, isolated objects on every call and provides no views, except the stand-in screen behind
+- Data comes from the package's [dummy extensions](swift-style.md#dummy-data) in
+  `Preview Content/Dummy/` (`QuoteRowView(quote: .dummyGaining, favoriteAction: .add)`).
+- Dependencies and view models come from the package's `PreviewObjectPool` (`#if DEBUG`), a struct
+  whose instance members (`PreviewObjectPool().watchlistDependencies()`) return new, isolated
+  objects on every call and provides no views, except the stand-in screen behind
   each `FeatureEntry`.

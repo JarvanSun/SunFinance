@@ -18,7 +18,6 @@ struct TradingIssueTests {
         (.cancelled, .serviceUnavailable),
     ])
     func initWhenBrokerageFailsThenNamesTheIssue(error: BrokerageError, expected: TradingIssue) {
-        // Then
         #expect(TradingIssue(error) == expected)
     }
 
@@ -29,7 +28,6 @@ struct TradingIssueTests {
         (.cancelled, .serviceUnavailable),
     ])
     func initWhenMarketDataFailsThenNamesTheIssue(error: MarketDataError, expected: TradingIssue) {
-        // Then
         #expect(TradingIssue(error) == expected)
     }
 
@@ -38,7 +36,6 @@ struct TradingIssueTests {
         (.serviceUnavailable, "service_unavailable"),
     ])
     func analyticsReasonThenIsSnakeCase(issue: TradingIssue, reason: String) {
-        // Then
         #expect(issue.analyticsReason == reason)
     }
 }

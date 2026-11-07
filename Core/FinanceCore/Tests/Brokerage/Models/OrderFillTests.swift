@@ -12,8 +12,8 @@ import Testing
 
 struct OrderFillTests {
     @Test func initThenMapsEveryField() throws {
-        // When
-        let fill = try OrderFill(FillDTO())
+        // Given / When
+        let fill = try OrderFill(FillDTO.dummy())
 
         // Then
         #expect(fill.date == Date(timeIntervalSince1970: 1_000))
@@ -25,8 +25,8 @@ struct OrderFillTests {
     }
 
     @Test func initWhenACurrencyIsInvalidThenThrowsDecoding() {
-        // When
-        let result = Result { () throws(BrokerageError) in try OrderFill(.init(currency: "us")) }
+        // Given / When
+        let result = Result { () throws(BrokerageError) in try OrderFill(.dummy(currency: "us")) }
 
         // Then
         #expect(result.failure == .decoding)

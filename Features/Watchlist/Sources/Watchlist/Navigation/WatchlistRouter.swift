@@ -22,7 +22,7 @@ final class WatchlistRouter: FeatureRouting, WatchlistRouting {
     }
 
     func view(for destination: WatchlistDestination) -> WatchlistDestinationView {
-        WatchlistDestinationView(destination: destination, quoteDetail: quoteDetail)
+        .init(destination: destination, quoteDetail: quoteDetail)
     }
 
     func showQuoteDetail(for symbol: TickerSymbol) {

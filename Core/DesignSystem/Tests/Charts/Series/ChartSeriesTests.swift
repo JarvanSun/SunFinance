@@ -12,8 +12,8 @@ import Testing
 
 struct ChartSeriesTests {
     @Test func initWhenShortThenKeepsEveryPoint() {
-        // When
-        let series = ChartSeries(makePoints(count: 10), maximumCount: 100)
+        // Given / When
+        let series = ChartSeries(ChartPoint.dummySeries(count: 10), maximumCount: 100)
 
         // Then
         #expect(series.points.count == 10)
@@ -21,7 +21,7 @@ struct ChartSeriesTests {
 
     @Test func initWhenLongThenKeepsEndsAndExtremesInOrderWithinLimit() {
         // Given
-        var points = makePoints(count: 2_000)
+        var points = ChartPoint.dummySeries(count: 2_000)
         points[777] = ChartPoint(date: points[777].date, value: 9_999)
         points[1_234] = ChartPoint(date: points[1_234].date, value: -9_999)
 
@@ -101,7 +101,7 @@ struct ChartSeriesTests {
     @Test(arguments: [(0, 0), (5, 5), (99, nil)] as [(Int, Int?)])
     func pointAtIndexThenOnlyInsideTheSeries(index: Int, expected: Int?) {
         // Given
-        let series = ChartSeries(makePoints(count: 10), maximumCount: 100)
+        let series = ChartSeries(ChartPoint.dummySeries(count: 10), maximumCount: 100)
 
         // When
         let point = series.point(at: index)
@@ -112,7 +112,7 @@ struct ChartSeriesTests {
 
     @Test func indexOfDateThenFindsFirstPointAtOrAfterIt() {
         // Given
-        let points = makePoints(count: 10)
+        let points = ChartPoint.dummySeries(count: 10)
         let series = ChartSeries(points, maximumCount: 100)
 
         // Then
@@ -123,20 +123,12 @@ struct ChartSeriesTests {
     @Test(arguments: [(160, 3, [0, 53, 106]), (1, 3, []), (10, 0, [])] as [(Int, Int, [Int])])
     func tickIndicesThenSpreadFromTheFirstPoint(pointCount: Int, count: Int, expected: [Int]) {
         // Given
-        let series = ChartSeries(makePoints(count: pointCount), maximumCount: 1_000)
+        let series = ChartSeries(ChartPoint.dummySeries(count: pointCount), maximumCount: 1_000)
 
         // When
         let ticks = series.tickIndices(count: count)
 
         // Then
         #expect(ticks == expected)
-    }
-}
-
-private extension ChartSeriesTests {
-    func makePoints(count: Int) -> [ChartPoint] {
-        (0..<count).map {
-            ChartPoint(date: Date(timeIntervalSince1970: Double($0) * 60), value: Double($0))
-        }
     }
 }

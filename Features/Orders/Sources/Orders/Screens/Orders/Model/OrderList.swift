@@ -26,14 +26,10 @@ struct OrderList: Equatable {
 
     var footer: OrdersFooter? {
         switch (phase, orders.isEmpty, hasMore) {
-        case (_, true, _):
-            nil
-        case (.failed(let issue), false, _):
-            .failed(issue)
-        case (.idle, false, true), (.loading, false, true), (.loaded, false, true):
-            .loadingMore
-        case (.idle, false, false), (.loading, false, false), (.loaded, false, false):
-            nil
+        case (_, true, _): nil
+        case (.failed(let issue), false, _): .failed(issue)
+        case (.idle, false, true), (.loading, false, true), (.loaded, false, true): .loadingMore
+        case (.idle, false, false), (.loading, false, false), (.loaded, false, false): nil
         }
     }
 

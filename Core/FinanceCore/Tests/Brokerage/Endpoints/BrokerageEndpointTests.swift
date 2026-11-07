@@ -25,7 +25,6 @@ struct BrokerageEndpointTests {
         path: [String],
         method: HTTPMethod
     ) {
-        // Then
         #expect(endpoint.path == path)
         #expect(endpoint.method == method)
         #expect(BrokerageEndpoint(path: path, method: method) == endpoint)
@@ -39,7 +38,7 @@ struct BrokerageEndpointTests {
         (["v1", "quotes"], .get),
     ])
     func initWhenPathOrMethodIsUnknownThenIsNil(path: [String], method: HTTPMethod) {
-        // When
+        // Given / When
         let endpoint = BrokerageEndpoint(path: path, method: method)
 
         // Then

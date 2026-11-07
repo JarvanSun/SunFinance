@@ -10,19 +10,15 @@ import Charts
 extension ChartMarker.Kind {
     var symbol: BasicChartSymbolShape {
         switch self {
-        case .buy:
-            .triangle
-        case .sell:
-            .diamond
+        case .buy: .triangle
+        case .sell: .diamond
         }
     }
 
     var color: FinanceColor {
         switch self {
-        case .buy:
-            .gain
-        case .sell:
-            .loss
+        case .buy: .gain
+        case .sell: .loss
         }
     }
 }

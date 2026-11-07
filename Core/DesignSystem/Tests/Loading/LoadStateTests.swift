@@ -17,7 +17,6 @@ struct LoadStateTests {
         (.failed("offline"), nil),
     ])
     func valueThenExistsOnlyOnceLoaded(state: LoadState<Int, String>, expected: Int?) {
-        // Then
         #expect(state.value == expected)
     }
 
@@ -31,7 +30,6 @@ struct LoadStateTests {
         state: LoadState<Int, String>,
         expected: LoadState<Int, String>
     ) {
-        // Then
         #expect(state.reloading == expected)
     }
 
@@ -50,7 +48,6 @@ struct LoadStateTests {
         result: LoadState<Int, String>,
         expected: LoadState<Int, String>
     ) {
-        // Then
         #expect(state.settled(with: result) == expected)
     }
 }

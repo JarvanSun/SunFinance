@@ -34,7 +34,7 @@ final class QuoteDetailViewModel {
     }
 
     var historyRequest: HistoryRequest {
-        HistoryRequest(range: range, reload: reloadRequest)
+        .init(range: range, reload: reloadRequest)
     }
 
     var canShowCandles: Bool {
@@ -68,31 +68,28 @@ final class QuoteDetailViewModel {
 
     var placeholder: QuoteDetailPlaceholder? {
         switch detail {
-        case .idle, .loading:
-            .loading
-        case .failed(let issue):
-            .failed(issue)
-        case .loaded:
-            nil
+        case .idle, .loading: .loading
+        case .failed(let issue): .failed(issue)
+        case .loaded: nil
         }
     }
 
     private let symbol: TickerSymbol
-    private let detailProvider: any QuoteDetailProviding
-    private let historyProvider: any PriceHistoryProviding
-    private let positionProvider: any PositionProviding
-    private let orderProvider: any OrderProviding
-    private let router: any QuoteDetailRouting
-    private let tracker: any AnalyticsTracking
+    private let detailProvider: QuoteDetailProviding
+    private let historyProvider: PriceHistoryProviding
+    private let positionProvider: PositionProviding
+    private let orderProvider: OrderProviding
+    private let router: QuoteDetailRouting
+    private let tracker: AnalyticsTracking
 
     init(
         symbol: TickerSymbol,
-        detailProvider: some QuoteDetailProviding,
-        historyProvider: some PriceHistoryProviding,
-        positionProvider: some PositionProviding,
-        orderProvider: some OrderProviding,
-        router: some QuoteDetailRouting,
-        tracker: some AnalyticsTracking
+        detailProvider: QuoteDetailProviding,
+        historyProvider: PriceHistoryProviding,
+        positionProvider: PositionProviding,
+        orderProvider: OrderProviding,
+        router: QuoteDetailRouting,
+        tracker: AnalyticsTracking
     ) {
         self.symbol = symbol
         self.detailProvider = detailProvider
@@ -170,10 +167,8 @@ private extension QuoteDetailViewModel {
 
     var tradeSides: [TradeSide] {
         switch position?.isOpen {
-        case .some(true):
-            [.sell, .buy]
-        case .some(false), nil:
-            [.buy]
+        case .some(true): [.sell, .buy]
+        case .some(false), nil: [.buy]
         }
     }
 
@@ -203,10 +198,8 @@ private extension QuoteDetailViewModel {
 
     func change(to price: Decimal) -> QuoteChange {
         switch history.selected?.change(to: price) {
-        case .some(let change):
-            .known(change)
-        case nil:
-            .pending
+        case .some(let change): .known(change)
+        case nil: .pending
         }
     }
 
@@ -230,7 +223,7 @@ private extension QuoteDetailViewModel {
         do {
             return .loaded(try await detailProvider.quoteDetail(for: symbol))
         } catch {
-            return .failed(QuoteDetailIssue(error))
+            return .failed(.init(error))
         }
     }
 
@@ -238,7 +231,7 @@ private extension QuoteDetailViewModel {
         do {
             return .loaded(try await historyProvider.priceHistory(for: symbol, range: range))
         } catch {
-            return .failed(QuoteDetailIssue(error))
+            return .failed(.init(error))
         }
     }
 
@@ -256,7 +249,7 @@ private extension QuoteDetailViewModel {
                 )
             )
         case (.failure(let error), _, _), (_, .failure(let error), _), (_, _, .failure(let error)):
-            .failed(QuoteDetailIssue(error))
+            .failed(.init(error))
         }
     }
 

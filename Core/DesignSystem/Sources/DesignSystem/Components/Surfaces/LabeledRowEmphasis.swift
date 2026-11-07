@@ -11,19 +11,15 @@ public enum LabeledRowEmphasis: Hashable, Sendable {
 
     var font: FinanceFont {
         switch self {
-        case .regular:
-            .body
-        case .total:
-            .headline
+        case .regular: .body
+        case .total: .headline
         }
     }
 
     var titleColor: FinanceColor {
         switch self {
-        case .regular:
-            .textSecondary
-        case .total:
-            .textPrimary
+        case .regular: .textSecondary
+        case .total: .textPrimary
         }
     }
 }

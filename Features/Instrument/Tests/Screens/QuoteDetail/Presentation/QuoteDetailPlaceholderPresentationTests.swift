@@ -17,7 +17,6 @@ struct QuoteDetailPlaceholderPresentationTests {
         (.failed(.serviceUnavailable), "quoteDetail.placeholder.unavailable.title"),
     ])
     func titleThenNamesThePlaceholder(placeholder: QuoteDetailPlaceholder, key: String) {
-        // Then
         #expect(placeholder.title.key == key)
     }
 }

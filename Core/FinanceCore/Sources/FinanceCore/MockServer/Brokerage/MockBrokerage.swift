@@ -17,7 +17,7 @@ final class MockBrokerage: Sendable {
         self.exchange = exchange
         self.storageURL = storageURL
         let stored = storageURL.flatMap { try? Data(contentsOf: $0) }.flatMap {
-            try? makeBackendDecoder().decode(MockLedger.self, from: $0)
+            try? BackendCoding().decoder.decode(MockLedger.self, from: $0)
         }
         ledger = Mutex(stored ?? .init(seededAt: now, exchange: exchange))
     }
@@ -34,7 +34,7 @@ final class MockBrokerage: Sendable {
 
 private extension MockBrokerage {
     func save(_ ledger: MockLedger) {
-        guard let storageURL, let data = try? makeBackendEncoder().encode(ledger) else { return }
+        guard let storageURL, let data = try? BackendCoding().encoder.encode(ledger) else { return }
 
         try? FileManager.default.createDirectory(
             at: storageURL.deletingLastPathComponent(),

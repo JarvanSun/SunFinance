@@ -74,6 +74,73 @@ struct QuoteDetailView: View {
 - A placeholder that replaces the screen is attached after the bottom bar, so it covers the
   screen's actions too.
 - Mutually exclusive content is a `switch` over an enum from the ViewModel.
+- A `switch` in a view (`body`, a `@ViewBuilder` property or a view-returning function) shows all
+  its cases at a glance: each case is one line, or a few at most, that calls an extracted piece. A
+  piece is a private view property or function in the view's `private extension`, or its own
+  `View` type in the screen's `Views/` when it is substantial.
+
+  Before, in `WatchlistView`:
+
+  ```swift
+  func list(_ content: WatchlistContent) -> some View {
+      List(content.sections) { section in
+          Section {
+              switch section {
+              case .quotes, .quotesMatchingSearch:
+                  ForEach(content.visibleQuotes) { quote in
+                      Button(action: { viewModel.openDetail(for: quote) }) {
+                          QuoteRowView(
+                              quote: quote,
+                              favoriteAction: viewModel.favoriteAction(for: quote.symbol)
+                          )
+                      }
+                      .buttonStyle(.finance(.row))
+                      .listRowSeparator(.hidden)
+                      .listRowBackground(FinanceColor.background.color)
+                      .swipeActions { … }
+                      .accessibilityAction(named: …) { … }
+                  }
+              case .symbolMatches:
+                  ForEach(content.addableMatches) { match in
+                      Button(action: { viewModel.addToWatchlist(match) }) {
+                          SymbolMatchRowView(match: match, addition: viewModel.addition(for: match))
+                      }
+                      .buttonStyle(.finance(.row))
+                      .disabled(!viewModel.addition(for: match).isAvailable)
+                      .listRowSeparator(.hidden)
+                      .listRowBackground(FinanceColor.background.color)
+                      .accessibilityIdentifier(WatchlistAccessibility.addSymbolButton)
+                  }
+              }
+          } header: {
+              WatchlistSectionHeader(section: section)
+          }
+      }
+  }
+  ```
+
+  After:
+
+  ```swift
+  func list(_ content: WatchlistContent) -> some View {
+      List(content.sections) { section in
+          Section {
+              switch section {
+              case .quotes, .quotesMatchingSearch:
+                  ForEach(content.visibleQuotes, content: quoteRow(_:))
+              case .symbolMatches:
+                  ForEach(content.addableMatches, content: matchRow(_:))
+              }
+          } header: {
+              WatchlistSectionHeader(section: section)
+          }
+      }
+  }
+
+  func quoteRow(_ quote: StockQuote) -> some View { … }
+
+  func matchRow(_ match: SymbolMatch) -> some View { … }
+  ```
 - No conditional expressions that pick strings, symbols, colors or actions: write
   `Image(style: addition.image)`, never `Image(systemName: isAdded ? … : …)`.
 - No literal numbers, strings or symbol names ([swift-style.md](swift-style.md#no-magic-values)).

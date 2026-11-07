@@ -14,7 +14,6 @@ import UIKit
 struct FinanceFontTests {
     @Test(arguments: FinanceFont.allCases)
     func styleThenUsesBundledFaceSoDynamicTypeScales(font: FinanceFont) {
-        // Then
         #expect(InterFace.allCases.contains(font.face))
         #expect(font.size == font.pointSize)
     }
@@ -26,13 +25,12 @@ struct FinanceFontTests {
         (.bold, .bold),
     ])
     func faceWeightThenMatchesTheFaceSoSwiftUIKeepsIt(face: InterFace, weight: Font.Weight) {
-        // Then
         #expect(face.weight == weight)
     }
 
     @Test(arguments: FinanceFont.allCases)
     func fontThenItsBundledFaceIsRegistered(font: FinanceFont) {
-        // When
+        // Given / When
         _ = font.font
 
         // Then

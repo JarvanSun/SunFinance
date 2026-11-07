@@ -12,8 +12,9 @@ without SwiftUI is decided here, so a unit test covers it.
   (`LoadState`, `RangedHistory`). Never SwiftUI or SunUserInterface; never reads Environment.
 - Created by the navigation host or the router, owned with `@State`, passed down as
   `let viewModel` or `@Bindable var viewModel`.
-- Every dependency is an `init` parameter typed `some Protocol` and stored as
-  `private let … : any Protocol`: starting values first (a symbol, a range), services next, router
+- Every dependency is an `init` parameter typed as its protocol and stored as
+  `private let … : Protocol` (`any` / `some` only where the compiler needs them, as for
+  `any Clock<Duration>`): starting values first (a symbol, a range), services next, router
   and tracker last. No default arguments; previews and tests pass their own.
 
 ## State
@@ -103,41 +104,37 @@ final class WatchlistViewModel {
 
     var placeholder: WatchlistPlaceholder? {
         switch (content.hasRows, activity, searchActivity) {
-        case (true, _, _):
-            nil
-        case (false, .loading, _):
-            .loading
-        case (false, .failed(let issue), _):
-            .unavailable(.failed(issue))
+        case (true, _, _): nil
+        case (false, .loading, _): .loading
+        case (false, .failed(let issue), _): .unavailable(.failed(issue))
         case (false, _, .failed(let issue)) where hasSearchedCurrentQuery:
             .unavailable(.failed(issue))
         case (false, _, .loaded) where hasSearchedCurrentQuery:
             .unavailable(.noSearchResults(query: searchText))
-        case (false, _, _) where isSearching:
-            .searching
-        case (false, .loaded, _):
-            .unavailable(.empty)
-        default:
-            nil
+        case (false, _, _) where isSearching: .searching
+        case (false, .loaded, _): .unavailable(.empty)
+        default: nil
         }
     }
 
-    private let watchlistStore: any WatchlistSymbolStoring
-    private let quoteProvider: any QuoteProviding
-    ...
-    private let router: any WatchlistRouting
-    private let tracker: any AnalyticsTracking
+    private let watchlistStore: WatchlistSymbolStoring
+    private let quoteProvider: QuoteProviding
+    private let symbolSearcher: SymbolSearching
+    private let favoriteStore: FavoriteSymbolStoring
+    private let clock: any Clock<Duration>
+    private let router: WatchlistRouting
+    private let tracker: AnalyticsTracking
 
     private var searchedQuery = ""
 
     init(
-        watchlistStore: some WatchlistSymbolStoring,
-        quoteProvider: some QuoteProviding,
-        symbolSearcher: some SymbolSearching,
-        favoriteStore: some FavoriteSymbolStoring,
+        watchlistStore: WatchlistSymbolStoring,
+        quoteProvider: QuoteProviding,
+        symbolSearcher: SymbolSearching,
+        favoriteStore: FavoriteSymbolStoring,
         clock: some Clock<Duration>,
-        router: some WatchlistRouting,
-        tracker: some AnalyticsTracking
+        router: WatchlistRouting,
+        tracker: AnalyticsTracking
     ) { ... }
 
     func trackScreenView() { ... }

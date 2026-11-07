@@ -103,7 +103,7 @@ private extension OrderDetailView {
     }
 
     var isConfirming: Binding<Bool> {
-        Binding(
+        .init(
             get: { viewModel.isConfirmingCancel },
             set: { _ in viewModel.dismissCancel() }
         )
@@ -112,7 +112,7 @@ private extension OrderDetailView {
 
 #if DEBUG
 @available(iOS 26, *)
-#Preview("Order Detail", arguments: PreviewObjectPool().sampleOrders) { order in
+#Preview("Order Detail", arguments: Order.dummyList) { order in
     NavigationStack {
         OrderDetailView(viewModel: PreviewObjectPool().detailViewModel(order))
     }

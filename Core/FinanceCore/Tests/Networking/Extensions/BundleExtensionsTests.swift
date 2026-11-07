@@ -12,7 +12,7 @@ import Testing
 
 struct BundleExtensionsTests {
     @Test func fixtureWhenFileExistsThenDecodesIt() throws {
-        // When
+        // Given / When
         let listings = try Bundle.module.fixture(named: "listings", as: MockListingsDTO.self)
 
         // Then
@@ -21,7 +21,6 @@ struct BundleExtensionsTests {
     }
 
     @Test func fixtureWhenFileIsMissingThenThrows() {
-        // Then
         #expect(throws: CocoaError.self) {
             try Bundle.module.fixture(named: "missing", as: MockListingsDTO.self)
         }

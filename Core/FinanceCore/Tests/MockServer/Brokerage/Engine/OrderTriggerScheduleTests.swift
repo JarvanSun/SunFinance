@@ -18,7 +18,6 @@ struct OrderTriggerScheduleTests {
         (.priceAtOrBelow(10), nil),
     ])
     func scheduledTimeThenIsSetOnlyForATimeTrigger(trigger: OrderTrigger, expected: Date?) {
-        // Then
         #expect(trigger.scheduledTime == expected)
     }
 }

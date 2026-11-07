@@ -18,7 +18,7 @@ final class TradingRouter: FeatureRouting, TradingRouting {
     @ObservationIgnored var makeReviewViewModel: ((OrderDraft) -> ReviewViewModel)?
 
     func view(for destination: TradingDestination) -> TradingDestinationView {
-        TradingDestinationView(destination: destination, makeReviewViewModel: makeReviewViewModel)
+        .init(destination: destination, makeReviewViewModel: makeReviewViewModel)
     }
 
     func showReview(of draft: OrderDraft) {

@@ -23,19 +23,15 @@ extension TicketContext {
         let quantity = heldShares.formattedQuantity()
         let count = NSDecimalNumber(decimal: heldShares).doubleValue
         return switch side {
-        case .buy:
-            .init("trading.header.buyingPower \(amount)", bundle: .module)
-        case .sell:
-            .init("trading.header.held \(quantity) \(count)", bundle: .module)
+        case .buy: .init("trading.header.buyingPower \(amount)", bundle: .module)
+        case .sell: .init("trading.header.held \(quantity) \(count)", bundle: .module)
         }
     }
 
     var marketNotice: LocalizedStringResource? {
         switch quote.isMarketOpen {
-        case true:
-            nil
-        case false:
-            .init("trading.header.marketClosed", bundle: .module)
+        case true: nil
+        case false: .init("trading.header.marketClosed", bundle: .module)
         }
     }
 }

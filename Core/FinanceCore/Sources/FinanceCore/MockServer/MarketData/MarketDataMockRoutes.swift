@@ -24,17 +24,13 @@ struct MarketDataMockRoutes: MockRoute {
 
     func response(to request: MockRequest) throws -> MockResponse? {
         switch MarketEndpoint(path: request.path, method: request.method) {
-        case .quotes:
-            try .init(json: QuotesResponseDTO(quotes: quotes(for: request)))
+        case .quotes: try .init(json: QuotesResponseDTO(quotes: quotes(for: request)))
         case .quoteDetail(let symbol):
             try detail(for: symbol, at: request.date).map { try .init(json: $0) }
                 ?? .init(status: .notFound)
-        case .priceHistory(let symbol):
-            try historyResponse(for: symbol, request: request)
-        case .symbolSearch:
-            try searchResponse(for: request)
-        case nil:
-            nil
+        case .priceHistory(let symbol): try historyResponse(for: symbol, request: request)
+        case .symbolSearch: try searchResponse(for: request)
+        case nil: nil
         }
     }
 }
@@ -130,7 +126,7 @@ private extension MarketDataMockRoutes {
     }
 
     func dto(of candle: ExchangeCandle) -> CandleDTO {
-        CandleDTO(
+        .init(
             start: candle.start,
             open: candle.open,
             high: candle.high,

@@ -18,7 +18,7 @@ struct WatchlistIssueTests {
         (.decoding, .unreadableData),
     ])
     func initThenMapsEveryDomainError(error: MarketDataError, expected: WatchlistIssue) {
-        // When
+        // Given / When
         let issue = WatchlistIssue(error)
 
         // Then

@@ -9,12 +9,12 @@ import Foundation
 import SunCore
 
 struct MockServer: Sendable {
-    private let routes: [any MockRoute]
+    private let routes: [MockRoute]
     private let behavior: MockServerBehavior
     private let now: @Sendable () -> Date
 
     init(
-        routes: [any MockRoute],
+        routes: [MockRoute],
         behavior: MockServerBehavior,
         now: @escaping @Sendable () -> Date = { Date() }
     ) {
@@ -24,7 +24,7 @@ struct MockServer: Sendable {
     }
 
     func makeSender() -> RequestSender {
-        RequestSender { request in try await respond(to: request) }
+        .init { request in try await respond(to: request) }
     }
 
     func respond(to urlRequest: URLRequest) async throws -> (Data, URLResponse) {
@@ -46,12 +46,9 @@ private extension MockServer {
 
     func response(to request: MockRequest) -> MockResponse {
         switch (shouldFail(request), routedResponse(to: request)) {
-        case (true, _):
-            .init(status: .serviceUnavailable)
-        case (false, .some(let response)):
-            response
-        case (false, nil):
-            .init(status: .notFound)
+        case (true, _): .init(status: .serviceUnavailable)
+        case (false, .some(let response)): response
+        case (false, nil): .init(status: .notFound)
         }
     }
 

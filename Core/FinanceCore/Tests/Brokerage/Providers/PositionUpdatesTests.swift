@@ -13,7 +13,7 @@ struct PositionUpdatesTests {
     @Test func portfolioUpdatesWhenAPollFailsThenYieldsTheFailureAndKeepsPolling() async throws {
         // Given
         let first = Portfolio(open: [], closed: [])
-        let second = Portfolio(open: [], closed: [try Position(.init(symbol: "KO"))])
+        let second = Portfolio(open: [], closed: [try Position(.dummy(symbol: "KO"))])
         let provider = PositionProviderStub(
             results: [.success(first), .failure(.offline), .success(second)]
         )
@@ -31,7 +31,7 @@ struct PositionUpdatesTests {
 
     @Test func portfolioUpdatesThenWaitsOneIntervalBeforeTheFirstPoll() async {
         // Given
-        let provider = PositionProviderStub(results: [.success(Portfolio(open: [], closed: []))])
+        let provider = PositionProviderStub(results: [.success(.init(open: [], closed: []))])
 
         // When
         let listening = Task {

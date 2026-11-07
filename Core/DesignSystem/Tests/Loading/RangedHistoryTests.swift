@@ -160,6 +160,6 @@ struct RangedHistoryTests {
 
 private extension RangedHistoryTests {
     func makeHistory() -> RangedHistory<String, Int, String> {
-        RangedHistory(range: "day")
+        .init(range: "day")
     }
 }

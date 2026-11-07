@@ -36,10 +36,8 @@ An event is a value conforming to `AnalyticsEvent`: a `name: AnalyticsEventName`
   ```swift
   var name: AnalyticsEventName {
       switch self {
-      case .screenViewed:
-          .init("watchlist_viewed")
-      case .quotesLoaded:
-          .init("watchlist_quotes_loaded")
+      case .screenViewed: .init("watchlist_viewed")
+      case .quotesLoaded: .init("watchlist_quotes_loaded")
       …
       }
   }

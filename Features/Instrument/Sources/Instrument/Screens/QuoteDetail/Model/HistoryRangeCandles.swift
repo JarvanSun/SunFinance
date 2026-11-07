@@ -10,10 +10,8 @@ import FinanceCore
 extension HistoryRange {
     var isLongEnoughForCandles: Bool {
         switch self {
-        case .day, .week:
-            false
-        case .month, .threeMonths, .year, .fiveYears:
-            true
+        case .day, .week: false
+        case .month, .threeMonths, .year, .fiveYears: true
         }
     }
 }

@@ -14,25 +14,24 @@ import Testing
 
 struct OrderDraftPresentationTests {
     @Test(arguments: [
-        (OrderDraft(.buy, amount: .shares(2)), "trading.review.summary.buy %@ %@"),
-        (.init(.sell, amount: .shares(2)), "trading.review.summary.sell %@ %@"),
-        (.init(.buy, amount: .euros(500)), "trading.review.summary.euros.buy %@ %@"),
-        (.init(.sell, amount: .euros(500)), "trading.review.summary.euros.sell %@ %@"),
+        (OrderDraft.dummy(.buy, amount: .shares(2)), "trading.review.summary.buy %@ %@"),
+        (.dummy(.sell, amount: .shares(2)), "trading.review.summary.sell %@ %@"),
+        (.dummy(.buy, amount: .euros(500)), "trading.review.summary.euros.buy %@ %@"),
+        (.dummy(.sell, amount: .euros(500)), "trading.review.summary.euros.sell %@ %@"),
     ])
     func headlineThenFollowsSideAndAmount(draft: OrderDraft, key: String) {
-        // Then
         #expect(draft.headline.key == key)
     }
 
     @Test(arguments: [
         (
-            OrderDraft(),
+            OrderDraft.dummy(),
             "trading.review.execution.market",
             "trading.review.trigger.now",
             "trading.validity.day"
         ),
         (
-            .init(
+            .dummy(
                 execution: .limit(230),
                 trigger: .priceAtOrBelow(220),
                 validity: .goodTillCancelled
@@ -42,7 +41,7 @@ struct OrderDraftPresentationTests {
             "trading.validity.gtc"
         ),
         (
-            .init(trigger: .at(testNow)),
+            .dummy(trigger: .at(Date.dummyNow)),
             "trading.review.execution.market",
             "trading.review.trigger.time %@",
             "trading.validity.day"
@@ -54,7 +53,7 @@ struct OrderDraftPresentationTests {
         trigger: String,
         validity: String
     ) {
-        // When
+        // Given / When
         let rows = draft.termRows(currency: .usd)
 
         // Then

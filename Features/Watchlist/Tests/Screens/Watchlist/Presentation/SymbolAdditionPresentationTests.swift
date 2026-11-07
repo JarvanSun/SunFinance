@@ -22,14 +22,12 @@ struct SymbolAdditionPresentationTests {
         color: FinanceColor,
         isAvailable: Bool
     ) {
-        // Then
         #expect(addition.image == image)
         #expect(addition.imageColor == color)
         #expect(addition.isAvailable == isAvailable)
     }
 
     @Test func accessibilityHintThenDiffersPerState() {
-        // Then
         #expect(SymbolAddition.available.accessibilityHint.key == "watchlist.match.add.hint")
         #expect(SymbolAddition.added.accessibilityHint.key == "watchlist.match.added.hint")
     }

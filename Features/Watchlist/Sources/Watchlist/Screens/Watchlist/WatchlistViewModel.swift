@@ -24,7 +24,7 @@ final class WatchlistViewModel {
     var searchText = ""
 
     var content: WatchlistContent {
-        WatchlistContent(
+        .init(
             quotes: quotes,
             symbolMatches: symbolMatches,
             searchText: searchText,
@@ -33,48 +33,42 @@ final class WatchlistViewModel {
     }
 
     var searchRequest: SymbolSearchRequest {
-        SymbolSearchRequest(query: searchText, attempt: searchAttempt)
+        .init(query: searchText, attempt: searchAttempt)
     }
 
     var placeholder: WatchlistPlaceholder? {
         switch (content.hasRows, activity, searchActivity) {
-        case (true, _, _):
-            nil
-        case (false, .loading, _):
-            .loading
-        case (false, .failed(let issue), _):
-            .unavailable(.failed(issue))
+        case (true, _, _): nil
+        case (false, .loading, _): .loading
+        case (false, .failed(let issue), _): .unavailable(.failed(issue))
         case (false, _, .failed(let issue)) where hasSearchedCurrentQuery:
             .unavailable(.failed(issue))
         case (false, _, .loaded) where hasSearchedCurrentQuery:
             .unavailable(.noSearchResults(query: searchText))
-        case (false, _, _) where isSearching:
-            .searching
-        case (false, .loaded, _):
-            .unavailable(.empty)
-        default:
-            nil
+        case (false, _, _) where isSearching: .searching
+        case (false, .loaded, _): .unavailable(.empty)
+        default: nil
         }
     }
 
-    private let watchlistStore: any WatchlistSymbolStoring
-    private let quoteProvider: any QuoteProviding
-    private let symbolSearcher: any SymbolSearching
-    private let favoriteStore: any FavoriteSymbolStoring
+    private let watchlistStore: WatchlistSymbolStoring
+    private let quoteProvider: QuoteProviding
+    private let symbolSearcher: SymbolSearching
+    private let favoriteStore: FavoriteSymbolStoring
     private let clock: any Clock<Duration>
-    private let router: any WatchlistRouting
-    private let tracker: any AnalyticsTracking
+    private let router: WatchlistRouting
+    private let tracker: AnalyticsTracking
 
     private var searchedQuery = ""
 
     init(
-        watchlistStore: some WatchlistSymbolStoring,
-        quoteProvider: some QuoteProviding,
-        symbolSearcher: some SymbolSearching,
-        favoriteStore: some FavoriteSymbolStoring,
+        watchlistStore: WatchlistSymbolStoring,
+        quoteProvider: QuoteProviding,
+        symbolSearcher: SymbolSearching,
+        favoriteStore: FavoriteSymbolStoring,
         clock: some Clock<Duration>,
-        router: some WatchlistRouting,
-        tracker: some AnalyticsTracking
+        router: WatchlistRouting,
+        tracker: AnalyticsTracking
     ) {
         self.watchlistStore = watchlistStore
         self.quoteProvider = quoteProvider

@@ -22,7 +22,7 @@ struct DecimalInputTests {
         ("en_US", "-3", nil),
     ])
     func parseThenReadsTheLocalesNumbers(locale: String, text: String, expected: Decimal?) {
-        // When
+        // Given / When
         let value = DecimalInput(locale: Locale(identifier: locale)).parse(text)
 
         // Then
@@ -30,7 +30,7 @@ struct DecimalInputTests {
     }
 
     @Test func textWhenGermanThenUsesCommaWithoutGrouping() {
-        // When
+        // Given / When
         let text = DecimalInput(locale: Locale(identifier: "de_DE")).text(
             for: Decimal(string: "1234.5")!
         )

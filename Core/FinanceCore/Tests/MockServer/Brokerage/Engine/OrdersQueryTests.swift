@@ -41,9 +41,9 @@ struct OrdersQueryTests {
 
 private extension OrdersQueryTests {
     func order(state: LedgerOrder.State, symbol: TickerSymbol) -> LedgerOrder {
-        LedgerOrder(
+        .init(
             id: "order-1",
-            draft: .init(symbol: symbol),
+            draft: .dummy(symbol: symbol),
             quantity: 1,
             createdAt: Date(timeIntervalSince1970: 100),
             state: state,

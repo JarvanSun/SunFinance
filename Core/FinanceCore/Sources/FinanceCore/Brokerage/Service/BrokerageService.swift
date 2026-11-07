@@ -56,7 +56,7 @@ public struct BrokerageService:
         cursor: String?
     ) async throws(BrokerageError) -> Page<Order> {
         let response = try await send(OrdersRequest(filter: filter, symbol: symbol, cursor: cursor))
-        return Page(
+        return .init(
             elements: try response.orders.map(Order.init(_:)),
             nextCursor: response.nextCursor
         )

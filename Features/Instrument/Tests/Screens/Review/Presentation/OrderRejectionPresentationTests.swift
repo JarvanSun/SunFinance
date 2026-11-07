@@ -21,7 +21,6 @@ struct OrderRejectionPresentationTests {
         (.unknownSymbol, "trading.rejection.unknownSymbol"),
     ])
     func messageThenGivesTheReason(rejection: OrderRejection, key: String) {
-        // Then
         #expect(rejection.message.key == key)
     }
 }
