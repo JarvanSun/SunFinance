@@ -1,0 +1,16 @@
+{
+  "companies": [
+    {"symbol": "AAPL", "company_name": "Apple Inc.", "market_cap": 3450000000000},
+    {"symbol": "MSFT", "company_name": "Microsoft Corporation", "market_cap": 3090000000000},
+    {"symbol": "NVDA", "company_name": "NVIDIA Corporation", "market_cap": 3400000000000},
+    {"symbol": "AMZN", "company_name": "Amazon.com, Inc.", "market_cap": 2070000000000},
+    {"symbol": "GOOGL", "company_name": "Alphabet Inc.", "market_cap": 2110000000000},
+    {"symbol": "TSLA", "company_name": "Tesla, Inc.", "market_cap": 803000000000},
+    {"symbol": "ASML", "company_name": "ASML Holding N.V.", "market_cap": 268000000000},
+    {"symbol": "SAP", "company_name": "SAP SE", "market_cap": 271000000000},
+    {"symbol": "SIE", "company_name": "Siemens AG", "market_cap": 141000000000},
+    {"symbol": "ALV", "company_name": "Allianz SE", "market_cap": 113000000000},
+    {"symbol": "JPM", "company_name": "JPMorgan Chase & Co.", "market_cap": 640000000000},
+    {"symbol": "KO", "company_name": "The Coca-Cola Company", "market_cap": 268000000000}
+  ]
+}

@@ -1,0 +1,31 @@
+//
+//  MoneyDTO.swift
+//  FinanceCore
+//
+//  Created by Jiawen Sun on 2026/11/07.
+//
+
+import Foundation
+
+struct MoneyDTO: Codable, Sendable {
+    let amount: Decimal
+    let currency: String
+}
+
+extension MoneyDTO {
+    init(_ money: Money) {
+        self.init(amount: money.amount, currency: money.currency.rawValue)
+    }
+
+    static func eur(_ amount: Decimal) -> Self {
+        MoneyDTO(amount: amount, currency: CurrencyCode.eur.rawValue)
+    }
+}
+
+extension MoneyDTO {
+    func money() throws(BrokerageError) -> Money {
+        guard let currency = CurrencyCode(rawValue: currency) else { throw .decoding }
+
+        return Money(amount, currency)
+    }
+}

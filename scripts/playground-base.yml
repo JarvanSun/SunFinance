@@ -1,0 +1,41 @@
+# Shared settings for every package playground (Features/*/Playground, Core/*/Playground).
+# A playground's project.yml includes this file and applies the Playground target template.
+
+options:
+  bundleIdPrefix: com.sunapp.sunfinance.playground
+  deploymentTarget:
+    iOS: "18.0"
+  developmentLanguage: en
+  usesTabs: false
+  indentWidth: 4
+  tabWidth: 4
+
+settings:
+  base:
+    DEVELOPMENT_TEAM: ${SUNFINANCE_TEAM_ID}
+    MARKETING_VERSION: 1.0
+    CURRENT_PROJECT_VERSION: 1
+    SWIFT_VERSION: "6.0"
+    SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+    SWIFT_APPROACHABLE_CONCURRENCY: true
+    SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY: true
+    SWIFT_TREAT_WARNINGS_AS_ERRORS: true
+    TARGETED_DEVICE_FAMILY: "1"
+    GENERATE_INFOPLIST_FILE: true
+
+targetTemplates:
+  Playground:
+    type: application
+    platform: iOS
+    scheme:
+      gatherCoverageData: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.sunapp.sunfinance.playground.${target_name}
+        CODE_SIGN_STYLE: Automatic
+        INFOPLIST_KEY_CFBundleDisplayName: ${target_name}
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
+        INFOPLIST_KEY_UILaunchScreen_Generation: true
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: >-
+          UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft
+          UIInterfaceOrientationLandscapeRight

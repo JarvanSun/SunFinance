@@ -1,0 +1,104 @@
+name: SunFinance
+options:
+  bundleIdPrefix: com.sunapp
+  deploymentTarget:
+    iOS: "18.0"
+  createIntermediateGroups: true
+  localPackagesGroup: ""
+  developmentLanguage: en
+  knownRegions: [en, de]
+  usesTabs: false
+  indentWidth: 4
+  tabWidth: 4
+
+packages:
+  SunKit:
+    url: https://github.com/JarvanSun/SunKit.git
+    minorVersion: 0.2.2
+  FinanceCore:
+    path: Core/FinanceCore
+  DesignSystem:
+    path: Core/DesignSystem
+  Instrument:
+    path: Features/Instrument
+  Watchlist:
+    path: Features/Watchlist
+  Portfolio:
+    path: Features/Portfolio
+  Orders:
+    path: Features/Orders
+
+settings:
+  base:
+    DEVELOPMENT_TEAM: ${SUNFINANCE_TEAM_ID}
+    MARKETING_VERSION: 1.0
+    CURRENT_PROJECT_VERSION: 1
+    SWIFT_VERSION: "6.0"
+    SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+    SWIFT_APPROACHABLE_CONCURRENCY: true
+    SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY: true
+    SWIFT_TREAT_WARNINGS_AS_ERRORS: true
+    TARGETED_DEVICE_FAMILY: "1"
+    GENERATE_INFOPLIST_FILE: true
+    SWIFT_EMIT_LOC_STRINGS: true
+    LOCALIZATION_PREFERS_STRING_CATALOGS: true
+    ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: true
+
+targets:
+  SunFinance:
+    type: application
+    platform: iOS
+    sources:
+      - SunFinance
+    resources:
+      - SunFinance/Resources/Assets.xcassets
+      - SunFinance/Resources/Localizable.xcstrings
+      - SunFinance/Resources/PrivacyInfo.xcprivacy
+    dependencies:
+      - package: SunKit
+        product: SunUserInterface
+      - package: FinanceCore
+      - package: DesignSystem
+      - package: Instrument
+      - package: Watchlist
+      - package: Portfolio
+      - package: Orders
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.sunapp.sunfinance
+        CODE_SIGN_STYLE: Automatic
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        INFOPLIST_KEY_CFBundleDisplayName: SunFinance
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: true
+        INFOPLIST_KEY_UILaunchScreen_Generation: true
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: >-
+          UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft
+          UIInterfaceOrientationLandscapeRight
+
+  SunFinanceTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - SunFinanceTests
+    dependencies:
+      - target: SunFinance
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.sunapp.sunfinanceTests
+
+schemes:
+  SunFinance:
+    build:
+      targets:
+        SunFinance: all
+        SunFinanceTests: [test]
+    test:
+      config: Debug
+      targets:
+        - SunFinanceTests
+        - package: FinanceCore/FinanceCoreTests
+        - package: DesignSystem/DesignSystemTests
+        - package: Instrument/InstrumentTests
+        - package: Watchlist/WatchlistTests
+        - package: Portfolio/PortfolioTests
+        - package: Orders/OrdersTests

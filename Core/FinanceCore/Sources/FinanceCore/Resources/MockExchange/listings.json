@@ -1,0 +1,17 @@
+{
+  "listings": [
+    { "symbol": "AAPL", "currency": "USD", "venue": "nasdaq", "reference_price": 228.52, "volatility": 1.0 },
+    { "symbol": "MSFT", "currency": "USD", "venue": "nasdaq", "reference_price": 415.30, "volatility": 0.9 },
+    { "symbol": "NVDA", "currency": "USD", "venue": "nasdaq", "reference_price": 138.85, "volatility": 1.8 },
+    { "symbol": "AMZN", "currency": "USD", "venue": "nasdaq", "reference_price": 197.12, "volatility": 1.2 },
+    { "symbol": "GOOGL", "currency": "USD", "venue": "nasdaq", "reference_price": 171.08, "volatility": 1.1 },
+    { "symbol": "TSLA", "currency": "USD", "venue": "nasdaq", "reference_price": 252.40, "volatility": 2.4 },
+    { "symbol": "ASML", "currency": "EUR", "venue": "xetra", "reference_price": 681.20, "volatility": 1.5 },
+    { "symbol": "SAP", "currency": "EUR", "venue": "xetra", "reference_price": 221.35, "volatility": 0.9 },
+    { "symbol": "SIE", "currency": "EUR", "venue": "xetra", "reference_price": 178.40, "volatility": 0.8 },
+    { "symbol": "ALV", "currency": "EUR", "venue": "xetra", "reference_price": 289.90, "volatility": 0.6 },
+    { "symbol": "JPM", "currency": "USD", "venue": "nyse", "reference_price": 224.70, "volatility": 0.8 },
+    { "symbol": "KO", "currency": "USD", "venue": "nyse", "reference_price": 62.15, "volatility": 0.5 }
+  ],
+  "eur_per_usd": 0.9230
+}

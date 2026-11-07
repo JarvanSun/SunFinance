@@ -1,0 +1,652 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "portfolio.action.buyMore" : {
+      "comment" : "Context menu on a position: opens a buy ticket.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nachkaufen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buy more"
+          }
+        }
+      }
+    },
+    "portfolio.action.sell" : {
+      "comment" : "Context menu on a position: opens a sell ticket.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verkaufen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sell"
+          }
+        }
+      }
+    },
+    "portfolio.allocation.cash" : {
+      "comment" : "Cash slice and legend.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guthaben"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cash"
+          }
+        }
+      }
+    },
+    "portfolio.allocation.positions" : {
+      "comment" : "Centre of the donut: under the number of positions.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Positionen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Positions"
+          }
+        }
+      }
+    },
+    "portfolio.allocation.summary %@ %@" : {
+      "comment" : "Accessibility summary of the allocation donut: the largest position's symbol, then its share of the portfolio.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Größte Position %1$@, %2$@ des Depots"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Largest position %1$@, %2$@ of the portfolio"
+          }
+        }
+      }
+    },
+    "portfolio.allocation.summary.cashOnly" : {
+      "comment" : "Accessibility summary of the allocation donut when the account holds only cash.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur Guthaben"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All in cash"
+          }
+        }
+      }
+    },
+    "portfolio.allocation.title" : {
+      "comment" : "Section title.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aufteilung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allocation"
+          }
+        }
+      }
+    },
+    "portfolio.chart.summary.day %@ %@" : {
+      "comment" : "Accessibility summary of the value chart over today: the first value, then the last.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heute: von %1$@ auf %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today, from %1$@ to %2$@"
+          }
+        }
+      }
+    },
+    "portfolio.chart.summary.fiveYears %@ %@" : {
+      "comment" : "Accessibility summary of the value chart over past 5 years: the first value, then the last.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5 Jahre: von %1$@ auf %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past 5 years, from %1$@ to %2$@"
+          }
+        }
+      }
+    },
+    "portfolio.chart.summary.month %@ %@" : {
+      "comment" : "Accessibility summary of the value chart over past month: the first value, then the last.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Monat: von %1$@ auf %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past month, from %1$@ to %2$@"
+          }
+        }
+      }
+    },
+    "portfolio.chart.summary.threeMonths %@ %@" : {
+      "comment" : "Accessibility summary of the value chart over past 3 months: the first value, then the last.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 Monate: von %1$@ auf %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past 3 months, from %1$@ to %2$@"
+          }
+        }
+      }
+    },
+    "portfolio.chart.summary.week %@ %@" : {
+      "comment" : "Accessibility summary of the value chart over past week: the first value, then the last.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Woche: von %1$@ auf %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past week, from %1$@ to %2$@"
+          }
+        }
+      }
+    },
+    "portfolio.chart.summary.year %@ %@" : {
+      "comment" : "Accessibility summary of the value chart over past year: the first value, then the last.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Jahr: von %1$@ auf %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past year, from %1$@ to %2$@"
+          }
+        }
+      }
+    },
+    "portfolio.chart.title" : {
+      "comment" : "Accessibility title of the value chart.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depotwert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Portfolio value"
+          }
+        }
+      }
+    },
+    "portfolio.chart.unavailable" : {
+      "comment" : "Instead of the chart when it could not load.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chart nicht verfügbar"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chart unavailable"
+          }
+        }
+      }
+    },
+    "portfolio.closed.accessibilityLabel %@ %@" : {
+      "comment" : "Spoken for a closed position row: symbol, then its realized gain.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, realisierter Gewinn %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, realized gain %2$@"
+          }
+        }
+      }
+    },
+    "portfolio.closed.realizedLabel" : {
+      "comment" : "Under a closed position's symbol.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Realisierter Gewinn"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Realized gain"
+          }
+        }
+      }
+    },
+    "portfolio.closed.title" : {
+      "comment" : "Section title.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geschlossene Positionen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Closed positions"
+          }
+        }
+      }
+    },
+    "portfolio.empty.message" : {
+      "comment" : "Positions section when there are no open positions.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaufe eine Aktie aus deiner Watchlist, um sie hier zu sehen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buy a stock from your watchlist to see it here."
+          }
+        }
+      }
+    },
+    "portfolio.empty.title" : {
+      "comment" : "Positions section when there are no open positions.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch keine Positionen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No positions yet"
+          }
+        }
+      }
+    },
+    "portfolio.failure.offline.message" : {
+      "comment" : "Message when offline.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prüfe deine Verbindung und versuche es erneut."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check your connection and try again."
+          }
+        }
+      }
+    },
+    "portfolio.failure.offline.title" : {
+      "comment" : "Title when offline.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist offline"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're offline"
+          }
+        }
+      }
+    },
+    "portfolio.failure.retry" : {
+      "comment" : "Retry button.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erneut versuchen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try again"
+          }
+        }
+      }
+    },
+    "portfolio.failure.service.message" : {
+      "comment" : "Message when the service failed.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Das Depot konnte nicht geladen werden. Versuche es gleich noch einmal."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The portfolio couldn't be loaded. Try again in a moment."
+          }
+        }
+      }
+    },
+    "portfolio.failure.service.title" : {
+      "comment" : "Title when the service failed.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depot nicht verfügbar"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Portfolio unavailable"
+          }
+        }
+      }
+    },
+    "portfolio.loading" : {
+      "comment" : "Spoken while the portfolio loads.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depot wird geladen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading portfolio"
+          }
+        }
+      }
+    },
+    "portfolio.metric.invested" : {
+      "comment" : "Metric label: the value of all open positions.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Investiert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invested"
+          }
+        }
+      }
+    },
+    "portfolio.metric.today" : {
+      "comment" : "Metric label: the change since the last close.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heute"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        }
+      }
+    },
+    "portfolio.metric.totalReturn" : {
+      "comment" : "Metric label: realized plus unrealized gain.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gesamtrendite"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total return"
+          }
+        }
+      }
+    },
+    "portfolio.period.day" : {
+      "comment" : "Label before the change over the chart's range.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heute"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        }
+      }
+    },
+    "portfolio.period.fiveYears" : {
+      "comment" : "Label before the change over the chart's range.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5 Jahre"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past 5 years"
+          }
+        }
+      }
+    },
+    "portfolio.period.month" : {
+      "comment" : "Label before the change over the chart's range.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Monat"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past month"
+          }
+        }
+      }
+    },
+    "portfolio.period.threeMonths" : {
+      "comment" : "Label before the change over the chart's range.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 Monate"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past 3 months"
+          }
+        }
+      }
+    },
+    "portfolio.period.week" : {
+      "comment" : "Label before the change over the chart's range.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Woche"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past week"
+          }
+        }
+      }
+    },
+    "portfolio.period.year" : {
+      "comment" : "Label before the change over the chart's range.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Jahr"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past year"
+          }
+        }
+      }
+    },
+    "portfolio.position.accessibilityLabel %@ %@ %@ %@" : {
+      "comment" : "Spoken for a position row: symbol, market value, price per share, total return in percent.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, Wert %2$@, Kurs %3$@, Gesamtrendite %4$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@, worth %2$@, price %3$@, total return %4$@"
+          }
+        }
+      }
+    },
+    "portfolio.positions.title" : {
+      "comment" : "Section title.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Positionen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Positions"
+          }
+        }
+      }
+    },
+    "portfolio.title" : {
+      "comment" : "Tab and navigation title.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Depot"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Portfolio"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

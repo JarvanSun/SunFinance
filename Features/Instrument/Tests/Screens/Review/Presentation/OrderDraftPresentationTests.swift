@@ -1,0 +1,64 @@
+//
+//  OrderDraftPresentationTests.swift
+//  InstrumentTests
+//
+//  Created by Jiawen Sun on 2026/11/07.
+//
+
+import DesignSystem
+import FinanceCore
+import Foundation
+import Testing
+
+@testable import Instrument
+
+struct OrderDraftPresentationTests {
+    @Test(arguments: [
+        (OrderDraft.make(.buy, amount: .shares(2)), "trading.review.summary.buy %@ %@"),
+        (.make(.sell, amount: .shares(2)), "trading.review.summary.sell %@ %@"),
+        (.make(.buy, amount: .euros(500)), "trading.review.summary.euros.buy %@ %@"),
+        (.make(.sell, amount: .euros(500)), "trading.review.summary.euros.sell %@ %@"),
+    ])
+    func headlineThenFollowsSideAndAmount(draft: OrderDraft, key: String) {
+        // Then
+        #expect(draft.headline.key == key)
+    }
+
+    @Test(arguments: [
+        (
+            OrderDraft.make(),
+            "trading.review.execution.market",
+            "trading.review.trigger.now",
+            "trading.validity.day"
+        ),
+        (
+            .make(
+                execution: .limit(230),
+                trigger: .priceAtOrBelow(220),
+                validity: .goodTillCancelled
+            ),
+            "trading.review.execution.limit %@",
+            "trading.review.trigger.price %@",
+            "trading.validity.gtc"
+        ),
+        (
+            .make(trigger: .at(.testNow)),
+            "trading.review.execution.market",
+            "trading.review.trigger.time %@",
+            "trading.validity.day"
+        ),
+    ])
+    func termRowsThenDescribeTypeTriggerAndValidity(
+        draft: OrderDraft,
+        type: String,
+        trigger: String,
+        validity: String
+    ) {
+        // When
+        let rows = draft.termRows(currency: .usd)
+
+        // Then
+        #expect(rows.map(\.id) == ["type", "trigger", "validity"])
+        #expect(rows.map(\.value.resourceKey) == [type, trigger, validity])
+    }
+}

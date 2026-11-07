@@ -1,0 +1,24 @@
+name: Playground
+include:
+  - ../../../scripts/playground-base.yml
+
+packages:
+  SunKit:
+    url: https://github.com/JarvanSun/SunKit.git
+    minorVersion: 0.2.2
+  FinanceCore:
+    path: ..
+  DesignSystem:
+    path: ../../../Core/DesignSystem
+
+targets:
+  FinanceCorePlayground:
+    templates:
+      - Playground
+    sources:
+      - Sources
+    dependencies:
+      - package: FinanceCore
+      - package: DesignSystem
+      - package: SunKit
+        product: SunUserInterface

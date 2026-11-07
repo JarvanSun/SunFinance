@@ -1,0 +1,510 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "watchlist.title": {
+      "comment": "Navigation title of the watchlist screen",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watchlist"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Watchlist"
+          }
+        }
+      }
+    },
+    "watchlist.search.prompt": {
+      "comment": "Placeholder text of the watchlist search field",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search symbol or company"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Symbol oder Unternehmen suchen"
+          }
+        }
+      }
+    },
+    "watchlist.sort.menu": {
+      "comment": "Title of the sort menu in the watchlist toolbar",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sort"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sortieren"
+          }
+        }
+      }
+    },
+    "watchlist.sort.marketCap": {
+      "comment": "Sort option: largest market capitalisation first",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market cap"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marktkapitalisierung"
+          }
+        }
+      }
+    },
+    "watchlist.sort.dailyChange": {
+      "comment": "Sort option: biggest daily gain first",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daily change"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tagesveränderung"
+          }
+        }
+      }
+    },
+    "watchlist.sort.symbol": {
+      "comment": "Sort option: alphabetical by ticker symbol",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Symbol"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Symbol"
+          }
+        }
+      }
+    },
+    "watchlist.section.onWatchlist": {
+      "comment": "Heading over the watchlist's own stocks that match the search",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On your watchlist"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In deiner Watchlist"
+          }
+        }
+      }
+    },
+    "watchlist.section.symbolMatches": {
+      "comment": "Heading over search results that are not on the watchlist yet",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add to watchlist"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zur Watchlist hinzufügen"
+          }
+        }
+      }
+    },
+    "watchlist.match.listing %@ %@": {
+      "comment": "Second line of a search result: ticker symbol, then the exchange it trades on",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "watchlist.match.accessibilityLabel %@ %@ %@": {
+      "comment": "VoiceOver label of a search result: company name, ticker symbol, exchange",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %2$@, %3$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %2$@, %3$@"
+          }
+        }
+      }
+    },
+    "watchlist.match.add.hint": {
+      "comment": "VoiceOver hint of a search result that can be added",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adds the stock to your watchlist."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fügt die Aktie deiner Watchlist hinzu."
+          }
+        }
+      }
+    },
+    "watchlist.match.added.hint": {
+      "comment": "VoiceOver hint of a search result that was just added",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Already on your watchlist."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bereits in deiner Watchlist."
+          }
+        }
+      }
+    },
+    "watchlist.placeholder.loading.title": {
+      "comment": "Shown while quotes load and nothing is on screen yet",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading quotes…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurse werden geladen …"
+          }
+        }
+      }
+    },
+    "watchlist.placeholder.searching.title": {
+      "comment": "Shown while a search runs and nothing matches yet",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Searching…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suche läuft …"
+          }
+        }
+      }
+    },
+    "watchlist.placeholder.empty.title": {
+      "comment": "Title when the watchlist has no symbols",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your watchlist is empty"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Watchlist ist leer"
+          }
+        }
+      }
+    },
+    "watchlist.placeholder.empty.message": {
+      "comment": "Message when the watchlist has no symbols",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search for a stock to add it."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suche nach einer Aktie, um sie hinzuzufügen."
+          }
+        }
+      }
+    },
+    "watchlist.placeholder.noResults.title": {
+      "comment": "Title when a search matches nothing",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No results"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Ergebnisse"
+          }
+        }
+      }
+    },
+    "watchlist.placeholder.noResults.message %@": {
+      "comment": "Message when a search matches nothing; %@ is the search text",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No symbol or company matches “%@”."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Symbol und kein Unternehmen passt zu „%@“."
+          }
+        }
+      }
+    },
+    "watchlist.placeholder.offline.title": {
+      "comment": "Title when the device is offline",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You’re offline"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du bist offline"
+          }
+        }
+      }
+    },
+    "watchlist.placeholder.offline.message": {
+      "comment": "Message when the device is offline",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check your connection and try again."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfe deine Verbindung und versuche es erneut."
+          }
+        }
+      }
+    },
+    "watchlist.placeholder.unavailable.title": {
+      "comment": "Title when the market data service fails",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quotes unavailable"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurse nicht verfügbar"
+          }
+        }
+      }
+    },
+    "watchlist.placeholder.unavailable.message": {
+      "comment": "Message when the market data service fails",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The market data service didn’t respond. Try again in a moment."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Marktdatendienst antwortet nicht. Versuche es gleich noch einmal."
+          }
+        }
+      }
+    },
+    "watchlist.placeholder.unreadable.title": {
+      "comment": "Title when the server sends data the app cannot read",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something went wrong"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etwas ist schiefgelaufen"
+          }
+        }
+      }
+    },
+    "watchlist.placeholder.unreadable.message": {
+      "comment": "Message when the server sends data the app cannot read",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We received data we couldn’t read."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wir haben Daten erhalten, die wir nicht lesen konnten."
+          }
+        }
+      }
+    },
+    "watchlist.placeholder.retry": {
+      "comment": "Button that loads quotes or search results again after a failure",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try again"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erneut versuchen"
+          }
+        }
+      }
+    },
+    "watchlist.favorite.add": {
+      "comment": "Swipe and VoiceOver action that adds a symbol to favorites",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add to favorites"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu Favoriten hinzufügen"
+          }
+        }
+      }
+    },
+    "watchlist.favorite.remove": {
+      "comment": "Swipe and VoiceOver action that removes a symbol from favorites",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove from favorites"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus Favoriten entfernen"
+          }
+        }
+      }
+    },
+    "watchlist.row.accessibilityLabel %@ %@ %@": {
+      "comment": "VoiceOver label of a quote row: company name, price, signed daily change",
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %2$@, %3$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %2$@, %3$@"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

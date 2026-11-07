@@ -1,0 +1,2362 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "quoteDetail.chart.loading": {
+      "comment": "Spoken while the chart loads.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chart wird geladen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading chart"
+          }
+        }
+      }
+    },
+    "quoteDetail.chart.summary %@ %@ %@ %@ %@": {
+      "comment": "VoiceOver summary of the chart: company, range, change in percent, the price it compares with and the last price.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %2$@, %3$@, von %4$@ auf %5$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %2$@, %3$@, from %4$@ to %5$@"
+          }
+        }
+      }
+    },
+    "quoteDetail.chart.summary.empty %@ %@": {
+      "comment": "VoiceOver summary of a chart without prices: company and range.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %2$@, noch keine Kurse"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, %2$@, no prices yet"
+          }
+        }
+      }
+    },
+    "quoteDetail.chart.title %@": {
+      "comment": "Audio Graph title of the price chart; the argument is the company name.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurs %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ price"
+          }
+        }
+      }
+    },
+    "quoteDetail.chart.unavailable": {
+      "comment": "Shown in place of the chart when its prices could not be loaded.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Chart ist gerade nicht verfügbar."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The chart isn’t available right now."
+          }
+        }
+      }
+    },
+    "quoteDetail.chartStyle.candles": {
+      "comment": "Chart style option: candlesticks.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kerzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Candles"
+          }
+        }
+      }
+    },
+    "quoteDetail.chartStyle.line": {
+      "comment": "Chart style option: price line.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linie"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Line"
+          }
+        }
+      }
+    },
+    "quoteDetail.header.atTime %@": {
+      "comment": "Caption under the price while scrubbing the one-day chart; the argument is a time of day.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At %@"
+          }
+        }
+      }
+    },
+    "quoteDetail.header.marketClosed": {
+      "comment": "Caption under the price while the exchange is closed; the price is the last close.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Börse geschlossen · Schlusskurs"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market closed · last close"
+          }
+        }
+      }
+    },
+    "quoteDetail.header.marketOpen": {
+      "comment": "Caption under the price while the exchange is trading.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Börse geöffnet"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market open"
+          }
+        }
+      }
+    },
+    "quoteDetail.header.onDate %@": {
+      "comment": "Caption under the price while scrubbing a longer chart; the argument is a date, sometimes with a time.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Am %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On %@"
+          }
+        }
+      }
+    },
+    "quoteDetail.level.limit": {
+      "comment": "Chart line at an open order’s limit.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit"
+          }
+        }
+      }
+    },
+    "quoteDetail.level.trigger": {
+      "comment": "Chart line at an open order’s trigger price.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auslöser"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trigger"
+          }
+        }
+      }
+    },
+    "quoteDetail.placeholder.loading": {
+      "comment": "Shown while the quote loads.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurs wird geladen …"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading quote…"
+          }
+        }
+      }
+    },
+    "quoteDetail.placeholder.offline.message": {
+      "comment": "Message when the device is offline.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfe deine Verbindung und versuche es erneut."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check your connection and try again."
+          }
+        }
+      }
+    },
+    "quoteDetail.placeholder.offline.title": {
+      "comment": "Title when the device is offline.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du bist offline"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You’re offline"
+          }
+        }
+      }
+    },
+    "quoteDetail.placeholder.retry": {
+      "comment": "Button that loads the quote again.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erneut versuchen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try again"
+          }
+        }
+      }
+    },
+    "quoteDetail.placeholder.unavailable.message": {
+      "comment": "Message when the quote could not be loaded.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Aktie konnte nicht geladen werden. Versuche es gleich noch einmal."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We couldn’t load this stock. Try again in a moment."
+          }
+        }
+      }
+    },
+    "quoteDetail.placeholder.unavailable.title": {
+      "comment": "Title when the quote could not be loaded.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurs nicht verfügbar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quote unavailable"
+          }
+        }
+      }
+    },
+    "quoteDetail.position.averageBuyIn %@": {
+      "comment": "Caption under the price; the argument is the average cost per share.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Ø Einstand"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ avg. buy in"
+          }
+        }
+      }
+    },
+    "quoteDetail.position.buyIn %@": {
+      "comment": "Caption under the position’s value; the argument is what it cost.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Einstand"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ buy in"
+          }
+        }
+      }
+    },
+    "quoteDetail.position.currencyEffect": {
+      "comment": "Position figure: the part of the gain that comes from the exchange rate.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Währungseffekt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Currency effect"
+          }
+        }
+      }
+    },
+    "quoteDetail.position.realized": {
+      "comment": "Position figure.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Realisierter Gewinn"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Realized gain"
+          }
+        }
+      }
+    },
+    "quoteDetail.position.shares": {
+      "comment": "Position figure.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stück"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shares"
+          }
+        }
+      }
+    },
+    "quoteDetail.position.sinceBuy": {
+      "comment": "Caption under the gain since buying.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seit Kauf"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Since buy"
+          }
+        }
+      }
+    },
+    "quoteDetail.position.sinceBuyPercent": {
+      "comment": "Caption under the gain in percent since buying.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seit Kauf (%)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Since buy (%)"
+          }
+        }
+      }
+    },
+    "quoteDetail.position.title": {
+      "comment": "Section title.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Position"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your position"
+          }
+        }
+      }
+    },
+    "quoteDetail.position.today": {
+      "comment": "Position figure.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heute"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        }
+      }
+    },
+    "quoteDetail.position.totalReturnPercent %@": {
+      "comment": "Caption under the total return; the argument is its percentage.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gesamtrendite · %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total return · %@"
+          }
+        }
+      }
+    },
+    "quoteDetail.statistics.dayRange": {
+      "comment": "Statistic: today’s lowest to highest price.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tagesspanne"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day range"
+          }
+        }
+      }
+    },
+    "quoteDetail.statistics.marketCap": {
+      "comment": "Statistic: market capitalisation.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marktkapitalisierung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market cap"
+          }
+        }
+      }
+    },
+    "quoteDetail.statistics.open": {
+      "comment": "Statistic: today’s opening price.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eröffnung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open"
+          }
+        }
+      }
+    },
+    "quoteDetail.statistics.range %@ %@": {
+      "comment": "Value of a range statistic: the lowest, then the highest price.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@–%2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@–%2$@"
+          }
+        }
+      }
+    },
+    "quoteDetail.statistics.title": {
+      "comment": "Title of the key statistics section.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kennzahlen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Key statistics"
+          }
+        }
+      }
+    },
+    "quoteDetail.statistics.volume": {
+      "comment": "Statistic: shares traded today.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volumen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volume"
+          }
+        }
+      }
+    },
+    "quoteDetail.statistics.yearRange": {
+      "comment": "Statistic: the last 52 weeks’ lowest to highest price.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "52-Wochen-Spanne"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "52-week range"
+          }
+        }
+      }
+    },
+    "quoteDetail.trade.buy": {
+      "comment": "Button that opens the order ticket to buy.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaufen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy"
+          }
+        }
+      }
+    },
+    "quoteDetail.trade.sell": {
+      "comment": "Button that opens the order ticket to sell.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verkaufen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sell"
+          }
+        }
+      }
+    },
+    "trading.amount.field.euros": {
+      "comment": "Amount field title in euros mode.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betrag in Euro"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amount in euros"
+          }
+        }
+      }
+    },
+    "trading.amount.field.shares": {
+      "comment": "Amount field title in shares mode.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anzahl Stück"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Number of shares"
+          }
+        }
+      }
+    },
+    "trading.amount.mode.euros": {
+      "comment": "Amount picker segment: size in euros.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Euro"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Euros"
+          }
+        }
+      }
+    },
+    "trading.amount.mode.shares": {
+      "comment": "Amount picker segment: size in shares.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stück"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shares"
+          }
+        }
+      }
+    },
+    "trading.amount.sellAll": {
+      "comment": "Fills in every share the user holds.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle verkaufen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sell all"
+          }
+        }
+      }
+    },
+    "trading.cancel": {
+      "comment": "Closes the ticket.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abbrechen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        }
+      }
+    },
+    "trading.estimate.total.buy": {
+      "comment": "Live estimate label on a buy.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voraussichtliche Kosten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimated total"
+          }
+        }
+      }
+    },
+    "trading.estimate.total.sell": {
+      "comment": "Live estimate label on a sell.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voraussichtlicher Erlös"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimated proceeds"
+          }
+        }
+      }
+    },
+    "trading.execution.limit": {
+      "comment": "Order type segment.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit"
+          }
+        }
+      }
+    },
+    "trading.execution.market": {
+      "comment": "Order type segment.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market"
+          }
+        }
+      }
+    },
+    "trading.execution.title": {
+      "comment": "Section title for market or limit.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orderart"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order type"
+          }
+        }
+      }
+    },
+    "trading.failure.offline.message": {
+      "comment": "Message when offline.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfe deine Verbindung und versuche es erneut."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check your connection and try again."
+          }
+        }
+      }
+    },
+    "trading.failure.offline.title": {
+      "comment": "Title when offline.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du bist offline"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You're offline"
+          }
+        }
+      }
+    },
+    "trading.failure.retry": {
+      "comment": "Retry button.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erneut versuchen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try again"
+          }
+        }
+      }
+    },
+    "trading.failure.service.message": {
+      "comment": "Message when the service failed.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Orderservice hat nicht geantwortet. Versuche es gleich noch einmal."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The order service didn't answer. Try again in a moment."
+          }
+        }
+      }
+    },
+    "trading.failure.service.title": {
+      "comment": "Title when the service failed.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Etwas ist schiefgelaufen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something went wrong"
+          }
+        }
+      }
+    },
+    "trading.header.buyingPower %@": {
+      "comment": "Ticket header on a buy; the argument is an amount.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaufkraft %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buying power %@"
+          }
+        }
+      }
+    },
+    "trading.header.held %@ %lf": {
+      "comment": "Ticket header on a sell: the number of shares held, then the same number choosing the plural.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Depot: %1$@ %#@count@"
+          },
+          "substitutions": {
+            "count": {
+              "argNum": 2,
+              "formatSpecifier": "lf",
+              "variations": {
+                "plural": {
+                  "one": {
+                    "stringUnit": {
+                      "state": "translated",
+                      "value": "Stück"
+                    }
+                  },
+                  "other": {
+                    "stringUnit": {
+                      "state": "translated",
+                      "value": "Stück"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You own %1$@ %#@count@"
+          },
+          "substitutions": {
+            "count": {
+              "argNum": 2,
+              "formatSpecifier": "lf",
+              "variations": {
+                "plural": {
+                  "one": {
+                    "stringUnit": {
+                      "state": "translated",
+                      "value": "share"
+                    }
+                  },
+                  "other": {
+                    "stringUnit": {
+                      "state": "translated",
+                      "value": "shares"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "trading.header.marketClosed": {
+      "comment": "Ticket header while the exchange is closed.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Börse geschlossen · Orders warten auf die Eröffnung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market closed · Orders wait for the open"
+          }
+        }
+      }
+    },
+    "trading.issue.amount.missing": {
+      "comment": "Under the amount field.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betrag eingeben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter an amount"
+          }
+        }
+      }
+    },
+    "trading.issue.belowShareStep": {
+      "comment": "Under the amount field when the server predicts the amount buys less than the smallest share step.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu klein für den kleinsten Aktienschritt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Too small for the smallest share step"
+          }
+        }
+      }
+    },
+    "trading.issue.insufficientCash": {
+      "comment": "Under the amount field.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mehr als deine Kaufkraft"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More than your buying power"
+          }
+        }
+      }
+    },
+    "trading.issue.insufficientShares": {
+      "comment": "Under the amount field.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mehr Aktien, als du verkaufen kannst"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More shares than you can sell"
+          }
+        }
+      }
+    },
+    "trading.issue.notANumber": {
+      "comment": "Under a field that does not hold a number.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zahl eingeben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter a number"
+          }
+        }
+      }
+    },
+    "trading.issue.notInFuture": {
+      "comment": "Under the date picker.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zeitpunkt in der Zukunft wählen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a time in the future"
+          }
+        }
+      }
+    },
+    "trading.issue.notPositive": {
+      "comment": "Under a field whose number is zero or less.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muss größer als null sein"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Must be more than zero"
+          }
+        }
+      }
+    },
+    "trading.issue.notTradable": {
+      "comment": "Under the amount field when the server says the stock cannot be traded.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Aktie ist nicht handelbar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This stock can't be traded"
+          }
+        }
+      }
+    },
+    "trading.issue.outsideSchedule": {
+      "comment": "Under the date picker when the server says the time is not within 90 days.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zeitpunkt in den nächsten 90 Tagen wählen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a time within the next 90 days"
+          }
+        }
+      }
+    },
+    "trading.issue.price.missing": {
+      "comment": "Under a price field.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preis eingeben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter a price"
+          }
+        }
+      }
+    },
+    "trading.issue.tooFar": {
+      "comment": "Under the date picker.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Höchstens 90 Tage im Voraus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At most 90 days ahead"
+          }
+        }
+      }
+    },
+    "trading.issue.tooPrecise": {
+      "comment": "Under the shares field.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Höchstens 4 Nachkommastellen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Up to 4 decimal places"
+          }
+        }
+      }
+    },
+    "trading.limit.field.buy": {
+      "comment": "Limit field title on a buy.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Höchstpreis pro Aktie"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Highest price per share"
+          }
+        }
+      }
+    },
+    "trading.limit.field.sell": {
+      "comment": "Limit field title on a sell.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mindestpreis pro Aktie"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lowest price per share"
+          }
+        }
+      }
+    },
+    "trading.loading": {
+      "comment": "Spoken while the ticket loads.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird geladen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading"
+          }
+        }
+      }
+    },
+    "trading.rejection.insufficientCash": {
+      "comment": "Why an order would be rejected.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht genug Kaufkraft für diese Order."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not enough buying power for this order."
+          }
+        }
+      }
+    },
+    "trading.rejection.insufficientShares": {
+      "comment": "Why an order would be rejected.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du hast nicht genug Aktien für diese Order."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You don't have enough shares for this order."
+          }
+        }
+      }
+    },
+    "trading.rejection.invalidAmount": {
+      "comment": "Why an order would be rejected.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Betrag reicht nicht für einen Aktienschritt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The amount is too small for one share step."
+          }
+        }
+      }
+    },
+    "trading.rejection.invalidPrice": {
+      "comment": "Why an order would be rejected.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Preis muss größer als null sein."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The price must be more than zero."
+          }
+        }
+      }
+    },
+    "trading.rejection.invalidSchedule": {
+      "comment": "Why an order would be rejected.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle einen Zeitpunkt in den nächsten 90 Tagen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a time within the next 90 days."
+          }
+        }
+      }
+    },
+    "trading.rejection.unknownSymbol": {
+      "comment": "Why an order would be rejected.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Aktie ist nicht handelbar."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This stock can't be traded."
+          }
+        }
+      }
+    },
+    "trading.result.cancelled": {
+      "comment": "Result title for an order that was cancelled before it went out.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order storniert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order cancelled"
+          }
+        }
+      }
+    },
+    "trading.result.cancelled.detail": {
+      "comment": "Result detail for a cancelled order.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sie wurde storniert, bevor sie ausgeführt wurde."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It was cancelled before it went out."
+          }
+        }
+      }
+    },
+    "trading.result.done": {
+      "comment": "Closes the ticket.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fertig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        }
+      }
+    },
+    "trading.result.expired": {
+      "comment": "Result title for an order whose validity ended.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order abgelaufen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order expired"
+          }
+        }
+      }
+    },
+    "trading.result.expired.detail": {
+      "comment": "Result detail for an expired order.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sie ist abgelaufen, bevor sie ausgeführt wurde."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Its validity ended before it filled."
+          }
+        }
+      }
+    },
+    "trading.result.filled.buy %@ %@": {
+      "comment": "Result title after a buy filled: quantity, then symbol.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@ gekauft"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bought %1$@ %2$@"
+          }
+        }
+      }
+    },
+    "trading.result.filled.detail %@ %@": {
+      "comment": "Result detail after a fill: price per share, then total.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu %1$@ pro Aktie · %2$@ insgesamt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At %1$@ per share · %2$@ in total"
+          }
+        }
+      }
+    },
+    "trading.result.filled.sell %@ %@": {
+      "comment": "Result title after a sell filled: quantity, then symbol.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@ verkauft"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sold %1$@ %2$@"
+          }
+        }
+      }
+    },
+    "trading.result.filledWithoutDetails": {
+      "comment": "Result title for a filled order whose fill has not arrived yet.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order ausgeführt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order filled"
+          }
+        }
+      }
+    },
+    "trading.result.filledWithoutDetails.detail": {
+      "comment": "Result detail for a filled order whose fill has not arrived yet.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurs und Gebühr erscheinen unter Orders."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Its price and fee show up in Orders."
+          }
+        }
+      }
+    },
+    "trading.result.placed": {
+      "comment": "Result title for an order that waits.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order platziert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order placed"
+          }
+        }
+      }
+    },
+    "trading.result.rejected": {
+      "comment": "Result title for a rejected order.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order nicht platziert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order not placed"
+          }
+        }
+      }
+    },
+    "trading.result.scheduled %@": {
+      "comment": "Result detail for a scheduled order; the argument is a date and time.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sie wird am %@ gesendet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It goes out on %@."
+          }
+        }
+      }
+    },
+    "trading.result.waitingForOpen": {
+      "comment": "Result detail while the exchange is closed.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sie wird zur Börseneröffnung gesendet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It goes out when the market opens."
+          }
+        }
+      }
+    },
+    "trading.result.waitingForPrice": {
+      "comment": "Result detail for a limit order.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sie wird ausgeführt, sobald der Kurs dein Limit erreicht."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It fills once the price reaches your limit."
+          }
+        }
+      }
+    },
+    "trading.result.waitingForTrigger %@": {
+      "comment": "Result detail for a stop order; the argument is the trigger price.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sie wird gesendet, sobald der Kurs %@ erreicht."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It goes out once the price reaches %@."
+          }
+        }
+      }
+    },
+    "trading.review.button": {
+      "comment": "Button that opens the review.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review order"
+          }
+        }
+      }
+    },
+    "trading.review.edit": {
+      "comment": "Goes back to the ticket.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order bearbeiten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit order"
+          }
+        }
+      }
+    },
+    "trading.review.execution.limit %@": {
+      "comment": "Value of the review's order type row for a limit order; the argument is the limit.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit %@"
+          }
+        }
+      }
+    },
+    "trading.review.execution.market": {
+      "comment": "Value of the review's order type row for a market order.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Market"
+          }
+        }
+      }
+    },
+    "trading.review.note": {
+      "comment": "Under the review rows.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurse bewegen sich. Die Order wird zum Börsenkurs ausgeführt, wenn sie gesendet wird."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prices move. The order fills at the exchange price when it goes out."
+          }
+        }
+      }
+    },
+    "trading.review.placeFailed.offline": {
+      "comment": "Under the slider when placing failed offline.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du bist offline. Zum Wiederholen erneut schieben."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You're offline. Slide again to retry."
+          }
+        }
+      }
+    },
+    "trading.review.placeFailed.service": {
+      "comment": "Under the slider when placing failed.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Order wurde nicht gesendet. Zum Wiederholen erneut schieben."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The order wasn't sent. Slide again to retry."
+          }
+        }
+      }
+    },
+    "trading.review.row.cashAfter": {
+      "comment": "Review row.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guthaben danach"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cash afterwards"
+          }
+        }
+      }
+    },
+    "trading.review.row.fee": {
+      "comment": "Review row.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gebühr"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fee"
+          }
+        }
+      }
+    },
+    "trading.review.row.price": {
+      "comment": "Review row.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurs pro Aktie"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Price per share"
+          }
+        }
+      }
+    },
+    "trading.review.row.quantity": {
+      "comment": "Review and result row: the number of shares.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stück"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shares"
+          }
+        }
+      }
+    },
+    "trading.review.row.rate": {
+      "comment": "Review row.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wechselkurs"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exchange rate"
+          }
+        }
+      }
+    },
+    "trading.review.row.rate.value %@ %@": {
+      "comment": "Exchange rate value: one unit of a currency, then its euro value.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 %1$@ = %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 %1$@ = %2$@"
+          }
+        }
+      }
+    },
+    "trading.review.row.total.buy": {
+      "comment": "Review row on a buy.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voraussichtliche Kosten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimated total"
+          }
+        }
+      }
+    },
+    "trading.review.row.total.sell": {
+      "comment": "Review row on a sell.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voraussichtlicher Erlös"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estimated proceeds"
+          }
+        }
+      }
+    },
+    "trading.review.row.trigger": {
+      "comment": "Review row: when the order goes out.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausführung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goes out"
+          }
+        }
+      }
+    },
+    "trading.review.row.type": {
+      "comment": "Review row: market or limit, with its price.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orderart"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order type"
+          }
+        }
+      }
+    },
+    "trading.review.row.validity": {
+      "comment": "Review row: how long the order lives.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gültig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valid"
+          }
+        }
+      }
+    },
+    "trading.review.slide.buy": {
+      "comment": "Slide-to-confirm label on a buy.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zum Kaufen schieben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slide to buy"
+          }
+        }
+      }
+    },
+    "trading.review.slide.sell": {
+      "comment": "Slide-to-confirm label on a sell.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zum Verkaufen schieben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slide to sell"
+          }
+        }
+      }
+    },
+    "trading.review.summary.buy %@ %@": {
+      "comment": "Review headline on a buy: quantity, then symbol.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@ kaufen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy %1$@ %2$@"
+          }
+        }
+      }
+    },
+    "trading.review.summary.euros.buy %@ %@": {
+      "comment": "Review headline on a buy in euros: amount, then symbol.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$@ für %1$@ kaufen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy %2$@ for %1$@"
+          }
+        }
+      }
+    },
+    "trading.review.summary.euros.sell %@ %@": {
+      "comment": "Review headline on a sell in euros: amount, then symbol.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$@ für %1$@ verkaufen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sell %2$@ for %1$@"
+          }
+        }
+      }
+    },
+    "trading.review.summary.sell %@ %@": {
+      "comment": "Review headline on a sell: quantity, then symbol.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@ verkaufen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sell %1$@ %2$@"
+          }
+        }
+      }
+    },
+    "trading.review.title": {
+      "comment": "Navigation title of the review.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review"
+          }
+        }
+      }
+    },
+    "trading.review.trigger.now": {
+      "comment": "Value of the review's goes-out row for an order without a trigger.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sofort"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Right away"
+          }
+        }
+      }
+    },
+    "trading.review.trigger.price %@": {
+      "comment": "Value of the review's goes-out row for a stop; the argument is the trigger price.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At %@"
+          }
+        }
+      }
+    },
+    "trading.review.trigger.time %@": {
+      "comment": "Value of the review's goes-out row for a scheduled order; the argument is a date and time.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Am %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On %@"
+          }
+        }
+      }
+    },
+    "trading.side.buy": {
+      "comment": "Side picker segment.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaufen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy"
+          }
+        }
+      }
+    },
+    "trading.side.sell": {
+      "comment": "Side picker segment.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verkaufen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sell"
+          }
+        }
+      }
+    },
+    "trading.ticket.title.buy %@": {
+      "comment": "Ticket title for a buy; the argument is the symbol.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kaufen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy %@"
+          }
+        }
+      }
+    },
+    "trading.ticket.title.sell %@": {
+      "comment": "Ticket title for a sell; the argument is the symbol.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ verkaufen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sell %@"
+          }
+        }
+      }
+    },
+    "trading.trigger.now": {
+      "comment": "Trigger segment.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sofort"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Now"
+          }
+        }
+      }
+    },
+    "trading.trigger.price": {
+      "comment": "Trigger segment: at a price level.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurs"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At a price"
+          }
+        }
+      }
+    },
+    "trading.trigger.price.field.buy": {
+      "comment": "Stop field title on a buy.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaufen, wenn der Kurs steigt auf"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy when the price rises to"
+          }
+        }
+      }
+    },
+    "trading.trigger.price.field.sell": {
+      "comment": "Stop field title on a sell.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verkaufen, wenn der Kurs fällt auf"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sell when the price falls to"
+          }
+        }
+      }
+    },
+    "trading.trigger.time": {
+      "comment": "Trigger segment: at a date and time.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zeitpunkt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At a time"
+          }
+        }
+      }
+    },
+    "trading.trigger.time.field": {
+      "comment": "Date picker title for a scheduled order.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order senden am"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send the order on"
+          }
+        }
+      }
+    },
+    "trading.trigger.title": {
+      "comment": "Section title for when the order goes out.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wann"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When"
+          }
+        }
+      }
+    },
+    "trading.validity.day": {
+      "comment": "Validity segment.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heute"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        }
+      }
+    },
+    "trading.validity.gtc": {
+      "comment": "Validity segment.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bis auf Widerruf"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Until cancelled"
+          }
+        }
+      }
+    },
+    "trading.validity.title": {
+      "comment": "Section title for how long an order lives.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gültig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Valid"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
