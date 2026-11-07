@@ -12,7 +12,7 @@ extension Bundle {
         guard let url = url(forResource: name, withExtension: jsonExtension) else {
             throw CocoaError(.fileNoSuchFile)
         }
-        return try JSONDecoder.backend.decode(type, from: Data(contentsOf: url))
+        return try makeBackendDecoder().decode(type, from: Data(contentsOf: url))
     }
 }
 

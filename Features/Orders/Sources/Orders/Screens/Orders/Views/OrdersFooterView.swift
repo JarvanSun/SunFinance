@@ -20,14 +20,14 @@ struct OrdersFooterView: View {
         case .loadingMore:
             ProgressView()
                 .frame(maxWidth: .infinity)
-                .accessibilityLabel(Text(OrdersText.loadingMore))
+                .accessibilityLabel(Text("orders.footer.loading", bundle: .module))
         case .failed(let issue):
             VStack(spacing: dimensions.spaceSmall) {
                 Text(issue.title)
                     .textStyle(FinanceColor.textSecondary, FinanceFont.callout)
 
                 Button(action: onRetry) {
-                    Text(OrdersText.retryPage)
+                    Text("orders.footer.retry", bundle: .module)
                 }
                 .buttonStyle(.finance(.tertiary))
                 .accessibilityIdentifier(OrdersAccessibility.pageRetryButton)

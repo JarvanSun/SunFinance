@@ -17,7 +17,9 @@ final class BrokerageConsole {
     private let service: BrokerageService
 
     init() {
-        service = BrokerageService(environment: .mock(behavior: .realistic, storageDirectory: nil))
+        service = BrokerageService(
+            environment: .init(mockBehavior: .realistic, storageDirectory: nil)
+        )
     }
 
     func run(_ call: BrokerageCall) async {

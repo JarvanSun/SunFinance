@@ -43,7 +43,7 @@ private extension OrdersQueryTests {
     func order(state: LedgerOrder.State, symbol: TickerSymbol) -> LedgerOrder {
         LedgerOrder(
             id: "order-1",
-            draft: .make(symbol: symbol),
+            draft: .init(symbol: symbol),
             quantity: 1,
             createdAt: Date(timeIntervalSince1970: 100),
             state: state,

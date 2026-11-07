@@ -13,10 +13,10 @@ final class TradingServicesStub: QuoteProviding, AccountProviding, PositionProvi
     OrderPreviewing, OrderPlacing
 {
     struct State {
-        var quoteResult: Result<[StockQuote], MarketDataError> = .success([.apple])
-        var accountResult: Result<Account, BrokerageError> = .success(.sample)
-        var portfolioResult: Result<Portfolio, BrokerageError> = .success(.holdingApple(15))
-        var previewResult: Result<OrderPreview, BrokerageError> = .success(.sample())
+        var quoteResult: Result<[StockQuote], MarketDataError> = .success([appleQuote])
+        var accountResult: Result<Account, BrokerageError> = .success(sampleAccount)
+        var portfolioResult: Result<Portfolio, BrokerageError> = .success(.init(holdingApple: 15))
+        var previewResult: Result<OrderPreview, BrokerageError> = .success(.init())
         var placeResults: [Result<OrderStatus, BrokerageError>] = [.success(.filled)]
         var previewDelay = Duration.zero
         var placeDelay = Duration.zero
@@ -69,6 +69,6 @@ final class TradingServicesStub: QuoteProviding, AccountProviding, PositionProvi
             return (result, state.placeDelay)
         }
         try? await Task.sleep(for: delay)
-        return Order.make(draft, status: try result.get())
+        return Order(draft, status: try result.get())
     }
 }

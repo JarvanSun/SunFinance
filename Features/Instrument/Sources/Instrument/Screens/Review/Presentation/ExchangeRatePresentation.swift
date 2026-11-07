@@ -15,16 +15,23 @@ extension ExchangeRate {
         case true:
             []
         case false:
-            [LabeledRow(id: "rate", title: TradingText.rateRow, value: .localized(valueText))]
+            [
+                LabeledRow(
+                    id: "rate",
+                    title: .init("trading.review.row.rate", bundle: .module),
+                    value: .localized(valueText)
+                )
+            ]
         }
     }
 }
 
 private extension ExchangeRate {
     var valueText: LocalizedStringResource {
-        TradingText.rate(
-            currency: currency.rawValue,
-            inEuros: eurosPerUnit.formattedExchangeRate()
+        let inEuros = eurosPerUnit.formattedExchangeRate()
+        return .init(
+            "trading.review.row.rate.value \(currency.rawValue) \(inEuros)",
+            bundle: .module
         )
     }
 }

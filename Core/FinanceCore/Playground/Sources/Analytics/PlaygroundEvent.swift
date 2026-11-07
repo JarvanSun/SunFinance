@@ -32,7 +32,7 @@ enum PlaygroundEvent: String, CaseIterable, Identifiable, AnalyticsEvent {
         case .quoteOpened:
             [.symbol: .text("AAPL")]
         case .searchWithQueryText:
-            [AnalyticsParameter("query"): .text("apple")]
+            [.query: .text("apple")]
         }
     }
 }

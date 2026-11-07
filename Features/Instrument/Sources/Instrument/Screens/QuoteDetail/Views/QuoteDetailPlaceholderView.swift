@@ -23,7 +23,10 @@ struct QuoteDetailPlaceholderView: View {
                 message: issue.message,
                 image: issue.image,
                 action: StateAction(
-                    title: QuoteDetailText.retry,
+                    title: .init(
+                        "quoteDetail.placeholder.retry",
+                        bundle: .module
+                    ),
                     accessibilityIdentifier: InstrumentAccessibility.quoteRetryButton,
                     perform: onRetry
                 )

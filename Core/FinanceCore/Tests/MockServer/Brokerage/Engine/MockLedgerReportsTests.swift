@@ -12,12 +12,12 @@ import Testing
 
 struct MockLedgerReportsTests {
     let exchange = MockExchange()
-    let date = TradingClock.tuesdayAfternoon
+    let date = TradingMoment.tuesdayAfternoon.date
 
     @Test func accountThenAddsCashAndPositionsAndSubtractsReservedCash() throws {
         // Given
-        var ledger = MockLedger.seeded(at: date, exchange: exchange)
-        let draft = OrderDraft.make(.buy, .shares(1), execution: .limit(1))
+        var ledger = MockLedger(seededAt: date, exchange: exchange)
+        let draft = OrderDraft(.buy, .shares(1), execution: .limit(1))
         _ = ledger.place(draft, key: nil, at: date, exchange: exchange)
 
         // When
@@ -36,8 +36,8 @@ struct MockLedgerReportsTests {
         // Given
         let quote = try #require(exchange.quote(for: "SAP", at: date))
         var ledger = makeLedger()
-        ledger.book(.make(.buy, 10, at: 100, day: -30))
-        ledger.book(.make(.sell, 10, at: 105, date: date.addingTimeInterval(-3_600)))
+        ledger.book(.init(.buy, 10, at: 100, day: -30))
+        ledger.book(.init(.sell, 10, at: 105, date: date.addingTimeInterval(-3_600)))
 
         // When
         let account = try Account(ledger.account(at: date, exchange: exchange))
@@ -49,7 +49,7 @@ struct MockLedgerReportsTests {
 
     @Test func positionsThenListsOpenByValueAndClosedApart() {
         // Given
-        let ledger = MockLedger.seeded(at: date, exchange: exchange)
+        let ledger = MockLedger(seededAt: date, exchange: exchange)
 
         // When
         let positions = ledger.positions(at: date, exchange: exchange)
@@ -63,7 +63,7 @@ struct MockLedgerReportsTests {
 
     @Test func historyThenEndsNowAtTheTotalValue() throws {
         // Given
-        let ledger = MockLedger.seeded(at: date, exchange: exchange)
+        let ledger = MockLedger(seededAt: date, exchange: exchange)
 
         // When
         let dto = ledger.history(range: .week, at: date, exchange: exchange)
@@ -78,16 +78,16 @@ struct MockLedgerReportsTests {
 
     @Test func ordersPageThenSplitsOpenFromPastNewestFirstAndPages() {
         // Given
-        var ledger = MockLedger.seeded(at: date, exchange: exchange)
+        var ledger = MockLedger(seededAt: date, exchange: exchange)
         let orders = (0..<25).map { index in
             ledger.place(
-                .make(execution: .limit(1)),
+                .init(execution: .limit(1)),
                 key: nil,
                 at: date.addingTimeInterval(Double(index)),
                 exchange: exchange
             )
         }
-        _ = ledger.place(.make(), key: nil, at: date, exchange: exchange)
+        _ = ledger.place(.init(), key: nil, at: date, exchange: exchange)
 
         // When
         let first = ledger.ordersPage(query(.open), at: date, exchange: exchange)
@@ -108,8 +108,8 @@ struct MockLedgerReportsTests {
 
     @Test func dtoThenDescribesTheOrderWithItsFill() throws {
         // Given
-        var ledger = MockLedger.seeded(at: date, exchange: exchange)
-        let draft = OrderDraft.make(.buy, .shares(2), symbol: "AAPL")
+        var ledger = MockLedger(seededAt: date, exchange: exchange)
+        let draft = OrderDraft(.buy, .shares(2), symbol: "AAPL")
         let order = ledger.place(draft, key: nil, at: date, exchange: exchange)
 
         // When
@@ -144,7 +144,7 @@ struct MockLedgerReportsTests {
         let ledger = makeLedger()
         let order = LedgerOrder(
             id: "order-1",
-            draft: .make(execution: execution, trigger: trigger),
+            draft: .init(execution: execution, trigger: trigger),
             quantity: 1,
             createdAt: date,
             state: state,

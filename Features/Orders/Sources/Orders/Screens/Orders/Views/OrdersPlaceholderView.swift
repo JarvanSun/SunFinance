@@ -29,7 +29,10 @@ struct OrdersPlaceholderView: View {
                 title: placeholder.title,
                 message: placeholder.message,
                 image: placeholder.image,
-                action: StateAction(title: OrdersText.retry, perform: onRetry)
+                action: StateAction(
+                    title: .init("orders.failure.retry", bundle: .module),
+                    perform: onRetry
+                )
             )
             .accessibilityIdentifier(OrdersAccessibility.retryButton)
         }

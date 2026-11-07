@@ -14,7 +14,7 @@ import Testing
 struct PortfolioSnapshotTests {
     @Test func totalReturnThenSumsOpenAndClosedPositions() {
         // When
-        let snapshot = PortfolioSnapshot(account: .sample, portfolio: .sample)
+        let snapshot = PortfolioSnapshot(account: sampleAccount, portfolio: samplePortfolio)
 
         // Then
         #expect(snapshot.totalReturn == Money(180, .eur))
@@ -24,8 +24,8 @@ struct PortfolioSnapshotTests {
     @Test func hasOpenPositionsWhenEverythingIsSoldThenIsFalse() {
         // When
         let snapshot = PortfolioSnapshot(
-            account: .sample,
-            portfolio: Portfolio(open: [], closed: Portfolio.sample.closed)
+            account: sampleAccount,
+            portfolio: Portfolio(open: [], closed: samplePortfolio.closed)
         )
 
         // Then

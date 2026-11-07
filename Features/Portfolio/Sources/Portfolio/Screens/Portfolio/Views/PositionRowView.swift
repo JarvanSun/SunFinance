@@ -58,13 +58,18 @@ struct PositionRowView: View {
 #Preview(traits: .sizeThatFitsLayout) {
     VStack(spacing: 0) {
         PositionRowView(
-            position: PreviewObjectPool.position("SAP", quantity: 15, value: 3_425, gain: 412.5),
+            position: PreviewObjectPool().position("SAP", quantity: 15, value: 3_425, gain: 412.5),
             swatch: FinanceColor.accent.color,
             highlight: .clear
         )
 
         PositionRowView(
-            position: PreviewObjectPool.position("NVDA", quantity: 15, value: 2_610, gain: -188.4),
+            position: PreviewObjectPool().position(
+                "NVDA",
+                quantity: 15,
+                value: 2_610,
+                gain: -188.4
+            ),
             swatch: FinanceColor.accentMuted.color,
             highlight: FinanceColor.accentMuted.color.opacity(0.12)
         )

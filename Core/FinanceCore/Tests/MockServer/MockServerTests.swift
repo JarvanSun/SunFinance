@@ -50,7 +50,7 @@ struct MockServerTests {
 
     @Test func respondWhenOnlyReadsFailThenWriteStillSucceeds() async throws {
         // Given
-        let server = makeServer(behavior: .init(latency: .zero...(.zero), readFailureRate: 1))
+        let server = makeServer(behavior: .failingReads)
         var write = try request(path: "v1/echo")
         write.httpMethod = "POST"
 

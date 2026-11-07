@@ -69,12 +69,12 @@ struct PortfolioAllocationTests {
     }
 
     @Test(arguments: [
-        (Portfolio.sample, "portfolio.allocation.summary %@ %@"),
+        (samplePortfolio, "portfolio.allocation.summary %@ %@"),
         (Portfolio(open: [], closed: []), "portfolio.allocation.summary.cashOnly"),
     ])
     func contentThenReadsTheLargestPositionOrCashOnly(portfolio: Portfolio, key: String) {
         // When
-        let accessibility = PortfolioAllocation(account: .sample, portfolio: portfolio)
+        let accessibility = PortfolioAllocation(account: sampleAccount, portfolio: portfolio)
             .content
             .accessibility
 
@@ -86,6 +86,6 @@ struct PortfolioAllocationTests {
 
 private extension PortfolioAllocationTests {
     func makeAllocation() -> PortfolioAllocation {
-        PortfolioAllocation(account: .sample, portfolio: .sample)
+        PortfolioAllocation(account: sampleAccount, portfolio: samplePortfolio)
     }
 }

@@ -31,22 +31,22 @@ struct OrderDetailView: View {
             .frame(maxWidth: .infinity)
         }
         .background(FinanceColor.background.color)
-        .navigationTitle(Text(OrdersText.detailTitle))
+        .navigationTitle(Text("orders.detail.title", bundle: .module))
         .navigationBarTitleDisplayMode(.inline)
         .confirmationDialog(
-            Text(OrdersText.cancelConfirmTitle),
+            Text("orders.detail.cancel.confirm.title", bundle: .module),
             isPresented: isConfirming,
             titleVisibility: .visible
         ) {
             Button(role: .destructive, action: viewModel.confirmCancel) {
-                Text(OrdersText.cancelOrder)
+                Text("orders.detail.cancel", bundle: .module)
             }
 
             Button(role: .cancel, action: viewModel.dismissCancel) {
-                Text(OrdersText.keepOrder)
+                Text("orders.detail.cancel.keep", bundle: .module)
             }
         } message: {
-            Text(OrdersText.cancelConfirmMessage)
+            Text("orders.detail.cancel.confirm.message", bundle: .module)
         }
         .task(id: viewModel.cancelRequest) { await viewModel.cancelRequestedOrder() }
     }
@@ -75,7 +75,7 @@ private extension OrderDetailView {
     var actions: some View {
         VStack(spacing: dimensions.spaceSmall) {
             RevealContainer(isRevealed: viewModel.hasCancelFailed) {
-                Text(OrdersText.cancelFailed)
+                Text("orders.detail.cancel.failed", bundle: .module)
                     .textStyle(FinanceColor.critical, FinanceFont.caption)
                     .frame(maxWidth: .infinity)
             }
@@ -86,7 +86,7 @@ private extension OrderDetailView {
                     case .working:
                         ProgressView()
                     case .idle, .confirming, .failed:
-                        Text(OrdersText.cancelOrder)
+                        Text("orders.detail.cancel", bundle: .module)
                     }
                 }
                 .buttonStyle(.finance(.destructive))
@@ -95,7 +95,7 @@ private extension OrderDetailView {
             }
 
             Button(action: viewModel.showStock) {
-                Text(OrdersText.viewStock)
+                Text("orders.detail.stock", bundle: .module)
             }
             .buttonStyle(.finance(.secondary))
             .accessibilityIdentifier(OrdersAccessibility.stockButton)
@@ -112,9 +112,9 @@ private extension OrderDetailView {
 
 #if DEBUG
 @available(iOS 26, *)
-#Preview("Order Detail", arguments: PreviewObjectPool.sampleOrders) { order in
+#Preview("Order Detail", arguments: PreviewObjectPool().sampleOrders) { order in
     NavigationStack {
-        OrderDetailView(viewModel: PreviewObjectPool.detailViewModel(order))
+        OrderDetailView(viewModel: PreviewObjectPool().detailViewModel(order))
     }
 }
 #endif

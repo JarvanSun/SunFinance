@@ -92,7 +92,7 @@ extension FinanceFont {
 
 private extension FinanceFont {
     var style: FontStyle {
-        _ = FontRegistrar.registration
+        FontRegistrar().registerBundledFonts()
         return FontStyle(
             face.postScriptName,
             size: pointSize,

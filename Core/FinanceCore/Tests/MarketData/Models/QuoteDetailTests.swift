@@ -37,7 +37,7 @@ struct QuoteDetailTests {
 private extension QuoteDetailTests {
     func dto(dayLow: Decimal, dayHigh: Decimal) -> QuoteDetailResponseDTO {
         QuoteDetailResponseDTO(
-            quote: .apple,
+            quote: QuoteDTO(),
             open: 225,
             dayHigh: dayHigh,
             dayLow: dayLow,

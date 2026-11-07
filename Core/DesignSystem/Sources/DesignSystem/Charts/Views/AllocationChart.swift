@@ -163,7 +163,7 @@ private struct AllocationChartPreview: View {
     var body: some View {
         VStack(spacing: 24) {
             AllocationChart(
-                ChartPreviewData.allocationChart,
+                ChartPreviewData().allocationChart,
                 selection: selection,
                 onSelect: { selection = $0 }
             ) { slice in
@@ -173,7 +173,7 @@ private struct AllocationChartPreview: View {
             .id(replay)
 
             AllocationChart(
-                AllocationChartContent(slices: [ChartPreviewData.allocation[0]]),
+                AllocationChartContent(slices: [ChartPreviewData().allocation[0]]),
                 selection: nil,
                 onSelect: { _ in }
             ) { _ in

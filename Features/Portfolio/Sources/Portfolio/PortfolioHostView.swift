@@ -21,6 +21,6 @@ public struct PortfolioHostView: View {
 
 #if DEBUG
 #Preview("Portfolio") {
-    PortfolioHostView(dependencies: PreviewObjectPool.portfolioDependencies())
+    PortfolioHostView(dependencies: PreviewObjectPool().portfolioDependencies())
 }
 #endif

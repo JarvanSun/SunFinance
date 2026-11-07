@@ -21,18 +21,10 @@ struct MockLedger: Codable, Sendable {
 }
 
 extension MockLedger {
-    static var fee: Decimal { 1 }
+    var fee: Decimal { 1 }
 
-    static func seeded(at date: Date, exchange: MockExchange) -> MockLedger {
-        let fills =
-            seedTrades
-            .compactMap { trade in
-                let day = date.addingTimeInterval(-trade.daysAgo * secondsPerDay)
-                return trade.fill(closingBefore: day, exchange: exchange)
-            }
-            .sorted { $0.date < $1.date }
-        let spent = fills.reduce(Decimal.zero) { $0 - $1.cashEffect }
-        var ledger = MockLedger(
+    init(seededAt date: Date, exchange: MockExchange) {
+        self.init(
             cash: 0,
             orders: [],
             fills: [],
@@ -40,14 +32,23 @@ extension MockLedger {
             idempotencyKeys: [:],
             settledUntil: date
         )
-        ledger.book(
+        let fee = fee
+        let secondsPerDay = secondsPerDay
+        let fills =
+            seedTrades
+            .compactMap { trade in
+                let day = date.addingTimeInterval(-trade.daysAgo * secondsPerDay)
+                return trade.fill(closingBefore: day, exchange: exchange, fee: fee)
+            }
+            .sorted { $0.date < $1.date }
+        let spent = fills.reduce(Decimal.zero) { $0 - $1.cashEffect }
+        book(
             deposit: startingCash + spent,
             at: date.addingTimeInterval(-depositDaysAgo * secondsPerDay)
         )
         for fill in fills {
-            ledger.book(fill)
+            book(fill)
         }
-        return ledger
     }
 
     mutating func book(deposit amount: Decimal, at date: Date) {
@@ -63,11 +64,13 @@ extension MockLedger {
 }
 
 private extension MockLedger {
-    static var startingCash: Decimal { 10_000 }
-    static var depositDaysAgo: Double { 200 }
-    static var secondsPerDay: TimeInterval { 86_400 }
+    var startingCash: Decimal { 10_000 }
 
-    static var seedTrades: [SeedTrade] {
+    var depositDaysAgo: Double { 200 }
+
+    var secondsPerDay: TimeInterval { 86_400 }
+
+    var seedTrades: [SeedTrade] {
         [
             SeedTrade(symbol: "AAPL", side: .buy, quantity: 10, daysAgo: 170),
             SeedTrade(symbol: "SAP", side: .buy, quantity: 20, daysAgo: 150),
@@ -87,7 +90,7 @@ private struct SeedTrade {
     let quantity: Decimal
     let daysAgo: Double
 
-    func fill(closingBefore day: Date, exchange: MockExchange) -> LedgerFill? {
+    func fill(closingBefore day: Date, exchange: MockExchange, fee: Decimal) -> LedgerFill? {
         guard
             let close = exchange.venue(of: symbol)?.closes(atOrBefore: day).first,
             let price = exchange.price(of: symbol, at: close)
@@ -102,7 +105,7 @@ private struct SeedTrade {
             price: price.amount,
             currency: price.currency,
             exchangeRate: exchange.eurRate(of: price.currency, at: close),
-            fee: MockLedger.fee,
+            fee: fee,
             date: close
         )
     }

@@ -26,7 +26,7 @@ struct OrderPresentationTests {
         subtitle: String
     ) {
         // When
-        let order = Order.make("1", amount: amount, side: side)
+        let order = Order("1", amount: amount, side: side)
 
         // Then
         #expect(order.headline.key == "orders.headline.\(headline) %@ %@")
@@ -44,7 +44,7 @@ struct OrderPresentationTests {
         rowKind: String
     ) {
         // When
-        let order = Order.make("1", trigger: trigger)
+        let order = Order("1", trigger: trigger)
 
         // Then
         #expect(order.triggerText.key == triggerText)
@@ -55,7 +55,7 @@ struct OrderPresentationTests {
 
     @Test func rowSubtitleThenCountsSharesInPlural() {
         // Given
-        var subtitle = Order.make("1").rowSubtitle
+        var subtitle = Order("1").rowSubtitle
         subtitle.locale = Locale(identifier: "en_US")
 
         // When
@@ -71,16 +71,16 @@ struct OrderPresentationTests {
     ])
     func settledTotalThenIsSignedLikeTheCash(side: TradeSide, expected: String) {
         // When
-        let order = Order.make("1", status: .filled, side: side, fill: .make(currency: .eur))
+        let order = Order("1", status: .filled, side: side, fill: .init(currency: .eur))
 
         // Then
         #expect(order.settledTotal == expected)
-        #expect(Order.make("2").settledTotal == nil)
+        #expect(Order("2").settledTotal == nil)
     }
 
     @Test func accessibilityLabelThenReadsTheRowAsOneSentence() {
         // Given
-        var label = Order.make("1").accessibilityLabel
+        var label = Order("1").accessibilityLabel
         label.locale = Locale(identifier: "en_US")
 
         // When

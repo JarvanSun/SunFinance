@@ -10,23 +10,13 @@ import Foundation
 @testable import FinanceCore
 
 extension QuoteDTO {
-    static let apple = make()
-
-    static let appleWithoutCompanyName = make(companyName: "")
-
-    static let appleWithInvalidCurrency = make(currency: "DOLLAR")
-
-    static let appleWithZeroPrice = make(lastPrice: 0)
-
-    static let appleWithZeroPreviousClose = make(previousClose: 0)
-
-    static func make(
+    init(
         companyName: String = "Apple Inc.",
         lastPrice: Decimal = 228.52,
         currency: String = "USD",
         previousClose: Decimal = 200
-    ) -> QuoteDTO {
-        QuoteDTO(
+    ) {
+        self.init(
             symbol: "AAPL",
             companyName: companyName,
             lastPrice: lastPrice,

@@ -30,8 +30,8 @@ private extension ServerEnvironment {
     func makeAPIClient() -> APIClient {
         APIClient(
             sender: makeSender(),
-            requestBuilder: RequestBuilder(baseURL: baseURL) { JSONEncoder.backend },
-            responseDecoder: ResponseDecoder { JSONDecoder.backend }
+            requestBuilder: RequestBuilder(baseURL: baseURL) { makeBackendEncoder() },
+            responseDecoder: ResponseDecoder { makeBackendDecoder() }
         )
     }
 

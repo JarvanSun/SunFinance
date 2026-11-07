@@ -16,12 +16,7 @@ struct MockResponse: Equatable, Sendable {
         self.body = body
     }
 
-    static func json(_ value: some Encodable, status: HTTPStatus = .ok) throws -> Self {
-        .init(status: status, body: try JSONEncoder.backend.encode(value))
+    init(json value: some Encodable, status: HTTPStatus = .ok) throws {
+        self.init(status: status, body: try makeBackendEncoder().encode(value))
     }
-
-    static let badRequest = Self(status: .badRequest)
-    static let notFound = Self(status: .notFound)
-    static let internalError = Self(status: .internalServerError)
-    static let serviceUnavailable = Self(status: .serviceUnavailable)
 }

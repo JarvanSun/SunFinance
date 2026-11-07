@@ -12,9 +12,9 @@ import UIKit
 
 struct FontRegistrarTests {
     @Test(arguments: InterFace.allCases)
-    func registrationThenEveryFaceIsAvailable(face: InterFace) {
+    func registerBundledFontsThenEveryFaceIsAvailable(face: InterFace) {
         // When
-        _ = FontRegistrar.registration
+        FontRegistrar().registerBundledFonts()
 
         // Then
         #expect(UIFont(name: face.postScriptName, size: 17) != nil)

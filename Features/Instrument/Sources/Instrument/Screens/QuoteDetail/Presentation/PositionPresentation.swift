@@ -14,48 +14,58 @@ extension Position {
         [
             Metric(
                 id: MetricID.value.rawValue,
-                label: QuoteDetailText.positionBuyIn(costBasis.formatted()),
+                label: .init(
+                    "quoteDetail.position.buyIn \(costBasis.formatted())",
+                    bundle: .module
+                ),
                 value: marketValue.formatted()
             ),
             Metric(
                 id: MetricID.gain.rawValue,
-                label: QuoteDetailText.positionSinceBuy,
+                label: .init("quoteDetail.position.sinceBuy", bundle: .module),
                 value: unrealizedGain.formattedSigned(),
                 trend: GainTrend(unrealizedGain.amount)
             ),
             Metric(
                 id: MetricID.price.rawValue,
-                label: QuoteDetailText.positionAverageBuyIn(averageCostInPriceCurrency.formatted()),
+                label: .init(
+                    "quoteDetail.position.averageBuyIn \(averageCostInPriceCurrency.formatted())",
+                    bundle: .module
+                ),
                 value: price.formatted()
             ),
             Metric(
                 id: MetricID.gainPercent.rawValue,
-                label: QuoteDetailText.positionSinceBuyPercent,
+                label: .init(
+                    "quoteDetail.position.sinceBuyPercent",
+                    bundle: .module
+                ),
                 value: unrealizedGainPercent.formatted(.signedPercent),
                 trend: GainTrend(unrealizedGain.amount)
             ),
             Metric(
                 id: MetricID.shares.rawValue,
-                label: QuoteDetailText.positionShares,
+                label: .init("quoteDetail.position.shares", bundle: .module),
                 value: quantity.formattedQuantity()
             ),
             Metric(
                 id: MetricID.today.rawValue,
-                label: QuoteDetailText.positionToday,
+                label: .init("quoteDetail.position.today", bundle: .module),
                 value: todayGain.formattedSigned(),
                 trend: GainTrend(todayGain.amount)
             ),
             Metric(
                 id: MetricID.realized.rawValue,
-                label: QuoteDetailText.positionRealized,
+                label: .init("quoteDetail.position.realized", bundle: .module),
                 value: realizedGain.formattedSigned(),
                 trend: GainTrend(realizedGain.amount)
             ),
         ] + currencyEffectMetrics + [
             Metric(
                 id: MetricID.totalReturn.rawValue,
-                label: QuoteDetailText.positionTotalReturn(
-                    totalReturnPercent.formatted(.signedPercent)
+                label: .init(
+                    "quoteDetail.position.totalReturnPercent \(totalReturnPercent.formatted(.signedPercent))",
+                    bundle: .module
                 ),
                 value: totalReturn.formattedSigned(),
                 trend: GainTrend(totalReturn.amount)
@@ -98,7 +108,10 @@ private extension Position {
             [
                 Metric(
                     id: MetricID.currencyEffect.rawValue,
-                    label: QuoteDetailText.positionCurrencyEffect,
+                    label: .init(
+                        "quoteDetail.position.currencyEffect",
+                        bundle: .module
+                    ),
                     value: currencyEffect.formattedSigned(),
                     trend: GainTrend(currencyEffect.amount)
                 )

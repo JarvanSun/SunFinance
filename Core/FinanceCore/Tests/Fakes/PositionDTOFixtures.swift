@@ -10,21 +10,21 @@ import Foundation
 @testable import FinanceCore
 
 extension PositionDTO {
-    static func make(symbol: String = "AAPL", currency: String = "USD") -> PositionDTO {
-        PositionDTO(
+    init(symbol: String = "AAPL", currency: String = "USD") {
+        self.init(
             symbol: symbol,
             quantity: 10,
             price: MoneyDTO(amount: 110, currency: currency),
-            averageCost: .eur(91),
+            averageCost: .init(euros: 91),
             averageLocalCost: MoneyDTO(amount: 100, currency: currency),
-            costBasis: .eur(910),
-            marketValue: .eur(990),
-            unrealizedGain: .eur(80),
+            costBasis: .init(euros: 910),
+            marketValue: .init(euros: 990),
+            unrealizedGain: .init(euros: 80),
             unrealizedGainPercent: 8.79,
-            realizedGain: .eur(12),
-            todayGain: .eur(-3),
-            currencyEffect: .eur(-20),
-            totalReturn: .eur(92),
+            realizedGain: .init(euros: 12),
+            todayGain: .init(euros: -3),
+            currencyEffect: .init(euros: -20),
+            totalReturn: .init(euros: 92),
             totalReturnPercent: 9.2
         )
     }

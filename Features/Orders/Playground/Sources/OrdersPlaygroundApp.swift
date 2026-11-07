@@ -16,7 +16,7 @@ struct OrdersPlaygroundApp: App {
     @State private var isReady = false
 
     private let brokerage = BrokerageService(
-        environment: .mock(behavior: .realistic, storageDirectory: nil)
+        environment: .init(mockBehavior: .realistic, storageDirectory: nil)
     )
     private let tracker = AnalyticsTracker(
         consent: UserDefaultsAnalyticsConsent(defaults: .standard),

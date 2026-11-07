@@ -29,11 +29,11 @@ private extension LocalizationCatalog {
         func translatedValue(for language: String) -> String? {
             guard let unit = localizations?[language]?.stringUnit else { return nil }
 
-            let isTranslated = unit.state == Self.translatedState
+            let isTranslated = unit.state == translatedState
             return isTranslated ? unit.value : nil
         }
 
-        private static let translatedState = "translated"
+        private var translatedState: String { "translated" }
     }
 
     struct Localization: Decodable {

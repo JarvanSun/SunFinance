@@ -6,6 +6,7 @@
 //
 
 import DesignSystem
+import FinanceCore
 import SwiftUI
 import Testing
 
@@ -17,10 +18,10 @@ struct WatchlistRouterTests {
         let router = WatchlistRouter(quoteDetail: FeatureEntry { _ in EmptyView() })
 
         // When
-        router.showQuoteDetail(for: .sap)
+        router.showQuoteDetail(for: "SAP")
 
         // Then
-        #expect(router.path == [.quoteDetail(.sap)])
+        #expect(router.path == [.quoteDetail("SAP")])
         #expect(router.presentation == nil)
     }
 }

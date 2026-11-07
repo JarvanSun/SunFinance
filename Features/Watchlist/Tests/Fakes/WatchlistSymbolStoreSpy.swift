@@ -12,7 +12,7 @@ final class WatchlistSymbolStoreSpy: WatchlistSymbolStoring {
 
     private(set) var savedSymbols: [[TickerSymbol]] = []
 
-    init(symbols: [TickerSymbol] = [.apple, .sap]) {
+    init(symbols: [TickerSymbol] = ["AAPL", "SAP"]) {
         self.symbols = symbols
     }
 

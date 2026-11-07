@@ -22,7 +22,7 @@ public struct QuoteDetailHostView: View {
 #if DEBUG
 #Preview("Quote Detail") {
     NavigationStack {
-        QuoteDetailHostView(dependencies: PreviewObjectPool.quoteDetailDependencies())
+        QuoteDetailHostView(dependencies: PreviewObjectPool().quoteDetailDependencies())
     }
 }
 #endif

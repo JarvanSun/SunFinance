@@ -13,7 +13,7 @@ import Testing
 struct LedgerFillTests {
     @Test func grossAndPriceInEurosThenConvertAtTheFillsRate() {
         // Given
-        let fill = LedgerFill.make(.buy, 10, at: 100, rate: 0.9, symbol: "AAPL", currency: .usd)
+        let fill = LedgerFill(.buy, 10, at: 100, rate: 0.9, symbol: "AAPL", currency: .usd)
 
         // Then
         #expect(fill.grossInEuros == 900)
@@ -23,7 +23,7 @@ struct LedgerFillTests {
     @Test(arguments: [(TradeSide.buy, Decimal(-901), Decimal(901)), (.sell, 899, 899)])
     func cashEffectAndTotalThenIncludeTheFee(side: TradeSide, cashEffect: Decimal, total: Decimal) {
         // Given
-        let fill = LedgerFill.make(side, 10, at: 100, rate: 0.9, symbol: "AAPL", currency: .usd)
+        let fill = LedgerFill(side, 10, at: 100, rate: 0.9, symbol: "AAPL", currency: .usd)
 
         // Then
         #expect(fill.cashEffect == cashEffect)

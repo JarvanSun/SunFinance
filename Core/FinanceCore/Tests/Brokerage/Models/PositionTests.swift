@@ -13,7 +13,7 @@ import Testing
 struct PositionTests {
     @Test func initThenMapsEveryField() throws {
         // When
-        let position = try Position(PositionDTO.make())
+        let position = try Position(PositionDTO())
 
         // Then
         #expect(position.symbol == "AAPL")
@@ -36,7 +36,7 @@ struct PositionTests {
 
     @Test func initWhenACurrencyIsInvalidThenThrowsDecoding() {
         // When
-        let result = Result { () throws(BrokerageError) in try Position(.make(currency: "x")) }
+        let result = Result { () throws(BrokerageError) in try Position(.init(currency: "x")) }
 
         // Then
         #expect(result.failure == .decoding)

@@ -5,43 +5,39 @@
 //  Created by Jiawen Sun on 2026/11/07.
 //
 
-public struct AnalyticsParameter: RawRepresentable, Hashable, Sendable {
-    public let rawValue: String
+public enum AnalyticsParameter: String, Hashable, Sendable {
+    case symbol
+    case resultCount = "result_count"
+    case failureReason = "failure_reason"
+    case sortOrder = "sort_order"
+    case isFavorite = "is_favorite"
+    case appVersion = "app_version"
+    case locale
+    case source
+    case range
+    case chartStyle = "chart_style"
+    case side
+    case orderType = "order_type"
+    case trigger
+    case status
+    case openCount = "open_count"
+    case positionCount = "position_count"
+    case query
+    case email
+    case name
+    case amount
+    case price
+    case quantity
+    case deviceID = "device_id"
 
-    public init(rawValue: String) {
-        self.rawValue = rawValue
+    var isPersonalData: Bool {
+        switch self {
+        case .query, .email, .name, .amount, .price, .quantity, .deviceID:
+            true
+        case .symbol, .resultCount, .failureReason, .sortOrder, .isFavorite, .appVersion, .locale,
+            .source, .range, .chartStyle, .side, .orderType, .trigger, .status, .openCount,
+            .positionCount:
+            false
+        }
     }
-
-    public init(_ rawValue: String) {
-        self.init(rawValue: rawValue)
-    }
-}
-
-extension AnalyticsParameter {
-    public static let symbol = Self("symbol")
-    public static let resultCount = Self("result_count")
-    public static let failureReason = Self("failure_reason")
-    public static let sortOrder = Self("sort_order")
-    public static let isFavorite = Self("is_favorite")
-    public static let appVersion = Self("app_version")
-    public static let locale = Self("locale")
-    public static let source = Self("source")
-    public static let range = Self("range")
-    public static let chartStyle = Self("chart_style")
-    public static let side = Self("side")
-    public static let orderType = Self("order_type")
-    public static let trigger = Self("trigger")
-    public static let status = Self("status")
-    public static let openCount = Self("open_count")
-    public static let positionCount = Self("position_count")
-
-    static let personalDataKeys: Set<Self> = [
-        Self("query"),
-        Self("email"),
-        Self("name"),
-        Self("amount"),
-        Self("price"),
-        Self("quantity"),
-        Self("device_id"),
-    ]
 }

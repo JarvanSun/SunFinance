@@ -18,11 +18,11 @@ extension QuoteDetail {
             ),
             StatisticRow(
                 title: .init("quoteDetail.statistics.dayRange", bundle: .module),
-                value: Self.rangeText(dayRange)
+                value: rangeText(dayRange)
             ),
             StatisticRow(
                 title: .init("quoteDetail.statistics.yearRange", bundle: .module),
-                value: Self.rangeText(yearRange)
+                value: rangeText(yearRange)
             ),
             StatisticRow(
                 title: .init("quoteDetail.statistics.marketCap", bundle: .module),
@@ -39,7 +39,7 @@ extension QuoteDetail {
 }
 
 private extension QuoteDetail {
-    static func rangeText(_ range: ClosedRange<Decimal>) -> String {
+    func rangeText(_ range: ClosedRange<Decimal>) -> String {
         let style = Decimal.FormatStyle.number.precision(.fractionLength(2))
         let lower = range.lowerBound.formatted(style)
         let upper = range.upperBound.formatted(style)

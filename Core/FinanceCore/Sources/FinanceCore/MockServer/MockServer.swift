@@ -47,11 +47,11 @@ private extension MockServer {
     func response(to request: MockRequest) -> MockResponse {
         switch (shouldFail(request), routedResponse(to: request)) {
         case (true, _):
-            .serviceUnavailable
+            .init(status: .serviceUnavailable)
         case (false, .some(let response)):
             response
         case (false, nil):
-            .notFound
+            .init(status: .notFound)
         }
     }
 
@@ -64,7 +64,7 @@ private extension MockServer {
         do {
             return try firstResponse(to: request)
         } catch {
-            return .internalError
+            return .init(status: .internalServerError)
         }
     }
 

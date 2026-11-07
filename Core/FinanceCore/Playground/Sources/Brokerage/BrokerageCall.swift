@@ -47,7 +47,7 @@ enum BrokerageCall: String, CaseIterable, Identifiable, Sendable {
             return String(describing: try await service.account())
         case .portfolio:
             let portfolio = try await service.portfolio()
-            return (portfolio.open + portfolio.closed).map(Self.describe).joined(separator: "\n\n")
+            return (portfolio.open + portfolio.closed).map(describe).joined(separator: "\n\n")
         case .history:
             let history = try await service.portfolioHistory(range: .month)
             return "\(history.points.count) points, last \(String(describing: history.points.last))"
@@ -60,18 +60,18 @@ enum BrokerageCall: String, CaseIterable, Identifiable, Sendable {
                 String(describing: $0)
             }.joined(separator: "\n\n")
         case .previewBuy:
-            return String(describing: try await service.preview(Self.draft("AAPL", shares: 2)))
+            return String(describing: try await service.preview(draft("AAPL", shares: 2)))
         case .placeBuy:
             return String(
                 describing: try await service.place(
-                    Self.draft("SAP", shares: 1),
+                    draft("SAP", shares: 1),
                     idempotencyKey: IdempotencyKey()
                 )
             )
         case .placeLimit:
             return String(
                 describing: try await service.place(
-                    Self.draft("NVDA", shares: 1, execution: .limit(1)),
+                    draft("NVDA", shares: 1, execution: .limit(1)),
                     idempotencyKey: IdempotencyKey()
                 )
             )
@@ -80,7 +80,7 @@ enum BrokerageCall: String, CaseIterable, Identifiable, Sendable {
 }
 
 private extension BrokerageCall {
-    static func draft(_ symbol: TickerSymbol, shares: Int, execution: OrderExecution = .market)
+    func draft(_ symbol: TickerSymbol, shares: Int, execution: OrderExecution = .market)
         -> OrderDraft
     {
         OrderDraft(
@@ -93,7 +93,7 @@ private extension BrokerageCall {
         )
     }
 
-    static func describe(_ position: Position) -> String {
+    func describe(_ position: Position) -> String {
         """
         \(position.symbol.rawValue) × \(position.quantity)
         value \(position.marketValue.amount) EUR, cost \(position.costBasis.amount) EUR

@@ -8,32 +8,24 @@
 import FinanceCore
 import Foundation
 
-extension StockQuote {
-    nonisolated static var apple: StockQuote {
-        StockQuote(
-            symbol: "AAPL",
-            companyName: "Apple Inc.",
-            price: Money(200, .usd),
-            changePercent: 1,
-            marketCap: Money(1, .usd)
-        )
-    }
-}
+nonisolated let appleQuote = StockQuote(
+    symbol: "AAPL",
+    companyName: "Apple Inc.",
+    price: Money(200, .usd),
+    changePercent: 1,
+    marketCap: Money(1, .usd)
+)
 
-extension Account {
-    nonisolated static var sample: Account {
-        Account(
-            cash: Money(1_000, .eur),
-            buyingPower: Money(1_000, .eur),
-            positionsValue: Money(0, .eur),
-            total: Money(1_000, .eur),
-            todayGain: Money(0, .eur)
-        )
-    }
-}
+nonisolated let sampleAccount = Account(
+    cash: Money(1_000, .eur),
+    buyingPower: Money(1_000, .eur),
+    positionsValue: Money(0, .eur),
+    total: Money(1_000, .eur),
+    todayGain: Money(0, .eur)
+)
 
 extension Portfolio {
-    nonisolated static func holdingApple(_ quantity: Decimal) -> Portfolio {
+    nonisolated init(holdingApple quantity: Decimal) {
         let zero = Money(0, .eur)
         let position = Position(
             symbol: "AAPL",
@@ -51,15 +43,13 @@ extension Portfolio {
             totalReturn: zero,
             totalReturnPercent: 0
         )
-        return Portfolio(open: quantity > 0 ? [position] : [], closed: [])
+        self.init(open: quantity > 0 ? [position] : [], closed: [])
     }
 }
 
 extension OrderPreview {
-    nonisolated static func sample(rejection: OrderRejection? = nil, currency: CurrencyCode = .usd)
-        -> OrderPreview
-    {
-        OrderPreview(
+    nonisolated init(rejection: OrderRejection? = nil, currency: CurrencyCode = .usd) {
+        self.init(
             quantity: 2,
             price: Money(200, currency),
             exchangeRate: currency == .eur ? 1 : Decimal(string: "0.92")!,
@@ -72,14 +62,14 @@ extension OrderPreview {
 }
 
 extension OrderDraft {
-    nonisolated static func make(
+    nonisolated init(
         _ side: TradeSide = .buy,
         amount: OrderAmount = .shares(2),
         execution: OrderExecution = .market,
         trigger: OrderTrigger = .immediately,
         validity: OrderValidity = .day
-    ) -> OrderDraft {
-        OrderDraft(
+    ) {
+        self.init(
             symbol: "AAPL",
             side: side,
             amount: amount,
@@ -91,22 +81,22 @@ extension OrderDraft {
 }
 
 extension Order {
-    nonisolated static func make(_ draft: OrderDraft = .make(), status: OrderStatus) -> Order {
+    nonisolated init(_ draft: OrderDraft = .init(), status: OrderStatus) {
         let fill = OrderFill(
-            date: .testNow,
+            date: testNow,
             quantity: 2,
             price: Money(200, .usd),
             exchangeRate: 1,
             fee: Money(1, .eur),
             total: Money(401, .eur)
         )
-        return Order(
+        self.init(
             id: "order-1",
             draft: draft,
             quantity: 2,
             currency: .usd,
             status: status,
-            createdAt: .testNow,
+            createdAt: testNow,
             fill: status == .filled ? fill : nil
         )
     }
@@ -126,12 +116,6 @@ extension Order {
     }
 }
 
-extension OrderFill {
-    nonisolated static var filledSample: OrderFill {
-        Order.make(status: .filled).fill!
-    }
-}
+nonisolated let sampleFill = Order(status: .filled).fill!
 
-extension Date {
-    nonisolated static let testNow = Date(timeIntervalSince1970: 1_793_718_000)
-}
+nonisolated let testNow = Date(timeIntervalSince1970: 1_793_718_000)

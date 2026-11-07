@@ -15,7 +15,7 @@ import Testing
 struct OrderDetailPresentationTests {
     @Test func detailSectionsWhenOpenThenShowOnlyTheTerms() {
         // When
-        let sections = Order.make("1").detailSections
+        let sections = Order("1").detailSections
 
         // Then
         #expect(sections.map(\.id) == ["terms"])
@@ -30,7 +30,7 @@ struct OrderDetailPresentationTests {
     ])
     func detailSectionsWhenFilledThenAddTheFill(currency: CurrencyCode, ids: [String]) throws {
         // Given
-        let order = Order.make("1", status: .filled, fill: .make(currency: currency))
+        let order = Order("1", status: .filled, fill: .init(currency: currency))
 
         // When
         let fill = try #require(order.detailSections.last)
@@ -47,6 +47,6 @@ struct OrderDetailPresentationTests {
     ])
     func totalTitleThenFollowsTheSide(side: TradeSide, key: String) {
         // Then
-        #expect(Order.make("1", side: side).totalTitle.key == key)
+        #expect(Order("1", side: side).totalTitle.key == key)
     }
 }

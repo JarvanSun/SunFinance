@@ -36,8 +36,7 @@ public final class AnalyticsTracker: AnalyticsTracking {
 
 private extension AnalyticsTracker {
     func isFreeOfPersonalData(_ event: some AnalyticsEvent) -> Bool {
-        let parameterKeys = Set(event.parameters.keys)
-        return parameterKeys.isDisjoint(with: AnalyticsParameter.personalDataKeys)
+        !event.parameters.keys.contains { $0.isPersonalData }
     }
 
     func enriched(_ event: some AnalyticsEvent) -> TrackedEvent {

@@ -27,7 +27,7 @@ public enum FinanceColor: String, CaseIterable, ColorStyling, Sendable {
     case highlight
 
     public var color: Color {
-        Color(rawValue, bundle: .designSystem)
+        Color(rawValue, bundle: .module)
     }
 }
 

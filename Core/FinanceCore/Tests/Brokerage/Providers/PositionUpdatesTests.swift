@@ -13,7 +13,7 @@ struct PositionUpdatesTests {
     @Test func portfolioUpdatesWhenAPollFailsThenYieldsTheFailureAndKeepsPolling() async throws {
         // Given
         let first = Portfolio(open: [], closed: [])
-        let second = Portfolio(open: [], closed: [try Position(.make(symbol: "KO"))])
+        let second = Portfolio(open: [], closed: [try Position(.init(symbol: "KO"))])
         let provider = PositionProviderStub(
             results: [.success(first), .failure(.offline), .success(second)]
         )

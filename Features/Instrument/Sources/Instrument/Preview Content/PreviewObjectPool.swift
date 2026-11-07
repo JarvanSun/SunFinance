@@ -10,8 +10,8 @@ import FinanceCore
 import Foundation
 import SwiftUI
 
-enum PreviewObjectPool {
-    static func quoteDetailDependencies() -> QuoteDetailDependencies {
+struct PreviewObjectPool {
+    func quoteDetailDependencies() -> QuoteDetailDependencies {
         let marketData = PreviewMarketData(detailError: nil, historyError: nil, delay: .zero)
         let brokerage = PreviewBrokerage(isHolding: true)
         return QuoteDetailDependencies(
@@ -25,7 +25,7 @@ enum PreviewObjectPool {
         )
     }
 
-    static func quoteDetailViewModel(_ state: QuoteDetailPreviewState) -> QuoteDetailViewModel {
+    func quoteDetailViewModel(_ state: QuoteDetailPreviewState) -> QuoteDetailViewModel {
         let marketData = PreviewMarketData(
             detailError: state.detailError,
             historyError: state.historyError,
@@ -43,7 +43,7 @@ enum PreviewObjectPool {
         )
     }
 
-    nonisolated static var detail: QuoteDetail {
+    nonisolated var detail: QuoteDetail {
         QuoteDetail(
             quote: quote(),
             open: Money(228.1, .usd),
@@ -53,7 +53,7 @@ enum PreviewObjectPool {
         )
     }
 
-    nonisolated static func history(range: HistoryRange) -> PriceHistory {
+    nonisolated func history(range: HistoryRange) -> PriceHistory {
         let start = Date(timeIntervalSince1970: 1_793_000_000)
         let candles = (0..<78).map { index in
             let open = Decimal(228 + sin(Double(index) / 7) * 3 + Double(index) * 0.04)
@@ -75,7 +75,7 @@ enum PreviewObjectPool {
         )
     }
 
-    static var euroPosition: Position {
+    var euroPosition: Position {
         Position(
             symbol: "SAP",
             quantity: 4.5,
@@ -94,11 +94,11 @@ enum PreviewObjectPool {
         )
     }
 
-    static var trading: TradingSnapshot {
+    var trading: TradingSnapshot {
         TradingSnapshot(position: position, orders: [])
     }
 
-    static func header(change: Decimal, moment: QuoteMoment) -> QuoteHeader {
+    func header(change: Decimal, moment: QuoteMoment) -> QuoteHeader {
         QuoteHeader(
             companyName: "Apple Inc.",
             price: Money(231.42 + change, .usd),
@@ -109,11 +109,11 @@ enum PreviewObjectPool {
         )
     }
 
-    static func change(_ amount: Decimal) -> QuoteChange {
+    func change(_ amount: Decimal) -> QuoteChange {
         header(change: amount, moment: .live(isMarketOpen: true)).change
     }
 
-    static var pendingHeader: QuoteHeader {
+    var pendingHeader: QuoteHeader {
         QuoteHeader(
             companyName: "Apple Inc.",
             price: Money(231.42, .usd),
@@ -122,7 +122,7 @@ enum PreviewObjectPool {
         )
     }
 
-    nonisolated static func quote(isMarketOpen: Bool = true) -> StockQuote {
+    nonisolated func quote(isMarketOpen: Bool = true) -> StockQuote {
         StockQuote(
             symbol: "AAPL",
             companyName: "Apple Inc.",
@@ -133,7 +133,7 @@ enum PreviewObjectPool {
         )
     }
 
-    nonisolated static var account: Account {
+    nonisolated var account: Account {
         Account(
             cash: Money(9_876.54, .eur),
             buyingPower: Money(9_876.54, .eur),
@@ -143,11 +143,11 @@ enum PreviewObjectPool {
         )
     }
 
-    nonisolated static var portfolio: Portfolio {
+    nonisolated var portfolio: Portfolio {
         Portfolio(open: [position], closed: [])
     }
 
-    nonisolated static var position: Position {
+    nonisolated var position: Position {
         Position(
             symbol: "AAPL",
             quantity: 15,
@@ -166,7 +166,7 @@ enum PreviewObjectPool {
         )
     }
 
-    nonisolated static func preview(rejection: OrderRejection?) -> OrderPreview {
+    nonisolated func preview(rejection: OrderRejection?) -> OrderPreview {
         OrderPreview(
             quantity: 2,
             price: Money(231.42, .usd),
@@ -178,7 +178,7 @@ enum PreviewObjectPool {
         )
     }
 
-    nonisolated static func order(_ draft: OrderDraft, status: OrderStatus) -> Order {
+    nonisolated func order(_ draft: OrderDraft, status: OrderStatus) -> Order {
         let fill = OrderFill(
             date: Date(timeIntervalSince1970: 1_793_718_000),
             quantity: 2,
@@ -198,7 +198,7 @@ enum PreviewObjectPool {
         )
     }
 
-    nonisolated static var draft: OrderDraft {
+    nonisolated var draft: OrderDraft {
         OrderDraft(
             symbol: "AAPL",
             side: .buy,
@@ -209,7 +209,7 @@ enum PreviewObjectPool {
         )
     }
 
-    static func tradingDependencies(
+    func tradingDependencies(
         for intent: TradeIntent = TradeIntent(symbol: "AAPL", side: .buy, source: .quoteDetail)
     ) -> TradingDependencies {
         let services = PreviewServices()
@@ -224,7 +224,7 @@ enum PreviewObjectPool {
         )
     }
 
-    nonisolated static func context(isMarketOpen: Bool) -> TicketContext {
+    nonisolated func context(isMarketOpen: Bool) -> TicketContext {
         TicketContext(
             quote: quote(isMarketOpen: isMarketOpen),
             buyingPower: account.buyingPower,
@@ -232,7 +232,7 @@ enum PreviewObjectPool {
         )
     }
 
-    nonisolated static var outcomes: [OrderOutcome] {
+    nonisolated var outcomes: [OrderOutcome] {
         [
             .filled(order(draft, status: .filled).fill!),
             .waitingForPrice,
@@ -243,7 +243,7 @@ enum PreviewObjectPool {
         ]
     }
 
-    static func ticketViewModel(_ state: TicketPreviewState) -> TicketViewModel {
+    func ticketViewModel(_ state: TicketPreviewState) -> TicketViewModel {
         let services = PreviewServices(
             rejection: state.rejection,
             failure: state.failure,
@@ -266,7 +266,7 @@ enum PreviewObjectPool {
         return viewModel
     }
 
-    static func reviewViewModel(_ state: ReviewPreviewState) -> ReviewViewModel {
+    func reviewViewModel(_ state: ReviewPreviewState) -> ReviewViewModel {
         let services = PreviewServices(
             rejection: state.rejection,
             failure: state.failure,

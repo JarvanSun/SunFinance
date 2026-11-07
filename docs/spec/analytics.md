@@ -29,9 +29,21 @@ in [architecture.md](architecture.md#isolation).
 An event is a value conforming to `AnalyticsEvent`: a `name: AnalyticsEventName` and
 `parameters: [AnalyticsParameter: AnalyticsValue]`.
 
-- `AnalyticsEventName` and `AnalyticsParameter` are string wrappers declared once as `static let`:
-  shared parameters in FinanceCore, event names in the owning feature's
-  `<Feature>AnalyticsNames.swift`.
+- `AnalyticsParameter` is an `enum` in FinanceCore with `String` raw values, one case per key
+  (`case resultCount = "result_count"`). `AnalyticsEventName` is a string wrapper; each event writes
+  its names once, in its `name` switch:
+
+  ```swift
+  var name: AnalyticsEventName {
+      switch self {
+      case .screenViewed:
+          .init("watchlist_viewed")
+      case .quotesLoaded:
+          .init("watchlist_quotes_loaded")
+      …
+      }
+  }
+  ```
 - `AnalyticsValue` is an enum (`text`, `integer`, `decimal`, `boolean`).
 - Each flow has one `<Flow>Event` enum conforming to `AnalyticsEvent` and `Equatable`
   (`WatchlistEvent`; Instrument has `QuoteDetailEvent` and `TradingEvent`). A new tracked action
@@ -81,7 +93,9 @@ an order the same way.
 - **No personal data.** Never track free text (search queries), amounts, prices the user typed,
   quantities, names, emails, device identifiers or location; order events describe the kind of
   order, never its size. Symbols are public market data and may be tracked.
-- The tracker drops any event that uses a key in `AnalyticsParameter.personalDataKeys`. A test per
+- The tracker drops any event that uses a parameter whose `isPersonalData` is true (`query`,
+  `email`, `name`, `amount`, `price`, `quantity`, `device_id`); `AnalyticsParameterTests` covers
+  every case. A test per
   feature proves its search event carries no query text.
 
 ## The pipeline

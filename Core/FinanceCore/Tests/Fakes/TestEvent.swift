@@ -25,7 +25,7 @@ enum TestEvent: AnalyticsEvent {
         case .favoriteToggled:
             [.symbol: .text("AAPL"), .isFavorite: .boolean(true)]
         case .searchWithQuery:
-            [.init("query"): .text("apple")]
+            [.query: .text("apple")]
         }
     }
 }

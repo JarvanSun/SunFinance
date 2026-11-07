@@ -19,14 +19,14 @@ extension TicketContext {
     }
 
     func holdingsText(for side: TradeSide) -> LocalizedStringResource {
-        switch side {
+        let amount = buyingPower.formatted()
+        let quantity = heldShares.formattedQuantity()
+        let count = NSDecimalNumber(decimal: heldShares).doubleValue
+        return switch side {
         case .buy:
-            TradingText.buyingPower(buyingPower.formatted())
+            .init("trading.header.buyingPower \(amount)", bundle: .module)
         case .sell:
-            TradingText.heldShares(
-                heldShares.formattedQuantity(),
-                count: NSDecimalNumber(decimal: heldShares).doubleValue
-            )
+            .init("trading.header.held \(quantity) \(count)", bundle: .module)
         }
     }
 
@@ -35,7 +35,7 @@ extension TicketContext {
         case true:
             nil
         case false:
-            TradingText.marketClosed
+            .init("trading.header.marketClosed", bundle: .module)
         }
     }
 }

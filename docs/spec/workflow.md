@@ -1,7 +1,7 @@
 # Workflow
 
-Commands are in [AGENTS.md](../../AGENTS.md#commands). Edit `project.yml`, never the generated
-project.
+Commands are in [AGENTS.md](../../AGENTS.md#commands). The Xcode projects are committed and edited
+in Xcode.
 
 ## Adding a feature
 
@@ -12,12 +12,13 @@ project.
    type and DTOs, the catalogue case, model mapping, provider protocol and service method, fixture
    and mock route, each with tests.
 3. **Package.** Create `Features/<Name>` in the shape of `Watchlist`: `Package.swift`,
-   `<Name>HostView`, `Navigation/` and `Playground/`.
+   `<Name>HostView`, `Navigation/` and `Playground/` (copy Watchlist's `Playground.xcodeproj` and
+   swap the package and scheme names in Xcode).
 4. **ViewModel.** Write it and its tests before the view.
 5. **Views.** Screen, sections, placeholder, previews.
 6. **Strings.** English and German in the package catalog.
-7. **Wire up.** Add the package to `project.yml`, a method to `AppDependencies`, and the host to
-   the App.
+7. **Wire up.** Add the local package to `SunFinance.xcodeproj` and link it to the App target, a
+   method to `AppDependencies`, and the host to the App.
 
 ## Definition of done
 
@@ -40,5 +41,6 @@ project.
 ## Git
 
 - Commit messages are imperative and say what changed and why: `Add price history request`.
-- Never commit a generated `.xcodeproj`, `DerivedData`, `.build` or a package's
-  `Package.resolved`; versions are fixed by `Package.swift` and `project.yml`.
+- Commit the `.xcodeproj` files with their shared schemes and the project's `Package.resolved`;
+  never commit `xcuserdata`, `DerivedData`, `.build`, a package's own `Package.resolved` or
+  `Configuration/Signing.local.xcconfig`.

@@ -15,16 +15,16 @@ import Testing
 struct StockQuotePresentationTests {
     @Test func formattedChangeThenIsSigned() {
         // When
-        let formattedChange = StockQuote.apple.formattedChange
+        let formattedChange = appleQuote.formattedChange
 
         // Then
         #expect(formattedChange.hasPrefix("+"))
     }
 
     @Test(arguments: [
-        (StockQuote.apple, GainTrend.gain),
-        (.sap, .loss),
-        (.unchanged, .unchanged),
+        (appleQuote, GainTrend.gain),
+        (sapQuote, .loss),
+        (unchangedQuote, .unchanged),
     ])
     func trendThenFollowsDailyChange(quote: StockQuote, expected: GainTrend) {
         // Then
@@ -34,7 +34,7 @@ struct StockQuotePresentationTests {
     @Test func accessibilityLabelThenReadsCompanyPriceAndChange() {
         // Then
         #expect(
-            StockQuote.apple.accessibilityLabel.key == "watchlist.row.accessibilityLabel %@ %@ %@"
+            appleQuote.accessibilityLabel.key == "watchlist.row.accessibilityLabel %@ %@ %@"
         )
     }
 }

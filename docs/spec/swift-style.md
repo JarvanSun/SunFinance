@@ -123,8 +123,8 @@ file.
 - Name compound conditions before using them (`let matchesSymbol = …`).
 - Ternaries only to pick between two simple values (`isFavorite ? .remove : .add`); never nested,
   never for side effects.
-- No force unwraps or `try!` outside tests and previews, except a `static let` `URL` from a string
-  literal.
+- No force unwraps or `try!` outside tests and previews, except a file-scope `private let` `URL`
+  from a string literal.
 
 ## Errors
 
@@ -139,10 +139,10 @@ A literal that carries meaning gets a name, once, in the place that owns it.
 
 | Literal | Lives in |
 |---|---|
-| User-facing text | String Catalog, read through `LocalizedStringResource` |
+| User-facing text | String Catalog, keyed where it is used (`Text("watchlist.title", bundle: .module)`) |
 | Spacing, radii, sizes | DesignSystem dimension tokens (`dimensions.spaceMedium`) |
 | Colors, fonts, SF Symbols | `FinanceColor`, `FinanceFont`, `FinanceImage` or a feature's `ImageStyling` enum |
-| Analytics names and keys | `AnalyticsEventName`, `AnalyticsParameter` constants |
+| Analytics names and keys | The event's `name` switch and `AnalyticsParameter` cases |
 | API paths and query names | The domain's endpoint catalogue and `…PathSegment` / `…QueryKey` |
 | JSON keys | `CodingKeys` |
 | Durations, limits, retry counts | A configuration value or a property of the type that uses it |
@@ -153,12 +153,32 @@ A literal that carries meaning gets a name, once, in the place that owns it.
 
 A constant belongs to the type that uses it: a closed set of names is an `enum` with raw values; a
 value one type uses is a computed property in its `private extension`
-(`var pressedOpacity: Double { 0.7 }`); a value that differs per environment is configuration
-passed through `init`. `static` only where the language needs it: leading-dot members
-(`.realistic`, `.finance(_:)`), names other modules extend (`AnalyticsEventName`), protocol
-requirements, one-time setup (`FontRegistrar.registration`), a `<Feature>Text` namespace, and
-`VendorAnalytics.shared`, which imitates code we do not own. Never a file-scope `let` or a
-`Constants` type.
+(`var pressedOpacity: Double { 0.7 }`); a value an initializer needs before `self` exists is a
+file-scope `private let` below the type (`private let cashSliceID = "cash"`); a value that differs
+per environment is configuration passed through `init`. Never a `Constants` type.
+
+## No `static`
+
+Write no `static` (or `class`) member, except:
+
+1. a member a protocol requires (`==`, `<`);
+2. an extension that gives a protocol-typed SwiftUI or Foundation parameter its leading dot:
+   `extension ButtonStyle where Self == FinanceButtonStyle { static func finance(_:) }`,
+   `extension FormatStyle where Self == SignedPercentFormatStyle { static var signedPercent }`, and
+   each package's `LocalizedStringResource.BundleDescription.module` behind `bundle: .module`;
+3. `VendorAnalytics.shared`, which imitates code we do not own.
+
+Localization keys are never `static`: the key is written where it is used,
+`Text("watchlist.title", bundle: .module)`. Everything else has a non-static home:
+
+- A preset is an enum case (`MockServerBehavior.realistic`, `CurrencyCode.eur`) or an initializer
+  with default values (`AppConfiguration()`, `ServerEnvironment(mockBehavior:storageDirectory:)`).
+- A helper is an instance member, an initializer (`MockLedger(seededAt:exchange:)`) or a
+  file-scope `private func` (`marketEndpoint(matching:)`).
+- One-time setup is a lazily initialized file-scope `private let` (`FontRegistrar`).
+- Preview data and test fixtures are instances (`PreviewObjectPool().quotes`), initializers with
+  fixture defaults (`OrderDraft(.sell, .shares(16))`) or `nonisolated let` constants in `Fakes/`;
+  `@Test(arguments:)` takes array literals of them.
 
 ## Comments
 

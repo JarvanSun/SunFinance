@@ -14,7 +14,7 @@ struct FinanceColorTests {
     @Test(arguments: FinanceColor.allCases)
     func colorThenEveryCaseHasAnAsset(color: FinanceColor) {
         // When
-        let asset = UIColor(named: color.rawValue, in: .designSystem, compatibleWith: nil)
+        let asset = UIColor(named: color.rawValue, in: .module, compatibleWith: nil)
 
         // Then
         #expect(asset != nil)

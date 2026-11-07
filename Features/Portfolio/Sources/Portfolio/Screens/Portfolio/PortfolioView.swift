@@ -31,7 +31,7 @@ struct PortfolioView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(FinanceColor.background.color)
         }
-        .navigationTitle(Text(PortfolioText.title))
+        .navigationTitle(Text("portfolio.title", bundle: .module))
         .refreshable { await viewModel.refresh() }
         .task(id: reloadRequest) {
             await viewModel.load()
@@ -78,7 +78,7 @@ private extension PortfolioView {
 
     func allocationSection(_ allocation: PortfolioAllocation) -> some View {
         VStack(alignment: .leading, spacing: dimensions.spaceMedium) {
-            SectionHeading(PortfolioText.allocationTitle)
+            SectionHeading(LocalizedStringResource("portfolio.allocation.title", bundle: .module))
 
             SurfaceGroup {
                 AllocationSection(
@@ -93,7 +93,7 @@ private extension PortfolioView {
 
     func positionsSection(_ allocation: PortfolioAllocation) -> some View {
         VStack(alignment: .leading, spacing: dimensions.spaceMedium) {
-            SectionHeading(PortfolioText.positionsTitle)
+            SectionHeading(LocalizedStringResource("portfolio.positions.title", bundle: .module))
 
             VStack(spacing: 0) {
                 switch viewModel.positionsPlaceholder {
@@ -130,7 +130,7 @@ private extension PortfolioView {
 
     var closedSection: some View {
         VStack(alignment: .leading, spacing: dimensions.spaceMedium) {
-            SectionHeading(PortfolioText.closedTitle)
+            SectionHeading(LocalizedStringResource("portfolio.closed.title", bundle: .module))
 
             VStack(spacing: 0) {
                 ForEach(viewModel.closedPositions) { position in
@@ -152,7 +152,7 @@ private extension PortfolioView {
 @available(iOS 26, *)
 #Preview("Portfolio", arguments: PortfolioPreviewState.allCases) { state in
     NavigationStack {
-        PortfolioView(viewModel: PreviewObjectPool.portfolioViewModel(state))
+        PortfolioView(viewModel: PreviewObjectPool().portfolioViewModel(state))
     }
     .environment(\.locale, state.locale)
 }

@@ -15,11 +15,11 @@ enum PortfolioEvent: AnalyticsEvent, Equatable {
     var name: AnalyticsEventName {
         switch self {
         case .viewed:
-            .portfolioViewed
+            .init("portfolio_viewed")
         case .rangeChanged:
-            .portfolioRangeChanged
+            .init("portfolio_range_changed")
         case .positionOpened:
-            .portfolioPositionOpened
+            .init("portfolio_position_opened")
         }
     }
 

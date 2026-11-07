@@ -16,11 +16,11 @@ enum AppTab: String, CaseIterable, Hashable {
     var title: LocalizedStringResource {
         switch self {
         case .watchlist:
-            AppText.watchlistTab
+            .init("app.tab.watchlist")
         case .portfolio:
-            AppText.portfolioTab
+            .init("app.tab.portfolio")
         case .orders:
-            AppText.ordersTab
+            .init("app.tab.orders")
         }
     }
 

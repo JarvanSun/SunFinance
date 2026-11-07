@@ -31,30 +31,30 @@ private extension BrokerageMockRoutes {
         let date = request.date
         switch endpoint {
         case .account:
-            return try .json(
-                brokerage.update(at: date) { $0.account(at: date, exchange: exchange) }
+            return try .init(
+                json: brokerage.update(at: date) { $0.account(at: date, exchange: exchange) }
             )
         case .positions:
-            return try .json(
-                brokerage.update(at: date) { $0.positions(at: date, exchange: exchange) }
+            return try .init(
+                json: brokerage.update(at: date) { $0.positions(at: date, exchange: exchange) }
             )
         case .portfolioHistory:
             guard let range = query(.range, of: request, as: HistoryRange.self) else {
-                return .badRequest
+                return .init(status: .badRequest)
             }
-            return try .json(
-                brokerage.update(at: date) {
+            return try .init(
+                json: brokerage.update(at: date) {
                     $0.history(range: range, at: date, exchange: exchange)
                 }
             )
         case .orders:
             guard let filter = query(.status, of: request, as: OrderListFilter.self) else {
-                return .badRequest
+                return .init(status: .badRequest)
             }
             let symbol = query(.symbol, of: request, as: TickerSymbol.self)
             let cursor = request.query(BrokerageQueryKey.cursor.rawValue)
-            return try .json(
-                brokerage.update(at: date) {
+            return try .init(
+                json: brokerage.update(at: date) {
                     $0.ordersPage(
                         OrdersQuery(filter: filter, symbol: symbol, cursor: cursor),
                         at: date,
@@ -63,17 +63,17 @@ private extension BrokerageMockRoutes {
                 }
             )
         case .previewOrder:
-            guard let draft = draft(in: request) else { return .badRequest }
+            guard let draft = draft(in: request) else { return .init(status: .badRequest) }
 
-            return try .json(
-                brokerage.update(at: date) { $0.preview(draft, at: date, exchange: exchange) }
+            return try .init(
+                json: brokerage.update(at: date) { $0.preview(draft, at: date, exchange: exchange) }
             )
         case .placeOrder:
-            guard let draft = draft(in: request) else { return .badRequest }
+            guard let draft = draft(in: request) else { return .init(status: .badRequest) }
 
             let key = request.header(.idempotencyKey)
-            return try .json(
-                brokerage.update(at: date) { ledger in
+            return try .init(
+                json: brokerage.update(at: date) { ledger in
                     let order = ledger.place(draft, key: key, at: date, exchange: exchange)
                     return ledger.dto(of: order, at: date, exchange: exchange)
                 },
@@ -83,7 +83,7 @@ private extension BrokerageMockRoutes {
             let order = brokerage.update(at: date) { ledger in
                 ledger.cancel(orderID: id).map { ledger.dto(of: $0, at: date, exchange: exchange) }
             }
-            return try order.map { try .json($0) } ?? .notFound
+            return try order.map { try .init(json: $0) } ?? .init(status: .notFound)
         }
     }
 
@@ -98,7 +98,7 @@ private extension BrokerageMockRoutes {
     func draft(in request: MockRequest) -> OrderDraft? {
         guard
             let body = request.body,
-            let dto = try? JSONDecoder.backend.decode(OrderDraftDTO.self, from: body)
+            let dto = try? makeBackendDecoder().decode(OrderDraftDTO.self, from: body)
         else { return nil }
 
         return try? OrderDraft(dto)

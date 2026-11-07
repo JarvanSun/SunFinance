@@ -8,6 +8,8 @@
 import CoreGraphics
 import SunUserInterface
 
+// MARK: - DimensionStyling
+
 extension DimensionStyling {
     public var minimumTapTarget: CGFloat {
         value(for: .minimumTapTarget, default: 44)
@@ -132,4 +134,45 @@ extension DimensionStyling {
     public var actionButtonHeight: CGFloat {
         value(for: .actionButtonHeight, default: 56)
     }
+}
+
+// MARK: - Private
+
+private extension DimensionStyling {
+    func value(for dimension: FinanceDimension, default defaultValue: CGFloat) -> CGFloat {
+        value(for: DimensionToken(rawValue: dimension.rawValue), default: defaultValue)
+    }
+}
+
+private enum FinanceDimension: String {
+    case minimumTapTarget
+    case placeholderMaximumWidth
+    case placeholderMinimumHeight
+    case headerPlaceholderHeight
+    case formMaximumWidth
+    case heroAmountSpacing
+    case heroAmountRowSpacing
+    case heroAmountKerning
+    case chartHeight
+    case volumeChartHeight
+    case chartLineWidth
+    case chartMarkerSize
+    case chartDashLength
+    case chartSliceGap
+    case chartLiveDotSize
+    case chartLiveEndPadding
+    case chartSelectionDotSize
+    case chartSelectionDotBorderWidth
+    case chartSelectionShadowRadius
+    case chartScrubMaskWidth
+    case segmentCapsuleHeight
+    case slideKnobSize
+    case slideKnobShadowRadius
+    case completionBadgeSize
+    case completionBadgeRingWidth
+    case handoffRiseDistance
+    case shakeDistance
+    case cornerRadiusSurface
+    case swatchHeight
+    case actionButtonHeight
 }

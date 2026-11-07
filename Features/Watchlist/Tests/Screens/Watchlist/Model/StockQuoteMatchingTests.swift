@@ -14,7 +14,7 @@ struct StockQuoteMatchingTests {
     @Test(arguments: [("", true), ("  ", true), ("aapl", true), ("apple", true), ("SAP", false)])
     func matchesThenComparesSymbolAndCompanyName(query: String, expected: Bool) {
         // When
-        let matches = StockQuote.apple.matches(query)
+        let matches = appleQuote.matches(query)
 
         // Then
         #expect(matches == expected)

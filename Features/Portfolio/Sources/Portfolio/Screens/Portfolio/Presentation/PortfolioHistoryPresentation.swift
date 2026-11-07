@@ -20,7 +20,7 @@ extension PortfolioHistory {
 
     var chartAccessibility: ChartAccessibility {
         ChartAccessibility(
-            title: PortfolioText.chartTitle,
+            title: .init("portfolio.chart.title", bundle: .module),
             summary: range.chartSummary(
                 from: points.first?.value.formatted() ?? "",
                 to: points.last?.value.formatted() ?? ""

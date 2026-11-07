@@ -5,33 +5,38 @@
 //  Created by Jiawen Sun on 2026/11/07.
 //
 
-public struct MockServerBehavior: Sendable {
-    let latency: ClosedRange<Duration>
-    let readFailureRate: Double
-    let writeFailureRate: Double
+public enum MockServerBehavior: Sendable {
+    case realistic
+    case instant
+    case failingReads
+    case alwaysFailing
 
-    public init(
-        latency: ClosedRange<Duration>,
-        readFailureRate: Double,
-        writeFailureRate: Double = 0
-    ) {
-        self.latency = latency
-        self.readFailureRate = readFailureRate
-        self.writeFailureRate = writeFailureRate
+    var latency: ClosedRange<Duration> {
+        switch self {
+        case .realistic:
+            .milliseconds(250)...(.milliseconds(900))
+        case .instant, .failingReads, .alwaysFailing:
+            .zero...(.zero)
+        }
     }
-}
 
-extension MockServerBehavior {
-    public static let realistic = Self(
-        latency: .milliseconds(250)...(.milliseconds(900)),
-        readFailureRate: 0.05
-    )
+    var readFailureRate: Double {
+        switch self {
+        case .realistic:
+            0.05
+        case .instant:
+            0
+        case .failingReads, .alwaysFailing:
+            1
+        }
+    }
 
-    public static let instant = Self(latency: .zero...(.zero), readFailureRate: 0)
-
-    public static let alwaysFailing = Self(
-        latency: .zero...(.zero),
-        readFailureRate: 1,
-        writeFailureRate: 1
-    )
+    var writeFailureRate: Double {
+        switch self {
+        case .realistic, .instant, .failingReads:
+            0
+        case .alwaysFailing:
+            1
+        }
+    }
 }

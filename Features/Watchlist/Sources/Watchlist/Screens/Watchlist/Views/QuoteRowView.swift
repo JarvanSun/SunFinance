@@ -55,13 +55,13 @@ struct QuoteRowView: View {
 #if DEBUG
 #Preview(traits: .sizeThatFitsLayout) {
     VStack(alignment: .leading) {
-        QuoteRowView(quote: PreviewObjectPool.gainingQuote, favoriteAction: .remove)
+        QuoteRowView(quote: PreviewObjectPool().gainingQuote, favoriteAction: .remove)
 
-        QuoteRowView(quote: PreviewObjectPool.losingQuote, favoriteAction: .add)
+        QuoteRowView(quote: PreviewObjectPool().losingQuote, favoriteAction: .add)
 
-        QuoteRowView(quote: PreviewObjectPool.unchangedQuote, favoriteAction: .add)
+        QuoteRowView(quote: PreviewObjectPool().unchangedQuote, favoriteAction: .add)
 
-        QuoteRowView(quote: PreviewObjectPool.losingQuote, favoriteAction: .remove)
+        QuoteRowView(quote: PreviewObjectPool().losingQuote, favoriteAction: .remove)
             .environment(\.locale, Locale(identifier: "de_DE"))
     }
     .padding()

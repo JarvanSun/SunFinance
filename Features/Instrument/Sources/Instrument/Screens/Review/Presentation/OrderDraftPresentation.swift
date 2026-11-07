@@ -39,17 +39,17 @@ extension OrderDraft {
         [
             LabeledRow(
                 id: "type",
-                title: TradingText.typeRow,
+                title: .init("trading.review.row.type", bundle: .module),
                 value: .localized(executionText(currency: currency))
             ),
             LabeledRow(
                 id: "trigger",
-                title: TradingText.triggerRow,
+                title: .init("trading.review.row.trigger", bundle: .module),
                 value: .localized(triggerText(currency: currency))
             ),
             LabeledRow(
                 id: "validity",
-                title: TradingText.validityRow,
+                title: .init("trading.review.row.validity", bundle: .module),
                 value: .localized(validity.segmentTitle)
             ),
         ]

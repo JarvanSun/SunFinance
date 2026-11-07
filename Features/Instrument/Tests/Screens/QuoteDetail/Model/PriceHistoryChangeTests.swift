@@ -14,7 +14,7 @@ import Testing
 struct PriceHistoryChangeTests {
     @Test func changeThenStartsAtTheBaseline() {
         // When
-        let change = PriceHistory.appleDay.change(to: 110)
+        let change = appleDayHistory.change(to: 110)
 
         // Then
         #expect(change == PriceChange(start: Money(100, .usd), end: Money(110, .usd)))

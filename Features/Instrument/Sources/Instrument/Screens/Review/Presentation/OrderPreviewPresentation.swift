@@ -14,17 +14,21 @@ extension OrderPreview {
         let figures = [
             LabeledRow(
                 id: "quantity",
-                title: TradingText.quantityRow,
+                title: .init("trading.review.row.quantity", bundle: .module),
                 value: .verbatim(quantity.formattedQuantity())
             ),
             LabeledRow(
                 id: "price",
-                title: TradingText.priceRow,
+                title: .init("trading.review.row.price", bundle: .module),
                 value: .verbatim(price.formatted())
             ),
         ]
         let costs = [
-            LabeledRow(id: "fee", title: TradingText.feeRow, value: .verbatim(fee.formatted())),
+            LabeledRow(
+                id: "fee",
+                title: .init("trading.review.row.fee", bundle: .module),
+                value: .verbatim(fee.formatted())
+            ),
             LabeledRow(
                 id: "total",
                 title: side.totalRowTitle,
@@ -33,7 +37,7 @@ extension OrderPreview {
             ),
             LabeledRow(
                 id: "cashAfter",
-                title: TradingText.cashAfterRow,
+                title: .init("trading.review.row.cashAfter", bundle: .module),
                 value: .verbatim(cashAfter.formatted())
             ),
         ]

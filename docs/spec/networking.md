@@ -17,7 +17,7 @@ domain; they never see URLs, HTTP or JSON.
 | Public | Internal to FinanceCore |
 |---|---|
 | Values, domain models and errors, provider protocols, `MarketDataService` and `BrokerageService` (`init(environment:)`), the watchlist and favorites stores, the analytics types | Endpoint catalogues, request types, DTOs, `…PathSegment` and `…QueryKey` names |
-| `ServerEnvironment` and `.mock(behavior:storageDirectory:)`, `MockServerBehavior` and its presets | `BackendClient`, `BackendFailure`, `ServerTransport`, `HeaderKey`, `HTTPStatus`, `APIVersion`, the JSON coders |
+| `ServerEnvironment` and `init(mockBehavior:storageDirectory:)`, `MockServerBehavior` and its cases | `BackendClient`, `BackendFailure`, `ServerTransport`, `HeaderKey`, `HTTPStatus`, `APIVersion`, the JSON coders |
 | `MockExchange()`, `quote(for:at:)`, `eurRate(of:at:)`, `ExchangeQuote` (for the FinanceCore playground) | The mock server, its routes, the mock brokerage engine, the exchange's internals |
 
 Tests reach internal parts with `@testable import FinanceCore`.
@@ -113,9 +113,10 @@ private extension QuotesRequest {
   object inside either `<Object>DTO` (`QuoteDTO`).
 - Mapping lives in the domain model: `StockQuote(_ dto: QuoteDTO) throws(MarketDataError)`. An
   invalid DTO throws `.decoding`; it is never silently defaulted.
-- Money is `Money` (`Decimal` amount plus ISO 4217 currency), never `Double`. Quantities are
-  `Decimal`. Timestamps are `Date`, ISO 8601 in both directions (`JSONEncoder.backend`,
-  `JSONDecoder.backend`).
+- Money is `Money` (`Decimal` amount plus a `CurrencyCode`), never `Double`. `CurrencyCode` is an
+  enum of the ISO 4217 codes the app supports (`EUR`, `USD`, `JPY`); a DTO with any other code is
+  invalid. Quantities are `Decimal`. Timestamps are `Date`, ISO 8601 in both directions
+  (`makeBackendEncoder()`, `makeBackendDecoder()`).
 
 ## Errors
 
@@ -136,8 +137,8 @@ not an error.
 ## Server environments
 
 `ServerEnvironment` (`Networking/Environment/`) is a value holding a base URL and a transport;
-only the type and its presets are public. `.mock(behavior:storageDirectory:)` assembles the whole
-mock backend: one `MockExchange`, the mock brokerage (persisted as `brokerage.json` in the
+only the type and its mock initializer are public. `init(mockBehavior:storageDirectory:)`
+assembles the whole mock backend: one `MockExchange`, the mock brokerage (persisted as `brokerage.json` in the
 directory, in memory for `nil`) and every domain's routes. Only the services read the
 environment. A real backend would be a new `ServerEnvironment`, nothing else.
 
@@ -163,9 +164,10 @@ body, the timeout) and are never repeated. The only header the app adds is
   behind a lock, persisted as JSON in Application Support. On every request it first settles
   everything up to now: triggered open orders fill at that moment's price, scheduled orders whose
   time came are released, and orders placed outside trading hours wait for the open.
-- `MockServerBehavior` sets latency and read and write failure rates (a failure answers `503`):
-  `.realistic` (the app: 250–900 ms, 5 % of reads fail, writes never), `.instant` (tests) and
-  `.alwaysFailing` (error-path tests).
+- `MockServerBehavior` is an enum whose cases set latency and read and write failure rates (a
+  failure answers `503`): `.realistic` (the app: 250–900 ms, 5 % of reads fail, writes never),
+  `.instant` (tests), `.failingReads` (reads fail, writes succeed) and `.alwaysFailing`
+  (error-path tests).
 
 ## Providers
 

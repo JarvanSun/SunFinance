@@ -12,7 +12,10 @@ public struct MockExchange: Sendable {
     private let eurPerUSD: Decimal
 
     public init() {
-        let fixture = try? Bundle.module.fixture(named: Self.fileName, as: MockListingsDTO.self)
+        let fixture = try? Bundle.module.fixture(
+            named: FixtureFile.listings.rawValue,
+            as: MockListingsDTO.self
+        )
         self.init(listings: fixture?.listings ?? [], eurPerUSD: fixture?.eurPerUSD ?? 1)
     }
 
@@ -78,8 +81,6 @@ public struct MockExchange: Sendable {
 
 private extension MockExchange {
     typealias Wave = (period: TimeInterval, amplitude: Double)
-
-    static var fileName: String { "listings" }
 
     var day: TimeInterval { 86_400 }
 
@@ -191,4 +192,8 @@ private extension Decimal {
         NSDecimalRound(&result, &value, scale, .bankers)
         return result
     }
+}
+
+private enum FixtureFile: String {
+    case listings
 }

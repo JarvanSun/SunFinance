@@ -50,6 +50,6 @@ final class OrdersStub: OrderProviding, OrderCancelling {
 
     func cancel(orderID: Order.ID) async throws(BrokerageError) -> Order {
         let status = try state.withLock(\.cancelResult).get()
-        return .make(orderID, status: status)
+        return .init(orderID, status: status)
     }
 }

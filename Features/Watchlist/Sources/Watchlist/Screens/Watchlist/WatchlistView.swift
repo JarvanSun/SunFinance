@@ -22,8 +22,11 @@ struct WatchlistView: View {
             .overlay(if: viewModel.placeholder) { placeholder in
                 WatchlistPlaceholderView(placeholder: placeholder, onRetry: viewModel.retry)
             }
-            .navigationTitle(Text(WatchlistText.title))
-            .searchable(text: $viewModel.searchText, prompt: Text(WatchlistText.searchPrompt))
+            .navigationTitle(Text("watchlist.title", bundle: .module))
+            .searchable(
+                text: $viewModel.searchText,
+                prompt: Text("watchlist.search.prompt", bundle: .module)
+            )
             .onSubmit(of: .search, viewModel.submitSearch)
             .toolbar {
                 WatchlistToolbar(
@@ -92,7 +95,7 @@ private extension WatchlistView {
 @available(iOS 26, *)
 #Preview("Watchlist", arguments: WatchlistPreviewState.allCases) { state in
     NavigationStack {
-        WatchlistView(viewModel: PreviewObjectPool.watchlistViewModel(state))
+        WatchlistView(viewModel: PreviewObjectPool().watchlistViewModel(state))
     }
     .environment(\.locale, state.locale)
 }

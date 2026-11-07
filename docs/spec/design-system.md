@@ -11,8 +11,8 @@ SunKit's styling protocols (`ColorStyling`, `FontStyling`, `ImageStyling`, `Dime
 - Each case is a color set in `Resources/Colors.xcassets` with light, dark and increased-contrast
   variants. Every text and market color meets WCAG AA (4.5:1) on `background`, `surface` and
   `surfaceElevated`, in light and dark.
-- DesignSystem's resources are reached through `Bundle.designSystem`, never `Bundle.module`, so
-  tests reach them too.
+- DesignSystem's resources are reached through `Bundle.module`; its tests have no resources of their
+  own and reach the same bundle through `@testable import`.
 - Views apply colors with SunKit's `.foregroundColor(FinanceColor.…)`, `.background(…)` or
   `.textStyle(_:_:)`. Never `Color.red`, `Color(hex:)` or `.foregroundStyle(.secondary)`.
 - Gain and loss are never shown by color alone: every change carries its sign. Lists and
@@ -46,10 +46,11 @@ an `ImageStyling` enum; a feature may define its own for symbols only it uses.
 - Every size is a SunKit dimension token read through `@Environment(\.dimensions)`
   (`dimensions.spaceMedium`). Never a number in a view.
 - SunKit's generic tokens are used where they fit (`cornerRadiusLarge`, `borderWidthSmall`).
-- An app-specific size is declared once: a `DimensionToken` in
-  `Extensions/DimensionTokenExtensions.swift` and a `DimensionStyling` property with its default in
-  `Extensions/DimensionStylingExtensions.swift` (`minimumTapTarget`, `chartLineWidth`). A test
-  covers every token's default and override.
+- An app-specific size is declared once, in `Extensions/DimensionStylingExtensions.swift`: a case
+  of the file's private `FinanceDimension` enum names the token, converted to SunKit's
+  `DimensionToken` at the lookup, and a public `DimensionStyling` property gives its default
+  (`dimensions.minimumTapTarget`, `dimensions.chartLineWidth`). A test covers every token's default
+  and override.
 - The App injects no overrides; tests override through `\.dimensions`.
 - Tokens hold lengths only. Opacities, durations, counts and ratios are properties of the type
   that uses them; durations are `FinanceMotion` values.

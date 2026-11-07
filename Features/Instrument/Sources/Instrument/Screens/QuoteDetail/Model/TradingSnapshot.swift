@@ -10,13 +10,14 @@ import FinanceCore
 nonisolated struct TradingSnapshot: Equatable, Sendable {
     let position: Position?
     let orders: [Order]
+
+    init(position: Position? = nil, orders: [Order] = []) {
+        self.position = position
+        self.orders = orders
+    }
 }
 
 extension TradingSnapshot {
-    static var empty: Self {
-        .init(position: nil, orders: [])
-    }
-
     init(symbol: TickerSymbol, portfolio: Portfolio, orders: [Order]) {
         self.init(
             position: portfolio.position(of: symbol),

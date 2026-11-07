@@ -20,21 +20,21 @@ enum WatchlistEvent: AnalyticsEvent, Equatable {
     var name: AnalyticsEventName {
         switch self {
         case .screenViewed:
-            .watchlistViewed
+            .init("watchlist_viewed")
         case .quotesLoaded:
-            .watchlistQuotesLoaded
+            .init("watchlist_quotes_loaded")
         case .quotesFailed:
-            .watchlistQuotesFailed
+            .init("watchlist_quotes_failed")
         case .searchSubmitted:
-            .watchlistSearchSubmitted
+            .init("watchlist_search_submitted")
         case .sortOrderChanged:
-            .watchlistSortChanged
+            .init("watchlist_sort_changed")
         case .favoriteToggled:
-            .watchlistFavoriteToggled
+            .init("watchlist_favorite_toggled")
         case .quoteOpened:
-            .watchlistQuoteOpened
+            .init("watchlist_quote_opened")
         case .symbolAdded:
-            .watchlistSymbolAdded
+            .init("watchlist_symbol_added")
         }
     }
 

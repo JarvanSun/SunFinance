@@ -12,7 +12,7 @@ public struct CandlestickChartContent: Sendable {
 
     public init(
         candles: [ChartCandle],
-        trading: ChartTradingLayer = .empty,
+        trading: ChartTradingLayer = .init(),
         accessibility: ChartAccessibility
     ) {
         self.candles = candles

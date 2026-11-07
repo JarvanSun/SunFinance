@@ -16,7 +16,7 @@ struct PlacementStatePresentationTests {
     @Test(arguments: [
         (PlacementState.ready, SlideToConfirmPhase.ready, false),
         (.placing, .working, false),
-        (.placed(.make(status: .filled)), .done, false),
+        (.placed(.init(status: .filled)), .done, false),
         (.failed(.offline), .ready, true),
     ])
     func slidePhaseThenFollowsThePlacement(

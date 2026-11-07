@@ -12,12 +12,12 @@ import Testing
 
 struct OrderDraftRulesTests {
     @Test(arguments: [
-        (OrderDraft.make(execution: .limit(90)), Decimal(90)),
-        (.make(execution: .limit(90), trigger: .priceAtOrAbove(95)), 90),
-        (.make(trigger: .priceAtOrAbove(110)), 110),
-        (.make(trigger: .priceAtOrBelow(80)), 80),
-        (.make(), 100),
-        (.make(trigger: .at(Date(timeIntervalSince1970: 0))), 100),
+        (OrderDraft(execution: .limit(90)), Decimal(90)),
+        (.init(execution: .limit(90), trigger: .priceAtOrAbove(95)), 90),
+        (.init(trigger: .priceAtOrAbove(110)), 110),
+        (.init(trigger: .priceAtOrBelow(80)), 80),
+        (.init(), 100),
+        (.init(trigger: .at(Date(timeIntervalSince1970: 0))), 100),
     ])
     func estimatedPriceThenPrefersLimitThenStopThenMarket(draft: OrderDraft, expected: Decimal) {
         // Then
@@ -32,7 +32,7 @@ struct OrderDraftRulesTests {
     ])
     func quantityThenTurnsEurosIntoWholeStepsAfterTheFee(amount: OrderAmount, expected: Decimal) {
         // When
-        let quantity = OrderDraft.make(.buy, amount).quantity(at: 100, fee: 1, scale: 2)
+        let quantity = OrderDraft(.buy, amount).quantity(at: 100, fee: 1, scale: 2)
 
         // Then
         #expect(quantity == expected)
@@ -40,19 +40,19 @@ struct OrderDraftRulesTests {
 
     @Test func quantityWhenPriceIsZeroThenIsZero() {
         // Then
-        #expect(OrderDraft.make(.buy, .euros(100)).quantity(at: 0, fee: 1, scale: 4) == 0)
+        #expect(OrderDraft(.buy, .euros(100)).quantity(at: 0, fee: 1, scale: 4) == 0)
     }
 
     @Test(arguments: [
-        (OrderDraft.make(.buy, .shares(0)), OrderRejection?.some(.invalidAmount)),
-        (.make(.buy, .euros(-5)), .invalidAmount),
-        (.make(execution: .limit(0)), .invalidPrice),
-        (.make(trigger: .priceAtOrAbove(0)), .invalidPrice),
-        (.make(trigger: .priceAtOrBelow(-1)), .invalidPrice),
-        (.make(trigger: .at(Date(timeIntervalSince1970: 1_000))), .invalidSchedule),
-        (.make(trigger: .at(Date(timeIntervalSince1970: 1_000_000))), .invalidSchedule),
-        (.make(trigger: .at(Date(timeIntervalSince1970: 5_000))), nil),
-        (.make(), nil),
+        (OrderDraft(.buy, .shares(0)), OrderRejection?.some(.invalidAmount)),
+        (.init(.buy, .euros(-5)), .invalidAmount),
+        (.init(execution: .limit(0)), .invalidPrice),
+        (.init(trigger: .priceAtOrAbove(0)), .invalidPrice),
+        (.init(trigger: .priceAtOrBelow(-1)), .invalidPrice),
+        (.init(trigger: .at(Date(timeIntervalSince1970: 1_000))), .invalidSchedule),
+        (.init(trigger: .at(Date(timeIntervalSince1970: 1_000_000))), .invalidSchedule),
+        (.init(trigger: .at(Date(timeIntervalSince1970: 5_000))), nil),
+        (.init(), nil),
     ])
     func validationIssueThenNamesTheFirstInvalidChoice(
         draft: OrderDraft,
@@ -84,7 +84,7 @@ struct OrderDraftRulesTests {
         expected: Bool
     ) {
         // When
-        let isTriggered = OrderDraft.make(trigger: trigger).isTriggered(
+        let isTriggered = OrderDraft(trigger: trigger).isTriggered(
             at: Date(timeIntervalSince1970: seconds),
             price: price
         )

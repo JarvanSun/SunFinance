@@ -49,14 +49,14 @@ struct OrderResultView: View {
             VStack(spacing: dimensions.spaceSmall) {
                 RevealContainer(isRevealed: outcome.allowsEditing) {
                     Button(action: onEdit) {
-                        Text(TradingText.editOrder)
+                        Text("trading.review.edit", bundle: .module)
                     }
                     .buttonStyle(.finance(.primary))
                     .accessibilityIdentifier(InstrumentAccessibility.editButton)
                 }
 
                 Button(action: onDone) {
-                    Text(TradingText.done)
+                    Text("trading.result.done", bundle: .module)
                 }
                 .buttonStyle(.finance(outcome.doneButtonKind))
                 .accessibilityIdentifier(InstrumentAccessibility.doneButton)
@@ -82,10 +82,10 @@ private extension OrderResultView {
 
 #if DEBUG
 @available(iOS 26, *)
-#Preview("Result", arguments: PreviewObjectPool.outcomes) { outcome in
+#Preview("Result", arguments: PreviewObjectPool().outcomes) { outcome in
     OrderResultView(
         outcome: outcome,
-        draft: PreviewObjectPool.draft,
+        draft: PreviewObjectPool().draft,
         currency: .usd,
         onDone: {},
         onEdit: {}

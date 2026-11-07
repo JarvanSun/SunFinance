@@ -16,13 +16,13 @@ enum TradingEvent: AnalyticsEvent, Equatable {
     var name: AnalyticsEventName {
         switch self {
         case .ticketOpened:
-            .tradingTicketOpened
+            .init("trading_ticket_opened")
         case .orderReviewed:
-            .tradingOrderReviewed
+            .init("trading_order_reviewed")
         case .orderPlaced:
-            .tradingOrderPlaced
+            .init("trading_order_placed")
         case .orderFailed:
-            .tradingOrderFailed
+            .init("trading_order_failed")
         }
     }
 
@@ -35,9 +35,9 @@ enum TradingEvent: AnalyticsEvent, Equatable {
                 .source: .text(intent.source.rawValue),
             ]
         case .orderReviewed(let draft):
-            Self.describe(draft)
+            describe(draft)
         case .orderPlaced(let order):
-            Self.describe(order.draft).merging(
+            describe(order.draft).merging(
                 [
                     .symbol: .text(order.draft.symbol.rawValue),
                     .status: .text(order.status.analyticsValue),
@@ -50,7 +50,7 @@ enum TradingEvent: AnalyticsEvent, Equatable {
 }
 
 private extension TradingEvent {
-    static func describe(_ draft: OrderDraft) -> [AnalyticsParameter: AnalyticsValue] {
+    func describe(_ draft: OrderDraft) -> [AnalyticsParameter: AnalyticsValue] {
         [
             .side: .text(draft.side.rawValue),
             .orderType: .text(draft.kind.rawValue),

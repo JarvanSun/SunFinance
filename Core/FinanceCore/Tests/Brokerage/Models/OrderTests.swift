@@ -13,10 +13,10 @@ import Testing
 struct OrderTests {
     @Test func initThenMapsEveryField() throws {
         // Given
-        let draft = OrderDraft.make(.buy, .euros(200), symbol: "AAPL")
+        let draft = OrderDraft(.buy, .euros(200), symbol: "AAPL")
 
         // When
-        let order = try Order(dto(draft: draft, fill: .make()))
+        let order = try Order(dto(draft: draft, fill: .init()))
 
         // Then
         #expect(order.id == "order-1")
@@ -25,7 +25,7 @@ struct OrderTests {
         #expect(order.currency == .usd)
         #expect(order.status == .filled)
         #expect(order.createdAt == Date(timeIntervalSince1970: 500))
-        #expect(order.fill == (try OrderFill(.make())))
+        #expect(order.fill == (try OrderFill(.init())))
     }
 
     @Test(arguments: [("filled", "DOLLAR"), ("lost", "USD"), ("rejected", "USD")])
@@ -42,7 +42,7 @@ struct OrderTests {
 
 private extension OrderTests {
     func dto(
-        draft: OrderDraft = .make(),
+        draft: OrderDraft = .init(),
         status: String = "filled",
         currency: String = "USD",
         fill: FillDTO? = nil

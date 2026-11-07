@@ -8,33 +8,26 @@
 import FinanceCore
 import Foundation
 
-extension TickerSymbol {
-    nonisolated static let apple: Self = "AAPL"
-    nonisolated static let sap: Self = "SAP"
-}
+nonisolated let appleQuote = StockQuote(
+    symbol: "AAPL",
+    companyName: "Apple Inc.",
+    price: Money(228.52, .usd),
+    changePercent: 1.24,
+    marketCap: Money(3_450_000_000_000, .usd)
+)
 
-extension StockQuote {
-    nonisolated static let apple = Self(
-        symbol: .apple,
-        companyName: "Apple Inc.",
-        price: Money(228.52, .usd),
-        changePercent: 1.24,
-        marketCap: Money(3_450_000_000_000, .usd)
-    )
+nonisolated let sapQuote = StockQuote(
+    symbol: "SAP",
+    companyName: "SAP SE",
+    price: Money(221.35, .eur),
+    changePercent: -0.38,
+    marketCap: Money(271_000_000_000, .eur)
+)
 
-    nonisolated static let sap = Self(
-        symbol: .sap,
-        companyName: "SAP SE",
-        price: Money(221.35, .eur),
-        changePercent: -0.38,
-        marketCap: Money(271_000_000_000, .eur)
-    )
-
-    nonisolated static let unchanged = Self(
-        symbol: "ALV",
-        companyName: "Allianz SE",
-        price: Money(289.90, .eur),
-        changePercent: 0,
-        marketCap: Money(113_000_000_000, .eur)
-    )
-}
+nonisolated let unchangedQuote = StockQuote(
+    symbol: "ALV",
+    companyName: "Allianz SE",
+    price: Money(289.90, .eur),
+    changePercent: 0,
+    marketCap: Money(113_000_000_000, .eur)
+)

@@ -49,7 +49,7 @@ private extension SymbolOrdersTests {
     func order(_ id: Order.ID) -> Order {
         Order(
             id: id,
-            draft: .make(symbol: "AAPL"),
+            draft: .init(symbol: "AAPL"),
             quantity: 1,
             currency: .usd,
             status: .waitingForPrice,

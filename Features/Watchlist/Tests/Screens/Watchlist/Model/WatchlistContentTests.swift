@@ -16,7 +16,7 @@ struct WatchlistContentTests {
         let content = makeContent(searchText: " ", sortOrder: .symbol)
 
         // Then
-        #expect(content.visibleQuotes == [.apple, .sap])
+        #expect(content.visibleQuotes == [appleQuote, sapQuote])
         #expect(content.addableMatches.isEmpty)
         #expect(content.sections == [.quotes])
         #expect(content.hasRows)
@@ -28,8 +28,8 @@ struct WatchlistContentTests {
         let content = makeContent(searchText: "Inc", sortOrder: .marketCap)
 
         // Then
-        #expect(content.visibleQuotes == [.apple])
-        #expect(content.addableMatches == [.tesla])
+        #expect(content.visibleQuotes == [appleQuote])
+        #expect(content.addableMatches == [teslaMatch])
         #expect(content.sections == [.quotesMatchingSearch, .symbolMatches])
         #expect(content.resultCount == 2)
     }
@@ -46,7 +46,7 @@ struct WatchlistContentTests {
     @Test func hasRowsWhenNothingMatchesThenIsFalse() {
         // Given
         let content = WatchlistContent(
-            quotes: [.sap],
+            quotes: [sapQuote],
             symbolMatches: [],
             searchText: "Apple",
             sortOrder: .marketCap
@@ -62,8 +62,8 @@ struct WatchlistContentTests {
 private extension WatchlistContentTests {
     func makeContent(searchText: String, sortOrder: WatchlistSortOrder) -> WatchlistContent {
         WatchlistContent(
-            quotes: [.sap, .apple],
-            symbolMatches: [.apple, .tesla],
+            quotes: [sapQuote, appleQuote],
+            symbolMatches: [appleMatch, teslaMatch],
             searchText: searchText,
             sortOrder: sortOrder
         )

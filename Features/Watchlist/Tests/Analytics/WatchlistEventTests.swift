@@ -13,10 +13,10 @@ import Testing
 struct WatchlistEventTests {
     @Test func favoriteToggledThenCarriesSymbolAndState() {
         // Given
-        let event = WatchlistEvent.favoriteToggled(symbol: .apple, isFavorite: true)
+        let event = WatchlistEvent.favoriteToggled(symbol: "AAPL", isFavorite: true)
 
         // Then
-        #expect(event.name == .watchlistFavoriteToggled)
+        #expect(event.name == .init("watchlist_favorite_toggled"))
         #expect(event.parameters == [.symbol: .text("AAPL"), .isFavorite: .boolean(true)])
     }
 
@@ -35,10 +35,10 @@ struct WatchlistEventTests {
 
     @Test func symbolAddedThenCarriesSymbol() {
         // Given
-        let event = WatchlistEvent.symbolAdded(symbol: .tesla)
+        let event = WatchlistEvent.symbolAdded(symbol: "TSLA")
 
         // Then
-        #expect(event.name == .watchlistSymbolAdded)
+        #expect(event.name == .init("watchlist_symbol_added"))
         #expect(event.parameters == [.symbol: .text("TSLA")])
     }
 

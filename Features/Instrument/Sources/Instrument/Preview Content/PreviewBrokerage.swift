@@ -15,7 +15,7 @@ struct PreviewBrokerage: PositionProviding, OrderProviding {
     func portfolio() async throws(BrokerageError) -> Portfolio {
         guard isHolding else { return Portfolio(open: [], closed: []) }
 
-        return Portfolio(open: [PreviewObjectPool.position], closed: [])
+        return Portfolio(open: [PreviewObjectPool().position], closed: [])
     }
 
     func orders(

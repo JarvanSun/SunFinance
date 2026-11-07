@@ -51,7 +51,7 @@ enum BrokerageEndpoint: Equatable, Sendable {
     }
 
     init?(path: [String], method: HTTPMethod) {
-        let endpoint = Self.endpoint(matching: path, method: method)
+        let endpoint = brokerageEndpoint(matching: path, method: method)
         guard let endpoint, endpoint.path == path, endpoint.method == method else { return nil }
 
         self = endpoint
@@ -59,21 +59,25 @@ enum BrokerageEndpoint: Equatable, Sendable {
 }
 
 private extension BrokerageEndpoint {
-    static var fixedEndpoints: [Self] {
-        [.account, .positions, .portfolioHistory, .orders, .previewOrder, .placeOrder]
-    }
-
     var version: String { APIVersion.v1.rawValue }
+}
 
-    static func endpoint(matching path: [String], method: HTTPMethod) -> Self? {
-        let fixed = fixedEndpoints.first { $0.path == path && $0.method == method }
-        switch (fixed, path.last) {
-        case (.some(let endpoint), _):
-            return endpoint
-        case (nil, .some(let id)):
-            return .cancelOrder(id)
-        case (nil, nil):
-            return nil
-        }
+private func brokerageEndpoint(matching path: [String], method: HTTPMethod) -> BrokerageEndpoint? {
+    let fixedEndpoints: [BrokerageEndpoint] = [
+        .account,
+        .positions,
+        .portfolioHistory,
+        .orders,
+        .previewOrder,
+        .placeOrder,
+    ]
+    let fixed = fixedEndpoints.first { $0.path == path && $0.method == method }
+    switch (fixed, path.last) {
+    case (.some(let endpoint), _):
+        return endpoint
+    case (nil, .some(let id)):
+        return .cancelOrder(id)
+    case (nil, nil):
+        return nil
     }
 }

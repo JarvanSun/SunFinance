@@ -29,7 +29,7 @@ struct TicketViewModelTests {
     @Test func loadWhenNothingIsHeldThenOffersBuyOnly() async {
         // Given
         let services = TradingServicesStub()
-        services.update { $0.portfolioResult = .success(.holdingApple(0)) }
+        services.update { $0.portfolioResult = .success(.init(holdingApple: 0)) }
         let viewModel = makeViewModel(services: services)
 
         // When
@@ -94,7 +94,7 @@ struct TicketViewModelTests {
     @Test func refreshEstimateWhenServerPredictsShortCashThenFlagsTheAmount() async {
         // Given
         let services = TradingServicesStub()
-        services.update { $0.previewResult = .success(.sample(rejection: .insufficientCash)) }
+        services.update { $0.previewResult = .success(.init(rejection: .insufficientCash)) }
         let viewModel = makeViewModel(services: services)
         viewModel.setAmountText("200")
 
@@ -103,7 +103,7 @@ struct TicketViewModelTests {
 
         // Then
         #expect(viewModel.visibleIssues == [.amount: .insufficientCash])
-        #expect(services.previewedDrafts == [.make(amount: .shares(200))])
+        #expect(services.previewedDrafts == [.init(amount: .shares(200))])
     }
 
     @Test func refreshEstimateWhenCancelledWhileAskingThenIgnoresTheLateAnswer() async {
@@ -151,7 +151,7 @@ struct TicketViewModelTests {
     ) async {
         // Given
         let services = TradingServicesStub()
-        services.update { $0.previewResult = .success(.sample(rejection: rejection)) }
+        services.update { $0.previewResult = .success(.init(rejection: rejection)) }
         let viewModel = makeViewModel(services: services)
         viewModel.setAmountText("2")
 
@@ -172,8 +172,8 @@ struct TicketViewModelTests {
         let range = viewModel.triggerDateRange
 
         // Then
-        #expect(range.lowerBound == .testNow)
-        #expect(range.upperBound == Date.testNow.addingTimeInterval(90 * 86_400))
+        #expect(range.lowerBound == testNow)
+        #expect(range.upperBound == testNow.addingTimeInterval(90 * 86_400))
     }
 
     @Test func offersSellAllWhenSellingHeldSharesThenIsTrue() async {
@@ -213,7 +213,7 @@ struct TicketViewModelTests {
         viewModel.review()
 
         // Then
-        #expect(router.reviewedDrafts == [.make()])
+        #expect(router.reviewedDrafts == [.init()])
     }
 
     @Test func sellAllWhenSharesAreHeldThenFillsThemIn() async {
@@ -259,7 +259,7 @@ private extension TicketViewModelTests {
             tracker: tracker,
             input: DecimalInput(locale: Locale(identifier: "en_US")),
             estimateDelay: .zero,
-            now: { .testNow }
+            now: { testNow }
         )
     }
 }

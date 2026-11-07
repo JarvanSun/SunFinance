@@ -13,11 +13,11 @@ import Watchlist
 
 struct PlaygroundDependencies {
     private let marketData = MarketDataService(
-        environment: .mock(behavior: .realistic, storageDirectory: nil)
+        environment: .init(mockBehavior: .realistic, storageDirectory: nil)
     )
     private let watchlistStore = InMemoryWatchlistSymbolStore(symbols: ["AAPL", "SAP"])
     private let favoriteStore = InMemoryFavoriteSymbolStore(favoriteSymbols: ["AAPL"])
-    private let tracker = PlaygroundDependencies.makeTracker()
+    private let tracker = makeTracker()
 
     func watchlist() -> WatchlistDependencies {
         WatchlistDependencies(
@@ -32,14 +32,12 @@ struct PlaygroundDependencies {
     }
 }
 
-private extension PlaygroundDependencies {
-    static func makeTracker() -> AnalyticsTracker {
-        let consent = UserDefaultsAnalyticsConsent(defaults: .standard)
-        consent.setConsent(true)
-        return AnalyticsTracker(
-            consent: consent,
-            context: AnalyticsContext(appVersion: "playground", locale: .autoupdatingCurrent),
-            destinations: [ConsoleAnalyticsDestination(subsystem: "WatchlistPlayground")]
-        )
-    }
+private func makeTracker() -> AnalyticsTracker {
+    let consent = UserDefaultsAnalyticsConsent(defaults: .standard)
+    consent.setConsent(true)
+    return AnalyticsTracker(
+        consent: consent,
+        context: AnalyticsContext(appVersion: "playground", locale: .autoupdatingCurrent),
+        destinations: [ConsoleAnalyticsDestination(subsystem: "WatchlistPlayground")]
+    )
 }

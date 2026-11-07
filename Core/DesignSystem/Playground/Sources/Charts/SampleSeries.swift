@@ -9,8 +9,8 @@ import DesignSystem
 import FinanceCore
 import Foundation
 
-enum SampleSeries {
-    static var allocation: AllocationChartContent {
+struct SampleSeries {
+    var allocation: AllocationChartContent {
         AllocationChartContent(
             slices: [
                 AllocationSlice(id: "AAPL", label: "AAPL", value: 3_197),
@@ -25,11 +25,11 @@ enum SampleSeries {
         )
     }
 
-    static var axisDate: @Sendable (Date) -> String {
+    var axisDate: @Sendable (Date) -> String {
         { $0.formatted(date: .omitted, time: .shortened) }
     }
 
-    static func line(for range: HistoryRange) -> PriceLineChartContent {
+    func line(for range: HistoryRange) -> PriceLineChartContent {
         PriceLineChartContent(
             points: points(for: range),
             baseline: 205,
@@ -38,7 +38,7 @@ enum SampleSeries {
         )
     }
 
-    static func value(for range: HistoryRange) -> PriceLineChartContent {
+    func value(for range: HistoryRange) -> PriceLineChartContent {
         PriceLineChartContent(
             points: points(for: range),
             baseline: nil,
@@ -46,7 +46,7 @@ enum SampleSeries {
         )
     }
 
-    static func candleChart(for range: HistoryRange) -> CandlestickChartContent {
+    func candleChart(for range: HistoryRange) -> CandlestickChartContent {
         CandlestickChartContent(
             candles: candles(for: range),
             trading: trading(for: range),
@@ -56,7 +56,7 @@ enum SampleSeries {
 }
 
 private extension SampleSeries {
-    static var accessibility: ChartAccessibility {
+    var accessibility: ChartAccessibility {
         ChartAccessibility(
             title: "Sample",
             summary: "A sample price series",
@@ -65,7 +65,7 @@ private extension SampleSeries {
         )
     }
 
-    static func points(for range: HistoryRange) -> [ChartPoint] {
+    func points(for range: HistoryRange) -> [ChartPoint] {
         let count = pointCount(for: range)
         let start = Date(timeIntervalSince1970: 1_793_000_000)
         return (0..<count).map { index in
@@ -75,7 +75,7 @@ private extension SampleSeries {
         }
     }
 
-    static func candles(for range: HistoryRange) -> [ChartCandle] {
+    func candles(for range: HistoryRange) -> [ChartCandle] {
         points(for: range).enumerated().map { index, point in
             let close = point.value + sin(Double(index)) * 2
             return ChartCandle(
@@ -89,7 +89,7 @@ private extension SampleSeries {
         }
     }
 
-    static func trading(for range: HistoryRange) -> ChartTradingLayer {
+    func trading(for range: HistoryRange) -> ChartTradingLayer {
         let points = points(for: range)
         let buy = points[points.count / 10]
         let sell = points[points.count * 3 / 4]
@@ -102,7 +102,7 @@ private extension SampleSeries {
         )
     }
 
-    static func pointCount(for range: HistoryRange) -> Int {
+    func pointCount(for range: HistoryRange) -> Int {
         switch range {
         case .day:
             78

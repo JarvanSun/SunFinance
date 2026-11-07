@@ -16,13 +16,13 @@ enum QuoteDetailEvent: AnalyticsEvent, Equatable {
     var name: AnalyticsEventName {
         switch self {
         case .screenViewed:
-            .quoteDetailViewed
+            .init("quote_detail_viewed")
         case .rangeChanged:
-            .quoteDetailRangeChanged
+            .init("quote_detail_range_changed")
         case .chartStyleChanged:
-            .quoteDetailChartStyleChanged
+            .init("quote_detail_chart_style_changed")
         case .chartScrubbed:
-            .quoteDetailChartScrubbed
+            .init("quote_detail_chart_scrubbed")
         }
     }
 

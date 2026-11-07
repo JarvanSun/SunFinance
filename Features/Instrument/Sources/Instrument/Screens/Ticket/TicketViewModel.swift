@@ -101,7 +101,7 @@ final class TicketViewModel {
         self.input = input
         self.estimateDelay = estimateDelay
         self.now = now
-        form = TicketForm(side: intent.side, triggerDate: Self.defaultTriggerDate(after: now()))
+        form = TicketForm(side: intent.side, triggerDate: defaultTriggerDate(after: now()))
     }
 
     func trackScreenView() {
@@ -216,15 +216,6 @@ private extension TicketViewModel {
         }
     }
 
-    static func defaultTriggerDate(after date: Date) -> Date {
-        let quarterHour: TimeInterval = 15 * 60
-        let inAnHour = date.addingTimeInterval(4 * quarterHour)
-        return Date(
-            timeIntervalSinceReferenceDate: (inAnHour.timeIntervalSinceReferenceDate / quarterHour)
-                .rounded(.up) * quarterHour
-        )
-    }
-
     func fetchContext() async -> LoadState<TicketContext, TradingIssue> {
         async let quotes = quoteProvider.quotes(for: [intent.symbol])
         async let account = accountProvider.account()
@@ -264,4 +255,13 @@ private extension TicketViewModel {
             estimate = .unavailable
         }
     }
+}
+
+private func defaultTriggerDate(after date: Date) -> Date {
+    let quarterHour: TimeInterval = 15 * 60
+    let inAnHour = date.addingTimeInterval(4 * quarterHour)
+    return Date(
+        timeIntervalSinceReferenceDate: (inAnHour.timeIntervalSinceReferenceDate / quarterHour)
+            .rounded(.up) * quarterHour
+    )
 }

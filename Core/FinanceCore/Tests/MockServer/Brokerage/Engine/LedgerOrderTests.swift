@@ -16,7 +16,7 @@ struct LedgerOrderTests {
         // Given
         let order = LedgerOrder(
             id: "order-1",
-            draft: .make(.sell, .euros(300), execution: .limit(99), validity: .goodTillCancelled),
+            draft: .init(.sell, .euros(300), execution: .limit(99), validity: .goodTillCancelled),
             quantity: 3,
             createdAt: Date(timeIntervalSince1970: 100),
             state: .working,
@@ -26,8 +26,8 @@ struct LedgerOrderTests {
         )
 
         // When
-        let data = try JSONEncoder.backend.encode(order)
-        let decoded = try JSONDecoder.backend.decode(LedgerOrder.self, from: data)
+        let data = try makeBackendEncoder().encode(order)
+        let decoded = try makeBackendDecoder().decode(LedgerOrder.self, from: data)
 
         // Then
         #expect(decoded == order)
@@ -37,7 +37,7 @@ struct LedgerOrderTests {
         // Given
         let order = LedgerOrder(
             id: "order-1",
-            draft: .make(),
+            draft: .init(),
             quantity: 1,
             createdAt: Date(timeIntervalSince1970: 100),
             state: .rejected,
@@ -45,12 +45,12 @@ struct LedgerOrderTests {
             rejection: .invalidPrice,
             fillID: nil
         )
-        let json = String(decoding: try JSONEncoder.backend.encode(order), as: UTF8.self)
+        let json = String(decoding: try makeBackendEncoder().encode(order), as: UTF8.self)
         let data = Data(json.replacingOccurrences(of: "invalid_price", with: "too_late").utf8)
 
         // Then
         #expect(throws: DecodingError.self) {
-            try JSONDecoder.backend.decode(LedgerOrder.self, from: data)
+            try makeBackendDecoder().decode(LedgerOrder.self, from: data)
         }
     }
 }

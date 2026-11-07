@@ -17,7 +17,7 @@ struct PreviewMarketData: QuoteDetailProviding, PriceHistoryProviding {
     func quoteDetail(for symbol: TickerSymbol) async throws(MarketDataError) -> QuoteDetail {
         try? await Task.sleep(for: delay)
         try fail(with: detailError)
-        return PreviewObjectPool.detail
+        return PreviewObjectPool().detail
     }
 
     func priceHistory(for symbol: TickerSymbol, range: HistoryRange) async throws(MarketDataError)
@@ -25,7 +25,7 @@ struct PreviewMarketData: QuoteDetailProviding, PriceHistoryProviding {
     {
         try? await Task.sleep(for: delay)
         try fail(with: historyError)
-        return PreviewObjectPool.history(range: range)
+        return PreviewObjectPool().history(range: range)
     }
 
     private func fail(with error: MarketDataError?) throws(MarketDataError) {

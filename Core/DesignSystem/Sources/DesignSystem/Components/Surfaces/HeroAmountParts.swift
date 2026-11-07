@@ -47,11 +47,9 @@ struct HeroAmountParts: Equatable {
             whole: whole,
             cents: cents,
             leadingSymbol: symbolLeads ? symbol : nil,
-            trailingSymbol: symbolLeads ? Self.raisingSpace : symbol
+            trailingSymbol: symbolLeads ? raisingSpace : symbol
         )
     }
 }
 
-private extension HeroAmountParts {
-    static var raisingSpace: String { " " }
-}
+private let raisingSpace = " "

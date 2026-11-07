@@ -13,7 +13,7 @@ import SwiftUI
 struct InstrumentPlaygroundApp: App {
     @State private var intent: TradeIntent?
 
-    private let environment = ServerEnvironment.mock(behavior: .realistic, storageDirectory: nil)
+    private let environment = ServerEnvironment(mockBehavior: .realistic, storageDirectory: nil)
     private let tracker = AnalyticsTracker(
         consent: UserDefaultsAnalyticsConsent(defaults: .standard),
         context: AnalyticsContext(appVersion: "playground", locale: .autoupdatingCurrent),

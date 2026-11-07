@@ -68,7 +68,7 @@ struct BrokerageMockRoutesTests {
             method: .post,
             path: ["v1", "orders"],
             headers: ["Idempotency-Key": "submit-1"],
-            body: try JSONEncoder.backend.encode(OrderDraft.make().dto),
+            body: try makeBackendEncoder().encode(OrderDraft().dto),
             date: date
         )
 
@@ -77,8 +77,8 @@ struct BrokerageMockRoutesTests {
         let second = try #require(try routes.response(to: request))
 
         // Then
-        let firstOrder = try JSONDecoder.backend.decode(OrderDTO.self, from: first.body)
-        let secondOrder = try JSONDecoder.backend.decode(OrderDTO.self, from: second.body)
+        let firstOrder = try makeBackendDecoder().decode(OrderDTO.self, from: first.body)
+        let secondOrder = try makeBackendDecoder().decode(OrderDTO.self, from: second.body)
         #expect(first.statusCode == 201)
         #expect(firstOrder.id == secondOrder.id)
         #expect(firstOrder.status == "filled")
@@ -92,8 +92,8 @@ struct BrokerageMockRoutesTests {
                 method: .post,
                 path: ["v1", "orders"],
                 headers: ["Idempotency-Key": key],
-                body: try JSONEncoder.backend.encode(
-                    OrderDraft.make(symbol: TickerSymbol(rawValue: symbol)).dto
+                body: try makeBackendEncoder().encode(
+                    OrderDraft(symbol: TickerSymbol(rawValue: symbol)).dto
                 ),
                 date: date
             )
@@ -112,7 +112,7 @@ struct BrokerageMockRoutesTests {
         let response = try #require(try routes.response(to: request))
 
         // Then
-        let page = try JSONDecoder.backend.decode(OrdersResponseDTO.self, from: response.body)
+        let page = try makeBackendDecoder().decode(OrdersResponseDTO.self, from: response.body)
         #expect(page.orders.map(\.draft.symbol) == ["SAP"])
     }
 
@@ -134,7 +134,7 @@ struct BrokerageMockRoutesTests {
 }
 
 private extension BrokerageMockRoutesTests {
-    var date: Date { TradingClock.tuesdayAfternoon }
+    var date: Date { TradingMoment.tuesdayAfternoon.date }
 
     func makeRoutes() -> BrokerageMockRoutes {
         let brokerage = MockBrokerage(exchange: MockExchange(), storageURL: nil, now: date)

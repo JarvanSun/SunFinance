@@ -51,10 +51,10 @@ struct PriceChartDescriptor: AXChartDescriptorRepresentable {
 
 private extension PriceChartDescriptor {
     var timeAxisTitle: LocalizedStringResource {
-        .init("charts.axis.time", bundle: .designSystem)
+        .init("charts.axis.time", bundle: .module)
     }
 
     var valueAxisTitle: LocalizedStringResource {
-        .init("charts.axis.value", bundle: .designSystem)
+        .init("charts.axis.value", bundle: .module)
     }
 }

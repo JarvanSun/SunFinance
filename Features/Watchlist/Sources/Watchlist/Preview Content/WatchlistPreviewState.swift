@@ -31,7 +31,7 @@ enum WatchlistPreviewState: String, CaseIterable, CustomStringConvertible {
         case .serviceUnavailable:
             .failure(.server(statusCode: 503))
         case .content, .loading, .search, .noSearchResults, .searchUnavailable, .german:
-            .success(PreviewObjectPool.quotes)
+            .success(PreviewObjectPool().quotes)
         }
     }
 
@@ -64,7 +64,7 @@ enum WatchlistPreviewState: String, CaseIterable, CustomStringConvertible {
             .failure(.offline)
         case .content, .loading, .empty, .offline, .serviceUnavailable, .search, .noSearchResults,
             .german:
-            .success(PreviewObjectPool.symbolMatches)
+            .success(PreviewObjectPool().symbolMatches)
         }
     }
 

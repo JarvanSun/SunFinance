@@ -43,9 +43,9 @@ private extension QuoteChangeView {
 #if DEBUG
 #Preview(traits: .sizeThatFitsLayout) {
     VStack(alignment: .leading) {
-        QuoteChangeView(change: PreviewObjectPool.change(2.4))
+        QuoteChangeView(change: PreviewObjectPool().change(2.4))
 
-        QuoteChangeView(change: PreviewObjectPool.change(-1.1))
+        QuoteChangeView(change: PreviewObjectPool().change(-1.1))
 
         QuoteChangeView(change: .pending)
             .border(.secondary)

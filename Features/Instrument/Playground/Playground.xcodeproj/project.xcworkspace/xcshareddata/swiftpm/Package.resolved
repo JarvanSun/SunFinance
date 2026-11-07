@@ -1,0 +1,15 @@
+{
+  "originHash" : "6df38822dc3858e13d14d4e369975181725c6284da7f84d6ba6852e68b48a99f",
+  "pins" : [
+    {
+      "identity" : "sunkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JarvanSun/SunKit.git",
+      "state" : {
+        "revision" : "0ac2808f76f2af555c2cd3dace929062df2dccea",
+        "version" : "0.2.2"
+      }
+    }
+  ],
+  "version" : 3
+}

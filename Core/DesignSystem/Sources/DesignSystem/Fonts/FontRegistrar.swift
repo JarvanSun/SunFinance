@@ -8,21 +8,23 @@
 import CoreText
 import Foundation
 
-nonisolated enum FontRegistrar {
-    static let registration: Void = registerBundledFonts()
+nonisolated struct FontRegistrar {
+    func registerBundledFonts() {
+        _ = registration
+    }
 }
 
 private extension FontRegistrar {
-    nonisolated static var fontFileExtension: String { "ttf" }
+    nonisolated var fontFileExtension: String { "ttf" }
 
-    nonisolated static func registerBundledFonts() {
+    nonisolated func registerEveryFace() {
         for face in InterFace.allCases {
             register(face)
         }
     }
 
-    nonisolated static func register(_ face: InterFace) {
-        let url = Bundle.designSystem.url(
+    nonisolated func register(_ face: InterFace) {
+        let url = Bundle.module.url(
             forResource: face.rawValue,
             withExtension: fontFileExtension
         )
@@ -31,3 +33,5 @@ private extension FontRegistrar {
         CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
     }
 }
+
+private nonisolated let registration: Void = FontRegistrar().registerEveryFace()

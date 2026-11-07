@@ -16,8 +16,8 @@ struct EchoRoute: MockRoute {
     func response(to request: MockRequest) throws -> MockResponse? {
         guard request.path == path else { return nil }
 
-        return try .json(
-            EchoDTO(method: request.method.rawValue, symbol: request.query("symbol"))
+        return try .init(
+            json: EchoDTO(method: request.method.rawValue, symbol: request.query("symbol"))
         )
     }
 }

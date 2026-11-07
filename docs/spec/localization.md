@@ -6,11 +6,14 @@ both before a change is done.
 ## String Catalogs
 
 - Each package that shows text has one `Resources/Localizable.xcstrings`, read with
-  `bundle: .module` through an internal `LocalizedStringResource.BundleDescription` extension in
-  `Extensions/BundleDescriptionExtensions.swift`. DesignSystem's is `bundle: .designSystem`.
-- The App has its own catalog, read through `AppText`.
-- Screen-level strings that belong to no model live in one `<Feature>Text` enum of computed
-  `LocalizedStringResource` properties.
+  `bundle: .module`: `Text` takes SwiftPM's `Bundle.module`, `LocalizedStringResource` the internal
+  `LocalizedStringResource.BundleDescription.module` in
+  `Extensions/BundleDescriptionExtensions.swift`. DesignSystem does the same.
+- The App has its own catalog in its main bundle; its keys take no `bundle:` argument
+  (`.init("app.tab.watchlist")`).
+- A key is written once, where it is used. There are no key enums and no `static` text: a string
+  that belongs to no model goes straight into the view, a model's text into its presentation
+  extension.
 - Keys are semantic and dotted, `<feature>.<screen or component>.<element>`
   (`watchlist.placeholder.empty.title`), never the English sentence.
 - Copy uses typographic apostrophes and quotes (`You’re offline`, `“%@”`, German `„%@“`) and
@@ -21,7 +24,20 @@ both before a change is done.
 
 ## In code
 
-- Text is a `LocalizedStringResource`, built once in the presentation extension that owns it:
+- A screen-level string is keyed in the view:
+
+  ```swift
+  .navigationTitle(Text("watchlist.title", bundle: .module))
+
+  Button(action: viewModel.cancel) {
+      Text("trading.cancel", bundle: .module)
+  }
+
+  SectionHeading(LocalizedStringResource("portfolio.positions.title", bundle: .module))
+  ```
+
+- Text that describes a model is a `LocalizedStringResource`, built in the presentation extension
+  that owns it, one key per case:
 
   ```swift
   extension WatchlistPlaceholder {
@@ -42,7 +58,8 @@ both before a change is done.
   model; it freezes the locale and breaks plural rules. The exception is a presentation extension
   filling a DesignSystem value that takes resolved text (`Metric.value`).
 - Never concatenate localized pieces. A sentence with values is one key with interpolation, so
-  German can reorder it.
+  German can reorder it: `.init("trading.header.held \(quantity) \(count)", bundle: .module)`
+  is the catalog key `trading.header.held %@ %lf`.
 - `Text(verbatim:)` only for values that are not language (ticker symbols).
 
 ## Numbers, money and dates

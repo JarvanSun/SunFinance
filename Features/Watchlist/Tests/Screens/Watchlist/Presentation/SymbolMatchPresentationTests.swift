@@ -14,13 +14,13 @@ import Testing
 struct SymbolMatchPresentationTests {
     @Test func listingThenNamesSymbolAndExchange() {
         // Then
-        #expect(SymbolMatch.tesla.listing.key == "watchlist.match.listing %@ %@")
+        #expect(teslaMatch.listing.key == "watchlist.match.listing %@ %@")
     }
 
     @Test func accessibilityLabelThenReadsCompanySymbolAndExchange() {
         // Then
         #expect(
-            SymbolMatch.tesla.accessibilityLabel.key
+            teslaMatch.accessibilityLabel.key
                 == "watchlist.match.accessibilityLabel %@ %@ %@"
         )
     }

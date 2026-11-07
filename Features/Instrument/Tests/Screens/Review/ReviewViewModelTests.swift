@@ -25,13 +25,13 @@ struct ReviewViewModelTests {
         #expect(viewModel.canConfirm)
         #expect(viewModel.isSliderEnabled)
         #expect(viewModel.currency == .usd)
-        #expect(tracker.events(of: TradingEvent.self) == [.orderReviewed(.make())])
+        #expect(tracker.events(of: TradingEvent.self) == [.orderReviewed(.init())])
     }
 
     @Test func loadPreviewWhenServerPredictsARejectionThenBlocksConfirming() async {
         // Given
         let services = TradingServicesStub()
-        services.update { $0.previewResult = .success(.sample(rejection: .insufficientShares)) }
+        services.update { $0.previewResult = .success(.init(rejection: .insufficientShares)) }
         let viewModel = makeViewModel(services: services)
 
         // When
@@ -89,9 +89,9 @@ struct ReviewViewModelTests {
         await viewModel.placeRequestedOrder()
 
         // Then
-        #expect(viewModel.outcome == .filled(Order.make(status: .filled).fill!))
+        #expect(viewModel.outcome == .filled(Order(status: .filled).fill!))
         #expect(!viewModel.canGoBack)
-        #expect(tracker.events(of: TradingEvent.self).last == .orderPlaced(.make(status: .filled)))
+        #expect(tracker.events(of: TradingEvent.self).last == .orderPlaced(.init(status: .filled)))
     }
 
     @Test func confirmThenPlacesOnlyOncePerRequest() async {
@@ -133,8 +133,8 @@ struct ReviewViewModelTests {
         await placing.value
 
         // Then
-        #expect(viewModel.outcome == .filled(Order.make(status: .filled).fill!))
-        #expect(tracker.events(of: TradingEvent.self).last == .orderPlaced(.make(status: .filled)))
+        #expect(viewModel.outcome == .filled(Order(status: .filled).fill!))
+        #expect(tracker.events(of: TradingEvent.self).last == .orderPlaced(.init(status: .filled)))
     }
 
     @Test func placeRequestedOrderWhenAskedAgainWhilePlacingThenSendsTheOrderOnce() async {
@@ -156,11 +156,11 @@ struct ReviewViewModelTests {
 
         // Then
         let placedEvents = tracker.events(of: TradingEvent.self).filter {
-            $0 == .orderPlaced(.make(status: .filled))
+            $0 == .orderPlaced(.init(status: .filled))
         }
         #expect(services.placedKeys.count == 1)
         #expect(placedEvents.count == 1)
-        #expect(viewModel.outcome == .filled(Order.make(status: .filled).fill!))
+        #expect(viewModel.outcome == .filled(Order(status: .filled).fill!))
     }
 
     @Test func confirmWhenRetriedAfterAFailureThenReusesTheKey() async {
@@ -233,7 +233,7 @@ struct ReviewViewModelTests {
 
         // When
         let editedReview = makeViewModel(
-            draft: .make(amount: .shares(3)),
+            draft: .init(amount: .shares(3)),
             services: services,
             keys: keys
         )
@@ -309,7 +309,7 @@ struct ReviewViewModelTests {
 
 private extension ReviewViewModelTests {
     func makeViewModel(
-        draft: OrderDraft = .make(),
+        draft: OrderDraft = .init(),
         services: TradingServicesStub = TradingServicesStub(),
         keys: PlacementKeys = PlacementKeys(),
         router: TradingRouterSpy = TradingRouterSpy(),

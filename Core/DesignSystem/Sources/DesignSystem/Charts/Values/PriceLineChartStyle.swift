@@ -22,7 +22,3 @@ public struct PriceLineChartStyle: Sendable {
         self.axisDate = axisDate
     }
 }
-
-extension PriceLineChartStyle {
-    public static var detailed: Self { .init() }
-}

@@ -21,6 +21,6 @@ public struct WatchlistHostView: View {
 
 #if DEBUG
 #Preview("Watchlist") {
-    WatchlistHostView(dependencies: PreviewObjectPool.watchlistDependencies())
+    WatchlistHostView(dependencies: PreviewObjectPool().watchlistDependencies())
 }
 #endif

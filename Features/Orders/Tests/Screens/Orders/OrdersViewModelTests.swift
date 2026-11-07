@@ -16,7 +16,7 @@ struct OrdersViewModelTests {
         // Given
         let stub = OrdersStub()
         stub.update {
-            $0.pages[.open] = [nil: Page(elements: [.make("1"), .make("2")], nextCursor: nil)]
+            $0.pages[.open] = [nil: Page(elements: [.init("1"), .init("2")], nextCursor: nil)]
         }
         let viewModel = makeViewModel(stub: stub)
 
@@ -34,7 +34,7 @@ struct OrdersViewModelTests {
         // Given
         let stub = OrdersStub()
         stub.update {
-            $0.pages[.open] = [nil: Page(elements: [.make("1"), .make("2")], nextCursor: nil)]
+            $0.pages[.open] = [nil: Page(elements: [.init("1"), .init("2")], nextCursor: nil)]
         }
         let tracker = AnalyticsTrackerSpy()
         let viewModel = makeViewModel(stub: stub, tracker: tracker)
@@ -84,8 +84,8 @@ struct OrdersViewModelTests {
         let stub = OrdersStub()
         stub.update {
             $0.pages[.past] = [
-                nil: Page(elements: [.make("1", status: .filled)], nextCursor: "1"),
-                "1": Page(elements: [.make("2", status: .expired)], nextCursor: nil),
+                nil: Page(elements: [.init("1", status: .filled)], nextCursor: "1"),
+                "1": Page(elements: [.init("2", status: .expired)], nextCursor: nil),
             ]
         }
         let viewModel = makeViewModel(stub: stub)
@@ -94,7 +94,7 @@ struct OrdersViewModelTests {
         let footerBefore = viewModel.footer
 
         // When
-        await viewModel.loadMore(reaching: .make("1", status: .filled))
+        await viewModel.loadMore(reaching: .init("1", status: .filled))
 
         // Then
         #expect(footerBefore == .loadingMore)
@@ -108,14 +108,14 @@ struct OrdersViewModelTests {
         let stub = OrdersStub()
         stub.update {
             $0.pages[.open] = [
-                nil: Page(elements: [.make("1"), .make("2")], nextCursor: "2")
+                nil: Page(elements: [.init("1"), .init("2")], nextCursor: "2")
             ]
         }
         let viewModel = makeViewModel(stub: stub)
         await viewModel.load()
 
         // When
-        await viewModel.loadMore(reaching: .make("1"))
+        await viewModel.loadMore(reaching: .init("1"))
 
         // Then
         #expect(stub.requests == 1)
@@ -126,14 +126,14 @@ struct OrdersViewModelTests {
         let stub = OrdersStub()
         stub.update {
             $0.pages[.open] = [
-                nil: Page(elements: [.make("1")], nextCursor: "1"),
-                "1": Page(elements: [.make("2")], nextCursor: nil),
+                nil: Page(elements: [.init("1")], nextCursor: "1"),
+                "1": Page(elements: [.init("2")], nextCursor: nil),
             ]
             $0.failingCursor = "1"
         }
         let viewModel = makeViewModel(stub: stub)
         await viewModel.load()
-        await viewModel.loadMore(reaching: .make("1"))
+        await viewModel.loadMore(reaching: .init("1"))
         let footerAfterFailure = viewModel.footer
 
         // When
@@ -183,8 +183,8 @@ struct OrdersViewModelTests {
         let stub = OrdersStub()
         stub.update {
             $0.pages[.open] = [
-                nil: Page(elements: [.make("1")], nextCursor: "1"),
-                "1": Page(elements: [.make("2")], nextCursor: nil),
+                nil: Page(elements: [.init("1")], nextCursor: "1"),
+                "1": Page(elements: [.init("2")], nextCursor: nil),
             ]
             $0.delays = [.seconds(3_600)]
         }
@@ -199,7 +199,7 @@ struct OrdersViewModelTests {
         let phaseWhileTheLoadRuns = viewModel.current.phase
         loading.cancel()
         await loading.value
-        await viewModel.loadMore(reaching: .make("1"))
+        await viewModel.loadMore(reaching: .init("1"))
 
         // Then
         #expect(phaseWhileTheLoadRuns == .loading)
@@ -211,7 +211,7 @@ struct OrdersViewModelTests {
         // Given
         let stub = OrdersStub()
         stub.update {
-            $0.pages[.open] = [nil: Page(elements: [.make("1")], nextCursor: "1")]
+            $0.pages[.open] = [nil: Page(elements: [.init("1")], nextCursor: "1")]
             $0.delays = [.milliseconds(20), .seconds(3_600)]
         }
         let viewModel = makeViewModel(stub: stub)
@@ -239,7 +239,7 @@ struct OrdersViewModelTests {
         // Given
         let stub = OrdersStub()
         stub.update {
-            $0.pages[.open] = [nil: Page(elements: [.make("new")], nextCursor: nil)]
+            $0.pages[.open] = [nil: Page(elements: [.init("new")], nextCursor: nil)]
             $0.delays = [.milliseconds(20), .zero]
         }
         let viewModel = makeViewModel(stub: stub)
@@ -250,7 +250,7 @@ struct OrdersViewModelTests {
 
         // When
         await viewModel.load()
-        stub.update { $0.pages[.open] = [nil: Page(elements: [.make("old")], nextCursor: nil)] }
+        stub.update { $0.pages[.open] = [nil: Page(elements: [.init("old")], nextCursor: nil)] }
         await older.value
 
         // Then
@@ -276,8 +276,8 @@ struct OrdersViewModelTests {
         // Given
         let stub = OrdersStub()
         stub.update {
-            $0.pages[.open] = [nil: Page(elements: [.make("1")], nextCursor: nil)]
-            $0.pages[.past] = [nil: Page(elements: [.make("2", status: .filled)], nextCursor: nil)]
+            $0.pages[.open] = [nil: Page(elements: [.init("1")], nextCursor: nil)]
+            $0.pages[.past] = [nil: Page(elements: [.init("2", status: .filled)], nextCursor: nil)]
         }
         let viewModel = makeViewModel(stub: stub)
 
@@ -292,12 +292,12 @@ struct OrdersViewModelTests {
     @Test func replaceWhenCancelledThenMovesFromOpenToPast() async {
         // Given
         let stub = OrdersStub()
-        stub.update { $0.pages[.open] = [nil: Page(elements: [.make("1")], nextCursor: nil)] }
+        stub.update { $0.pages[.open] = [nil: Page(elements: [.init("1")], nextCursor: nil)] }
         let viewModel = makeViewModel(stub: stub)
         await viewModel.load()
 
         // When
-        viewModel.replace(.make("1", status: .cancelled))
+        viewModel.replace(.init("1", status: .cancelled))
 
         // Then
         #expect(viewModel.lists[.open]?.orders.isEmpty == true)
@@ -310,7 +310,7 @@ struct OrdersViewModelTests {
         let viewModel = makeViewModel(router: router)
 
         // When
-        viewModel.open(.make("7"))
+        viewModel.open(.init("7"))
 
         // Then
         #expect(router.details.map(\.id) == ["7"])

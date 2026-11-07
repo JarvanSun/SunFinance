@@ -14,11 +14,11 @@ import Testing
 struct OrderListTests {
     @Test(arguments: [
         (OrderList(orders: [], nextCursor: "1", phase: .loaded), OrdersFooter?.none),
-        (OrderList(orders: [.make("1")], nextCursor: "1", phase: .loaded), .loadingMore),
-        (OrderList(orders: [.make("1")], nextCursor: "1", phase: .loading), .loadingMore),
-        (OrderList(orders: [.make("1")], nextCursor: nil, phase: .loaded), nil),
+        (OrderList(orders: [.init("1")], nextCursor: "1", phase: .loaded), .loadingMore),
+        (OrderList(orders: [.init("1")], nextCursor: "1", phase: .loading), .loadingMore),
+        (OrderList(orders: [.init("1")], nextCursor: nil, phase: .loaded), nil),
         (
-            OrderList(orders: [.make("1")], nextCursor: "1", phase: .failed(.offline)),
+            OrderList(orders: [.init("1")], nextCursor: "1", phase: .failed(.offline)),
             .failed(.offline)
         ),
     ])
@@ -33,10 +33,10 @@ struct OrderListTests {
         let now = Date(timeIntervalSince1970: 2 * 86_400 + 3_600)
         let list = OrderList(
             orders: [
-                .make("1", createdAt: Date(timeIntervalSince1970: 2 * 86_400 + 60)),
-                .make("2", createdAt: Date(timeIntervalSince1970: 2 * 86_400)),
-                .make("3", createdAt: Date(timeIntervalSince1970: 86_400 + 60)),
-                .make("4", createdAt: Date(timeIntervalSince1970: 60)),
+                .init("1", createdAt: Date(timeIntervalSince1970: 2 * 86_400 + 60)),
+                .init("2", createdAt: Date(timeIntervalSince1970: 2 * 86_400)),
+                .init("3", createdAt: Date(timeIntervalSince1970: 86_400 + 60)),
+                .init("4", createdAt: Date(timeIntervalSince1970: 60)),
             ]
         )
 

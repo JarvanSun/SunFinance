@@ -46,7 +46,7 @@ struct OrdersView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .background(FinanceColor.background.color)
-        .navigationTitle(Text(OrdersText.title))
+        .navigationTitle(Text("orders.title", bundle: .module))
         .refreshable { await viewModel.refresh() }
         .task(id: LoadRequest(filter: viewModel.filter, count: reloadRequest)) {
             await viewModel.load()
@@ -112,7 +112,7 @@ private extension OrdersView {
 @available(iOS 26, *)
 #Preview("Orders", arguments: OrdersPreviewState.allCases) { state in
     NavigationStack {
-        OrdersView(viewModel: PreviewObjectPool.ordersViewModel(state))
+        OrdersView(viewModel: PreviewObjectPool().ordersViewModel(state))
     }
     .environment(\.locale, state.locale)
 }

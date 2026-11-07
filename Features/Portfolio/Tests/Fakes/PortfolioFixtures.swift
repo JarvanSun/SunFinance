@@ -8,27 +8,23 @@
 import FinanceCore
 import Foundation
 
-extension Account {
-    nonisolated static var sample: Account {
-        Account(
-            cash: Money(1_000, .eur),
-            buyingPower: Money(1_000, .eur),
-            positionsValue: Money(3_000, .eur),
-            total: Money(4_000, .eur),
-            todayGain: Money(100, .eur)
-        )
-    }
-}
+nonisolated let sampleAccount = Account(
+    cash: Money(1_000, .eur),
+    buyingPower: Money(1_000, .eur),
+    positionsValue: Money(3_000, .eur),
+    total: Money(4_000, .eur),
+    todayGain: Money(100, .eur)
+)
 
 extension Position {
-    nonisolated static func make(
+    nonisolated init(
         _ symbol: TickerSymbol,
         value: Decimal,
         totalReturn: Decimal,
         quantity: Decimal = 10
-    ) -> Position {
+    ) {
         let euros = { (amount: Decimal) in Money(amount, .eur) }
-        return Position(
+        self.init(
             symbol: symbol,
             quantity: quantity,
             price: euros(value / max(quantity, 1)),
@@ -47,27 +43,19 @@ extension Position {
     }
 }
 
-extension Portfolio {
-    nonisolated static var sample: Portfolio {
-        Portfolio(
-            open: [
-                .make("SAP", value: 2_000, totalReturn: 200),
-                .make("AAPL", value: 1_000, totalReturn: -50),
-            ],
-            closed: [.make("KO", value: 0, totalReturn: 30, quantity: 0)]
-        )
-    }
-}
+nonisolated let samplePortfolio = Portfolio(
+    open: [
+        Position("SAP", value: 2_000, totalReturn: 200),
+        Position("AAPL", value: 1_000, totalReturn: -50),
+    ],
+    closed: [Position("KO", value: 0, totalReturn: 30, quantity: 0)]
+)
 
-extension PortfolioHistory {
-    nonisolated static var sample: PortfolioHistory {
-        PortfolioHistory(
-            range: .month,
-            points: [
-                .init(date: Date(timeIntervalSince1970: 0), value: Money(3_000, .eur)),
-                .init(date: Date(timeIntervalSince1970: 100), value: Money(3_300, .eur)),
-                .init(date: Date(timeIntervalSince1970: 200), value: Money(4_000, .eur)),
-            ]
-        )
-    }
-}
+nonisolated let sampleHistory = PortfolioHistory(
+    range: .month,
+    points: [
+        .init(date: Date(timeIntervalSince1970: 0), value: Money(3_000, .eur)),
+        .init(date: Date(timeIntervalSince1970: 100), value: Money(3_300, .eur)),
+        .init(date: Date(timeIntervalSince1970: 200), value: Money(4_000, .eur)),
+    ]
+)

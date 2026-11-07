@@ -13,11 +13,11 @@ import Testing
 
 struct TradingEventTests {
     @Test(arguments: [
-        (OrderDraft.make(), "market", "now"),
-        (.make(execution: .limit(1)), "limit", "now"),
-        (.make(trigger: .priceAtOrAbove(1)), "stop", "price"),
-        (.make(execution: .limit(1), trigger: .priceAtOrBelow(1)), "stop_limit", "price"),
-        (.make(trigger: .at(.testNow)), "market", "time"),
+        (OrderDraft(), "market", "now"),
+        (.init(execution: .limit(1)), "limit", "now"),
+        (.init(trigger: .priceAtOrAbove(1)), "stop", "price"),
+        (.init(execution: .limit(1), trigger: .priceAtOrBelow(1)), "stop_limit", "price"),
+        (.init(trigger: .at(testNow)), "market", "time"),
     ])
     func orderReviewedThenDescribesTypeAndTrigger(
         draft: OrderDraft,
@@ -34,10 +34,10 @@ struct TradingEventTests {
 
     @Test func orderPlacedThenCarriesStatusButNoSize() {
         // When
-        let event = TradingEvent.orderPlaced(.make(status: .filled))
+        let event = TradingEvent.orderPlaced(.init(status: .filled))
 
         // Then
-        #expect(event.name == .tradingOrderPlaced)
+        #expect(event.name == .init("trading_order_placed"))
         #expect(event.parameters[.status] == .text("filled"))
         #expect(Set(event.parameters.keys) == [.symbol, .side, .orderType, .trigger, .status])
     }

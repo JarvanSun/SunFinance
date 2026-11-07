@@ -50,7 +50,7 @@ struct TicketView: View {
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button(action: viewModel.cancel) {
-                    Text(TradingText.cancel)
+                    Text("trading.cancel", bundle: .module)
                 }
                 .accessibilityIdentifier(InstrumentAccessibility.cancelButton)
             }
@@ -116,7 +116,7 @@ private extension TicketView {
 
             RevealContainer(isRevealed: viewModel.offersSellAll) {
                 Button(action: viewModel.sellAll) {
-                    Text(TradingText.sellAll)
+                    Text("trading.amount.sellAll", bundle: .module)
                 }
                 .buttonStyle(.finance(.tertiary))
             }
@@ -125,7 +125,7 @@ private extension TicketView {
     }
 
     var executionSection: some View {
-        TicketSection(title: TradingText.executionTitle) {
+        TicketSection(title: .init("trading.execution.title", bundle: .module)) {
             FinanceSegmentedControl(
                 options: ExecutionKind.allCases,
                 selection: viewModel.form.execution,
@@ -148,7 +148,7 @@ private extension TicketView {
     }
 
     var triggerSection: some View {
-        TicketSection(title: TradingText.triggerTitle) {
+        TicketSection(title: .init("trading.trigger.title", bundle: .module)) {
             FinanceSegmentedControl(
                 options: TriggerKind.allCases,
                 selection: viewModel.form.trigger,
@@ -182,7 +182,7 @@ private extension TicketView {
                 in: viewModel.triggerDateRange,
                 displayedComponents: [.date, .hourAndMinute]
             ) {
-                Text(TradingText.triggerTimeField)
+                Text("trading.trigger.time.field", bundle: .module)
                     .textStyle(FinanceColor.textPrimary, FinanceFont.callout)
             }
             .tint(FinanceColor.accent.color)
@@ -199,7 +199,7 @@ private extension TicketView {
 
     var validitySection: some View {
         RevealContainer(isRevealed: viewModel.form.offersValidity) {
-            TicketSection(title: TradingText.validityTitle) {
+            TicketSection(title: .init("trading.validity.title", bundle: .module)) {
                 FinanceSegmentedControl(
                     options: OrderValidity.allCases,
                     selection: viewModel.form.validity,
@@ -241,7 +241,7 @@ private extension TicketView {
 @available(iOS 26, *)
 #Preview("Ticket", arguments: TicketPreviewState.allCases) { state in
     NavigationStack {
-        TicketView(viewModel: PreviewObjectPool.ticketViewModel(state))
+        TicketView(viewModel: PreviewObjectPool().ticketViewModel(state))
     }
     .environment(\.locale, state.locale)
 }

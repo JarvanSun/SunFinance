@@ -16,10 +16,10 @@ struct WatchlistDependenciesTests {
     @Test func makeViewModelThenUsesInjectedWatchlistAndFavorites() {
         // Given
         let dependencies = WatchlistDependencies(
-            watchlistStore: WatchlistSymbolStoreSpy(symbols: [.apple]),
+            watchlistStore: WatchlistSymbolStoreSpy(symbols: ["AAPL"]),
             quoteProvider: QuoteProviderStub(result: .success([])),
             symbolSearcher: SymbolSearcherSpy(),
-            favoriteStore: FavoriteSymbolStoreSpy(favoriteSymbols: [.apple]),
+            favoriteStore: FavoriteSymbolStoreSpy(favoriteSymbols: ["AAPL"]),
             clock: ClockSpy(),
             tracker: AnalyticsTrackerSpy(),
             quoteDetail: FeatureEntry { _ in EmptyView() }
@@ -29,7 +29,7 @@ struct WatchlistDependenciesTests {
         let viewModel = dependencies.makeViewModel(router: WatchlistRouterSpy())
 
         // Then
-        #expect(viewModel.symbols == [.apple])
-        #expect(viewModel.isFavorite(.apple))
+        #expect(viewModel.symbols == ["AAPL"])
+        #expect(viewModel.isFavorite("AAPL"))
     }
 }

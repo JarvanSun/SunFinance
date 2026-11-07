@@ -35,10 +35,10 @@ struct AccountTests {
 private extension AccountTests {
     func dto(currency: String = "EUR") -> AccountResponseDTO {
         AccountResponseDTO(
-            cash: .eur(100),
-            buyingPower: .eur(80),
-            positionsValue: .eur(900),
-            total: .eur(1_000),
+            cash: .init(euros: 100),
+            buyingPower: .init(euros: 80),
+            positionsValue: .init(euros: 900),
+            total: .init(euros: 1_000),
             todayGain: MoneyDTO(amount: -5, currency: currency)
         )
     }

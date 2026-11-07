@@ -14,7 +14,7 @@ import Testing
 struct PortfolioSnapshotPresentationTests {
     @Test func metricsThenShowTodayTotalReturnInvestedAndCash() {
         // When
-        let metrics = PortfolioSnapshot(account: .sample, portfolio: .sample).metrics
+        let metrics = PortfolioSnapshot(account: sampleAccount, portfolio: samplePortfolio).metrics
 
         // Then
         #expect(metrics.map(\.id) == ["today", "totalReturn", "invested", "cash"])

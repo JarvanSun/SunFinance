@@ -18,7 +18,7 @@ struct MoneyDTOTests {
         // Then
         #expect(dto.amount == 12.5)
         #expect(dto.currency == "USD")
-        #expect(MoneyDTO.eur(3).currency == "EUR")
+        #expect(MoneyDTO(euros: 3).currency == "EUR")
     }
 
     @Test func moneyThenMapsBackToMoney() throws {

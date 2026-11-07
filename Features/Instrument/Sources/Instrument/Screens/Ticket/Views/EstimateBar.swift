@@ -35,7 +35,7 @@ struct EstimateBar: View {
             .accessibilityElement(children: .combine)
 
             Button(action: onReview) {
-                Text(TradingText.reviewButton)
+                Text("trading.review.button", bundle: .module)
             }
             .buttonStyle(.finance(.primary))
             .accessibilityIdentifier(InstrumentAccessibility.reviewButton)

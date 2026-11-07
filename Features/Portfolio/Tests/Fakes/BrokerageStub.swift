@@ -11,10 +11,10 @@ import Synchronization
 
 final class BrokerageStub: AccountProviding, PositionProviding, PortfolioHistoryProviding {
     struct State {
-        var accountResult: Result<Account, BrokerageError> = .success(.sample)
-        var portfolios: [Portfolio] = [.sample]
+        var accountResult: Result<Account, BrokerageError> = .success(sampleAccount)
+        var portfolios: [Portfolio] = [samplePortfolio]
         var portfolioFailure: BrokerageError?
-        var historyResult: Result<PortfolioHistory, BrokerageError> = .success(.sample)
+        var historyResult: Result<PortfolioHistory, BrokerageError> = .success(sampleHistory)
         var historyDelay = Duration.zero
         var portfolioCalls = 0
         var historyCalls = 0

@@ -51,9 +51,9 @@ struct TicketHeaderView: View {
 #if DEBUG
 #Preview {
     VStack(spacing: 24) {
-        TicketHeaderView(context: PreviewObjectPool.context(isMarketOpen: true), side: .buy)
+        TicketHeaderView(context: PreviewObjectPool().context(isMarketOpen: true), side: .buy)
 
-        TicketHeaderView(context: PreviewObjectPool.context(isMarketOpen: false), side: .sell)
+        TicketHeaderView(context: PreviewObjectPool().context(isMarketOpen: false), side: .sell)
     }
     .padding()
 }

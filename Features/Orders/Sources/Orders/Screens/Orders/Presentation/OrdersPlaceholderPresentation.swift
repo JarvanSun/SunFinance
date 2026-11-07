@@ -13,7 +13,7 @@ extension OrdersPlaceholder {
     var title: LocalizedStringResource {
         switch self {
         case .loading:
-            OrdersText.loading
+            .init("orders.loading", bundle: .module)
         case .empty(.open):
             .init("orders.empty.open.title", bundle: .module)
         case .empty(.past):

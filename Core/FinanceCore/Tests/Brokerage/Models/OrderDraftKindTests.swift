@@ -28,7 +28,7 @@ struct OrderDraftKindTests {
         triggerKind: OrderTriggerKind
     ) {
         // Given
-        let draft = OrderDraft.make(execution: execution, trigger: trigger)
+        let draft = OrderDraft(execution: execution, trigger: trigger)
 
         // Then
         #expect(draft.kind == kind)

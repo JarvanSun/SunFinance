@@ -35,19 +35,27 @@ private extension Order {
         [
             LabeledRow(
                 id: "placed",
-                title: OrdersText.placedRow,
+                title: .init("orders.detail.row.placed", bundle: .module),
                 value: .verbatim(createdAt.formatted(date: .abbreviated, time: .shortened))
             ),
-            LabeledRow(id: "type", title: OrdersText.typeRow, value: .localized(executionText)),
-            LabeledRow(id: "trigger", title: OrdersText.triggerRow, value: .localized(triggerText)),
+            LabeledRow(
+                id: "type",
+                title: .init("orders.detail.row.type", bundle: .module),
+                value: .localized(executionText)
+            ),
+            LabeledRow(
+                id: "trigger",
+                title: .init("orders.detail.row.trigger", bundle: .module),
+                value: .localized(triggerText)
+            ),
             LabeledRow(
                 id: "validity",
-                title: OrdersText.validityRow,
+                title: .init("orders.detail.row.validity", bundle: .module),
                 value: .localized(validityText)
             ),
             LabeledRow(
                 id: "quantity",
-                title: OrdersText.quantityRow,
+                title: .init("orders.detail.row.quantity", bundle: .module),
                 value: .verbatim(quantity.formattedQuantity())
             ),
         ]
@@ -57,17 +65,21 @@ private extension Order {
         let figures = [
             LabeledRow(
                 id: "filled",
-                title: OrdersText.filledRow,
+                title: .init("orders.detail.row.filled", bundle: .module),
                 value: .verbatim(fill.date.formatted(date: .abbreviated, time: .shortened))
             ),
             LabeledRow(
                 id: "price",
-                title: OrdersText.priceRow,
+                title: .init("orders.detail.row.price", bundle: .module),
                 value: .verbatim(fill.price.formatted())
             ),
         ]
         let costs = [
-            LabeledRow(id: "fee", title: OrdersText.feeRow, value: .verbatim(fill.fee.formatted())),
+            LabeledRow(
+                id: "fee",
+                title: .init("orders.detail.row.fee", bundle: .module),
+                value: .verbatim(fill.fee.formatted())
+            ),
             LabeledRow(
                 id: "total",
                 title: totalTitle,
@@ -79,15 +91,23 @@ private extension Order {
     }
 
     func rateRows(of fill: OrderFill) -> [LabeledRow] {
-        let rate = OrdersText.rate(
-            currency: fill.price.currency.rawValue,
-            inEuros: fill.exchangeRate.formattedExchangeRate()
+        let currency = fill.price.currency.rawValue
+        let inEuros = fill.exchangeRate.formattedExchangeRate()
+        let rate = LocalizedStringResource(
+            "orders.detail.row.rate.value \(currency) \(inEuros)",
+            bundle: .module
         )
         return switch fill.price.currency == .eur {
         case true:
             []
         case false:
-            [LabeledRow(id: "rate", title: OrdersText.rateRow, value: .localized(rate))]
+            [
+                LabeledRow(
+                    id: "rate",
+                    title: .init("orders.detail.row.rate", bundle: .module),
+                    value: .localized(rate)
+                )
+            ]
         }
     }
 }

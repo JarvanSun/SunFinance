@@ -14,7 +14,7 @@ public struct PriceLineChartContent: Sendable {
     public init(
         points: [ChartPoint],
         baseline: Double?,
-        trading: ChartTradingLayer = .empty,
+        trading: ChartTradingLayer = .init(),
         accessibility: ChartAccessibility
     ) {
         self.points = points

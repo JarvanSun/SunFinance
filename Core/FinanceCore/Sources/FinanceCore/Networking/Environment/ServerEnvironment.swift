@@ -13,7 +13,7 @@ public struct ServerEnvironment: Sendable {
 }
 
 extension ServerEnvironment {
-    public static func mock(behavior: MockServerBehavior, storageDirectory: URL?) -> Self {
+    public init(mockBehavior: MockServerBehavior, storageDirectory: URL?) {
         let exchange = MockExchange()
         let brokerage = MockBrokerage(
             exchange: exchange,
@@ -23,16 +23,16 @@ extension ServerEnvironment {
             MarketDataMockRoutes(exchange: exchange),
             BrokerageMockRoutes(brokerage: brokerage),
         ]
-        return .mock(MockServer(routes: routes, behavior: behavior))
+        self.init(mockServer: MockServer(routes: routes, behavior: mockBehavior))
     }
 
-    static func mock(_ server: MockServer) -> Self {
-        .init(baseURL: mockBaseURL, transport: .mock(server))
+    init(mockServer: MockServer) {
+        self.init(baseURL: mockBaseURL, transport: .mock(mockServer))
     }
-
-    private static let mockBaseURL = URL(string: "https://api.sunfinance.example")!
 }
 
 private enum MockStorageFile: String {
     case brokerage = "brokerage.json"
 }
+
+private let mockBaseURL = URL(string: "https://api.sunfinance.example")!

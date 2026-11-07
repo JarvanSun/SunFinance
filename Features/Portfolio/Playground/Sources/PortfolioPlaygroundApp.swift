@@ -13,7 +13,7 @@ import SwiftUI
 @main
 struct PortfolioPlaygroundApp: App {
     private let brokerage = BrokerageService(
-        environment: .mock(behavior: .realistic, storageDirectory: nil)
+        environment: .init(mockBehavior: .realistic, storageDirectory: nil)
     )
     private let tracker = AnalyticsTracker(
         consent: UserDefaultsAnalyticsConsent(defaults: .standard),

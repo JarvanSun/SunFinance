@@ -8,8 +8,8 @@
 #if DEBUG
 import Foundation
 
-enum ChartPreviewData {
-    static var allocation: [AllocationSlice] {
+struct ChartPreviewData {
+    var allocation: [AllocationSlice] {
         [
             AllocationSlice(id: "AAPL", label: "AAPL", value: 3_197),
             AllocationSlice(id: "NVDA", label: "NVDA", value: 2_610),
@@ -19,7 +19,7 @@ enum ChartPreviewData {
         ]
     }
 
-    static var allocationChart: AllocationChartContent {
+    var allocationChart: AllocationChartContent {
         AllocationChartContent(
             slices: allocation,
             accessibility: AllocationChartAccessibility(
@@ -29,31 +29,31 @@ enum ChartPreviewData {
         )
     }
 
-    static var rising: [ChartPoint] {
+    var rising: [ChartPoint] {
         wave(from: 212, slope: 0.12)
     }
 
-    static var falling: [ChartPoint] {
+    var falling: [ChartPoint] {
         wave(from: 232, slope: -0.1)
     }
 
-    static var flat: [ChartPoint] {
+    var flat: [ChartPoint] {
         wave(from: 220, slope: 0, amplitude: 0)
     }
 
-    static var candles: [ChartCandle] {
+    var candles: [ChartCandle] {
         candles(count: 60)
     }
 
-    static var longCandles: [ChartCandle] {
+    var longCandles: [ChartCandle] {
         candles(count: 400)
     }
 
-    static var candlePoints: [ChartPoint] {
+    var candlePoints: [ChartPoint] {
         candles.map { ChartPoint(date: $0.date, value: $0.close) }
     }
 
-    static var accessibility: ChartAccessibility {
+    var accessibility: ChartAccessibility {
         ChartAccessibility(
             title: "Apple",
             summary: "Apple, one day, up 1.2 percent",
@@ -62,14 +62,14 @@ enum ChartPreviewData {
         )
     }
 
-    static var axisDate: @Sendable (Date) -> String {
+    var axisDate: @Sendable (Date) -> String {
         { $0.formatted(date: .omitted, time: .shortened) }
     }
 
-    static func line(
+    func line(
         _ points: [ChartPoint],
         baseline: Double?,
-        trading: ChartTradingLayer = .empty
+        trading: ChartTradingLayer = .init()
     ) -> PriceLineChartContent {
         PriceLineChartContent(
             points: points,
@@ -79,14 +79,14 @@ enum ChartPreviewData {
         )
     }
 
-    static func candleChart(
+    func candleChart(
         _ candles: [ChartCandle],
-        trading: ChartTradingLayer = .empty
+        trading: ChartTradingLayer = .init()
     ) -> CandlestickChartContent {
         CandlestickChartContent(candles: candles, trading: trading, accessibility: accessibility)
     }
 
-    static func trading(on points: [ChartPoint]) -> ChartTradingLayer {
+    func trading(on points: [ChartPoint]) -> ChartTradingLayer {
         let buy = points[points.count / 5]
         let sell = points[points.count * 7 / 10]
         return ChartTradingLayer(
@@ -100,9 +100,9 @@ enum ChartPreviewData {
         )
     }
 
-    private static var start: Date { Date(timeIntervalSince1970: 1_793_000_000) }
+    private var start: Date { Date(timeIntervalSince1970: 1_793_000_000) }
 
-    private static func wave(
+    private func wave(
         from base: Double,
         slope: Double,
         amplitude: Double = 3
@@ -113,7 +113,7 @@ enum ChartPreviewData {
         }
     }
 
-    private static func candles(count: Int) -> [ChartCandle] {
+    private func candles(count: Int) -> [ChartCandle] {
         stride(from: 0, to: count, by: 1).map { index in
             let open = 200 + sin(Double(index) / 5) * 8
             let close = open + cos(Double(index) / 3) * 3

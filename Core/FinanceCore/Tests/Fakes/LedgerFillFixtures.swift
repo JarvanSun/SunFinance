@@ -10,7 +10,7 @@ import Foundation
 @testable import FinanceCore
 
 extension LedgerFill {
-    static func make(
+    init(
         _ side: TradeSide,
         _ quantity: Decimal,
         at price: Decimal,
@@ -20,8 +20,8 @@ extension LedgerFill {
         currency: CurrencyCode = .eur,
         day: Double = 0,
         date: Date? = nil
-    ) -> LedgerFill {
-        LedgerFill(
+    ) {
+        self.init(
             id: UUID().uuidString,
             orderID: UUID().uuidString,
             symbol: symbol,

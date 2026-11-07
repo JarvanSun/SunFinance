@@ -59,10 +59,10 @@ private extension AllocationChartDescriptor {
     }
 
     var holdingAxisTitle: LocalizedStringResource {
-        .init("charts.axis.holding", bundle: .designSystem)
+        .init("charts.axis.holding", bundle: .module)
     }
 
     var shareAxisTitle: LocalizedStringResource {
-        .init("charts.axis.share", bundle: .designSystem)
+        .init("charts.axis.share", bundle: .module)
     }
 }

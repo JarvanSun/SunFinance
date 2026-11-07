@@ -14,10 +14,10 @@ import Testing
 
 struct OrderDraftPresentationTests {
     @Test(arguments: [
-        (OrderDraft.make(.buy, amount: .shares(2)), "trading.review.summary.buy %@ %@"),
-        (.make(.sell, amount: .shares(2)), "trading.review.summary.sell %@ %@"),
-        (.make(.buy, amount: .euros(500)), "trading.review.summary.euros.buy %@ %@"),
-        (.make(.sell, amount: .euros(500)), "trading.review.summary.euros.sell %@ %@"),
+        (OrderDraft(.buy, amount: .shares(2)), "trading.review.summary.buy %@ %@"),
+        (.init(.sell, amount: .shares(2)), "trading.review.summary.sell %@ %@"),
+        (.init(.buy, amount: .euros(500)), "trading.review.summary.euros.buy %@ %@"),
+        (.init(.sell, amount: .euros(500)), "trading.review.summary.euros.sell %@ %@"),
     ])
     func headlineThenFollowsSideAndAmount(draft: OrderDraft, key: String) {
         // Then
@@ -26,13 +26,13 @@ struct OrderDraftPresentationTests {
 
     @Test(arguments: [
         (
-            OrderDraft.make(),
+            OrderDraft(),
             "trading.review.execution.market",
             "trading.review.trigger.now",
             "trading.validity.day"
         ),
         (
-            .make(
+            .init(
                 execution: .limit(230),
                 trigger: .priceAtOrBelow(220),
                 validity: .goodTillCancelled
@@ -42,7 +42,7 @@ struct OrderDraftPresentationTests {
             "trading.validity.gtc"
         ),
         (
-            .make(trigger: .at(.testNow)),
+            .init(trigger: .at(testNow)),
             "trading.review.execution.market",
             "trading.review.trigger.time %@",
             "trading.validity.day"

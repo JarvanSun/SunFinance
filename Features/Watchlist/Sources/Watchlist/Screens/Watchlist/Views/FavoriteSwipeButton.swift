@@ -28,10 +28,10 @@ struct FavoriteSwipeButton: View {
 #if DEBUG
 #Preview {
     List {
-        QuoteRowView(quote: PreviewObjectPool.gainingQuote, favoriteAction: .add)
+        QuoteRowView(quote: PreviewObjectPool().gainingQuote, favoriteAction: .add)
             .swipeActions { FavoriteSwipeButton(action: .add, onToggle: {}) }
 
-        QuoteRowView(quote: PreviewObjectPool.losingQuote, favoriteAction: .remove)
+        QuoteRowView(quote: PreviewObjectPool().losingQuote, favoriteAction: .remove)
             .swipeActions { FavoriteSwipeButton(action: .remove, onToggle: {}) }
     }
     .listStyle(.plain)

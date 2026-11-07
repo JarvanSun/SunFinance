@@ -54,9 +54,9 @@ extension MockLedger {
                 currency: estimate?.currency.rawValue ?? CurrencyCode.eur.rawValue
             ),
             exchangeRate: estimate?.rate ?? 1,
-            fee: .eur(Self.fee),
-            total: .eur(draft.side.total(ofCashEffect: cashEffect)),
-            cashAfter: .eur(buyingPower(at: date, exchange: exchange) + cashEffect),
+            fee: .init(euros: fee),
+            total: .init(euros: draft.side.total(ofCashEffect: cashEffect)),
+            cashAfter: .init(euros: buyingPower(at: date, exchange: exchange) + cashEffect),
             rejection: rejection(for: draft, estimate: estimate, at: date, exchange: exchange)?
                 .rawValue
         )
@@ -123,13 +123,13 @@ private extension MockLedger {
         let price = draft.estimatedPrice(marketPrice: quote.price.amount)
         let rate = exchange.eurRate(of: quote.price.currency, at: date)
         let shares =
-            quantity ?? draft.quantity(at: price * rate, fee: Self.fee, scale: quantityScale)
+            quantity ?? draft.quantity(at: price * rate, fee: fee, scale: quantityScale)
         return OrderEstimate(
             quantity: shares,
             price: price,
             currency: quote.price.currency,
             rate: rate,
-            fee: Self.fee
+            fee: fee
         )
     }
 
@@ -205,7 +205,7 @@ private extension MockLedger {
             price: price,
             currency: currency,
             exchangeRate: exchange.eurRate(of: currency, at: moment),
-            fee: Self.fee,
+            fee: fee,
             date: moment
         )
         switch shortfall(of: fill) {

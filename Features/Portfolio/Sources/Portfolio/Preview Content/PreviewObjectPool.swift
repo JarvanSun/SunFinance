@@ -11,8 +11,8 @@ import FinanceCore
 import Foundation
 import SwiftUI
 
-enum PreviewObjectPool {
-    static func portfolioDependencies() -> PortfolioDependencies {
+struct PreviewObjectPool {
+    func portfolioDependencies() -> PortfolioDependencies {
         let services = PreviewBrokerage()
         return PortfolioDependencies(
             accountProvider: services,
@@ -26,7 +26,7 @@ enum PreviewObjectPool {
         )
     }
 
-    static func portfolioViewModel(_ state: PortfolioPreviewState) -> PortfolioViewModel {
+    func portfolioViewModel(_ state: PortfolioPreviewState) -> PortfolioViewModel {
         let services = PreviewBrokerage(
             isEmpty: state.isEmpty,
             failure: state.failure,
@@ -42,7 +42,7 @@ enum PreviewObjectPool {
         )
     }
 
-    nonisolated static func position(
+    nonisolated func position(
         _ symbol: TickerSymbol,
         quantity: Decimal,
         value: Decimal,

@@ -23,14 +23,13 @@ struct PreviewOrders: OrderProviding, OrderCancelling {
         if let failure { throw failure }
         let orders =
             isEmpty
-            ? [] : PreviewObjectPool.sampleOrders.filter { $0.status.isOpen == (filter == .open) }
+            ? [] : PreviewObjectPool().sampleOrders.filter { $0.status.isOpen == (filter == .open) }
         return Page(elements: orders, nextCursor: nil)
     }
 
     func cancel(orderID: Order.ID) async throws(BrokerageError) -> Order {
-        let order =
-            PreviewObjectPool.sampleOrders.first { $0.id == orderID }
-            ?? PreviewObjectPool.sampleOrders[0]
+        let orders = PreviewObjectPool().sampleOrders
+        let order = orders.first { $0.id == orderID } ?? orders[0]
         return Order(
             id: order.id,
             draft: order.draft,

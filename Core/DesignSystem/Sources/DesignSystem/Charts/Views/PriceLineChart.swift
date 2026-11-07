@@ -22,12 +22,12 @@ public struct PriceLineChart: View {
 
     public init(
         _ content: PriceLineChartContent,
-        style: PriceLineChartStyle = .detailed,
+        style: PriceLineChartStyle = .init(),
         onSelect: @escaping (ChartPoint?) -> Void = { _ in }
     ) {
         self.content = content
         self.style = style
-        series = ChartSeries(drawing: content.points, count: ChartSeries.morphPointCount)
+        series = ChartSeries(drawing: content.points, count: morphPointCount)
         scale = ValueScale(values: content.points.map(\.value))
         self.onSelect = onSelect
     }
@@ -258,39 +258,41 @@ private extension PriceLineChart {
     }
 }
 
+private let morphPointCount = 160
+
 // MARK: - Previews
 
 #if DEBUG
 #Preview {
     ScrollView {
         VStack(spacing: 32) {
-            PriceLineChart(ChartPreviewData.line(ChartPreviewData.rising, baseline: 210))
+            PriceLineChart(ChartPreviewData().line(ChartPreviewData().rising, baseline: 210))
 
             PriceLineChart(
-                ChartPreviewData.line(
-                    ChartPreviewData.falling,
+                ChartPreviewData().line(
+                    ChartPreviewData().falling,
                     baseline: 230,
-                    trading: ChartPreviewData.trading(on: ChartPreviewData.falling)
+                    trading: ChartPreviewData().trading(on: ChartPreviewData().falling)
                 )
             )
 
-            PriceLineChart(ChartPreviewData.line(ChartPreviewData.flat, baseline: 220))
+            PriceLineChart(ChartPreviewData().line(ChartPreviewData().flat, baseline: 220))
 
             PriceLineChart(
-                ChartPreviewData.line(ChartPreviewData.rising, baseline: nil),
-                style: PriceLineChartStyle(appearance: .hero, axisDate: ChartPreviewData.axisDate)
+                ChartPreviewData().line(ChartPreviewData().rising, baseline: nil),
+                style: PriceLineChartStyle(appearance: .hero, axisDate: ChartPreviewData().axisDate)
             )
 
             PriceLineChart(
-                ChartPreviewData.line(ChartPreviewData.falling, baseline: nil),
+                ChartPreviewData().line(ChartPreviewData().falling, baseline: nil),
                 style: PriceLineChartStyle(
                     appearance: .hero,
                     isLive: true,
-                    axisDate: ChartPreviewData.axisDate
+                    axisDate: ChartPreviewData().axisDate
                 )
             )
 
-            PriceLineChart(ChartPreviewData.line([], baseline: nil))
+            PriceLineChart(ChartPreviewData().line([], baseline: nil))
         }
         .padding()
     }

@@ -34,8 +34,8 @@ private extension PortfolioHistoryTests {
         PortfolioHistoryResponseDTO(
             range: range,
             points: [
-                ValuePointDTO(date: Date(timeIntervalSince1970: 0), value: .eur(100)),
-                ValuePointDTO(date: Date(timeIntervalSince1970: 60), value: .eur(110)),
+                ValuePointDTO(date: Date(timeIntervalSince1970: 0), value: .init(euros: 100)),
+                ValuePointDTO(date: Date(timeIntervalSince1970: 60), value: .init(euros: 110)),
             ]
         )
     }

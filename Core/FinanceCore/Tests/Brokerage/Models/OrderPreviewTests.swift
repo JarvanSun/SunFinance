@@ -46,9 +46,9 @@ private extension OrderPreviewTests {
             quantity: 2,
             price: MoneyDTO(amount: 100, currency: priceCurrency),
             exchangeRate: 0.9,
-            fee: .eur(1),
-            total: .eur(181),
-            cashAfter: .eur(819),
+            fee: .init(euros: 1),
+            total: .init(euros: 181),
+            cashAfter: .init(euros: 819),
             rejection: rejection
         )
     }

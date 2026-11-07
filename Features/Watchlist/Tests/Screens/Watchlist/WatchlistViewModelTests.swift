@@ -14,14 +14,14 @@ struct WatchlistViewModelTests {
     @Test func refreshWhenProviderSucceedsThenShowsQuotesAndTracksLoad() async {
         // Given
         let tracker = AnalyticsTrackerSpy()
-        let viewModel = makeViewModel(result: .success([.apple, .sap]), tracker: tracker)
+        let viewModel = makeViewModel(result: .success([appleQuote, sapQuote]), tracker: tracker)
 
         // When
         await viewModel.refresh()
 
         // Then
         #expect(viewModel.activity == .loaded)
-        #expect(viewModel.content.visibleQuotes == [.apple, .sap])
+        #expect(viewModel.content.visibleQuotes == [appleQuote, sapQuote])
         #expect(viewModel.placeholder == nil)
         #expect(tracker.events(of: WatchlistEvent.self) == [.quotesLoaded(count: 2)])
     }
@@ -50,7 +50,7 @@ struct WatchlistViewModelTests {
 
     @Test func refreshWhenCancelledThenDiscardsResult() async {
         // Given
-        let viewModel = makeViewModel(result: .success([.apple]))
+        let viewModel = makeViewModel(result: .success([appleQuote]))
 
         // When
         let task = Task { await viewModel.refresh() }
@@ -96,7 +96,7 @@ struct WatchlistViewModelTests {
 
     @Test func sectionsWhenNotSearchingThenShowWatchlistOnly() async {
         // Given
-        let viewModel = makeViewModel(result: .success([.apple]))
+        let viewModel = makeViewModel(result: .success([appleQuote]))
 
         // When
         await viewModel.refresh()
@@ -107,14 +107,14 @@ struct WatchlistViewModelTests {
 
     @Test func visibleQuotesWhenSearchingThenMatchesSymbolOrCompanyName() async {
         // Given
-        let viewModel = makeViewModel(result: .success([.apple, .sap]))
+        let viewModel = makeViewModel(result: .success([appleQuote, sapQuote]))
         await viewModel.refresh()
 
         // When
         viewModel.searchText = "app"
 
         // Then
-        #expect(viewModel.content.visibleQuotes == [.apple])
+        #expect(viewModel.content.visibleQuotes == [appleQuote])
     }
 
     @Test func searchSymbolsThenWaitsForTypingToPauseAndSearchesTrimmedText() async {
@@ -134,7 +134,7 @@ struct WatchlistViewModelTests {
 
     @Test func searchSymbolsWhenCancelledWhileWaitingThenNeverSearches() async {
         // Given
-        let searcher = SymbolSearcherSpy(result: .success([.tesla]))
+        let searcher = SymbolSearcherSpy(result: .success([teslaMatch]))
         let viewModel = makeViewModel(searcher: searcher)
         viewModel.searchText = "Tesla"
 
@@ -150,7 +150,7 @@ struct WatchlistViewModelTests {
 
     @Test func searchSymbolsWhenQueryIsBlankThenClearsMatchesWithoutSearching() async {
         // Given
-        let searcher = SymbolSearcherSpy(result: .success([.tesla]))
+        let searcher = SymbolSearcherSpy(result: .success([teslaMatch]))
         let viewModel = makeViewModel(searcher: searcher)
         viewModel.searchText = "Tesla"
         await viewModel.searchSymbols()
@@ -168,8 +168,8 @@ struct WatchlistViewModelTests {
     @Test func searchSymbolsWhenFoundThenOffersOnlyStocksNotShownFromTheWatchlist() async {
         // Given
         let viewModel = makeViewModel(
-            result: .success([.apple, .sap]),
-            searcher: SymbolSearcherSpy(result: .success([.apple, .tesla]))
+            result: .success([appleQuote, sapQuote]),
+            searcher: SymbolSearcherSpy(result: .success([appleMatch, teslaMatch]))
         )
         await viewModel.refresh()
         viewModel.searchText = "Inc"
@@ -178,15 +178,15 @@ struct WatchlistViewModelTests {
         await viewModel.searchSymbols()
 
         // Then
-        #expect(viewModel.content.visibleQuotes == [.apple])
-        #expect(viewModel.content.addableMatches == [.tesla])
+        #expect(viewModel.content.visibleQuotes == [appleQuote])
+        #expect(viewModel.content.addableMatches == [teslaMatch])
         #expect(viewModel.content.sections == [.quotesMatchingSearch, .symbolMatches])
         #expect(viewModel.placeholder == nil)
     }
 
     @Test func placeholderWhileSearchRunsThenShowsSearching() async {
         // Given
-        let viewModel = makeViewModel(result: .success([.apple]))
+        let viewModel = makeViewModel(result: .success([appleQuote]))
         await viewModel.refresh()
 
         // When
@@ -198,7 +198,7 @@ struct WatchlistViewModelTests {
 
     @Test func placeholderWhenSearchFindsNothingThenShowsNoSearchResults() async {
         // Given
-        let viewModel = makeViewModel(result: .success([.apple]))
+        let viewModel = makeViewModel(result: .success([appleQuote]))
         await viewModel.refresh()
         viewModel.searchText = "Tesla"
 
@@ -212,7 +212,7 @@ struct WatchlistViewModelTests {
     @Test func placeholderWhenSearchFailsAndNothingMatchesThenShowsFailure() async {
         // Given
         let viewModel = makeViewModel(
-            result: .success([.apple]),
+            result: .success([appleQuote]),
             searcher: SymbolSearcherSpy(result: .failure(.offline))
         )
         await viewModel.refresh()
@@ -230,8 +230,8 @@ struct WatchlistViewModelTests {
         // Given
         let tracker = AnalyticsTrackerSpy()
         let viewModel = makeViewModel(
-            result: .success([.apple, .sap]),
-            searcher: SymbolSearcherSpy(result: .success([.tesla])),
+            result: .success([appleQuote, sapQuote]),
+            searcher: SymbolSearcherSpy(result: .success([teslaMatch])),
             tracker: tracker
         )
         await viewModel.refresh()
@@ -260,56 +260,56 @@ struct WatchlistViewModelTests {
 
     @Test func addToWatchlistThenSavesRequestsQuotesAndTracks() {
         // Given
-        let watchlistStore = WatchlistSymbolStoreSpy(symbols: [.apple])
+        let watchlistStore = WatchlistSymbolStoreSpy(symbols: ["AAPL"])
         let tracker = AnalyticsTrackerSpy()
         let viewModel = makeViewModel(watchlistStore: watchlistStore, tracker: tracker)
         let quotesRequest = viewModel.quotesRequest
 
         // When
-        viewModel.addToWatchlist(.tesla)
+        viewModel.addToWatchlist(teslaMatch)
 
         // Then
-        #expect(viewModel.symbols == [.apple, .tesla])
-        #expect(watchlistStore.savedSymbols == [[.apple, .tesla]])
+        #expect(viewModel.symbols == ["AAPL", "TSLA"])
+        #expect(watchlistStore.savedSymbols == [["AAPL", "TSLA"]])
         #expect(viewModel.quotesRequest != quotesRequest)
-        #expect(viewModel.addition(for: .tesla) == .added)
-        #expect(tracker.events(of: WatchlistEvent.self) == [.symbolAdded(symbol: .tesla)])
+        #expect(viewModel.addition(for: teslaMatch) == .added)
+        #expect(tracker.events(of: WatchlistEvent.self) == [.symbolAdded(symbol: "TSLA")])
     }
 
     @Test func addToWatchlistWhenAlreadyOnWatchlistThenChangesNothing() {
         // Given
-        let watchlistStore = WatchlistSymbolStoreSpy(symbols: [.apple])
+        let watchlistStore = WatchlistSymbolStoreSpy(symbols: ["AAPL"])
         let tracker = AnalyticsTrackerSpy()
         let viewModel = makeViewModel(watchlistStore: watchlistStore, tracker: tracker)
 
         // When
-        viewModel.addToWatchlist(.apple)
+        viewModel.addToWatchlist(appleMatch)
 
         // Then
-        #expect(viewModel.symbols == [.apple])
+        #expect(viewModel.symbols == ["AAPL"])
         #expect(watchlistStore.savedSymbols.isEmpty)
         #expect(tracker.events(of: WatchlistEvent.self).isEmpty)
     }
 
     @Test func additionWhenNotOnWatchlistThenIsAvailable() {
         // Given
-        let viewModel = makeViewModel(watchlistStore: WatchlistSymbolStoreSpy(symbols: [.apple]))
+        let viewModel = makeViewModel(watchlistStore: WatchlistSymbolStoreSpy(symbols: ["AAPL"]))
 
         // Then
-        #expect(viewModel.addition(for: .tesla) == .available)
+        #expect(viewModel.addition(for: teslaMatch) == .available)
     }
 
     @Test func selectSortOrderWhenOrderChangesThenSortsAndTracks() async {
         // Given
         let tracker = AnalyticsTrackerSpy()
-        let viewModel = makeViewModel(result: .success([.sap, .apple]), tracker: tracker)
+        let viewModel = makeViewModel(result: .success([sapQuote, appleQuote]), tracker: tracker)
         await viewModel.refresh()
 
         // When
         viewModel.selectSortOrder(.symbol)
 
         // Then
-        #expect(viewModel.content.visibleQuotes == [.apple, .sap])
+        #expect(viewModel.content.visibleQuotes == [appleQuote, sapQuote])
         #expect(tracker.events(of: WatchlistEvent.self).last == .sortOrderChanged(.symbol))
     }
 
@@ -328,16 +328,16 @@ struct WatchlistViewModelTests {
     @Test(arguments: [false, true])
     func toggleFavoriteThenFlipsSavesAndTracks(wasFavorite: Bool) {
         // Given
-        let favoriteStore = FavoriteSymbolStoreSpy(favoriteSymbols: wasFavorite ? [.apple] : [])
+        let favoriteStore = FavoriteSymbolStoreSpy(favoriteSymbols: wasFavorite ? ["AAPL"] : [])
         let tracker = AnalyticsTrackerSpy()
         let viewModel = makeViewModel(favoriteStore: favoriteStore, tracker: tracker)
 
         // When
-        viewModel.toggleFavorite(.apple)
+        viewModel.toggleFavorite("AAPL")
 
         // Then
-        let expectedEvent = WatchlistEvent.favoriteToggled(symbol: .apple, isFavorite: !wasFavorite)
-        #expect(viewModel.isFavorite(.apple) == !wasFavorite)
+        let expectedEvent = WatchlistEvent.favoriteToggled(symbol: "AAPL", isFavorite: !wasFavorite)
+        #expect(viewModel.isFavorite("AAPL") == !wasFavorite)
         #expect(favoriteStore.savedFavoriteSymbols == [viewModel.favoriteSymbols])
         #expect(tracker.events(of: WatchlistEvent.self) == [expectedEvent])
     }
@@ -348,11 +348,11 @@ struct WatchlistViewModelTests {
         expected: FavoriteAction
     ) {
         // Given
-        let favoriteStore = FavoriteSymbolStoreSpy(favoriteSymbols: isFavorite ? [.apple] : [])
+        let favoriteStore = FavoriteSymbolStoreSpy(favoriteSymbols: isFavorite ? ["AAPL"] : [])
         let viewModel = makeViewModel(favoriteStore: favoriteStore)
 
         // When
-        let action = viewModel.favoriteAction(for: .apple)
+        let action = viewModel.favoriteAction(for: "AAPL")
 
         // Then
         #expect(action == expected)
@@ -365,11 +365,11 @@ struct WatchlistViewModelTests {
         let viewModel = makeViewModel(router: router, tracker: tracker)
 
         // When
-        viewModel.openDetail(for: .sap)
+        viewModel.openDetail(for: sapQuote)
 
         // Then
-        #expect(router.shownSymbols == [.sap])
-        #expect(tracker.events(of: WatchlistEvent.self) == [.quoteOpened(symbol: .sap)])
+        #expect(router.shownSymbols == ["SAP"])
+        #expect(tracker.events(of: WatchlistEvent.self) == [.quoteOpened(symbol: "SAP")])
     }
 
     @Test func trackScreenViewThenTracksScreenViewed() {

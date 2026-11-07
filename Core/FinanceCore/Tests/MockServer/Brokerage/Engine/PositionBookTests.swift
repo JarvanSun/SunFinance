@@ -14,9 +14,9 @@ struct PositionBookTests {
     @Test func holdingsThenAddUpFillsPerSymbolUpToTheMoment() {
         // Given
         let book = PositionBook(fills: [
-            .make(.buy, 5, at: 100, day: 2),
-            .make(.buy, 10, at: 100, day: 0),
-            .make(.buy, 3, at: 50, symbol: "ALV", day: 1),
+            .init(.buy, 5, at: 100, day: 2),
+            .init(.buy, 10, at: 100, day: 0),
+            .init(.buy, 3, at: 50, symbol: "ALV", day: 1),
         ])
 
         // When
@@ -29,7 +29,7 @@ struct PositionBookTests {
 
     @Test func holdingsThenKeepSymbolsSoldCompletely() {
         // Given
-        let book = PositionBook(fills: [.make(.buy, 10, at: 100), .make(.sell, 10, at: 90, day: 1)])
+        let book = PositionBook(fills: [.init(.buy, 10, at: 100), .init(.sell, 10, at: 90, day: 1)])
 
         // When
         let holding = book.holding(of: "SAP", asOf: day(1))
@@ -41,7 +41,7 @@ struct PositionBookTests {
 
     @Test func holdingWhenSymbolWasNeverTradedThenIsNil() {
         // Given
-        let book = PositionBook(fills: [.make(.buy, 10, at: 100)])
+        let book = PositionBook(fills: [.init(.buy, 10, at: 100)])
 
         // Then
         #expect(book.holding(of: "KO", asOf: day(5)) == nil)
@@ -49,11 +49,11 @@ struct PositionBookTests {
 
     @Test func fillsThenReturnsOnlyTheSymbolsFillsAfterTheMoment() {
         // Given
-        let later = LedgerFill.make(.sell, 2, at: 120, day: 2)
+        let later = LedgerFill(.sell, 2, at: 120, day: 2)
         let book = PositionBook(fills: [
-            .make(.buy, 10, at: 100),
+            .init(.buy, 10, at: 100),
             later,
-            .make(.buy, 1, at: 50, symbol: "ALV", day: 3),
+            .init(.buy, 1, at: 50, symbol: "ALV", day: 3),
         ])
 
         // When

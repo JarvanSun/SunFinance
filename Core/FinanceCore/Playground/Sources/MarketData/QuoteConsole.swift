@@ -58,7 +58,7 @@ private extension QuoteConsole {
 
     func makeService() -> MarketDataService {
         MarketDataService(
-            environment: .mock(behavior: behavior.mockBehavior, storageDirectory: nil)
+            environment: .init(mockBehavior: behavior.mockBehavior, storageDirectory: nil)
         )
     }
 }

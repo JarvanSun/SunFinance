@@ -8,7 +8,7 @@
 import Foundation
 
 extension LocalizedStringResource.BundleDescription {
-    static var designSystem: Self {
-        .atURL(Bundle.designSystem.bundleURL)
+    static var module: Self {
+        .atURL(Bundle.module.bundleURL)
     }
 }

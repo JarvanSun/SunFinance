@@ -23,7 +23,7 @@ public struct TradingHostView: View {
 #Preview("Trading") {
     Color.clear
         .sheet(isPresented: .constant(true)) {
-            TradingHostView(dependencies: PreviewObjectPool.tradingDependencies())
+            TradingHostView(dependencies: PreviewObjectPool().tradingDependencies())
         }
 }
 #endif

@@ -23,6 +23,15 @@ struct AppTabTests {
         #expect(tab.image == image)
     }
 
+    @Test func titleThenEveryTabIsTranslated() {
+        // When
+        let resolved = AppTab.allCases.map { String(localized: $0.title) }
+
+        // Then
+        #expect(resolved.allSatisfy { !$0.isEmpty && !$0.hasPrefix("app.tab") })
+        #expect(Set(resolved).count == AppTab.allCases.count)
+    }
+
     @Test func allCasesThenStartWithWatchlist() {
         // Then
         #expect(AppTab.allCases == [.watchlist, .portfolio, .orders])

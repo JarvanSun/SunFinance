@@ -24,7 +24,7 @@ struct EstimateStatePresentationTests {
 
     @Test func totalWhenRefreshingThenDimsTheLastEstimate() {
         // When
-        let state = EstimateState.loading(previous: .sample())
+        let state = EstimateState.loading(previous: .init())
 
         // Then
         #expect(state.totalValue == 369)
@@ -34,7 +34,7 @@ struct EstimateStatePresentationTests {
 
     @Test func totalWhenReadyThenShowsItPlainly() {
         // When
-        let state = EstimateState.ready(.sample())
+        let state = EstimateState.ready(.init())
 
         // Then
         #expect(state.totalValue == 369)

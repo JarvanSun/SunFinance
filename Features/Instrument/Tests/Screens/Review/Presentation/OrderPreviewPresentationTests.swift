@@ -15,7 +15,7 @@ import Testing
 struct OrderPreviewPresentationTests {
     @Test func rowsWhenStockTradesInDollarsThenShowsTheRate() {
         // When
-        let ids = OrderPreview.sample(currency: .usd).rows(side: .buy).map(\.id)
+        let ids = OrderPreview(currency: .usd).rows(side: .buy).map(\.id)
 
         // Then
         #expect(ids == ["quantity", "price", "rate", "fee", "total", "cashAfter"])
@@ -23,7 +23,7 @@ struct OrderPreviewPresentationTests {
 
     @Test func rowsWhenStockTradesInEurosThenLeavesTheRateOut() {
         // When
-        let ids = OrderPreview.sample(currency: .eur).rows(side: .sell).map(\.id)
+        let ids = OrderPreview(currency: .eur).rows(side: .sell).map(\.id)
 
         // Then
         #expect(ids == ["quantity", "price", "fee", "total", "cashAfter"])
@@ -35,7 +35,7 @@ struct OrderPreviewPresentationTests {
     ])
     func rowsThenEmphasizeTheTotalForTheSide(side: TradeSide, key: String) throws {
         // When
-        let total = try #require(OrderPreview.sample().rows(side: side).first { $0.id == "total" })
+        let total = try #require(OrderPreview().rows(side: side).first { $0.id == "total" })
 
         // Then
         #expect(total.title.key == key)

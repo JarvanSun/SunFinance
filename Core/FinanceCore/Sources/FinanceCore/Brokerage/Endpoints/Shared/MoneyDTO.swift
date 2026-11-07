@@ -17,8 +17,8 @@ extension MoneyDTO {
         self.init(amount: money.amount, currency: money.currency.rawValue)
     }
 
-    static func eur(_ amount: Decimal) -> Self {
-        MoneyDTO(amount: amount, currency: CurrencyCode.eur.rawValue)
+    init(euros amount: Decimal) {
+        self.init(amount: amount, currency: CurrencyCode.eur.rawValue)
     }
 }
 

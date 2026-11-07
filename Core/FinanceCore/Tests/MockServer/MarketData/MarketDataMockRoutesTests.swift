@@ -18,7 +18,7 @@ struct MarketDataMockRoutesTests {
 
         // When
         let response = try #require(try makeRoutes().response(to: request))
-        let body = try JSONDecoder.backend.decode(QuotesResponseDTO.self, from: response.body)
+        let body = try makeBackendDecoder().decode(QuotesResponseDTO.self, from: response.body)
 
         // Then
         #expect(response.statusCode == 200)
@@ -32,7 +32,10 @@ struct MarketDataMockRoutesTests {
 
         // When
         let response = try #require(try makeRoutes().response(to: request))
-        let body = try JSONDecoder.backend.decode(PriceHistoryResponseDTO.self, from: response.body)
+        let body = try makeBackendDecoder().decode(
+            PriceHistoryResponseDTO.self,
+            from: response.body
+        )
 
         // Then
         #expect(body.range == "1Y")
@@ -58,7 +61,7 @@ struct MarketDataMockRoutesTests {
 
         // When
         let response = try #require(try makeRoutes().response(to: request))
-        let body = try JSONDecoder.backend.decode(QuoteDetailResponseDTO.self, from: response.body)
+        let body = try makeBackendDecoder().decode(QuoteDetailResponseDTO.self, from: response.body)
 
         // Then
         #expect(body.dayLow <= body.dayHigh)
@@ -83,7 +86,10 @@ struct MarketDataMockRoutesTests {
 
         // When
         let response = try #require(try makeRoutes().response(to: request))
-        let body = try JSONDecoder.backend.decode(SymbolSearchResponseDTO.self, from: response.body)
+        let body = try makeBackendDecoder().decode(
+            SymbolSearchResponseDTO.self,
+            from: response.body
+        )
 
         // Then
         let symbols = body.matches.prefix(expectedPrefixes.count).map(\.symbol)
@@ -97,7 +103,10 @@ struct MarketDataMockRoutesTests {
 
         // When
         let response = try #require(try makeRoutes().response(to: request))
-        let body = try JSONDecoder.backend.decode(SymbolSearchResponseDTO.self, from: response.body)
+        let body = try makeBackendDecoder().decode(
+            SymbolSearchResponseDTO.self,
+            from: response.body
+        )
 
         // Then
         let first = try #require(body.matches.first)

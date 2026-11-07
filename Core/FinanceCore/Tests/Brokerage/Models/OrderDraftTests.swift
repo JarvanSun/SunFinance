@@ -12,11 +12,11 @@ import Testing
 
 struct OrderDraftTests {
     @Test(arguments: [
-        OrderDraft.make(.buy, .shares(2)),
-        .make(.sell, .euros(250), execution: .limit(99.5)),
-        .make(trigger: .priceAtOrAbove(120), validity: .goodTillCancelled),
-        .make(.sell, trigger: .priceAtOrBelow(80)),
-        .make(trigger: .at(Date(timeIntervalSince1970: 1_800_000_000))),
+        OrderDraft(.buy, .shares(2)),
+        .init(.sell, .euros(250), execution: .limit(99.5)),
+        .init(trigger: .priceAtOrAbove(120), validity: .goodTillCancelled),
+        .init(.sell, trigger: .priceAtOrBelow(80)),
+        .init(trigger: .at(Date(timeIntervalSince1970: 1_800_000_000))),
     ])
     func dtoThenMapsBackToTheSameDraft(draft: OrderDraft) throws {
         // When
@@ -28,7 +28,7 @@ struct OrderDraftTests {
 
     @Test func dtoThenWritesTheServersCodes() {
         // When
-        let dto = OrderDraft.make(.sell, .euros(250), execution: .limit(99.5)).dto
+        let dto = OrderDraft(.sell, .euros(250), execution: .limit(99.5)).dto
 
         // Then
         #expect(dto.symbol == "SAP")
@@ -42,14 +42,14 @@ struct OrderDraftTests {
     }
 
     @Test(arguments: [
-        OrderDraftTests.dto(side: "hold"),
-        OrderDraftTests.dto(shares: nil, cashAmount: nil),
-        OrderDraftTests.dto(shares: 1, cashAmount: 100),
-        OrderDraftTests.dto(execution: "limit"),
-        OrderDraftTests.dto(execution: "iceberg"),
-        OrderDraftTests.dto(trigger: "price_at_or_above"),
-        OrderDraftTests.dto(trigger: "time"),
-        OrderDraftTests.dto(validity: "forever"),
+        makeDraftDTO(side: "hold"),
+        makeDraftDTO(shares: nil, cashAmount: nil),
+        makeDraftDTO(shares: 1, cashAmount: 100),
+        makeDraftDTO(execution: "limit"),
+        makeDraftDTO(execution: "iceberg"),
+        makeDraftDTO(trigger: "price_at_or_above"),
+        makeDraftDTO(trigger: "time"),
+        makeDraftDTO(validity: "forever"),
     ])
     func initWhenDTOIsInvalidThenThrowsDecoding(dto: OrderDraftDTO) {
         // When
@@ -60,26 +60,24 @@ struct OrderDraftTests {
     }
 }
 
-private extension OrderDraftTests {
-    static func dto(
-        side: String = "buy",
-        shares: Decimal? = 1,
-        cashAmount: Decimal? = nil,
-        execution: String = "market",
-        trigger: String = "now",
-        validity: String = "day"
-    ) -> OrderDraftDTO {
-        OrderDraftDTO(
-            symbol: "SAP",
-            side: side,
-            shares: shares,
-            cashAmount: cashAmount,
-            execution: execution,
-            limitPrice: nil,
-            trigger: trigger,
-            triggerPrice: nil,
-            triggerTime: nil,
-            validity: validity
-        )
-    }
+private func makeDraftDTO(
+    side: String = "buy",
+    shares: Decimal? = 1,
+    cashAmount: Decimal? = nil,
+    execution: String = "market",
+    trigger: String = "now",
+    validity: String = "day"
+) -> OrderDraftDTO {
+    OrderDraftDTO(
+        symbol: "SAP",
+        side: side,
+        shares: shares,
+        cashAmount: cashAmount,
+        execution: execution,
+        limitPrice: nil,
+        trigger: trigger,
+        triggerPrice: nil,
+        triggerTime: nil,
+        validity: validity
+    )
 }

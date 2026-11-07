@@ -54,7 +54,7 @@ final class QuoteDetailViewModel {
     }
 
     var tradingSnapshot: TradingSnapshot {
-        trading.value ?? .empty
+        trading.value ?? TradingSnapshot()
     }
 
     var position: Position? {

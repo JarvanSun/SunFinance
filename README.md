@@ -16,17 +16,13 @@ needed.
 
 ## Running
 
-Requires Xcode 26 or later and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+Requires Xcode 26 or later. Open `SunFinance.xcodeproj` and run.
 
-```sh
-xcodegen generate
-open SunFinance.xcodeproj
-```
+The simulator needs no signing. To run on a device, create
+`Configuration/Signing.local.xcconfig` containing `DEVELOPMENT_TEAM = <your team id>`; the file is
+ignored by git.
 
-The simulator needs no signing. To run on a device, set your team before generating:
-`SUNFINANCE_TEAM_ID=<team id> xcodegen generate`.
-
-Each package also has a `Playground/` app that runs it on its own: `scripts/playgrounds.sh <Package>`.
+Each package also has an app that runs it on its own: `<Package>/Playground/Playground.xcodeproj`.
 
 ## Code
 

@@ -16,21 +16,24 @@ struct MockResponseTests {
         let echo = EchoDTO(method: "GET", symbol: "SAP")
 
         // When
-        let response = try MockResponse.json(echo, status: .created)
+        let response = try MockResponse(json: echo, status: .created)
 
         // Then
-        let body = try JSONDecoder.backend.decode(EchoDTO.self, from: response.body)
+        let body = try makeBackendDecoder().decode(EchoDTO.self, from: response.body)
         #expect(response.statusCode == 201)
         #expect(body == echo)
     }
 
     @Test(arguments: [
-        (MockResponse.badRequest, 400),
+        (HTTPStatus.badRequest, 400),
         (.notFound, 404),
-        (.internalError, 500),
+        (.internalServerError, 500),
         (.serviceUnavailable, 503),
     ])
-    func presetsThenHaveTheirStatusAndNoBody(response: MockResponse, statusCode: Int) {
+    func initWithStatusThenHasItsCodeAndNoBody(status: HTTPStatus, statusCode: Int) {
+        // When
+        let response = MockResponse(status: status)
+
         // Then
         #expect(response.statusCode == statusCode)
         #expect(response.body.isEmpty)

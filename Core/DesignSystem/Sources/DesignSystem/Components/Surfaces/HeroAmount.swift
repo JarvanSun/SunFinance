@@ -109,7 +109,7 @@ private extension HeroAmount {
 
             HeroAmount(Money(-1_250.07, .eur), size: size)
 
-            HeroAmount(Money(18_420, CurrencyCode(rawValue: "JPY")!), size: size)
+            HeroAmount(Money(18_420, .jpy), size: size)
         }
     }
     .padding()

@@ -47,11 +47,11 @@ struct SymbolMatchRowView: View {
 #if DEBUG
 #Preview(traits: .sizeThatFitsLayout) {
     VStack(alignment: .leading) {
-        SymbolMatchRowView(match: PreviewObjectPool.teslaMatch, addition: .available)
+        SymbolMatchRowView(match: PreviewObjectPool().teslaMatch, addition: .available)
 
-        SymbolMatchRowView(match: PreviewObjectPool.siemensMatch, addition: .added)
+        SymbolMatchRowView(match: PreviewObjectPool().siemensMatch, addition: .added)
 
-        SymbolMatchRowView(match: PreviewObjectPool.siemensMatch, addition: .available)
+        SymbolMatchRowView(match: PreviewObjectPool().siemensMatch, addition: .available)
             .environment(\.locale, Locale(identifier: "de_DE"))
     }
     .padding()

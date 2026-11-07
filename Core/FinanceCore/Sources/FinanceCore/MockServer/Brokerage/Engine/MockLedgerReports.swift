@@ -17,11 +17,11 @@ extension MockLedger {
         let positionsValue = valuations.reduce(Decimal.zero) { $0 + $1.marketValue }
         let todayGain = valuations.reduce(Decimal.zero) { $0 + $1.todayGain }
         return AccountResponseDTO(
-            cash: .eur(cash),
-            buyingPower: .eur(buyingPower(at: date, exchange: exchange)),
-            positionsValue: .eur(positionsValue),
-            total: .eur(cash + positionsValue),
-            todayGain: .eur(todayGain)
+            cash: .init(euros: cash),
+            buyingPower: .init(euros: buyingPower(at: date, exchange: exchange)),
+            positionsValue: .init(euros: positionsValue),
+            total: .init(euros: cash + positionsValue),
+            todayGain: .init(euros: todayGain)
         )
     }
 
@@ -42,7 +42,7 @@ extension MockLedger {
         return PortfolioHistoryResponseDTO(
             range: range.rawValue,
             points: moments.map {
-                ValuePointDTO(date: $0, value: .eur(totalValue(at: $0, exchange: exchange)))
+                ValuePointDTO(date: $0, value: .init(euros: totalValue(at: $0, exchange: exchange)))
             }
         )
     }
@@ -167,16 +167,16 @@ private extension PositionValuation {
             symbol: holding.symbol.rawValue,
             quantity: holding.quantity,
             price: MoneyDTO(amount: price, currency: currency),
-            averageCost: .eur(holding.averageCost),
+            averageCost: .init(euros: holding.averageCost),
             averageLocalCost: MoneyDTO(amount: holding.averageLocalCost, currency: currency),
-            costBasis: .eur(holding.costBasis),
-            marketValue: .eur(marketValue),
-            unrealizedGain: .eur(unrealizedGain),
+            costBasis: .init(euros: holding.costBasis),
+            marketValue: .init(euros: marketValue),
+            unrealizedGain: .init(euros: unrealizedGain),
             unrealizedGainPercent: unrealizedGainPercent,
-            realizedGain: .eur(holding.realizedGain),
-            todayGain: .eur(todayGain),
-            currencyEffect: .eur(currencyEffect),
-            totalReturn: .eur(totalReturn),
+            realizedGain: .init(euros: holding.realizedGain),
+            todayGain: .init(euros: todayGain),
+            currencyEffect: .init(euros: currencyEffect),
+            totalReturn: .init(euros: totalReturn),
             totalReturnPercent: totalReturnPercent
         )
     }
@@ -191,8 +191,8 @@ private extension LedgerFill {
             quantity: quantity,
             price: MoneyDTO(amount: price, currency: currency.rawValue),
             exchangeRate: exchangeRate,
-            fee: .eur(fee),
-            total: .eur(total)
+            fee: .init(euros: fee),
+            total: .init(euros: total)
         )
     }
 }

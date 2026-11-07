@@ -54,7 +54,7 @@ struct ValueChartSection: View {
             ProgressView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         case .failed:
-            Text(PortfolioText.chartUnavailable)
+            Text("portfolio.chart.unavailable", bundle: .module)
                 .textStyle(FinanceColor.textSecondary, FinanceFont.callout)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }

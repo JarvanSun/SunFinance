@@ -27,13 +27,14 @@ struct PreviewBrokerage: AccountProviding, PositionProviding, PortfolioHistoryPr
     }
 
     func portfolio() async throws(BrokerageError) -> Portfolio {
+        let pool = PreviewObjectPool()
         let open = [
-            PreviewObjectPool.position("SAP", quantity: 15, value: 3_425, gain: 412.5),
-            PreviewObjectPool.position("AAPL", quantity: 15, value: 3_197, gain: 466.2),
-            PreviewObjectPool.position("NVDA", quantity: 15, value: 2_610, gain: -188.4),
-            PreviewObjectPool.position("ALV", quantity: 4, value: 1_390, gain: 22.8),
+            pool.position("SAP", quantity: 15, value: 3_425, gain: 412.5),
+            pool.position("AAPL", quantity: 15, value: 3_197, gain: 466.2),
+            pool.position("NVDA", quantity: 15, value: 2_610, gain: -188.4),
+            pool.position("ALV", quantity: 4, value: 1_390, gain: 22.8),
         ]
-        let closed = [PreviewObjectPool.position("KO", quantity: 0, value: 0, gain: 96.3)]
+        let closed = [pool.position("KO", quantity: 0, value: 0, gain: 96.3)]
         return try await respond(
             isEmpty ? Portfolio(open: [], closed: []) : Portfolio(open: open, closed: closed)
         )

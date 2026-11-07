@@ -35,11 +35,14 @@ struct AppConfigurationTests {
         #expect(configuration.defaults != .standard)
     }
 
-    @Test func demoThenStartsWithAWatchlistAndStoresTheAccount() {
+    @Test func initThenStartsWithAWatchlistAndStoresTheAccount() {
+        // When
+        let configuration = AppConfiguration()
+
         // Then
-        #expect(!AppConfiguration.demo.defaultWatchlist.isEmpty)
-        #expect(AppConfiguration.demo.mockServerStorageURL != nil)
-        #expect(AppConfiguration.demo.defaultsSuiteName == nil)
+        #expect(!configuration.defaultWatchlist.isEmpty)
+        #expect(configuration.mockServerStorageURL != nil)
+        #expect(configuration.defaultsSuiteName == nil)
     }
 }
 

@@ -57,10 +57,11 @@ preview.
   by URL.
 - A package never reads the App's bundle, catalog, assets, Info.plist or configuration; what it
   needs arrives through its `*Dependencies` or an initializer.
-- `<Name>HostView.swift` ends with a preview built from `PreviewObjectPool.<name>Dependencies()`,
+- `<Name>HostView.swift` ends with a preview built from `PreviewObjectPool().<name>Dependencies()`,
   where every `FeatureEntry` is a stand-in screen, so the canvas runs the whole flow.
-- Every package also runs as an app: `Playground/project.yml` generates `Playground.xcodeproj` with
-  one target, `<Package>Playground`, from the template in `scripts/playground-base.yml`. Feature
+- Every package also runs as an app: `Playground/Playground.xcodeproj` with one target,
+  `<Package>Playground`, which links the package by relative path and shares
+  `Configuration/Signing.xcconfig` with the App. Feature
   playgrounds run the `*HostView` on the mock backend; DesignSystem's is a catalogue of tokens,
   components, motion and charts; FinanceCore's is a console for the exchange, each provider and
   analytics.
@@ -127,12 +128,11 @@ SunKit routing: `FeatureDestination` → `FeatureRouting` router → `FeatureDes
 ## The App
 
 `SunFinance/` holds `App/` (`SunFinanceApp`, `AppRoot`), `Composition/` (`AppDependencies`,
-`AppConfiguration`), `Navigation/` (`MainTabsView`, `AppTab`), `Localization/` (`AppText`) and
-`Resources/`; `SunFinanceTests/` mirrors it. The root shows a `TabView` at once, each tab a
+`AppConfiguration`), `Navigation/` (`MainTabsView`, `AppTab`) and `Resources/`; `SunFinanceTests/` mirrors it. The root shows a `TabView` at once, each tab a
 feature's `*HostView` with its own stack, under the privacy shield.
 
-`SunFinanceApp` creates one `AppDependencies` from `AppConfiguration.demo`. It builds one
-`ServerEnvironment.mock(behavior:storageDirectory:)` for both services, so every screen sees the
+`SunFinanceApp` creates one `AppDependencies` from `AppConfiguration()`, whose defaults are the
+demo setup. It builds one `ServerEnvironment(mockBehavior:storageDirectory:)` for both services, so every screen sees the
 same exchange and account, and builds each feature's dependencies and the `FeatureEntry`s between
 them in instance methods (`watchlist()`, `quoteDetail(for:)`, `trading(for:)`…).
 

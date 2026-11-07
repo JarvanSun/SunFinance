@@ -16,7 +16,7 @@ struct KeyStatisticsView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: dimensions.spaceLargeSmall) {
-            SectionHeading(QuoteDetailText.statisticsTitle)
+            SectionHeading(LocalizedStringResource("quoteDetail.statistics.title", bundle: .module))
 
             MetricStrip(rows.map(\.metric))
         }
@@ -26,9 +26,9 @@ struct KeyStatisticsView: View {
 #if DEBUG
 #Preview(traits: .sizeThatFitsLayout) {
     VStack(spacing: 32) {
-        KeyStatisticsView(rows: PreviewObjectPool.detail.statisticRows)
+        KeyStatisticsView(rows: PreviewObjectPool().detail.statisticRows)
 
-        KeyStatisticsView(rows: PreviewObjectPool.detail.statisticRows)
+        KeyStatisticsView(rows: PreviewObjectPool().detail.statisticRows)
             .environment(\.locale, Locale(identifier: "de_DE"))
     }
     .padding()

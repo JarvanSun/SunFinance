@@ -16,13 +16,16 @@ struct TicketPlaceholderView: View {
     var body: some View {
         switch placeholder {
         case .loading:
-            LoadingStateView(title: TradingText.loading)
+            LoadingStateView(title: .init("trading.loading", bundle: .module))
         case .failed(let issue):
             ContentUnavailableStateView(
                 title: issue.title,
                 message: issue.message,
                 image: issue.image,
-                action: StateAction(title: TradingText.retry, perform: onRetry)
+                action: StateAction(
+                    title: .init("trading.failure.retry", bundle: .module),
+                    perform: onRetry
+                )
             )
             .accessibilityIdentifier(InstrumentAccessibility.ticketRetryButton)
         }

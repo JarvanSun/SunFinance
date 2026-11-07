@@ -28,7 +28,10 @@ struct PortfolioPlaceholderView: View {
                 title: placeholder.title,
                 message: placeholder.message,
                 image: placeholder.image,
-                action: StateAction(title: PortfolioText.retry, perform: onRetry)
+                action: StateAction(
+                    title: .init("portfolio.failure.retry", bundle: .module),
+                    perform: onRetry
+                )
             )
             .accessibilityIdentifier(PortfolioAccessibility.retryButton)
         }

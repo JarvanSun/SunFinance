@@ -11,8 +11,8 @@ import FinanceCore
 import Foundation
 import SwiftUI
 
-enum PreviewObjectPool {
-    static func watchlistDependencies() -> WatchlistDependencies {
+struct PreviewObjectPool {
+    func watchlistDependencies() -> WatchlistDependencies {
         WatchlistDependencies(
             watchlistStore: InMemoryWatchlistSymbolStore(symbols: quotes.map(\.symbol)),
             quoteProvider: PreviewQuoteProvider(result: .success(quotes), delay: .zero),
@@ -26,7 +26,7 @@ enum PreviewObjectPool {
         )
     }
 
-    static func watchlistViewModel(_ state: WatchlistPreviewState) -> WatchlistViewModel {
+    func watchlistViewModel(_ state: WatchlistPreviewState) -> WatchlistViewModel {
         let viewModel = WatchlistViewModel(
             watchlistStore: InMemoryWatchlistSymbolStore(symbols: quotes.map(\.symbol)),
             quoteProvider: PreviewQuoteProvider(result: state.result, delay: state.delay),
@@ -40,7 +40,7 @@ enum PreviewObjectPool {
         return viewModel
     }
 
-    static var gainingQuote: StockQuote {
+    var gainingQuote: StockQuote {
         .init(
             symbol: "AAPL",
             companyName: "Apple Inc.",
@@ -50,7 +50,7 @@ enum PreviewObjectPool {
         )
     }
 
-    static var losingQuote: StockQuote {
+    var losingQuote: StockQuote {
         .init(
             symbol: "SAP",
             companyName: "SAP SE",
@@ -60,7 +60,7 @@ enum PreviewObjectPool {
         )
     }
 
-    static var unchangedQuote: StockQuote {
+    var unchangedQuote: StockQuote {
         .init(
             symbol: "ALV",
             companyName: "Allianz SE",
@@ -70,19 +70,19 @@ enum PreviewObjectPool {
         )
     }
 
-    static var quotes: [StockQuote] {
+    var quotes: [StockQuote] {
         [gainingQuote, losingQuote, unchangedQuote]
     }
 
-    static var teslaMatch: SymbolMatch {
+    var teslaMatch: SymbolMatch {
         .init(symbol: "TSLA", companyName: "Tesla, Inc.", exchange: "NASDAQ", currency: .usd)
     }
 
-    static var siemensMatch: SymbolMatch {
+    var siemensMatch: SymbolMatch {
         .init(symbol: "SIE", companyName: "Siemens AG", exchange: "XETRA", currency: .eur)
     }
 
-    static var symbolMatches: [SymbolMatch] {
+    var symbolMatches: [SymbolMatch] {
         [teslaMatch, siemensMatch]
     }
 }

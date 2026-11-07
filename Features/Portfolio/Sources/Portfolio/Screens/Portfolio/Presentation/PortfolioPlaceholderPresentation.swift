@@ -12,7 +12,7 @@ extension PortfolioPlaceholder {
     var title: LocalizedStringResource {
         switch self {
         case .loading:
-            PortfolioText.loading
+            .init("portfolio.loading", bundle: .module)
         case .empty:
             .init("portfolio.empty.title", bundle: .module)
         case .failed(let issue):

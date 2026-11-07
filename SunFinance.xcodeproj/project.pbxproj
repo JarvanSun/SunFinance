@@ -1,0 +1,656 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0919A83DFF883EBB9B8A334A /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B239CAA081D4FF5505E8A6C6 /* AppTab.swift */; };
+		1373BB5BBB00545DED25811A /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDCC9F91A5A663F44F4C22B /* AppConfiguration.swift */; };
+		13E1D97D4179E2C80100B7C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C4322DE14DA360FA487D682 /* Assets.xcassets */; };
+		25A0E30D4FD7CC7B907A27AB /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7380DEC3CCD693B0628C9A4E /* Localizable.xcstrings */; };
+		305A3AC4E4CA6FCEC6F24F94 /* AppTabTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6D7C57C4C762E6240E3596 /* AppTabTests.swift */; };
+		36F6A205F3579C61F119E46F /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 510C818D00F68C9FD1AA921F /* DesignSystem */; };
+		4A1A20CD4185521C630C42C8 /* AppConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801FCBA975E6B8C2D3128AF5 /* AppConfigurationTests.swift */; };
+		4CA132E4E1E7378C1F1F8D51 /* Watchlist in Frameworks */ = {isa = PBXBuildFile; productRef = 2AD4A420FF2D066FBC2A002A /* Watchlist */; };
+		546C2CEED9972C34EAF6DED9 /* AppRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F1E73D232143AEE3072509 /* AppRoot.swift */; };
+		551639481A66C5FD3E4184E2 /* Orders in Frameworks */ = {isa = PBXBuildFile; productRef = 61BF8A11268E5DB509E8372F /* Orders */; };
+		6618426BA800F321D99050D8 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DF03C5A87C8EC8BFB8D53A4F /* PrivacyInfo.xcprivacy */; };
+		90D67F157C195DE9C2F45196 /* SunUserInterface in Frameworks */ = {isa = PBXBuildFile; productRef = F5121870D471D3829E92AB20 /* SunUserInterface */; };
+		9DE5AE1B7CA384CC81BB2AE8 /* MainTabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB29086B4F52F0C54161B939 /* MainTabsView.swift */; };
+		A2F8FBF02312BB3F8ACCC731 /* FinanceCore in Frameworks */ = {isa = PBXBuildFile; productRef = 336B4B4F6488BCF1CF0CE8A5 /* FinanceCore */; };
+		AAD0B9FD712C8F41B0BF5B85 /* Portfolio in Frameworks */ = {isa = PBXBuildFile; productRef = 7F2EC7E15BC533C91E5E61F4 /* Portfolio */; };
+		B7566D28FCCBAF7E5A700D97 /* SunFinanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CD7CDE0FD0A60089EA72D1 /* SunFinanceApp.swift */; };
+		CBFDBCD7EEC65DF094044265 /* AppDependenciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B6A4213255A576472345FF /* AppDependenciesTests.swift */; };
+		E78869CB09FBF1A9CEF1A881 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B15D7813F46ADC55A237AEA /* AppDependencies.swift */; };
+		E8360D252A2C8E6DC0CCFB64 /* Instrument in Frameworks */ = {isa = PBXBuildFile; productRef = 4D56B6BB7BFE3C9005941D74 /* Instrument */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B7920E94D2B5D33D28C16826 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 886338AC179D067213505CC3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4619AAD07FE4DA314CEA224F;
+			remoteInfo = SunFinance;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2E662E7E69867A6F2E6EBB59 /* Orders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Orders; path = Features/Orders; sourceTree = SOURCE_ROOT; };
+		2F381C64CBB59E9ED96FA2E2 /* Portfolio */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Portfolio; path = Features/Portfolio; sourceTree = SOURCE_ROOT; };
+		3553DD1AD8C30C863B5FE2C7 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DesignSystem; path = Core/DesignSystem; sourceTree = SOURCE_ROOT; };
+		3B15D7813F46ADC55A237AEA /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
+		3C4322DE14DA360FA487D682 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5E9C4CF0253CC6BAC6A753C1 /* SunFinanceTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SunFinanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C1411BC7D01DAD4CAFBEA36 /* Watchlist */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Watchlist; path = Features/Watchlist; sourceTree = SOURCE_ROOT; };
+		7380DEC3CCD693B0628C9A4E /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		801FCBA975E6B8C2D3128AF5 /* AppConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigurationTests.swift; sourceTree = "<group>"; };
+		87F1E73D232143AEE3072509 /* AppRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoot.swift; sourceTree = "<group>"; };
+		A6CD7CDE0FD0A60089EA72D1 /* SunFinanceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunFinanceApp.swift; sourceTree = "<group>"; };
+		AAC88D449E22D447EE945A8A /* FinanceCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FinanceCore; path = Core/FinanceCore; sourceTree = SOURCE_ROOT; };
+		ABDCC9F91A5A663F44F4C22B /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		B239CAA081D4FF5505E8A6C6 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
+		BB29086B4F52F0C54161B939 /* MainTabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabsView.swift; sourceTree = "<group>"; };
+		BD879B09429149DF691F1BE6 /* Instrument */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Instrument; path = Features/Instrument; sourceTree = SOURCE_ROOT; };
+		C635119D05CCB409C27086D7 /* SunFinance.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = SunFinance.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF03C5A87C8EC8BFB8D53A4F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		E1AAFB4E5676CF1695F8837A /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		F3B6A4213255A576472345FF /* AppDependenciesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependenciesTests.swift; sourceTree = "<group>"; };
+		FE6D7C57C4C762E6240E3596 /* AppTabTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B09C1ABE491E35D7963406BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90D67F157C195DE9C2F45196 /* SunUserInterface in Frameworks */,
+				A2F8FBF02312BB3F8ACCC731 /* FinanceCore in Frameworks */,
+				36F6A205F3579C61F119E46F /* DesignSystem in Frameworks */,
+				E8360D252A2C8E6DC0CCFB64 /* Instrument in Frameworks */,
+				4CA132E4E1E7378C1F1F8D51 /* Watchlist in Frameworks */,
+				AAD0B9FD712C8F41B0BF5B85 /* Portfolio in Frameworks */,
+				551639481A66C5FD3E4184E2 /* Orders in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		118C64E5B60F5700C2E8A305 /* Composition */ = {
+			isa = PBXGroup;
+			children = (
+				ABDCC9F91A5A663F44F4C22B /* AppConfiguration.swift */,
+				3B15D7813F46ADC55A237AEA /* AppDependencies.swift */,
+			);
+			path = Composition;
+			sourceTree = "<group>";
+		};
+		5B9E45AFC5E31B25E1E46762 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				B239CAA081D4FF5505E8A6C6 /* AppTab.swift */,
+				BB29086B4F52F0C54161B939 /* MainTabsView.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		9830530FA0A62904209325D8 /* SunFinance */ = {
+			isa = PBXGroup;
+			children = (
+				D896E52FCD92FD651A3A02B5 /* App */,
+				118C64E5B60F5700C2E8A305 /* Composition */,
+				5B9E45AFC5E31B25E1E46762 /* Navigation */,
+				CF4D600699B4A00F020F19E2 /* Resources */,
+			);
+			path = SunFinance;
+			sourceTree = "<group>";
+		};
+		9AC27E8C95322130EB3DA66D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C635119D05CCB409C27086D7 /* SunFinance.app */,
+				5E9C4CF0253CC6BAC6A753C1 /* SunFinanceTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB5B310DE9B54C1761E56573 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				FE6D7C57C4C762E6240E3596 /* AppTabTests.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		B32980220DB078BC1570B710 /* SunFinanceTests */ = {
+			isa = PBXGroup;
+			children = (
+				F994790591CFA3E7E51FAF37 /* Composition */,
+				AB5B310DE9B54C1761E56573 /* Navigation */,
+			);
+			path = SunFinanceTests;
+			sourceTree = "<group>";
+		};
+		C57FD4E8B2A10F65AC0B6561 = {
+			isa = PBXGroup;
+			children = (
+				3553DD1AD8C30C863B5FE2C7 /* DesignSystem */,
+				AAC88D449E22D447EE945A8A /* FinanceCore */,
+				BD879B09429149DF691F1BE6 /* Instrument */,
+				2E662E7E69867A6F2E6EBB59 /* Orders */,
+				2F381C64CBB59E9ED96FA2E2 /* Portfolio */,
+				6C1411BC7D01DAD4CAFBEA36 /* Watchlist */,
+				D989449CAA5750FFB62A0826 /* Configuration */,
+				9830530FA0A62904209325D8 /* SunFinance */,
+				B32980220DB078BC1570B710 /* SunFinanceTests */,
+				9AC27E8C95322130EB3DA66D /* Products */,
+			);
+			indentWidth = 4;
+			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 0;
+		};
+		CF4D600699B4A00F020F19E2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3C4322DE14DA360FA487D682 /* Assets.xcassets */,
+				7380DEC3CCD693B0628C9A4E /* Localizable.xcstrings */,
+				DF03C5A87C8EC8BFB8D53A4F /* PrivacyInfo.xcprivacy */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D896E52FCD92FD651A3A02B5 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				87F1E73D232143AEE3072509 /* AppRoot.swift */,
+				A6CD7CDE0FD0A60089EA72D1 /* SunFinanceApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D989449CAA5750FFB62A0826 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				E1AAFB4E5676CF1695F8837A /* Signing.xcconfig */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		F994790591CFA3E7E51FAF37 /* Composition */ = {
+			isa = PBXGroup;
+			children = (
+				801FCBA975E6B8C2D3128AF5 /* AppConfigurationTests.swift */,
+				F3B6A4213255A576472345FF /* AppDependenciesTests.swift */,
+			);
+			path = Composition;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2B98B1A2C53F828964928980 /* SunFinanceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CBC788698A1FEEF57239EAA6 /* Build configuration list for PBXNativeTarget "SunFinanceTests" */;
+			buildPhases = (
+				B3C3BE89B3AF2698C3CBDCE6 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EAD73FE421360BD2DA982F90 /* PBXTargetDependency */,
+			);
+			name = SunFinanceTests;
+			packageProductDependencies = (
+			);
+			productName = SunFinanceTests;
+			productReference = 5E9C4CF0253CC6BAC6A753C1 /* SunFinanceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4619AAD07FE4DA314CEA224F /* SunFinance */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6780797D250EEAFF0A3C206A /* Build configuration list for PBXNativeTarget "SunFinance" */;
+			buildPhases = (
+				4274788483E3307229A7689E /* Sources */,
+				7713F60D4E884EF185CA2F78 /* Resources */,
+				B09C1ABE491E35D7963406BF /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SunFinance;
+			packageProductDependencies = (
+				F5121870D471D3829E92AB20 /* SunUserInterface */,
+				336B4B4F6488BCF1CF0CE8A5 /* FinanceCore */,
+				510C818D00F68C9FD1AA921F /* DesignSystem */,
+				4D56B6BB7BFE3C9005941D74 /* Instrument */,
+				2AD4A420FF2D066FBC2A002A /* Watchlist */,
+				7F2EC7E15BC533C91E5E61F4 /* Portfolio */,
+				61BF8A11268E5DB509E8372F /* Orders */,
+			);
+			productName = SunFinance;
+			productReference = C635119D05CCB409C27086D7 /* SunFinance.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		886338AC179D067213505CC3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					2B98B1A2C53F828964928980 = {
+						DevelopmentTeam = "";
+					};
+					4619AAD07FE4DA314CEA224F = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A15868FE6C4F9E739765B26F /* Build configuration list for PBXProject "SunFinance" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				de,
+				en,
+			);
+			mainGroup = C57FD4E8B2A10F65AC0B6561;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3E86662C0FA6DA5867AD3882 /* XCRemoteSwiftPackageReference "SunKit" */,
+				6CADE9864A7A1A2C27C8329B /* XCLocalSwiftPackageReference "Core/DesignSystem" */,
+				62BA31BF167CF62090CCAF20 /* XCLocalSwiftPackageReference "Core/FinanceCore" */,
+				24582E81F826AB2054DBA79D /* XCLocalSwiftPackageReference "Features/Instrument" */,
+				E7214171173BFBB086DE3343 /* XCLocalSwiftPackageReference "Features/Orders" */,
+				B62F9E67373199D677E4E511 /* XCLocalSwiftPackageReference "Features/Portfolio" */,
+				8FB770B1785E6E8E825B027A /* XCLocalSwiftPackageReference "Features/Watchlist" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 9AC27E8C95322130EB3DA66D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4619AAD07FE4DA314CEA224F /* SunFinance */,
+				2B98B1A2C53F828964928980 /* SunFinanceTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7713F60D4E884EF185CA2F78 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13E1D97D4179E2C80100B7C7 /* Assets.xcassets in Resources */,
+				25A0E30D4FD7CC7B907A27AB /* Localizable.xcstrings in Resources */,
+				6618426BA800F321D99050D8 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4274788483E3307229A7689E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1373BB5BBB00545DED25811A /* AppConfiguration.swift in Sources */,
+				E78869CB09FBF1A9CEF1A881 /* AppDependencies.swift in Sources */,
+				546C2CEED9972C34EAF6DED9 /* AppRoot.swift in Sources */,
+				0919A83DFF883EBB9B8A334A /* AppTab.swift in Sources */,
+				9DE5AE1B7CA384CC81BB2AE8 /* MainTabsView.swift in Sources */,
+				B7566D28FCCBAF7E5A700D97 /* SunFinanceApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3C3BE89B3AF2698C3CBDCE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A1A20CD4185521C630C42C8 /* AppConfigurationTests.swift in Sources */,
+				CBFDBCD7EEC65DF094044265 /* AppDependenciesTests.swift in Sources */,
+				305A3AC4E4CA6FCEC6F24F94 /* AppTabTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EAD73FE421360BD2DA982F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4619AAD07FE4DA314CEA224F /* SunFinance */;
+			targetProxy = B7920E94D2B5D33D28C16826 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		17CAC4FA15C78053E01A9C43 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1AAFB4E5676CF1695F8837A /* Signing.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		565486B969596295B23E3959 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunapp.sunfinanceTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SunFinance.app/SunFinance";
+			};
+			name = Debug;
+		};
+		7ECFE2E4D1CA648CB9B3A81C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1AAFB4E5676CF1695F8837A /* Signing.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		A5D8A0F6B3A02BA54C99B862 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_KEY_CFBundleDisplayName = SunFinance;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunapp.sunfinance;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DD46633AFACA99A463C4D944 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_KEY_CFBundleDisplayName = SunFinance;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunapp.sunfinance;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E15A563CECF5758D93D1D152 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sunapp.sunfinanceTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SunFinance.app/SunFinance";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6780797D250EEAFF0A3C206A /* Build configuration list for PBXNativeTarget "SunFinance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD46633AFACA99A463C4D944 /* Debug */,
+				A5D8A0F6B3A02BA54C99B862 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A15868FE6C4F9E739765B26F /* Build configuration list for PBXProject "SunFinance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17CAC4FA15C78053E01A9C43 /* Debug */,
+				7ECFE2E4D1CA648CB9B3A81C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CBC788698A1FEEF57239EAA6 /* Build configuration list for PBXNativeTarget "SunFinanceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				565486B969596295B23E3959 /* Debug */,
+				E15A563CECF5758D93D1D152 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		24582E81F826AB2054DBA79D /* XCLocalSwiftPackageReference "Features/Instrument" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Features/Instrument;
+		};
+		62BA31BF167CF62090CCAF20 /* XCLocalSwiftPackageReference "Core/FinanceCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Core/FinanceCore;
+		};
+		6CADE9864A7A1A2C27C8329B /* XCLocalSwiftPackageReference "Core/DesignSystem" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Core/DesignSystem;
+		};
+		8FB770B1785E6E8E825B027A /* XCLocalSwiftPackageReference "Features/Watchlist" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Features/Watchlist;
+		};
+		B62F9E67373199D677E4E511 /* XCLocalSwiftPackageReference "Features/Portfolio" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Features/Portfolio;
+		};
+		E7214171173BFBB086DE3343 /* XCLocalSwiftPackageReference "Features/Orders" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Features/Orders;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3E86662C0FA6DA5867AD3882 /* XCRemoteSwiftPackageReference "SunKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JarvanSun/SunKit.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2AD4A420FF2D066FBC2A002A /* Watchlist */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Watchlist;
+		};
+		336B4B4F6488BCF1CF0CE8A5 /* FinanceCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FinanceCore;
+		};
+		4D56B6BB7BFE3C9005941D74 /* Instrument */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Instrument;
+		};
+		510C818D00F68C9FD1AA921F /* DesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DesignSystem;
+		};
+		61BF8A11268E5DB509E8372F /* Orders */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Orders;
+		};
+		7F2EC7E15BC533C91E5E61F4 /* Portfolio */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Portfolio;
+		};
+		F5121870D471D3829E92AB20 /* SunUserInterface */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3E86662C0FA6DA5867AD3882 /* XCRemoteSwiftPackageReference "SunKit" */;
+			productName = SunUserInterface;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 886338AC179D067213505CC3 /* Project object */;
+}

@@ -21,11 +21,11 @@ struct WatchlistToolbar: ToolbarContent {
                         Text(order.title).tag(order)
                     }
                 } label: {
-                    Text(WatchlistText.sortMenuTitle)
+                    Text("watchlist.sort.menu", bundle: .module)
                 }
             } label: {
                 Label {
-                    Text(WatchlistText.sortMenuTitle)
+                    Text("watchlist.sort.menu", bundle: .module)
                 } icon: {
                     Image(style: FinanceImage.sort)
                 }

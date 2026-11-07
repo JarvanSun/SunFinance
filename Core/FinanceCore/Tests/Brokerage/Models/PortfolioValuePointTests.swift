@@ -14,7 +14,7 @@ struct PortfolioValuePointTests {
     @Test func initThenMapsDateAndValue() throws {
         // When
         let point = try PortfolioValuePoint(
-            ValuePointDTO(date: Date(timeIntervalSince1970: 60), value: .eur(10_500))
+            ValuePointDTO(date: Date(timeIntervalSince1970: 60), value: .init(euros: 10_500))
         )
 
         // Then

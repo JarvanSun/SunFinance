@@ -63,7 +63,7 @@ struct QuoteDetailView: View {
 @available(iOS 26, *)
 #Preview("Quote Detail", arguments: QuoteDetailPreviewState.allCases) { state in
     NavigationStack {
-        QuoteDetailView(viewModel: PreviewObjectPool.quoteDetailViewModel(state))
+        QuoteDetailView(viewModel: PreviewObjectPool().quoteDetailViewModel(state))
     }
     .environment(\.locale, state.locale)
 }

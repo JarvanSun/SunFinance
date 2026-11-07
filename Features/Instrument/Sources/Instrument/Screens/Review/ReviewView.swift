@@ -34,7 +34,7 @@ struct ReviewView: View {
             }
         }
         .background(FinanceColor.background.color)
-        .navigationTitle(Text(TradingText.reviewTitle))
+        .navigationTitle(Text("trading.review.title", bundle: .module))
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(hidesBackButton)
         .interactiveDismissDisabled(!viewModel.canGoBack)
@@ -69,14 +69,17 @@ private extension ReviewView {
     var previewSection: some View {
         switch viewModel.preview {
         case .idle, .loading:
-            LoadingStateView(title: TradingText.loading)
+            LoadingStateView(title: .init("trading.loading", bundle: .module))
                 .frame(maxWidth: .infinity, minHeight: dimensions.placeholderMinimumHeight)
         case .failed(let issue):
             ContentUnavailableStateView(
                 title: issue.title,
                 message: issue.message,
                 image: issue.image,
-                action: StateAction(title: TradingText.retry, perform: requestReload)
+                action: StateAction(
+                    title: .init("trading.failure.retry", bundle: .module),
+                    perform: requestReload
+                )
             )
             .accessibilityIdentifier(InstrumentAccessibility.ticketRetryButton)
         case .loaded(let preview):
@@ -100,7 +103,7 @@ private extension ReviewView {
             }
             .textStyle(FinanceColor.critical, FinanceFont.callout)
         case nil:
-            Text(TradingText.reviewNote)
+            Text("trading.review.note", bundle: .module)
                 .textStyle(FinanceColor.textSecondary, FinanceFont.caption)
         }
     }
@@ -117,7 +120,7 @@ private extension ReviewView {
             switch viewModel.predictedRejection {
             case .some:
                 Button(action: viewModel.editOrder) {
-                    Text(TradingText.editOrder)
+                    Text("trading.review.edit", bundle: .module)
                 }
                 .buttonStyle(.finance(.primary))
                 .accessibilityIdentifier(InstrumentAccessibility.editButton)
@@ -165,7 +168,7 @@ private extension ReviewView {
 @available(iOS 26, *)
 #Preview("Review", arguments: ReviewPreviewState.allCases) { state in
     NavigationStack {
-        ReviewView(viewModel: PreviewObjectPool.reviewViewModel(state))
+        ReviewView(viewModel: PreviewObjectPool().reviewViewModel(state))
     }
     .environment(\.locale, state.locale)
 }

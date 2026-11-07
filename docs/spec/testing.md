@@ -16,16 +16,16 @@
 @Test(arguments: [false, true])
 func toggleFavoriteThenFlipsSavesAndTracks(wasFavorite: Bool) {
     // Given
-    let favoriteStore = FavoriteSymbolStoreSpy(favoriteSymbols: wasFavorite ? [.apple] : [])
+    let favoriteStore = FavoriteSymbolStoreSpy(favoriteSymbols: wasFavorite ? ["AAPL"] : [])
     let tracker = AnalyticsTrackerSpy()
     let viewModel = makeViewModel(favoriteStore: favoriteStore, tracker: tracker)
 
     // When
-    viewModel.toggleFavorite(.apple)
+    viewModel.toggleFavorite("AAPL")
 
     // Then
-    let expectedEvent = WatchlistEvent.favoriteToggled(symbol: .apple, isFavorite: !wasFavorite)
-    #expect(viewModel.isFavorite(.apple) == !wasFavorite)
+    let expectedEvent = WatchlistEvent.favoriteToggled(symbol: "AAPL", isFavorite: !wasFavorite)
+    #expect(viewModel.isFavorite("AAPL") == !wasFavorite)
     #expect(favoriteStore.savedFavoriteSymbols == [viewModel.favoriteSymbols])
     #expect(tracker.events(of: WatchlistEvent.self) == [expectedEvent])
 }
@@ -50,8 +50,12 @@ Fakes live in `Tests/Fakes/`, one per file, named by role. No mocking frameworks
 | `Spy` | Records calls in `private(set)` arrays (`AnalyticsTrackerSpy`) |
 | `Fake` | A working lightweight implementation |
 
-Fixtures (`StockQuote.apple`) live in `Fakes/<Type>Fixtures.swift` as `nonisolated static let`s on
-the type. Other test helpers (`LocalizationCatalog`) also live in `Fakes/`.
+Fixtures live in `Fakes/<Type>Fixtures.swift` and are never `static`: a named value is a
+`nonisolated let` (`appleQuote`, `sampleAccount`), a family of values an initializer with fixture
+defaults in an extension (`OrderDraft(.sell, .shares(16))`,
+`Position(holding: "AAPL", quantity: 3)`). A symbol is its literal (`"AAPL"`).
+`@Test(arguments:)` takes array literals of these. Other test helpers (`LocalizationCatalog`) also
+live in `Fakes/`.
 
 ## What must be tested
 
@@ -88,7 +92,7 @@ One `#Preview` at the end of each view file and each DesignSystem style or token
 @available(iOS 26, *)
 #Preview("Watchlist", arguments: WatchlistPreviewState.allCases) { state in
     NavigationStack {
-        WatchlistView(viewModel: PreviewObjectPool.watchlistViewModel(state))
+        WatchlistView(viewModel: PreviewObjectPool().watchlistViewModel(state))
     }
     .environment(\.locale, state.locale)
 }
@@ -103,6 +107,6 @@ One `#Preview` at the end of each view file and each DesignSystem style or token
   set `.preferredColorScheme` or `.dynamicTypeSize`.
 - A screen that sets `navigationTitle`, `searchable` or `toolbar` is wrapped in a
   `NavigationStack`; nothing else is. Preview the `*HostView` to see navigation.
-- Data and dependencies come from the package's `PreviewObjectPool` (`#if DEBUG`), which returns
-  new, isolated objects on every call and provides no views, except the stand-in screen behind
+- Data and dependencies come from the package's `PreviewObjectPool` (`#if DEBUG`), a struct whose
+  instance members (`PreviewObjectPool().quotes`) return new, isolated objects on every call and provides no views, except the stand-in screen behind
   each `FeatureEntry`.

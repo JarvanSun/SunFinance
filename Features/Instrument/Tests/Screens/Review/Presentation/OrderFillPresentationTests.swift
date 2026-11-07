@@ -20,7 +20,7 @@ struct OrderFillPresentationTests {
     func rowsThenShowTheRateOnlyForAForeignStock(currency: CurrencyCode, ids: [String]) {
         // Given
         let fill = OrderFill(
-            date: .testNow,
+            date: testNow,
             quantity: 2,
             price: Money(200, currency),
             exchangeRate: 1,

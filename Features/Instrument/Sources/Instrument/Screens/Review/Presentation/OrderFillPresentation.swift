@@ -14,18 +14,18 @@ extension OrderFill {
         let figures = [
             LabeledRow(
                 id: "quantity",
-                title: TradingText.quantityRow,
+                title: .init("trading.review.row.quantity", bundle: .module),
                 value: .verbatim(quantity.formattedQuantity())
             ),
             LabeledRow(
                 id: "price",
-                title: TradingText.priceRow,
+                title: .init("trading.review.row.price", bundle: .module),
                 value: .verbatim(price.formatted())
             ),
         ]
         let feeRow = LabeledRow(
             id: "fee",
-            title: TradingText.feeRow,
+            title: .init("trading.review.row.fee", bundle: .module),
             value: .verbatim(fee.formatted())
         )
         return figures + rate.rows + [feeRow]

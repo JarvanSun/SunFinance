@@ -15,7 +15,7 @@ import Testing
 struct PortfolioHistoryPresentationTests {
     @Test func chartPointsThenUseTheFirstValueAsBaseline() {
         // When
-        let history = PortfolioHistory.sample
+        let history = sampleHistory
 
         // Then
         #expect(history.chartPoints.map(\.value) == [3_000, 3_300, 4_000])
@@ -24,7 +24,7 @@ struct PortfolioHistoryPresentationTests {
 
     @Test func chartAccessibilityThenSummarizesTheRange() {
         // When
-        let accessibility = PortfolioHistory.sample.chartAccessibility
+        let accessibility = sampleHistory.chartAccessibility
 
         // Then
         #expect(accessibility.title.key == "portfolio.chart.title")

@@ -74,6 +74,6 @@ private extension MarketDataServiceTests {
     func makeService(behavior: MockServerBehavior) -> MarketDataService {
         let routes = MarketDataMockRoutes(exchange: MockExchange())
         let server = MockServer(routes: [routes], behavior: behavior)
-        return MarketDataService(client: BackendClient(environment: .mock(server)))
+        return MarketDataService(client: BackendClient(environment: .init(mockServer: server)))
     }
 }

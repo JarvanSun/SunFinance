@@ -11,8 +11,8 @@ import FinanceCore
 import Foundation
 import SwiftUI
 
-enum PreviewObjectPool {
-    nonisolated static var sampleOrders: [Order] {
+struct PreviewObjectPool {
+    nonisolated var sampleOrders: [Order] {
         let start = Date(timeIntervalSince1970: 1_793_718_000)
         let fill = OrderFill(
             date: start,
@@ -90,7 +90,7 @@ enum PreviewObjectPool {
         ]
     }
 
-    static func ordersDependencies() -> OrdersDependencies {
+    func ordersDependencies() -> OrdersDependencies {
         let services = PreviewOrders()
         return OrdersDependencies(
             orderProvider: services,
@@ -100,7 +100,7 @@ enum PreviewObjectPool {
         )
     }
 
-    static func ordersViewModel(_ state: OrdersPreviewState) -> OrdersViewModel {
+    func ordersViewModel(_ state: OrdersPreviewState) -> OrdersViewModel {
         let services = PreviewOrders(
             isEmpty: state.isEmpty,
             failure: state.failure,
@@ -115,7 +115,7 @@ enum PreviewObjectPool {
         )
     }
 
-    static func detailViewModel(_ order: Order) -> OrderDetailViewModel {
+    func detailViewModel(_ order: Order) -> OrderDetailViewModel {
         OrderDetailViewModel(
             order: order,
             canceller: PreviewOrders(),

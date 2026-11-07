@@ -14,8 +14,8 @@ struct EstimateStateTests {
     @Test(arguments: [
         (EstimateState.unavailable, OrderPreview?.none),
         (.loading(previous: nil), nil),
-        (.loading(previous: .sample()), .sample()),
-        (.ready(.sample()), .sample()),
+        (.loading(previous: .init()), .init()),
+        (.ready(.init()), .init()),
     ])
     func previewThenKeepsTheLastEstimateWhileLoading(
         state: EstimateState,

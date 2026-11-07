@@ -12,7 +12,7 @@ struct LocalizationCatalogTests {
     @Test(arguments: ["en", "de"])
     func catalogThenEveryKeyIsTranslated(language: String) throws {
         // Given
-        let catalog = try LocalizationCatalog(contentsOf: Self.catalogURL)
+        let catalog = try LocalizationCatalog(contentsOf: catalogURL)
 
         // When
         let missingKeys = catalog.keysMissingTranslation(for: language)
@@ -20,10 +20,14 @@ struct LocalizationCatalogTests {
         // Then
         #expect(missingKeys.isEmpty, "Missing \(language): \(missingKeys)")
     }
+}
 
-    private static let catalogURL = URL(filePath: #filePath)
-        .deletingLastPathComponent()
-        .deletingLastPathComponent()
-        .deletingLastPathComponent()
-        .appending(path: "Sources/DesignSystem/Resources/Localizable.xcstrings")
+private extension LocalizationCatalogTests {
+    var catalogURL: URL {
+        URL(filePath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appending(path: "Sources/DesignSystem/Resources/Localizable.xcstrings")
+    }
 }

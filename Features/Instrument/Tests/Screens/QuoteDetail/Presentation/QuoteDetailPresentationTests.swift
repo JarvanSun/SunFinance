@@ -14,7 +14,7 @@ import Testing
 struct QuoteDetailPresentationTests {
     @Test func statisticRowsThenListFiveStatisticsInOrder() {
         // When
-        let keys = QuoteDetail.apple.statisticRows.map(\.title.key)
+        let keys = appleDetail.statisticRows.map(\.title.key)
 
         // Then
         #expect(
@@ -30,7 +30,7 @@ struct QuoteDetailPresentationTests {
 
     @Test func statisticRowsThenShowRangesFromLowToHigh() throws {
         // When
-        let dayRange = QuoteDetail.apple.statisticRows[1].value
+        let dayRange = appleDetail.statisticRows[1].value
 
         // Then
         let low = try #require(dayRange.firstRange(of: "99"))

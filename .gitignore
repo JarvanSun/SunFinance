@@ -1,5 +1,4 @@
 .DS_Store
-*.xcodeproj
 xcuserdata/
 DerivedData/
 .build/
@@ -7,3 +6,4 @@ DerivedData/
 build/
 Features/*/Package.resolved
 Core/*/Package.resolved
+Configuration/Signing.local.xcconfig

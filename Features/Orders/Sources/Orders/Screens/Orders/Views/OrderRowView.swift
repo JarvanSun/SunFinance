@@ -57,7 +57,7 @@ struct OrderRowView: View {
 #if DEBUG
 #Preview(traits: .sizeThatFitsLayout) {
     VStack(spacing: 0) {
-        ForEach(PreviewObjectPool.sampleOrders) { order in
+        ForEach(PreviewObjectPool().sampleOrders) { order in
             OrderRowView(order: order)
         }
     }

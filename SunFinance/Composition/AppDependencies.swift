@@ -15,11 +15,6 @@ import SwiftUI
 import Watchlist
 
 struct AppDependencies {
-    fileprivate enum InfoKey: String {
-        case shortVersion = "CFBundleShortVersionString"
-        case bundleIdentifier = "CFBundleIdentifier"
-    }
-
     private let configuration: AppConfiguration
     private let marketData: MarketDataService
     private let brokerage: BrokerageService
@@ -28,8 +23,8 @@ struct AppDependencies {
     private let tracker: AnalyticsTracker
 
     init(configuration: AppConfiguration) {
-        let environment = ServerEnvironment.mock(
-            behavior: configuration.serverBehavior,
+        let environment = ServerEnvironment(
+            mockBehavior: configuration.serverBehavior,
             storageDirectory: configuration.mockServerStorageURL
         )
         self.configuration = configuration
@@ -40,7 +35,7 @@ struct AppDependencies {
             defaultSymbols: configuration.defaultWatchlist
         )
         favoriteStore = UserDefaultsFavoriteSymbolStore(defaults: configuration.defaults)
-        tracker = Self.makeTracker(configuration: configuration)
+        tracker = makeTracker(configuration: configuration)
         tracker.applyConsent()
     }
 
@@ -109,29 +104,33 @@ private extension AppDependencies {
     var orderTicketEntry: FeatureEntry<TradeIntent> {
         FeatureEntry { TradingHostView(dependencies: trading(for: $0)) }
     }
+}
 
-    static func info(_ key: InfoKey) -> String {
-        Bundle.main.object(forInfoDictionaryKey: key.rawValue) as? String ?? ""
-    }
+private func info(_ key: InfoKey) -> String {
+    Bundle.main.object(forInfoDictionaryKey: key.rawValue) as? String ?? ""
+}
 
-    static func makeTracker(configuration: AppConfiguration) -> AnalyticsTracker {
-        AnalyticsTracker(
-            consent: UserDefaultsAnalyticsConsent(defaults: configuration.defaults),
-            context: AnalyticsContext(
-                appVersion: info(.shortVersion),
-                locale: .autoupdatingCurrent
-            ),
-            destinations: analyticsDestinations(configuration: configuration)
-        )
-    }
+private func makeTracker(configuration: AppConfiguration) -> AnalyticsTracker {
+    AnalyticsTracker(
+        consent: UserDefaultsAnalyticsConsent(defaults: configuration.defaults),
+        context: AnalyticsContext(
+            appVersion: info(.shortVersion),
+            locale: .autoupdatingCurrent
+        ),
+        destinations: analyticsDestinations(configuration: configuration)
+    )
+}
 
-    static func analyticsDestinations(configuration: AppConfiguration) -> [any AnalyticsDestination]
-    {
-        let vendor = VendorAnalyticsDestination(apiKey: configuration.vendorAnalyticsAPIKey)
-        #if DEBUG
-        return [vendor, ConsoleAnalyticsDestination(subsystem: info(.bundleIdentifier))]
-        #else
-        return [vendor]
-        #endif
-    }
+private func analyticsDestinations(configuration: AppConfiguration) -> [any AnalyticsDestination] {
+    let vendor = VendorAnalyticsDestination(apiKey: configuration.vendorAnalyticsAPIKey)
+    #if DEBUG
+    return [vendor, ConsoleAnalyticsDestination(subsystem: info(.bundleIdentifier))]
+    #else
+    return [vendor]
+    #endif
+}
+
+private enum InfoKey: String {
+    case shortVersion = "CFBundleShortVersionString"
+    case bundleIdentifier = "CFBundleIdentifier"
 }

@@ -41,7 +41,7 @@ struct PortfolioViewModelTests {
 
         // Then
         #expect(viewModel.placeholder == nil)
-        #expect(viewModel.snapshot.value?.account == .sample)
+        #expect(viewModel.snapshot.value?.account == sampleAccount)
         #expect(viewModel.freshness == .stale(.offline))
         #expect(!viewModel.isLive)
     }
@@ -142,7 +142,7 @@ struct PortfolioViewModelTests {
 
         // Then
         let header = viewModel.header(of: try #require(viewModel.snapshot.value))
-        #expect(viewModel.history.shown == .loaded(.sample))
+        #expect(viewModel.history.shown == .loaded(sampleHistory))
         #expect(header.change == .pending)
         #expect(header.moment == .range(.year))
     }
@@ -197,8 +197,8 @@ struct PortfolioViewModelTests {
     @Test func keepFreshThenAppliesEachNewPortfolio() async {
         // Given
         let brokerage = BrokerageStub()
-        let newer = Portfolio(open: [.make("SAP", value: 2_500, totalReturn: 700)], closed: [])
-        brokerage.update { $0.portfolios = [.sample, newer] }
+        let newer = Portfolio(open: [Position("SAP", value: 2_500, totalReturn: 700)], closed: [])
+        brokerage.update { $0.portfolios = [samplePortfolio, newer] }
         let viewModel = makeViewModel(brokerage: brokerage)
         await viewModel.load()
 
@@ -216,16 +216,19 @@ struct PortfolioViewModelTests {
     @Test func keepFreshThenAppliesTheFirstPollInsteadOfFetchingTwiceOnAppearance() async {
         // Given
         let brokerage = BrokerageStub()
-        let firstPoll = Portfolio(open: [.make("SAP", value: 2_500, totalReturn: 700)], closed: [])
+        let firstPoll = Portfolio(
+            open: [Position("SAP", value: 2_500, totalReturn: 700)],
+            closed: []
+        )
         let secondPoll = Portfolio(
             open: [
-                .make("SAP", value: 2_600, totalReturn: 800),
-                .make("AAPL", value: 1_000, totalReturn: 0),
-                .make("NVDA", value: 900, totalReturn: 0),
+                Position("SAP", value: 2_600, totalReturn: 800),
+                Position("AAPL", value: 1_000, totalReturn: 0),
+                Position("NVDA", value: 900, totalReturn: 0),
             ],
             closed: []
         )
-        brokerage.update { $0.portfolios = [.sample, firstPoll, secondPoll] }
+        brokerage.update { $0.portfolios = [samplePortfolio, firstPoll, secondPoll] }
         let viewModel = makeViewModel(brokerage: brokerage)
         await viewModel.load()
 
@@ -244,7 +247,7 @@ struct PortfolioViewModelTests {
     @Test func keepFreshWhenAPollFailsThenKeepsTheBalancesAndGoesStaleUntilTheNextPoll() async {
         // Given
         let brokerage = BrokerageStub()
-        let newer = Portfolio(open: [.make("SAP", value: 2_500, totalReturn: 700)], closed: [])
+        let newer = Portfolio(open: [Position("SAP", value: 2_500, totalReturn: 700)], closed: [])
         let viewModel = makeViewModel(brokerage: brokerage)
         await viewModel.load()
         brokerage.update { $0.portfolioFailure = .offline }
@@ -287,7 +290,7 @@ struct PortfolioViewModelTests {
         await viewModel.loadHistory()
 
         // Then
-        #expect(viewModel.history.shown == .loaded(.sample))
+        #expect(viewModel.history.shown == .loaded(sampleHistory))
     }
 
     @Test func loadHistoryWhenCancelledWhileAskingThenIgnoresTheLateAnswer() async {
@@ -349,7 +352,7 @@ struct PortfolioViewModelTests {
 
         // Then
         #expect(viewModel.snapshot.value != nil)
-        #expect(viewModel.history.shown == .loaded(.sample))
+        #expect(viewModel.history.shown == .loaded(sampleHistory))
     }
 
     @Test func selectSliceWhenTappedTwiceThenClearsIt() {

@@ -10,15 +10,15 @@ import Foundation
 @testable import FinanceCore
 
 extension OrderDraft {
-    static func make(
+    init(
         _ side: TradeSide = .buy,
         _ amount: OrderAmount = .shares(1),
         symbol: TickerSymbol = "SAP",
         execution: OrderExecution = .market,
         trigger: OrderTrigger = .immediately,
         validity: OrderValidity = .day
-    ) -> OrderDraft {
-        OrderDraft(
+    ) {
+        self.init(
             symbol: symbol,
             side: side,
             amount: amount,

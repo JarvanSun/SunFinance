@@ -12,7 +12,7 @@ struct SunFinanceApp: App {
     @State private var dependencies: AppDependencies
 
     init() {
-        _dependencies = State(initialValue: AppDependencies(configuration: .demo))
+        _dependencies = State(initialValue: AppDependencies(configuration: AppConfiguration()))
     }
 
     var body: some Scene {

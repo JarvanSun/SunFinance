@@ -12,13 +12,13 @@ import Testing
 
 struct WatchlistSortOrderTests {
     @Test(arguments: [
-        (WatchlistSortOrder.marketCap, [StockQuote.apple, .sap, .unchanged]),
-        (.dailyChange, [.apple, .unchanged, .sap]),
-        (.symbol, [.apple, .unchanged, .sap]),
+        (WatchlistSortOrder.marketCap, [appleQuote, sapQuote, unchangedQuote]),
+        (.dailyChange, [appleQuote, unchangedQuote, sapQuote]),
+        (.symbol, [appleQuote, unchangedQuote, sapQuote]),
     ])
     func areInIncreasingOrderThenSortsByOrder(order: WatchlistSortOrder, expected: [StockQuote]) {
         // Given
-        let quotes: [StockQuote] = [.sap, .unchanged, .apple]
+        let quotes: [StockQuote] = [sapQuote, unchangedQuote, appleQuote]
 
         // When
         let sortedQuotes = quotes.sorted(by: order.areInIncreasingOrder)

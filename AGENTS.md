@@ -12,14 +12,14 @@ changes in the same change. `Features/Watchlist` is the reference feature; copy 
 
 ## Commands
 
-- `xcodegen generate` after changing `project.yml` (the `.xcodeproj` is not committed). Signing
-  reads the Apple team ID from the `SUNFINANCE_TEAM_ID` environment variable.
+- Open `SunFinance.xcodeproj`. Signing reads the Apple team ID from
+  `Configuration/Signing.local.xcconfig` (untracked; `DEVELOPMENT_TEAM = <team id>`).
 - `scripts/format.sh` after editing Swift; `scripts/format.sh --lint` must succeed.
 - Build and test:
   `xcodebuild test -scheme SunFinance -destination 'platform=iOS Simulator,name=iPhone 17'`.
 - One package on its own: the same command with `-scheme <Package>`, run in the package's folder.
-- `scripts/playgrounds.sh [<Package>]` generates each package's `Playground/Playground.xcodeproj`,
-  an app that runs the package without the App.
+- Each package's `Playground/Playground.xcodeproj` is an app that runs the package without the
+  App.
 
 ## Hard rules
 
@@ -31,5 +31,8 @@ changes in the same change. `Features/Watchlist` is the reference feature; copy 
 - No App Store review prompt, no remote backend or push, no real third-party SDK.
 - Shared foundation is SunKit (`SunCore`, `SunUserInterface`) 0.2.x, at least 0.2.2; app-specific
   code never goes into it.
+- No `static` except protocol requirements, leading-dot extensions of protocol-typed SwiftUI and
+  Foundation APIs, and `VendorAnalytics.shared`; localization keys are written where they are used
+  ([swift-style.md](docs/spec/swift-style.md#no-static)).
 - No explanatory comments; `// MARK: -` only above the extensions of files over 150 lines
   ([swift-style.md](docs/spec/swift-style.md#comments)).

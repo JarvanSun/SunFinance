@@ -14,9 +14,9 @@ enum OrdersEvent: AnalyticsEvent, Equatable {
     var name: AnalyticsEventName {
         switch self {
         case .viewed:
-            .ordersViewed
+            .init("orders_viewed")
         case .cancelled:
-            .tradingOrderCancelled
+            .init("trading_order_cancelled")
         }
     }
 

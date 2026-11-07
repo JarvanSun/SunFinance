@@ -12,7 +12,10 @@ struct MarketDataMockRoutes: MockRoute {
     private let companies: [TickerSymbol: CompanyDTO]
 
     init(exchange: MockExchange) {
-        let fixture = try? Bundle.module.fixture(named: Self.fileName, as: CompaniesDTO.self)
+        let fixture = try? Bundle.module.fixture(
+            named: FixtureFile.companies.rawValue,
+            as: CompaniesDTO.self
+        )
         self.exchange = exchange
         companies = Dictionary((fixture?.companies ?? []).map { ($0.symbol, $0) }) { first, _ in
             first
@@ -22,9 +25,10 @@ struct MarketDataMockRoutes: MockRoute {
     func response(to request: MockRequest) throws -> MockResponse? {
         switch MarketEndpoint(path: request.path, method: request.method) {
         case .quotes:
-            try .json(QuotesResponseDTO(quotes: quotes(for: request)))
+            try .init(json: QuotesResponseDTO(quotes: quotes(for: request)))
         case .quoteDetail(let symbol):
-            try detail(for: symbol, at: request.date).map { try .json($0) } ?? .notFound
+            try detail(for: symbol, at: request.date).map { try .init(json: $0) }
+                ?? .init(status: .notFound)
         case .priceHistory(let symbol):
             try historyResponse(for: symbol, request: request)
         case .symbolSearch:
@@ -38,8 +42,6 @@ struct MarketDataMockRoutes: MockRoute {
 // MARK: - Private
 
 private extension MarketDataMockRoutes {
-    static var fileName: String { "companies" }
-
     var searchLimit: Int { 10 }
 
     func quotes(for request: MockRequest) -> [QuoteDTO] {
@@ -75,12 +77,14 @@ private extension MarketDataMockRoutes {
         let range = request.query(MarketQueryKey.range.rawValue).flatMap(
             HistoryRange.init(rawValue:)
         )
-        guard let range else { return .badRequest }
-        guard let quote = exchange.quote(for: symbol, at: request.date) else { return .notFound }
+        guard let range else { return .init(status: .badRequest) }
+        guard let quote = exchange.quote(for: symbol, at: request.date) else {
+            return .init(status: .notFound)
+        }
 
         let candles = exchange.candles(for: symbol, range: range, endingAt: request.date)
-        return try .json(
-            PriceHistoryResponseDTO(
+        return try .init(
+            json: PriceHistoryResponseDTO(
                 symbol: symbol.rawValue,
                 range: range.rawValue,
                 currency: quote.price.currency.rawValue,
@@ -91,7 +95,9 @@ private extension MarketDataMockRoutes {
     }
 
     func searchResponse(for request: MockRequest) throws -> MockResponse {
-        guard let query = request.query(MarketQueryKey.query.rawValue) else { return .badRequest }
+        guard let query = request.query(MarketQueryKey.query.rawValue) else {
+            return .init(status: .badRequest)
+        }
 
         let needle = query.trimmingCharacters(in: .whitespacesAndNewlines)
         let ranked = companies.values.compactMap { company in
@@ -106,7 +112,7 @@ private extension MarketDataMockRoutes {
             }
             .prefix(searchLimit)
             .compactMap { match(for: $0.company, at: request.date) }
-        return try .json(SymbolSearchResponseDTO(matches: matches))
+        return try .init(json: SymbolSearchResponseDTO(matches: matches))
     }
 
     func match(for company: CompanyDTO, at date: Date) -> SymbolMatchDTO? {
@@ -170,4 +176,8 @@ private enum SearchRank: Comparable {
             return nil
         }
     }
+}
+
+private enum FixtureFile: String {
+    case companies
 }

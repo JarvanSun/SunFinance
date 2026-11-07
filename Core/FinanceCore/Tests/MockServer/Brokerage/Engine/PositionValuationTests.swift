@@ -23,7 +23,7 @@ struct PositionValuationTests {
 
     @Test func todayGainThenCountsHeldSharesAndTodaysFills() {
         // Given
-        let todaysBuy = LedgerFill.make(.buy, 5, at: 115)
+        let todaysBuy = LedgerFill(.buy, 5, at: 115)
         let valuation = makeValuation(
             price: 120,
             quantityAtPreviousClose: 10,
@@ -35,10 +35,10 @@ struct PositionValuationTests {
     }
 
     @Test(arguments: [
-        ([LedgerFill.make(.sell, 10, at: 105)], Decimal(10), Decimal(50)),
-        ([.make(.sell, 4, at: 105)], 10, 80),
-        ([.make(.buy, 5, at: 108), .make(.sell, 5, at: 112)], 0, 20),
-        ([.make(.sell, 10, at: 105), .make(.buy, 2, at: 104)], 10, 62),
+        ([LedgerFill(.sell, 10, at: 105)], Decimal(10), Decimal(50)),
+        ([.init(.sell, 4, at: 105)], 10, 80),
+        ([.init(.buy, 5, at: 108), .init(.sell, 5, at: 112)], 0, 20),
+        ([.init(.sell, 10, at: 105), .init(.buy, 2, at: 104)], 10, 62),
     ])
     func todayGainWhenSellingTodayThenCountsTheSalePriceForTheSoldShares(
         fillsToday: [LedgerFill],
@@ -70,7 +70,7 @@ struct PositionValuationTests {
         // Given
         var holding = Holding(symbol: "AAPL", currency: .usd)
         holding.apply(
-            .make(
+            .init(
                 .buy,
                 10,
                 at: 100,
@@ -104,7 +104,7 @@ private extension PositionValuationTests {
         fillsToday: [LedgerFill]
     ) -> PositionValuation {
         var holding = Holding(symbol: "SAP", currency: .eur)
-        holding.apply(.make(.buy, 10, at: 100))
+        holding.apply(.init(.buy, 10, at: 100))
         return PositionValuation(
             holding: holding,
             price: price,

@@ -13,7 +13,7 @@ import Testing
 struct StockQuoteTests {
     @Test func initWhenDTOIsCompleteThenMapsEveryField() throws {
         // When
-        let quote = try StockQuote(QuoteDTO.apple)
+        let quote = try StockQuote(QuoteDTO())
 
         // Then
         #expect(quote.symbol == "AAPL")
@@ -25,10 +25,10 @@ struct StockQuoteTests {
     }
 
     @Test(arguments: [
-        QuoteDTO.appleWithoutCompanyName,
-        .appleWithInvalidCurrency,
-        .appleWithZeroPrice,
-        .appleWithZeroPreviousClose,
+        QuoteDTO(companyName: ""),
+        .init(currency: "DOLLAR"),
+        .init(lastPrice: 0),
+        .init(previousClose: 0),
     ])
     func initWhenDTOIsInvalidThenThrowsDecoding(dto: QuoteDTO) {
         // When

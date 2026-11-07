@@ -7,22 +7,16 @@
 
 import FinanceCore
 
-extension TickerSymbol {
-    nonisolated static let tesla: Self = "TSLA"
-}
+nonisolated let teslaMatch = SymbolMatch(
+    symbol: "TSLA",
+    companyName: "Tesla, Inc.",
+    exchange: "NASDAQ",
+    currency: .usd
+)
 
-extension SymbolMatch {
-    nonisolated static let tesla = Self(
-        symbol: .tesla,
-        companyName: "Tesla, Inc.",
-        exchange: "NASDAQ",
-        currency: .usd
-    )
-
-    nonisolated static let apple = Self(
-        symbol: .apple,
-        companyName: "Apple Inc.",
-        exchange: "NASDAQ",
-        currency: .usd
-    )
-}
+nonisolated let appleMatch = SymbolMatch(
+    symbol: "AAPL",
+    companyName: "Apple Inc.",
+    exchange: "NASDAQ",
+    currency: .usd
+)

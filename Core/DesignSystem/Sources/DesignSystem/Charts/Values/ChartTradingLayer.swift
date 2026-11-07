@@ -18,7 +18,3 @@ public struct ChartTradingLayer: Hashable, Sendable {
         self.levels = levels
     }
 }
-
-extension ChartTradingLayer {
-    public static var empty: Self { .init() }
-}

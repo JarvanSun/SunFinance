@@ -25,9 +25,9 @@ struct ChartTradingLayerTests {
         #expect(values == [10, 12])
     }
 
-    @Test func emptyThenDrawsNothing() {
+    @Test func initThenDrawsNothing() {
         // When
-        let layer = ChartTradingLayer.empty
+        let layer = ChartTradingLayer()
 
         // Then
         #expect(layer.markers.isEmpty)

@@ -21,6 +21,6 @@ public struct OrdersHostView: View {
 
 #if DEBUG
 #Preview("Orders") {
-    OrdersHostView(dependencies: PreviewObjectPool.ordersDependencies())
+    OrdersHostView(dependencies: PreviewObjectPool().ordersDependencies())
 }
 #endif

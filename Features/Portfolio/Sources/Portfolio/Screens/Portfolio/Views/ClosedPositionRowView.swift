@@ -21,7 +21,7 @@ struct ClosedPositionRowView: View {
                 Text(verbatim: position.symbol.rawValue)
                     .textStyle(FinanceColor.textPrimary, FinanceFont.headline)
 
-                Text(PortfolioText.realizedLabel)
+                Text("portfolio.closed.realizedLabel", bundle: .module)
                     .textStyle(FinanceColor.textSecondary, FinanceFont.callout)
             }
 
@@ -42,11 +42,11 @@ struct ClosedPositionRowView: View {
 #Preview(traits: .sizeThatFitsLayout) {
     VStack(spacing: 0) {
         ClosedPositionRowView(
-            position: PreviewObjectPool.position("KO", quantity: 0, value: 0, gain: 96.3)
+            position: PreviewObjectPool().position("KO", quantity: 0, value: 0, gain: 96.3)
         )
 
         ClosedPositionRowView(
-            position: PreviewObjectPool.position("TSLA", quantity: 0, value: 0, gain: -42)
+            position: PreviewObjectPool().position("TSLA", quantity: 0, value: 0, gain: -42)
         )
     }
     .padding()

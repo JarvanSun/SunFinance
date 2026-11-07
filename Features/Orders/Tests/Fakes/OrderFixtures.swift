@@ -9,7 +9,7 @@ import FinanceCore
 import Foundation
 
 extension Order {
-    nonisolated static func make(
+    nonisolated init(
         _ id: String,
         status: OrderStatus = .waitingForPrice,
         amount: OrderAmount = .shares(1),
@@ -17,8 +17,8 @@ extension Order {
         trigger: OrderTrigger = .immediately,
         createdAt: Date = Date(timeIntervalSince1970: 0),
         fill: OrderFill? = nil
-    ) -> Order {
-        Order(
+    ) {
+        self.init(
             id: id,
             draft: OrderDraft(
                 symbol: "SAP",
@@ -38,8 +38,8 @@ extension Order {
 }
 
 extension OrderFill {
-    nonisolated static func make(currency: CurrencyCode) -> OrderFill {
-        OrderFill(
+    nonisolated init(currency: CurrencyCode) {
+        self.init(
             date: Date(timeIntervalSince1970: 0),
             quantity: 1,
             price: Money(100, currency),

@@ -22,8 +22,10 @@ struct PortfolioAllocation: Equatable {
             )
         }
         let cash = AllocationSlice(
-            id: Self.cashID,
-            label: String(localized: PortfolioText.cash),
+            id: cashSliceID,
+            label: String(
+                localized: LocalizedStringResource("portfolio.allocation.cash", bundle: .module)
+            ),
             value: account.cash.doubleValue,
             tone: .neutral
         )
@@ -34,7 +36,7 @@ struct PortfolioAllocation: Equatable {
         AllocationChartContent(
             slices: slices,
             accessibility: AllocationChartAccessibility(
-                title: PortfolioText.allocationTitle,
+                title: .init("portfolio.allocation.title", bundle: .module),
                 summary: summary
             )
         )
@@ -42,7 +44,7 @@ struct PortfolioAllocation: Equatable {
 
     func symbol(forSlice id: String?) -> TickerSymbol? {
         switch id {
-        case .some(Self.cashID), nil:
+        case .some(cashSliceID), nil:
             nil
         case .some(let id):
             TickerSymbol(rawValue: id)
@@ -72,7 +74,7 @@ struct PortfolioAllocation: Equatable {
         case .some(let slice):
             Text(verbatim: slice.label)
         case nil:
-            Text(PortfolioText.positions)
+            Text("portfolio.allocation.positions", bundle: .module)
         }
     }
 
@@ -87,8 +89,6 @@ struct PortfolioAllocation: Equatable {
 }
 
 private extension PortfolioAllocation {
-    static var cashID: String { "cash" }
-
     var highlightOpacity: Double { 0.12 }
 
     var holdings: [AllocationSlice] {
@@ -119,3 +119,5 @@ private extension PortfolioAllocation {
         (slice.value / max(total, 1)).formatted(.percent.precision(.fractionLength(0)))
     }
 }
+
+private let cashSliceID = "cash"

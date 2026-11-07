@@ -29,7 +29,7 @@ public enum FinanceImage: String, CaseIterable, ImageStyling, Sendable {
     case portfolio = "chart.pie"
     case orders = "clock.arrow.circlepath"
 
-    public var definingBundle: Bundle { .designSystem }
+    public var definingBundle: Bundle { .module }
 }
 
 #if DEBUG

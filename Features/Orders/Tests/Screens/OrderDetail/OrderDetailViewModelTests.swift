@@ -16,7 +16,7 @@ struct OrderDetailViewModelTests {
         let tracker = AnalyticsTrackerSpy()
         var reported: [Order] = []
         let viewModel = OrderDetailViewModel(
-            order: .make("1"),
+            order: .init("1"),
             canceller: OrdersStub(),
             router: OrdersRouterSpy(),
             tracker: tracker
@@ -34,7 +34,7 @@ struct OrderDetailViewModelTests {
         #expect(!viewModel.canCancel)
         #expect(viewModel.statusNote == .none)
         #expect(reported.map(\.status) == [.cancelled])
-        #expect(tracker.events(of: OrdersEvent.self) == [.cancelled(Order.make("1").draft)])
+        #expect(tracker.events(of: OrdersEvent.self) == [.cancelled(Order("1").draft)])
     }
 
     @Test func confirmCancelThenShowsWorkingUntilTheServerAnswers() {
@@ -81,7 +81,7 @@ struct OrderDetailViewModelTests {
 
     @Test func requestCancelWhenOrderIsPastThenAsksNothing() {
         // Given
-        let viewModel = makeViewModel(order: .make("1", status: .filled))
+        let viewModel = makeViewModel(order: .init("1", status: .filled))
 
         // When
         viewModel.requestCancel()
@@ -119,7 +119,7 @@ struct OrderDetailViewModelTests {
 
 private extension OrderDetailViewModelTests {
     func makeViewModel(
-        order: Order = .make("1"),
+        order: Order = .init("1"),
         stub: OrdersStub = OrdersStub(),
         router: OrdersRouterSpy = OrdersRouterSpy()
     ) -> OrderDetailViewModel {

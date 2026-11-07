@@ -37,7 +37,7 @@ enum MarketEndpoint: Equatable, Sendable {
     }
 
     init?(path: [String], method: HTTPMethod) {
-        let endpoint = Self.endpoint(matching: path)
+        let endpoint = marketEndpoint(matching: path)
         guard let endpoint, endpoint.method == method else { return nil }
 
         self = endpoint
@@ -46,21 +46,21 @@ enum MarketEndpoint: Equatable, Sendable {
 
 private extension MarketEndpoint {
     var version: String { APIVersion.v1.rawValue }
+}
 
-    static func endpoint(matching path: [String]) -> Self? {
-        let symbolsPrefix = [APIVersion.v1.rawValue, MarketPathSegment.symbols.rawValue]
-        switch path {
-        case Self.quotes.path:
-            return .quotes
-        case Self.symbolSearch.path:
-            return .symbolSearch
-        case let path where path.count == 3 && path.starts(with: symbolsPrefix):
-            return .quoteDetail(TickerSymbol(rawValue: path[2]))
-        case let path where path.count == 4 && path.starts(with: symbolsPrefix):
-            let symbol = TickerSymbol(rawValue: path[2])
-            return path == Self.priceHistory(symbol).path ? .priceHistory(symbol) : nil
-        default:
-            return nil
-        }
+private func marketEndpoint(matching path: [String]) -> MarketEndpoint? {
+    let symbolsPrefix = [APIVersion.v1.rawValue, MarketPathSegment.symbols.rawValue]
+    switch path {
+    case MarketEndpoint.quotes.path:
+        return .quotes
+    case MarketEndpoint.symbolSearch.path:
+        return .symbolSearch
+    case let path where path.count == 3 && path.starts(with: symbolsPrefix):
+        return .quoteDetail(TickerSymbol(rawValue: path[2]))
+    case let path where path.count == 4 && path.starts(with: symbolsPrefix):
+        let symbol = TickerSymbol(rawValue: path[2])
+        return path == MarketEndpoint.priceHistory(symbol).path ? .priceHistory(symbol) : nil
+    default:
+        return nil
     }
 }

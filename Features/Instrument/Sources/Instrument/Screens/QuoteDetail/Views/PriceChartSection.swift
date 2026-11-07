@@ -63,9 +63,9 @@ private extension PriceChartSection {
             )
         case (.idle, _), (.loading, _):
             ProgressView()
-                .accessibilityLabel(Text(QuoteDetailText.chartLoading))
+                .accessibilityLabel(Text("quoteDetail.chart.loading", bundle: .module))
         case (.failed, _):
-            Text(QuoteDetailText.chartUnavailable)
+            Text("quoteDetail.chart.unavailable", bundle: .module)
                 .textStyle(FinanceColor.textSecondary, FinanceFont.callout)
         }
     }
@@ -76,8 +76,8 @@ private extension PriceChartSection {
     ScrollView {
         VStack(spacing: 32) {
             PriceChartSection(
-                history: .loaded(PreviewObjectPool.history(range: .day)),
-                trading: PreviewObjectPool.trading,
+                history: .loaded(PreviewObjectPool().history(range: .day)),
+                trading: PreviewObjectPool().trading,
                 companyName: "Apple Inc.",
                 style: .line,
                 range: .day,
@@ -88,8 +88,8 @@ private extension PriceChartSection {
             )
 
             PriceChartSection(
-                history: .loaded(PreviewObjectPool.history(range: .month)),
-                trading: PreviewObjectPool.trading,
+                history: .loaded(PreviewObjectPool().history(range: .month)),
+                trading: PreviewObjectPool().trading,
                 companyName: "Apple Inc.",
                 style: .candles,
                 range: .month,
@@ -101,7 +101,7 @@ private extension PriceChartSection {
 
             PriceChartSection(
                 history: .loading,
-                trading: .empty,
+                trading: TradingSnapshot(),
                 companyName: "Apple Inc.",
                 style: .line,
                 range: .week,
@@ -113,7 +113,7 @@ private extension PriceChartSection {
 
             PriceChartSection(
                 history: .failed(.serviceUnavailable),
-                trading: .empty,
+                trading: TradingSnapshot(),
                 companyName: "Apple Inc.",
                 style: .line,
                 range: .year,
