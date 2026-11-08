@@ -1,8 +1,7 @@
 # SunFinance
 
-A paper-trading app for iPhone, built with SwiftUI as a reference for how a modular, tested
-codebase can look. Everything runs against a built-in mock exchange, so no keys or accounts are
-needed.
+A paper-trading demo for iPhone, built with SwiftUI. It runs against a mock exchange inside the
+app, so every price, balance and order is made up.
 
 - **Watchlist** with symbol search, **quote detail** with morphing charts and your own trades on
   them, an **order ticket** with market, limit, stop and scheduled orders, **Portfolio** and
@@ -13,6 +12,12 @@ needed.
 - Swift 6 with strict concurrency, MVVM with Observation, ViewModels unit-tested with Swift
   Testing.
 - English and German.
+
+## How it was made
+
+I wrote the specs in [docs/spec](docs/spec/README.md) to describe my code style and how the app
+should be built. Claude Code generated the app from them almost in one pass, and the code then went
+through two rounds of code review.
 
 ## Running
 
